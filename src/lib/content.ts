@@ -3,7 +3,7 @@ export const site = {
   title: "AI Engineer / Software Engineer",
   headline: "AI engineer building trustworthy forecasting systems.",
   summary:
-    "Bridging the gap between research and production. I build AI systems that are accurate, interpretable, and engineered for the real world. TS/SCI active.",
+    "Building production-grade AI systems that bridge research and reality. I build AI systems that are accurate, interpretable, and engineered for the real world. TS/SCI active.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
