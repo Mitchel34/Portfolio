@@ -16,7 +16,7 @@ export function Hero() {
     return (
         <section
             ref={ref}
-            className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden bg-background"
+            className="relative flex min-h-[100dvh] pt-32 justify-center overflow-hidden bg-background md:pt-48 md:items-center md:justify-center"
         >
             {/* Animated Background */}
             <div className="absolute inset-0 z-0">
@@ -42,11 +42,11 @@ export function Hero() {
                         {site.title}
                     </div>
 
-                    <h1 className="bg-gradient-to-b from-white to-white/70 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-7xl md:text-8xl">
+                    <h1 className="bg-gradient-to-b from-white to-white/70 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-6xl md:text-8xl">
                         {site.headline}
                     </h1>
 
-                    <p className="mx-auto max-w-2xl text-lg leading-relaxed text-muted-foreground md:text-xl">
+                    <p className="mx-auto max-w-2xl text-lg leading-relaxed text-foreground/80 md:text-xl">
                         {site.summary}
                     </p>
 

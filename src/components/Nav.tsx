@@ -3,12 +3,14 @@ import Link from "next/link";
 import { site } from "@/lib/content";
 import { Container } from "./Container";
 
+import { Github, Linkedin } from "lucide-react";
+
 const navItems = [
   { href: "/#about", label: "About" },
   { href: "/#projects", label: "Projects" },
   { href: "/#research", label: "Research" },
   { href: "/#contact", label: "Contact" },
-  { href: "/resume", label: "Resume" },
+  { href: "/resume", label: "Resume", external: true },
 ];
 
 export function Nav() {
@@ -24,16 +26,55 @@ export function Nav() {
           </span>
           <span className="hidden sm:inline-block">{site.name}</span>
         </Link>
-        <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground sm:text-sm">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
+        <nav className="flex items-center gap-6">
+          <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition hover:text-foreground"
+                {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Mobile simplified nav */}
+          <div className="flex sm:hidden items-center gap-4 text-xs font-medium text-muted-foreground">
+            {navItems.filter(i => i.label === "Resume" || i.label === "Contact").map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="transition hover:text-foreground"
+                {...(item.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden h-4 w-px bg-white/10 sm:block" />
+          <div className="flex items-center gap-3 text-muted-foreground">
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
               className="transition hover:text-foreground"
+              aria-label="LinkedIn"
             >
-              {item.label}
-            </Link>
-          ))}
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a
+              href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition hover:text-foreground"
+              aria-label="GitHub"
+            >
+              <Github className="h-5 w-5" />
+            </a>
+          </div>
         </nav>
       </Container>
     </header>
