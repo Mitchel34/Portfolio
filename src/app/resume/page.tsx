@@ -50,9 +50,18 @@ export default function ResumePage() {
             title="Experience and education"
             description="Impact-focused highlights with an emphasis on systems thinking."
           />
-          <div className="mt-6">
+          <div className="mt-8 flex flex-col items-center gap-6">
+            <div className="w-full max-w-4xl overflow-hidden rounded-xl border border-white/10 bg-white/5 shadow-2xl backdrop-blur-sm">
+              <iframe
+                src={`${site.resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+                className="h-[500px] w-full border-none md:h-[800px]"
+                title="Resume PDF"
+              />
+            </div>
+
             <a
               href={site.resumeUrl}
+              download
               className="inline-flex h-10 items-center justify-center rounded-full bg-foreground px-6 text-sm font-semibold text-background transition hover:bg-foreground/90"
             >
               Download PDF
