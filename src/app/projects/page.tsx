@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <section className="py-12">
+    <section className="bg-background text-foreground py-12 min-h-screen">
       <Container>
         <SectionHeader
           eyebrow="Projects"
