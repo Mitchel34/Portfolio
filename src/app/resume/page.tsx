@@ -21,17 +21,17 @@ function TimelineCard({
   items: string[];
 }) {
   return (
-    <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
-          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
-          <p className="text-sm text-slate-600">{org}</p>
+          <h3 className="text-base font-semibold text-foreground">{title}</h3>
+          <p className="text-sm text-muted-foreground">{org}</p>
         </div>
-        <span className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+        <span className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
           {period}
         </span>
       </div>
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -42,8 +42,8 @@ function TimelineCard({
 
 export default function ResumePage() {
   return (
-    <div>
-      <section className="border-b border-slate-200/70 bg-white py-12">
+    <div className="bg-background text-foreground">
+      <section className="border-b border-white/5 py-12">
         <Container>
           <SectionHeader
             eyebrow="Resume"
@@ -53,7 +53,7 @@ export default function ResumePage() {
           <div className="mt-6">
             <a
               href={site.resumeUrl}
-              className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+              className="inline-flex h-10 items-center justify-center rounded-full bg-foreground px-6 text-sm font-semibold text-background transition hover:bg-foreground/90"
             >
               Download PDF
             </a>
@@ -82,7 +82,7 @@ export default function ResumePage() {
         </Container>
       </section>
 
-      <section className="border-t border-slate-200/70 bg-white py-12">
+      <section className="border-t border-white/5 bg-surface/30 py-12">
         <Container>
           <SectionHeader
             eyebrow="Education"

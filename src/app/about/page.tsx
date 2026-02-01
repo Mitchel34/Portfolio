@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div>
-      <section className="border-b border-slate-200/70 bg-white py-12">
+    <div className="bg-background text-foreground">
+      <section className="border-b border-white/5 pt-12 pb-12">
         <Container>
           <SectionHeader
             eyebrow="About"
             title="Engineering-first AI with research credibility"
             description="I work at the intersection of forecasting research and production software, aiming for models that are reliable, interpretable, and deployable."
           />
-          <div className="mt-8 max-w-3xl space-y-4 text-base text-slate-600">
+          <div className="mt-8 max-w-3xl space-y-4 text-lg leading-relaxed text-muted-foreground">
             {about.summary.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
@@ -43,18 +43,18 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="border-t border-slate-200/70 bg-white py-12">
+      <section className="border-t border-white/5 bg-surface/30 py-12">
         <Container>
           <SectionHeader
             eyebrow="Focus Areas"
             title="Applied AI and systems engineering"
             description="Areas where I have hands-on experience and active interest."
           />
-          <div className="mt-6 flex flex-wrap gap-2">
+          <div className="mt-8 flex flex-wrap gap-2">
             {focusAreas.map((area) => (
               <span
                 key={area}
-                className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
+                className="rounded-full border border-white/5 bg-surface px-4 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-white/10 hover:text-foreground"
               >
                 {area}
               </span>

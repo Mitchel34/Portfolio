@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <section className="py-12">
+    <section className="py-12 bg-background min-h-[calc(100vh-theme(spacing.16))]">
       <Container>
         <SectionHeader
           eyebrow="Contact"
@@ -19,35 +19,35 @@ export default function ContactPage() {
           description="Open to AI and ML engineering roles, applied forecasting work, and research collaborations."
         />
         <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
               Email
             </p>
             <a
               href={`mailto:${contact.email}`}
-              className="mt-3 block text-sm font-semibold text-slate-900"
+              className="mt-3 block text-sm font-semibold text-foreground hover:text-blue-400 transition-colors"
             >
               {contact.email}
             </a>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
               LinkedIn
             </p>
             <a
               href={contact.linkedin}
-              className="mt-3 block text-sm font-semibold text-slate-900"
+              className="mt-3 block text-sm font-semibold text-foreground hover:text-blue-400 transition-colors"
             >
               {contact.linkedin}
             </a>
           </div>
-          <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+          <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
               GitHub
             </p>
             <a
               href={contact.github}
-              className="mt-3 block text-sm font-semibold text-slate-900"
+              className="mt-3 block text-sm font-semibold text-foreground hover:text-blue-400 transition-colors"
             >
               {contact.github}
             </a>

@@ -9,54 +9,43 @@ const featuredProjects = projects.slice(0, 2);
 
 export default function Home() {
   return (
-    <div>
-      <section className="border-b border-slate-200/70 bg-white">
-        <Container className="py-16 md:py-20">
-          <div className="max-w-3xl space-y-6">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
-              {site.title}
+    <div className="bg-background text-foreground">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-white/5 pt-20 pb-20 md:pt-32 md:pb-32">
+        <Container>
+          <div className="max-w-4xl space-y-8">
+            <div className="space-y-4">
+              <p className="text-xs font-mono uppercase tracking-[0.2em] text-blue-400">
+                {site.title}
+              </p>
+              <h1 className="font-serif text-5xl font-medium tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+                {site.headline}
+              </h1>
+            </div>
+            <p className="max-w-2xl text-xl leading-relaxed text-muted-foreground">
+              {site.summary}
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight text-slate-900 sm:text-5xl">
-              {site.headline}
-            </h1>
-            <p className="text-lg text-slate-600">{site.summary}</p>
-            <div className="flex flex-wrap gap-3">
+
+            <div className="flex flex-wrap gap-4 pt-4">
               <Link
                 href="/projects"
-                className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-foreground px-8 text-sm font-medium text-background transition hover:bg-foreground/90"
               >
                 View Projects
               </Link>
-              <Link
-                href="/research"
-                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
-              >
-                View Research
-              </Link>
               <a
                 href={site.resumeUrl}
-                className="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-border px-8 text-sm font-medium text-foreground transition hover:bg-surface"
               >
                 Download Resume
               </a>
-              <a
-                href={site.github}
-                className="rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-600 transition hover:text-slate-900"
-              >
-                GitHub
-              </a>
-              <a
-                href={site.linkedin}
-                className="rounded-full border border-slate-200 px-4 py-2 text-sm text-slate-600 transition hover:text-slate-900"
-              >
-                LinkedIn
-              </a>
             </div>
-            <div className="flex flex-wrap gap-2 pt-2">
+
+            <div className="flex flex-wrap gap-2 pt-8">
               {focusAreas.map((area) => (
                 <span
                   key={area}
-                  className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-700"
+                  className="rounded-full border border-white/5 bg-white/5 px-4 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-white/10 hover:text-foreground"
                 >
                   {area}
                 </span>
@@ -66,60 +55,74 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="py-12">
+      {/* Overview Section */}
+      <section className="py-20 md:py-32">
         <Container>
-          <SectionHeader
-            eyebrow="Overview"
-            title="Applied AI with engineering discipline"
-            description="Research depth with a production mindset. I focus on forecasting systems that are reliable, interpretable, and deployable."
-          />
-          <div className="mt-8 grid gap-6 lg:grid-cols-[1.4fr,1fr]">
-            <div className="space-y-4 text-base text-slate-600">
-              {about.summary.map((paragraph) => (
-                <p key={paragraph}>{paragraph}</p>
-              ))}
-              <Link
-                href="/about"
-                className="text-sm font-semibold text-slate-900 transition hover:text-slate-700"
-              >
-                More about me
-              </Link>
-            </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
-                What I care about
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-slate-600">
-                {about.values.map((value) => (
-                  <li key={value.title}>
-                    <span className="font-semibold text-slate-900">
-                      {value.title}:
-                    </span>{" "}
-                    {value.description}
-                  </li>
+          <div className="grid gap-16 lg:grid-cols-[1.5fr,1fr]">
+            <div className="space-y-8">
+              <SectionHeader
+                eyebrow="Overview"
+                title="Applied AI with engineering discipline"
+                description="Research depth with a production mindset. I focus on forecasting systems that are reliable, interpretable, and deployable."
+              />
+              <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+                {about.summary.map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
                 ))}
-              </ul>
+                <div className="pt-4">
+                  <Link
+                    href="/about"
+                    className="group inline-flex items-center text-sm font-semibold text-foreground"
+                  >
+                    More about me
+                    <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <div className="relative">
+              <div className="rounded-2xl border border-border bg-surface/50 p-8 shadow-sm">
+                <p className="mb-6 text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+                  Core Values
+                </p>
+                <ul className="space-y-6">
+                  {about.values.map((value) => (
+                    <li key={value.title} className="group">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-sm font-semibold text-foreground group-hover:text-blue-400 transition-colors">
+                          {value.title}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {value.description}
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-slate-200/70 bg-white py-12">
+      {/* Projects Section */}
+      <section className="border-t border-white/5 bg-surface/30 py-20 md:py-32">
         <Container>
           <SectionHeader
             eyebrow="Projects"
-            title="Forecasting systems with measurable outcomes"
-            description="Selected work that balances model innovation with engineering delivery."
+            title="Systems with measurable impact"
+            description="Selected work balancing model innovation with delivery."
           />
-          <div className="mt-8 grid gap-6">
+          <div className="mt-16 grid gap-8">
             {featuredProjects.map((project) => (
               <ProjectCard key={project.title} project={project} />
             ))}
           </div>
-          <div className="mt-6">
+          <div className="mt-12 text-center">
             <Link
               href="/projects"
-              className="text-sm font-semibold text-slate-900 transition hover:text-slate-700"
+              className="inline-flex h-12 items-center justify-center rounded-full border border-border bg-background px-8 text-sm font-medium text-foreground transition hover:bg-surface"
             >
               View all projects
             </Link>
@@ -127,69 +130,82 @@ export default function Home() {
         </Container>
       </section>
 
-      <section className="py-12">
+      {/* Research Section */}
+      <section className="py-20 md:py-32">
         <Container>
           <SectionHeader
             eyebrow="Research"
             title={research.title}
             description={research.summary}
           />
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+
+          <div className="mt-16 grid gap-8 md:grid-cols-2">
+            <div className="rounded-2xl border border-border bg-surface p-8">
+              <p className="mb-6 text-xs font-mono uppercase tracking-[0.2em] text-blue-400">
                 Architecture
               </p>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+              <ul className="space-y-3">
                 {research.architecture.slice(0, 4).map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-blue-500/50" />
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-              <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
-                Evaluation
+
+            <div className="rounded-2xl border border-border bg-surface p-8">
+              <p className="mb-6 text-xs font-mono uppercase tracking-[0.2em] text-green-400">
+                Key Metrics
               </p>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
+              <ul className="space-y-3">
                 {research.evaluation.map((item) => (
-                  <li key={item}>{item}</li>
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-green-500/50" />
+                    {item}
+                  </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="mt-6">
+
+          <div className="mt-10 flex justify-center">
             <Link
               href="/research"
-              className="text-sm font-semibold text-slate-900 transition hover:text-slate-700"
+              className="group inline-flex items-center text-sm font-semibold text-foreground"
             >
-              View full research overview
+              Read full thesis overview
+              <span className="ml-2 transition-transform group-hover:translate-x-1">→</span>
             </Link>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-slate-200/70 bg-white py-12">
-        <Container className="text-center">
-          <SectionHeader
-            eyebrow="Contact"
-            title="Open to applied AI and ML engineering roles"
-            description="I am interested in forecasting, infrastructure-aware ML, and systems that ship."
-          />
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
+      {/* Contact Section */}
+      <section className="border-t border-white/5 py-24 text-center">
+        <Container>
+          <h2 className="font-serif text-3xl font-medium text-foreground sm:text-4xl">
+            Let's build something reliable.
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            {site.email}
+          </p>
+          <div className="mt-8 flex justify-center gap-4">
             <a
               href={`mailto:${site.email}`}
-              className="rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white transition hover:bg-slate-800"
+              className="inline-flex h-11 items-center justify-center rounded-full bg-foreground px-6 text-sm font-medium text-background transition hover:bg-foreground/90"
             >
-              Email
+              Email Me
             </a>
             <a
               href={site.linkedin}
-              className="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition hover:bg-surface"
             >
               LinkedIn
             </a>
             <a
               href={site.github}
-              className="rounded-full border border-slate-300 px-5 py-2 text-sm font-semibold text-slate-700 transition hover:border-slate-400 hover:text-slate-900"
+              className="inline-flex h-11 items-center justify-center rounded-full border border-border px-6 text-sm font-medium text-foreground transition hover:bg-surface"
             >
               GitHub
             </a>

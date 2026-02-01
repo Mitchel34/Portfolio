@@ -11,14 +11,14 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   return (
     <div className="space-y-3">
-      <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+      <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
         {eyebrow}
       </p>
-      <h2 className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+      <h2 className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
         {title}
       </h2>
       {description ? (
-        <p className="text-base text-slate-600">{description}</p>
+        <p className="text-lg text-muted-foreground">{description}</p>
       ) : null}
     </div>
   );
