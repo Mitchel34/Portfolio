@@ -3,7 +3,7 @@ export const site = {
   title: "AI Engineer / Software Engineer",
   headline: "AI engineer building trustworthy forecasting systems.",
   summary:
-    "I design ML models and the software around them, from hybrid Transformer/RNN research to production APIs. TS/SCI active.",
+    "Bridging the gap between research and production. I build AI systems that are accurate, interpretable, and engineered for the real world. TS/SCI active.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
@@ -19,29 +19,29 @@ export const focusAreas = [
 
 export const about = {
   summary: [
-    "I am a Computer Science graduate (Dec 2025) and incoming M.S. in AI student at UT Austin (Spring 2026). My background spans from mission-critical operations in the USAF to building production APIs at USAA and conducting deep learning research for hydrological forecasting.",
-    "My senior honors thesis focused on correction for NOAA streamflow forecasts, achieving 26–54% RMSE reduction using hybrid Transformer architectures. I value leakage-safe evaluation, reproducibility, and systems that withstand real-world conditions.",
+    "My journey began in high-stakes environments aboard Air Force 2, where reliability wasn't optional—it was the mission. I brought that same discipline to software engineering at USAA and now to my research in hydrological forecasting.",
+    "Today, I focus on time-series AI that works in the wild. My senior thesis achieved a 26–54% error reduction in national water forecasts using hybrid architectures. I value systems that are leakage-safe, reproducible, and verifiable.",
   ],
   values: [
     {
-      title: "Reliability",
+      title: "Reliability First",
       description:
-        "Metrics should reflect operational outcomes and remain stable under distribution shift.",
+        "Metrics must reflect operational reality. Models should remain stable even when data shifts.",
     },
     {
       title: "Interpretability",
       description:
-        "Models should explain residual behavior and reveal failure modes, not just scores.",
+        "We need to know *why* a model fails. I build systems that reveal their reasoning, not just their results.",
     },
     {
-      title: "Real-world impact",
+      title: "Real-World Impact",
       description:
-        "Forecast improvements should translate into decisions that matter.",
+        "Research shouldn't stay in a notebook. I aim for improvements that drive actual decisions.",
     },
     {
-      title: "Systems that get used",
+      title: "Engineering Discipline",
       description:
-        "Pipelines, monitoring, and clear handoffs are part of the model.",
+        "Pipelines, monitoring, and clear interfaces are as critical as the model architecture itself.",
     },
   ],
 };
@@ -49,15 +49,15 @@ export const about = {
 export const projects = [
   {
     title: "Hydra Temporal",
-    subtitle: "Residual correction for NOAA NWM streamflow forecasts (Honors Thesis)",
+    subtitle: "Improving National Streamflow Forecasts (Honors Thesis)",
     problem:
-      "Operational NWM forecasts show site-specific residual error that limits decision quality.",
+      "National water models often struggle with local precision, leaving communities with uncertain flood warnings.",
     impact:
-      "Achieved 26–54% RMSE reduction over LSTM baselines, supporting better water management.",
+      "Achieved 26–54% RMSE reduction over baselines, directly improving decision support for water management.",
     approach: [
-      "Developed advanced Transformer-based models for temporal sequence modeling.",
-      "Integrated multi-source data (NWM v3.0+, ERA5, USGS observations).",
-      "Designed leakage-safe evaluation with custom hydrologic metrics.",
+      "Developed advanced Transformer-based models to catch residuals that physical models miss.",
+      "Integrated multi-source data (NWM v3.0+, ERA5, USGS) for a comprehensive view.",
+      "Designed leakage-safe evaluation to ensure performance holds up in the future.",
       "Preparing manuscript for submission to Water Resources Research (AGU).",
     ],
     stack: [
@@ -69,13 +69,13 @@ export const projects = [
       "AWS Batch",
     ],
     results: [
-      "26–54% RMSE reduction on held-out basins.",
-      "Robust improvements in multi-horizon streamflow prediction.",
-      "Stable performance under distribution shift.",
+      "26–54% reduction in prediction error (RMSE) on held-out basins.",
+      "Consistent improvement across varying forecast horizons.",
+      "Demonstrated stability under seasonal distribution shifts.",
     ],
     learnings: [
-      "Hybrid architectures capture residual structure without overfitting.",
-      "Evaluation design is as critical as model choice.",
+      "Hybrid architectures can correct physical model biases without overfitting.",
+      "Rigorous evaluation design is the difference between a demo and a product.",
     ],
     links: [
       { label: "GitHub", href: "https://github.com/Mitchel34" },
@@ -83,15 +83,15 @@ export const projects = [
   },
   {
     title: "USAA Risk Services",
-    subtitle: "Production APIs and internal tools for secure workflows",
+    subtitle: "Secure Production APIs for Financial Services",
     problem:
-      "Internal teams needed reliable service APIs with tight latency and compliance constraints.",
+      "Internal teams needed a reliable, compliant way to access core risk data without navigating legacy complexity.",
     impact:
-      "Improved developer velocity and system reliability for partner teams.",
+      "Accelerated developer velocity and ensured compliance for partner teams across the organization.",
     approach: [
-      "Designed and implemented GraphQL APIs using Java and Spring Boot.",
-      "Enhanced troubleshooting tools by integrating Non-Source-of-Record data.",
-      "Built responsive React front-end components for data visualization.",
+      "Designed and deployed strict GraphQL APIs using Java and Spring Boot.",
+      "Enhanced internal observability tools by unifying disparate data sources.",
+      "Built responsive React dashboards to give stakeholders visibility into risk metrics.",
     ],
     stack: [
       "Java",
@@ -102,11 +102,11 @@ export const projects = [
       "PostgreSQL",
     ],
     results: [
-      "Improved data visibility for Business Partners.",
-      "Higher deployment confidence with automated tests.",
+      "Streamlined data access for business partners, reducing support tickets.",
+      "Increased deployment confidence through automated testing pipelines.",
     ],
     learnings: [
-      "Clear interfaces and observability speed up cross-team integration.",
+      "Clear interfaces (API contracts) allow teams to move fast safely.",
     ],
     links: [{ label: "Experience", href: "/resume" }],
   },
@@ -116,26 +116,26 @@ export const research = {
   title:
     "Senior Honors Thesis: Runoff Forecasting with Deep Learning",
   summary:
-    "Built hybrid Transformer and RNN models to post-process operational streamflow forecasts, improving accuracy while respecting real-world constraints.",
+    "Post-processing operational streamflow forecasts with Hybrid Transformer/RNN models to improve accuracy while respecting physical constraints.",
   architecture: [
-    "Inputs: NWM streamflow forecast, meteorological forcings, basin attributes.",
-    "Transformer encoder captures multi-scale temporal context.",
-    "Integrated multi-source data (NWM v3.0+, ERA5, USGS).",
-    "Automated feature normalization and leakage-safe splits.",
+    "Inputs: Operational NWM forecasts, meteorological forcings, static attributes.",
+    "Encoder: Transformer capturing multi-scale temporal context.",
+    "Integration: Fusing physical model outputs with deep learning corrections.",
+    "Pipeline: Automated feature normalization and leakage-safe splitting.",
   ],
   evaluation: [
-    "Metrics: RMSE, NSE, KGE.",
-    "Validation: leakage-safe temporal splits via spatial holdouts.",
-    "Diagnostics: seasonal regime tracking and error distribution checks.",
+    "Metrics: RMSE, NSE, KGE (Hydrology-standard metrics).",
+    "Validation: Spatial holdouts to test generalization.",
+    "Diagnostics: Analyzing error distributions across seasons.",
   ],
   reproducibility: [
-    "Config-driven experiments with fixed seeds.",
-    "Data versioning and preprocessing checksums.",
-    "Tracked runs, artifacts, and environment snapshots.",
+    "Config-driven experiments (Hydra) with fixed seeds.",
+    "Strict data versioning and artifact tracking.",
+    "Full environment captures for every run.",
   ],
   constraints: [
-    "Operational latency limits and missing data.",
-    "Distribution shift across basins and seasons.",
+    "Must run within operational latency limits.",
+    "Robustness to missing sensor data.",
   ],
   links: [
     { label: "GitHub", href: "https://github.com/Mitchel34" },
