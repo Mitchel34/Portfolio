@@ -8,6 +8,7 @@ export const site = {
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
+  url: "https://mitchelcarson.com",
 };
 
 export const focusAreas = [

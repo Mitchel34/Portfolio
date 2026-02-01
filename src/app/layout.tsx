@@ -22,9 +22,29 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mitchelcarson.com"),
   title: `${site.name} | ${site.title}`,
   description:
     "AI engineer focused on forecasting systems, applied ML, and production software.",
+  openGraph: {
+    title: `${site.name} | ${site.title}`,
+    description: "AI engineer focused on forecasting systems, applied ML, and production software.",
+    url: "https://mitchelcarson.com",
+    siteName: site.name,
+    locale: "en_US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
