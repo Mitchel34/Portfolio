@@ -1,7 +1,7 @@
 export const site = {
   name: "Mitchel Carson",
   title: "AI Engineer / Software Engineer",
-  headline: "Building production-grade AI systems that bridge research and reality.",
+  headline: "Building AI systems that bridge research and reality.",
   summary:
     "I build AI systems that are accurate, interpretable, and engineered for the real world. TS/SCI active.",
   resumeUrl: "/resume.pdf",
