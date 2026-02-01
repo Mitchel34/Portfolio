@@ -16,7 +16,7 @@ export function Hero() {
     return (
         <section
             ref={ref}
-            className="relative flex min-h-[100dvh] pt-32 justify-center overflow-hidden bg-background md:pt-48 md:items-center md:justify-center"
+            className="relative flex min-h-[100dvh] pt-32 justify-center overflow-hidden bg-background md:pt-40"
         >
             {/* Animated Background */}
             <div className="absolute inset-0 z-0">
