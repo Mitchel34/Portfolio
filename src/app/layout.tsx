@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Playfair_Display } from "next/font/google"; // [NEW]
+import { Fraunces, IBM_Plex_Mono, Sora } from "next/font/google";
 
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
 import { site } from "@/lib/content";
 
-const inter = Inter({
-  variable: "--font-inter",
+const sora = Sora({
+  variable: "--font-sora",
   subsets: ["latin"],
 });
 
-const playfair = Playfair_Display({ // [NEW]
-  variable: "--font-playfair",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
 });
 
-const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains",
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-ibm-plex-mono",
+  weight: ["400", "500"],
   subsets: ["latin"],
 });
 
@@ -55,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} ${jetBrainsMono.variable} min-h-screen bg-background text-foreground antialiased selection:bg-blue-500/30`}
+        className={`${sora.variable} ${fraunces.variable} ${ibmPlexMono.variable} min-h-screen bg-background text-foreground antialiased selection:bg-primary/25`}
       >
         <Nav />
         <main className="pb-20">{children}</main>

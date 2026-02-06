@@ -1,58 +1,72 @@
 "use client";
 
-import { Container } from "@/components/Container";
-import { site } from "@/lib/content";
 import { Github, Linkedin, Mail } from "lucide-react";
 
+import { Container } from "@/components/Container";
+import { site } from "@/lib/content";
+
 export function ContactSection() {
-    return (
-        <section className="border-t border-white/5 py-24 text-center" id="contact">
-            <Container>
-                <div className="mx-auto max-w-2xl space-y-8">
-                    <h2 className="font-serif text-4xl font-medium text-foreground sm:text-5xl">
-                        Let&apos;s build something reliable.
-                    </h2>
-                    <p className="text-xl text-muted-foreground">
-                        Always open to discussing time-series forecasting, production ML systems, or new opportunities.
-                    </p>
+  return (
+    <section className="border-t border-border/70 py-20" id="contact">
+      <Container>
+        <div className="grid gap-8 lg:grid-cols-[1.05fr,0.95fr] lg:items-center">
+          <div className="space-y-6">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
+            <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
+              Building reliable ML systems with real-world impact
+            </h2>
+            <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
+              Open to AI engineering roles and collaborations around forecasting, infrastructure-aware ML, and production deployment.
+            </p>
 
-                    <div className="pt-8">
-                        <a
-                            href={`mailto:${site.email}`}
-                            className="inline-flex h-14 items-center justify-center rounded-full bg-primary px-10 text-base font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:scale-105 shadow-lg shadow-blue-500/20"
-                        >
-                            Start a Conversation
-                        </a>
-                    </div>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href={`mailto:${site.email}`}
+                className="inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+              >
+                Start a conversation
+              </a>
+              <a
+                href={site.resumeUrl}
+                className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
+              >
+                Download resume
+              </a>
+            </div>
+          </div>
 
-                    <div className="mt-16 flex justify-center gap-8">
-                        <a
-                            href={`mailto:${site.email}`}
-                            className="text-muted-foreground transition hover:text-foreground"
-                            aria-label="Email"
-                        >
-                            <Mail className="h-6 w-6" />
-                        </a>
-                        <a
-                            href={site.linkedin}
-                            className="text-muted-foreground transition hover:text-foreground"
-                            aria-label="LinkedIn"
-                        >
-                            <Linkedin className="h-6 w-6" />
-                        </a>
-                        <a
-                            href={site.github}
-                            className="text-muted-foreground transition hover:text-foreground"
-                            aria-label="GitHub"
-                        >
-                            <Github className="h-6 w-6" />
-                        </a>
-                    </div>
-                    <p className="mt-12 text-xs text-muted-foreground/50">
-                        © {new Date().getFullYear()} Mitchel Carson. Built with Next.js & Tailwind.
-                    </p>
-                </div>
-            </Container>
-        </section>
-    );
+          <div className="rounded-3xl border border-border/80 bg-card p-6">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Reach me</p>
+            <div className="mt-4 space-y-4 text-sm text-foreground">
+              <a href={`mailto:${site.email}`} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
+                {site.email}
+              </a>
+              <a href={site.linkedin} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
+                {site.linkedin.replace("https://", "")}
+              </a>
+              <a href={site.github} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
+                {site.github.replace("https://", "")}
+              </a>
+            </div>
+
+            <div className="mt-6 flex items-center gap-2 text-muted-foreground">
+              <a href={`mailto:${site.email}`} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="Email">
+                <Mail className="h-4 w-4" />
+              </a>
+              <a href={site.linkedin} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="LinkedIn">
+                <Linkedin className="h-4 w-4" />
+              </a>
+              <a href={site.github} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="GitHub">
+                <Github className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p className="mt-14 text-center text-xs text-muted-foreground">
+          {new Date().getFullYear()} {site.name}.
+        </p>
+      </Container>
+    </section>
+  );
 }

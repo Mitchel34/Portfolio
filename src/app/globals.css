@@ -1,51 +1,41 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #0b1016;
-  /* Deep dark water/space */
-  --color-foreground: #ecf0f1;
-  /* Foam/mist white */
+  --color-background: #f5f3ee;
+  --color-foreground: #12243a;
 
-  --color-primary: #38bdf8;
-  /* Bright sky blue */
-  --color-primary-foreground: #0f172a;
+  --color-primary: #0b5fff;
+  --color-primary-foreground: #f8fafc;
 
-  --color-secondary: #64748b;
-  /* Slate/rock */
-  --color-secondary-foreground: #f8fafc;
+  --color-secondary: #f08a24;
+  --color-secondary-foreground: #fff8ef;
 
-  --color-accent: #2dd4bf;
-  /* Teal/water */
-  --color-accent-foreground: #0f172a;
+  --color-accent: #0f9f95;
+  --color-accent-foreground: #f2fffd;
 
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #f8fafc;
+  --color-muted: #d8dfec;
+  --color-muted-foreground: #546174;
 
-  --color-muted: #334155;
-  /* Muted deep blue */
-  --color-muted-foreground: #94a3b8;
+  --color-card: #fffdf8;
+  --color-card-foreground: #12243a;
 
-  --color-card: #151e29;
-  /* Slightly lighter depth */
-  --color-card-foreground: #ecf0f1;
+  --color-surface: #eef2fb;
+  --color-surface-foreground: #12243a;
 
-  --color-popover: #151e29;
-  --color-popover-foreground: #ecf0f1;
+  --color-popover: #fffdf8;
+  --color-popover-foreground: #12243a;
 
-  --color-border: #1e293b;
-  --color-input: #1e293b;
-  --color-ring: #38bdf8;
+  --color-border: #c5cedf;
+  --color-input: #c5cedf;
+  --color-ring: #0b5fff;
 
-  --radius-lg: 0.5rem;
-  --radius-md: calc(0.5rem - 2px);
-  --radius-sm: calc(0.5rem - 4px);
+  --radius-lg: 0.75rem;
+  --radius-md: calc(0.75rem - 2px);
+  --radius-sm: calc(0.75rem - 4px);
 
-  --font-sans: var(--font-inter);
-  --font-serif: var(--font-playfair);
-  --font-mono: var(--font-jetbrains);
-
-  --animate-fade-in: fade-in 0.5s ease-out;
-  --animate-slide-up: slide-up 0.5s ease-out;
+  --font-sans: var(--font-sora);
+  --font-serif: var(--font-fraunces);
+  --font-mono: var(--font-ibm-plex-mono);
 }
 
 @layer base {
@@ -53,33 +43,20 @@
     @apply border-border;
   }
 
-  body {
-    @apply bg-background text-foreground;
-  }
-
   html {
     scroll-behavior: smooth;
   }
-}
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
+  body {
+    @apply bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at 6% 10%, rgba(11, 95, 255, 0.12), transparent 30%),
+      radial-gradient(circle at 95% 2%, rgba(240, 138, 36, 0.14), transparent 24%),
+      radial-gradient(circle at 78% 70%, rgba(15, 159, 149, 0.12), transparent 35%),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 243, 238, 0.95));
   }
 
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slide-up {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateY(0);
-    opacity: 1;
+  ::selection {
+    color: #12243a;
   }
 }

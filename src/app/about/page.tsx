@@ -12,30 +12,33 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-background text-foreground">
-      <section className="border-b border-white/5 pt-12 pb-12">
+    <div className="bg-background text-foreground pb-16">
+      <section className="pt-14">
         <Container>
           <SectionHeader
             eyebrow="About"
             title="Engineering-first AI with research credibility"
-            description="I work at the intersection of forecasting research and production software, aiming for models that are reliable, interpretable, and deployable."
+            description="I build at the intersection of forecasting research and production software, with a focus on reliability and deployment readiness."
           />
-          <div className="mt-8 max-w-3xl space-y-4 text-lg leading-relaxed text-muted-foreground">
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
             {about.summary.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
+              <article key={paragraph} className="rounded-2xl border border-border/80 bg-card p-6">
+                <p className="text-base leading-relaxed text-muted-foreground">{paragraph}</p>
+              </article>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="py-12">
+      <section className="pt-16">
         <Container>
           <SectionHeader
-            eyebrow="Focus"
+            eyebrow="Values"
             title="What I care about"
-            description="These principles shape how I design models, experiments, and systems."
+            description="Principles that shape model design, evaluation, and software delivery."
           />
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-8 grid gap-5 md:grid-cols-2">
             {about.values.map((value) => (
               <ValueCard key={value.title} {...value} />
             ))}
@@ -43,18 +46,18 @@ export default function AboutPage() {
         </Container>
       </section>
 
-      <section className="border-t border-white/5 bg-surface/30 py-12">
+      <section className="pt-16">
         <Container>
           <SectionHeader
             eyebrow="Focus Areas"
             title="Applied AI and systems engineering"
-            description="Areas where I have hands-on experience and active interest."
+            description="Domains where I have direct implementation experience."
           />
           <div className="mt-8 flex flex-wrap gap-2">
             {focusAreas.map((area) => (
               <span
                 key={area}
-                className="rounded-full border border-white/5 bg-surface px-4 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-white/10 hover:text-foreground"
+                className="rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium text-muted-foreground"
               >
                 {area}
               </span>

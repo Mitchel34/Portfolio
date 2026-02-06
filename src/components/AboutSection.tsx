@@ -1,59 +1,63 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { about, experience } from "@/lib/content";
+
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
+import { about, experience } from "@/lib/content";
 
 export function AboutSection() {
-    return (
-        <section className="py-24 md:py-32" id="about">
-            <Container>
-                <div className="grid gap-16 lg:grid-cols-[1fr,1.2fr]">
-                    <div className="space-y-8">
-                        <SectionHeader
-                            eyebrow="About Me"
-                            title="Applied AI with engineering discipline"
-                            description="Research depth with a production mindset."
-                        />
-                        <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
-                            {about.summary.map((paragraph, i) => (
-                                <p key={i}>{paragraph}</p>
-                            ))}
-                        </div>
-                    </div>
+  return (
+    <section className="relative py-20" id="about">
+      <Container>
+        <div className="grid gap-10 lg:grid-cols-[1.02fr,0.98fr]">
+          <div className="space-y-8">
+            <SectionHeader
+              eyebrow="About"
+              title="Engineering rigor, research depth, and practical delivery"
+              description="I operate between ML research and software engineering, focused on systems that are useful outside notebooks."
+            />
 
-                    <div className="relative space-y-8 border-l border-white/10 pl-8">
-                        <h3 className="text-xl font-semibold text-foreground">Timeline</h3>
-                        {experience.map((item, index) => (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: index * 0.1 }}
-                                className="relative"
-                            >
-                                <div className="absolute -left-[37px] top-1.5 h-3 w-3 rounded-full bg-primary ring-4 ring-background" />
-                                <div className="space-y-1">
-                                    <div className="flex items-center justify-between gap-4 text-sm">
-                                        <span className="font-semibold text-primary">{item.role}</span>
-                                        <span className="font-mono text-xs text-muted-foreground">
-                                            {item.period}
-                                        </span>
-                                    </div>
-                                    <p className="font-medium text-foreground">{item.org}</p>
-                                    <ul className="list-disc pl-4 text-sm text-muted-foreground mt-2 space-y-1">
-                                        {item.highlights.map(hl => (
-                                            <li key={hl}>{hl}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+            <div className="space-y-5 rounded-3xl border border-border/80 bg-card p-7 shadow-[0_20px_60px_-50px_rgba(18,36,58,0.45)]">
+              {about.summary.map((paragraph) => (
+                <p key={paragraph} className="text-base leading-relaxed text-muted-foreground">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
+              Career Timeline
+            </p>
+
+            {experience.map((item, index) => (
+              <motion.article
+                key={item.role}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="rounded-2xl border border-border/80 bg-card px-5 py-4"
+              >
+                <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
+                  <h3 className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
+                    {item.role}
+                  </h3>
+                  <span className="text-xs font-mono text-muted-foreground">{item.period}</span>
                 </div>
-            </Container>
-        </section>
-    );
+                <p className="text-sm font-medium text-foreground">{item.org}</p>
+                <ul className="mt-3 space-y-1.5 pl-4 text-sm text-muted-foreground list-disc marker:text-secondary">
+                  {item.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
 }
