@@ -6,6 +6,7 @@ import { ContactSection } from "@/components/ContactSection";
 import { CoreValues } from "@/components/CoreValues";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import { Hero } from "@/components/Hero";
+import { HowIWork } from "@/components/HowIWork";
 import { ProjectGrid } from "@/components/ProjectGrid";
 import { ResearchSection } from "@/components/ResearchSection";
 import { createPageMetadata } from "@/lib/seo";
@@ -35,6 +36,7 @@ export default function Home() {
       <CredibilityBand />
       <AboutSection />
       <CoreValues />
+      <HowIWork />
       <FeaturedProject />
       <ProjectGrid />
       <ResearchSection />

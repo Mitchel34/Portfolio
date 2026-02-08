@@ -28,8 +28,8 @@ export default function ContactPage() {
           <SectionHeader
             as="h1"
             eyebrow="Contact"
-            title="Let's build reliable forecasting systems"
-            description="Open to AI engineering roles, forecasting work, and infrastructure-aware ML projects."
+            title="Let's build something that works in the real world"
+            description="I'm open to collaborating with teams working on forecasting, infrastructure-aware ML, and production systems—whether in industry or research. If you care about reliability, clarity, and shipping useful systems, I'd enjoy connecting."
           />
 
           <div className="mt-10 grid gap-5 md:grid-cols-3">
@@ -59,7 +59,7 @@ export default function ContactPage() {
             <p>
               For role outreach, include context on product scope, deployment constraints, and expected model ownership.
             </p>
-            <p className="mt-2">I prioritize teams shipping measurable impact.</p>
+            <p className="mt-2">I prioritize teams shipping measurable impact and value cross-functional collaboration.</p>
           </div>
         </Container>
       </section>

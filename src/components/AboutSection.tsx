@@ -14,7 +14,7 @@ export function AboutSection() {
           <div className="space-y-8">
             <SectionHeader
               eyebrow="About"
-              title="Engineering rigor, research depth, and practical delivery"
+              title="Engineering rigor, research depth, and collaborative delivery"
               description="I operate between ML research and software engineering, focused on systems that are useful outside notebooks."
             />
 

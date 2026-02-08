@@ -1,9 +1,9 @@
 export const site = {
   name: "Mitchel Carson",
-  title: "AI Engineer / Software Engineer",
-  headline: "Building AI systems that bridge research and reality.",
+  title: "AI Engineer building production-ready forecasting systems",
+  headline: "AI Engineer building production-ready forecasting systems",
   summary:
-    "I build AI systems that are accurate, interpretable, and engineered for the real world. TS/SCI active.",
+    "I design machine-learning systems that hold up under real-world constraints—accuracy, interpretability, and operational reliability. TS/SCI active.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
@@ -46,29 +46,29 @@ export type Project = {
 
 export const about = {
   summary: [
-    "My journey began in high-stakes environments aboard Air Force 2, where reliability wasn't optional—it was the mission. I brought that same discipline to software engineering at USAA and now to my research in hydrological forecasting.",
-    "Today, I focus on time-series AI that works in the wild. My senior thesis achieved a 26–54% error reduction in national water forecasts using hybrid architectures. I value systems that are leakage-safe, reproducible, and verifiable.",
+    "I operate at the intersection of machine learning research and software engineering, focused on systems that are useful outside notebooks. My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
+    "My senior thesis achieved a 26–54% error reduction in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.",
   ],
   values: [
     {
-      title: "Reliability First",
+      title: "Reliability in Shared Systems",
       description:
-        "Metrics must reflect operational reality. Models should remain stable even when data shifts.",
+        "I design models and pipelines that teammates can trust—stable metrics, leakage-safe evaluation, and behavior that's predictable under change.",
     },
     {
-      title: "Interpretability",
+      title: "Interpretability & Debuggability",
       description:
-        "We need to know *why* a model fails. I build systems that reveal their reasoning, not just their results.",
+        "Models should explain themselves. Clear diagnostics help teams understand failures quickly and improve systems together.",
     },
     {
       title: "Real-World Impact",
       description:
-        "Research shouldn't stay in a notebook. I aim for improvements that drive actual decisions.",
+        "Research shouldn't stay in a notebook. I aim for improvements that drive actual decisions for real stakeholders.",
     },
     {
-      title: "Engineering Discipline",
+      title: "Engineering Discipline Enables Team Velocity",
       description:
-        "Pipelines, monitoring, and clear interfaces are as critical as the model architecture itself.",
+        "Clean interfaces, reproducible pipelines, and monitoring aren't overhead—they're what let teams move fast without breaking things.",
     },
   ],
 };
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     problem:
       "National water models often struggle with local precision, leaving communities with uncertain flood warnings.",
     impact:
-      "Achieved 26–54% RMSE reduction over baselines, directly improving decision support for water management.",
+      "Achieved 26–54% RMSE reduction over baselines, directly improving decision support for water management. Operational water forecasts affect real decisions—flood warnings, resource planning, and risk management. Improving accuracy while maintaining stability directly improves trust in these systems.",
     approach: [
       "Developed advanced Transformer-based models to catch residuals that physical models miss.",
       "Integrated multi-source data (NWM v3.0+, ERA5, USGS) for a comprehensive view.",
@@ -105,6 +105,7 @@ export const projects: Project[] = [
     learnings: [
       "Hybrid architectures can correct physical model biases without overfitting.",
       "Rigorous evaluation design is the difference between a demo and a product.",
+      "Balancing research goals with operational constraints mirrors how ML systems are built in production teams.",
     ],
     caseStudy: {
       architecture: [
@@ -135,7 +136,7 @@ export const projects: Project[] = [
     problem:
       "Internal teams needed a reliable, compliant way to access core risk data without navigating legacy complexity.",
     impact:
-      "Accelerated developer velocity and ensured compliance for partner teams across the organization.",
+      "Accelerated developer velocity and ensured compliance for partner teams across the organization. Making risk data accessible and predictable reduced cross-team friction and improved decision-making speed.",
     approach: [
       "Designed and deployed strict GraphQL APIs using Java and Spring Boot.",
       "Enhanced internal observability tools by unifying disparate data sources.",
@@ -155,6 +156,7 @@ export const projects: Project[] = [
     ],
     learnings: [
       "Clear interfaces (API contracts) allow teams to move fast safely.",
+      "Effective production systems require close collaboration between engineers, product owners, and end users.",
     ],
     caseStudy: {
       architecture: [
@@ -185,7 +187,7 @@ export const research = {
   title:
     "Senior Honors Thesis: Runoff Forecasting with Deep Learning",
   summary:
-    "Post-processing operational streamflow forecasts with Hybrid Transformer/RNN models to improve accuracy while respecting physical constraints.",
+    "Post-processing operational streamflow forecasts with Hybrid Transformer/RNN models to improve accuracy while respecting physical constraints. I'm interested in extending this work through collaboration—across hydrology, ML research, and applied engineering teams—to improve real-world decision support.",
   architecture: [
     "Inputs: Operational NWM forecasts, meteorological forcings, static attributes.",
     "Encoder: Transformer capturing multi-scale temporal context.",
@@ -221,6 +223,7 @@ export const experience = [
       "Enhanced internal troubleshooting tools by integrating Non-Source-of-Record data.",
       "Built and refined JavaScript front-end components for data visualization.",
       "Collaborated in an Agile/Scrum team using Jira and Git.",
+      "Worked closely with product owners, backend engineers, and internal users to ensure APIs were usable, secure, and operationally reliable.",
     ],
   },
   {
@@ -231,6 +234,7 @@ export const experience = [
       "Maintained passenger safety and schedule reliability for distinguished guests aboard Air Force 2.",
       "Responsible for mission planning and communication with the White House.",
       "Managed logistics, billing, and visa applications for crew and passengers.",
+      "Coordinated across flight crew, security teams, and executive staff to meet exacting operational standards.",
     ],
   },
 ];

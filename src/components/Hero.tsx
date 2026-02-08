@@ -42,10 +42,13 @@ export function Hero() {
 
           <div className="space-y-6">
             <h1 className="max-w-3xl font-serif text-4xl font-medium leading-[1.03] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              Designing forecasting systems that survive real production constraints
+              AI Engineer building production-ready forecasting systems
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               {site.summary}
+            </p>
+            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground/80">
+              I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
               Machine Learning / Forecasting / Production Engineering

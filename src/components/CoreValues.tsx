@@ -18,7 +18,7 @@ export function CoreValues() {
             Core Values
           </p>
           <h2 className="mt-3 font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
-            Principles behind every system I build
+            Principles that make teams and systems stronger
           </h2>
         </div>
 

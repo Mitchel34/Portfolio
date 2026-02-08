@@ -13,10 +13,10 @@ export function ContactSection() {
           <div className="space-y-6">
             <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
             <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
-              Building reliable ML systems with real-world impact
+              Let&apos;s build something that works in the real world
             </h2>
             <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-              Open to AI engineering roles and collaborations around forecasting, infrastructure-aware ML, and production deployment.
+              I&apos;m open to collaborating with teams working on forecasting, infrastructure-aware ML, and production systems—whether in industry or research. If you care about reliability, clarity, and shipping useful systems, I&apos;d enjoy connecting.
             </p>
 
             <div className="flex flex-wrap gap-3">

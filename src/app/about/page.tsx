@@ -35,7 +35,7 @@ export default function AboutPage() {
               as="h1"
               eyebrow="About"
               title="Engineering-first AI with research credibility"
-              description="I build at the intersection of forecasting research and production software, with a focus on reliability and deployment readiness."
+              description="I build at the intersection of forecasting research and production software—focused on reliability, deployment readiness, and working effectively across disciplines."
             />
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
@@ -53,7 +53,7 @@ export default function AboutPage() {
             <SectionHeader
               eyebrow="Values"
               title="What I care about"
-              description="Principles that shape model design, evaluation, and software delivery."
+              description="Principles that shape model design, team collaboration, and software delivery."
             />
             <div className="mt-8 grid gap-5 md:grid-cols-2">
               {about.values.map((value) => (
