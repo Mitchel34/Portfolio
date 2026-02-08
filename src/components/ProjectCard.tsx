@@ -19,10 +19,22 @@ function ProjectSection({ label, children }: { label: string; children: ReactNod
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
+  const isWip = project.status === "Active Development";
+
   return (
-    <article className="rounded-2xl border border-border/80 bg-card p-6 shadow-[0_18px_48px_-42px_rgba(18,36,58,0.65)]">
+    <article
+      className={`rounded-2xl border bg-card p-6 shadow-[0_18px_48px_-42px_rgba(18,36,58,0.65)] ${
+        isWip ? "border-dashed border-amber-400/60" : "border-border/80"
+      }`}
+    >
       <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
         <div>
+          {isWip && (
+            <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-amber-700">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
+              Active Development
+            </span>
+          )}
           <h3 className="font-serif text-2xl font-medium tracking-tight text-foreground">
             {project.title}
           </h3>
@@ -73,7 +85,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </div>
         </ProjectSection>
 
-        <ProjectSection label="Results">
+        <ProjectSection label={isWip ? "Current Scope" : "Results"}>
           <ul className="list-disc space-y-1 pl-5 marker:text-accent">
             {project.results.map((item) => (
               <li key={item}>{item}</li>
@@ -81,7 +93,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
           </ul>
         </ProjectSection>
 
-        <ProjectSection label="What I learned">
+        <ProjectSection label={isWip ? "Design Principles" : "What I learned"}>
           <ul className="list-disc space-y-1 pl-5 marker:text-secondary">
             {project.learnings.map((item) => (
               <li key={item}>{item}</li>

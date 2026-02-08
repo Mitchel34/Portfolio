@@ -148,12 +148,24 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
           </div>
 
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <CaseStudySection title="Technical Approach" items={project.approach} />
+            <CaseStudySection
+              title={project.status === "Active Development" ? "Project Goals" : "Technical Approach"}
+              items={project.approach}
+            />
             <CaseStudySection title="Architecture Decisions" items={project.caseStudy.architecture} />
-            <CaseStudySection title="Reliability and Evaluation" items={project.caseStudy.reliability} />
+            <CaseStudySection
+              title={project.status === "Active Development" ? "Evaluation Methodology" : "Reliability and Evaluation"}
+              items={project.caseStudy.reliability}
+            />
             <CaseStudySection title="Delivery and Operations" items={project.caseStudy.delivery} />
-            <CaseStudySection title="Results" items={project.results} />
-            <CaseStudySection title="What I Learned" items={project.learnings} />
+            <CaseStudySection
+              title={project.status === "Active Development" ? "Current Scope" : "Results"}
+              items={project.results}
+            />
+            <CaseStudySection
+              title={project.status === "Active Development" ? "Design Principles" : "What I Learned"}
+              items={project.learnings}
+            />
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">

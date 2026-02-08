@@ -33,7 +33,7 @@ export type Project = {
   slug: string;
   title: string;
   subtitle: string;
-  status: "Active" | "Production";
+  status: "Active" | "Production" | "Active Development";
   problem: string;
   impact: string;
   approach: string[];
@@ -69,6 +69,11 @@ export const about = {
       title: "Engineering Discipline Enables Team Velocity",
       description:
         "Clean interfaces, reproducible pipelines, and monitoring aren't overhead—they're what let teams move fast without breaking things.",
+    },
+    {
+      title: "Risk Awareness",
+      description:
+        "Systems should explicitly model uncertainty and downside, not just optimize expected outcomes.",
     },
   ],
 };
@@ -176,6 +181,65 @@ export const projects: Project[] = [
       ],
     },
     links: [{ label: "Experience", href: "/resume" }],
+  },
+  {
+    slug: "harmony-trading",
+    title: "Harmony",
+    subtitle: "Algorithmic trading systems for disciplined decision-making",
+    status: "Active Development",
+    problem:
+      "Financial markets are noisy, adversarial environments where predictive accuracy alone is insufficient. Sustainable trading systems require disciplined evaluation, strict risk controls, and infrastructure that behaves predictably under stress.",
+    impact:
+      "A modular trading application exploring forecasting, risk controls, and production-grade execution pipelines. Harmony is an evolving project, intentionally built in a modular way—open to discussion and collaboration around system design, evaluation methodology, and infrastructure choices.",
+    approach: [
+      "Design a forecasting and execution pipeline that survives regime shifts.",
+      "Emphasize risk management over raw returns.",
+      "Build components that can be evaluated independently and replaced safely.",
+      "Treat trading as a systems engineering problem, not a single model.",
+    ],
+    stack: [
+      "Python",
+      "PyTorch",
+      "pandas",
+      "NumPy",
+      "PostgreSQL",
+      "Docker",
+    ],
+    results: [
+      "Market data ingestion and normalization pipeline.",
+      "Forecasting models for short- and medium-horizon signals.",
+      "Risk engine enforcing position sizing and drawdown limits.",
+      "Backtesting framework with leakage-aware evaluation.",
+      "Execution simulation via paper trading.",
+    ],
+    learnings: [
+      "No model is trusted without adversarial backtesting.",
+      "Risk constraints override model confidence.",
+      "Components must fail safely.",
+      "Performance claims require statistically sound evaluation.",
+    ],
+    caseStudy: {
+      architecture: [
+        "Market data ingestion feeding normalized feature pipelines.",
+        "Forecast models generating short- and medium-horizon signals.",
+        "Risk engine enforcing position sizing, drawdown limits, and exposure controls.",
+        "Execution layer with paper trading simulation and metrics monitoring.",
+      ],
+      reliability: [
+        "Risk-adjusted return metrics (Sharpe, Sortino) over raw P&L.",
+        "Maximum drawdown tracking and regime-stability analysis.",
+        "Backtest vs. forward-test divergence monitoring.",
+        "Leakage-aware evaluation to prevent look-ahead bias.",
+      ],
+      delivery: [
+        "Modular component architecture allowing independent evaluation and replacement.",
+        "Incremental development with infrastructure-first approach.",
+        "Design decisions documented for future team onboarding.",
+      ],
+    },
+    links: [
+      { label: "GitHub", href: "https://github.com/Mitchel34" },
+    ],
   },
 ];
 

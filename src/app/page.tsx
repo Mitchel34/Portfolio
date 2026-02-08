@@ -36,10 +36,10 @@ export default function Home() {
       <CredibilityBand />
       <AboutSection />
       <CoreValues />
-      <HowIWork />
       <FeaturedProject />
       <ProjectGrid />
       <ResearchSection />
+      <HowIWork />
       <ContactSection />
     </main>
   );
