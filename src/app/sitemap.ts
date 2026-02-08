@@ -1,8 +1,15 @@
 import { MetadataRoute } from "next";
+import { projects } from "@/lib/content";
 import { absoluteUrl } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
+  const projectCaseStudies: MetadataRoute.Sitemap = projects.map((project) => ({
+    url: absoluteUrl(`/projects/${project.slug}`),
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.75,
+  }));
 
   return [
     {
@@ -41,5 +48,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    ...projectCaseStudies,
   ];
 }

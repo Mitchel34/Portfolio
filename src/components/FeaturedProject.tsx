@@ -80,13 +80,21 @@ export function FeaturedProject() {
                 ))}
               </div>
 
-              <Link
-                href={project.links?.[0]?.href ?? site.github}
-                className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
-              >
-                View source and write-up
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+              <div className="flex flex-wrap items-center gap-4">
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
+                >
+                  Read case study
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <a
+                  href={project.links?.[0]?.href ?? site.github}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition hover:opacity-80"
+                >
+                  View source
+                </a>
+              </div>
             </motion.div>
 
             <motion.div

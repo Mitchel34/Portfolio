@@ -1,5 +1,6 @@
 import { site } from "@/lib/content";
 import { absoluteUrl } from "@/lib/seo";
+import { SchemaScript } from "@/components/SchemaScript";
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -31,17 +32,25 @@ const websiteJsonLd = {
   inLanguage: "en-US",
 };
 
+const profilePageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  name: `${site.name} Portfolio`,
+  url: site.url,
+  description: site.summary,
+  mainEntity: {
+    "@type": "Person",
+    name: site.name,
+    url: site.url,
+  },
+};
+
 export function StructuredData() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-      />
+      <SchemaScript data={personJsonLd} />
+      <SchemaScript data={websiteJsonLd} />
+      <SchemaScript data={profilePageJsonLd} />
     </>
   );
 }

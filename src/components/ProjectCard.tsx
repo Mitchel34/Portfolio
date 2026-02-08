@@ -1,21 +1,7 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 
-type ProjectLink = {
-  label: string;
-  href: string;
-};
-
-type Project = {
-  title: string;
-  subtitle: string;
-  problem: string;
-  impact: string;
-  approach: string[];
-  stack: string[];
-  results: string[];
-  learnings: string[];
-  links?: ProjectLink[];
-};
+import type { Project } from "@/lib/content";
 
 type ProjectCardProps = {
   project: Project;
@@ -43,19 +29,23 @@ export function ProjectCard({ project }: ProjectCardProps) {
           <p className="mt-1 text-sm text-muted-foreground">{project.subtitle}</p>
         </div>
 
-        {project.links && project.links.length > 0 ? (
-          <div className="flex flex-wrap gap-2">
-            {project.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        ) : null}
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href={`/projects/${project.slug}`}
+            className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+          >
+            Case Study
+          </Link>
+          {project.links?.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
       </div>
 
       <div className="grid gap-6 lg:grid-cols-2">

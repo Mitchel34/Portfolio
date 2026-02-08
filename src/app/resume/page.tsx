@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { education, experience, site } from "@/lib/content";
@@ -44,70 +45,79 @@ function TimelineCard({
 
 export default function ResumePage() {
   return (
-    <div className="bg-background pb-16 pt-14 text-foreground">
-      <Container>
-        <SectionHeader
-          eyebrow="Resume"
-          title="Experience and education"
-          description="Impact-focused highlights with systems-level thinking and delivery discipline."
-        />
-
-        <div className="mt-6">
-          <a
-            href={site.resumeUrl}
-            download
-            className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-          >
-            Download PDF
-          </a>
-        </div>
-
-        <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[0_22px_70px_-48px_rgba(18,36,58,0.75)]">
-          <iframe
-            src={`${site.resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-            className="h-[520px] w-full border-none md:h-[840px]"
-            title="Resume PDF"
-          />
-        </div>
-
-        <section className="mt-12">
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Resume", href: "/resume" },
+        ]}
+      />
+      <div className="bg-background pb-16 pt-14 text-foreground">
+        <Container>
           <SectionHeader
-            eyebrow="Experience"
-            title="Industry and research work"
-            description="Roles that shaped my approach to building reliable ML systems."
+            as="h1"
+            eyebrow="Resume"
+            title="Experience and education"
+            description="Impact-focused highlights with systems-level thinking and delivery discipline."
           />
-          <div className="mt-7 grid gap-5">
-            {experience.map((role) => (
-              <TimelineCard
-                key={role.role}
-                title={role.role}
-                org={role.org}
-                period={role.period}
-                items={role.highlights}
-              />
-            ))}
-          </div>
-        </section>
 
-        <section className="mt-12">
-          <SectionHeader
-            eyebrow="Education"
-            title="Academic foundation"
-            description="Graduate AI training grounded in computer science fundamentals."
-          />
-          <div className="mt-7 grid gap-5">
-            {education.map((item) => (
-              <TimelineCard
-                key={item.degree}
-                title={item.degree}
-                org={item.org}
-                period={item.period}
-                items={item.details}
-              />
-            ))}
+          <div className="mt-6">
+            <a
+              href={site.resumeUrl}
+              download
+              className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+            >
+              Download PDF
+            </a>
           </div>
-        </section>
-      </Container>
-    </div>
+
+          <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[0_22px_70px_-48px_rgba(18,36,58,0.75)]">
+            <iframe
+              src={`${site.resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
+              className="h-[520px] w-full border-none md:h-[840px]"
+              title="Resume PDF"
+            />
+          </div>
+
+          <section className="mt-12">
+            <SectionHeader
+              eyebrow="Experience"
+              title="Industry and research work"
+              description="Roles that shaped my approach to building reliable ML systems."
+            />
+            <div className="mt-7 grid gap-5">
+              {experience.map((role) => (
+                <TimelineCard
+                  key={role.role}
+                  title={role.role}
+                  org={role.org}
+                  period={role.period}
+                  items={role.highlights}
+                />
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <SectionHeader
+              eyebrow="Education"
+              title="Academic foundation"
+              description="Graduate AI training grounded in computer science fundamentals."
+            />
+            <div className="mt-7 grid gap-5">
+              {education.map((item) => (
+                <TimelineCard
+                  key={item.degree}
+                  title={item.degree}
+                  org={item.org}
+                  period={item.period}
+                  items={item.details}
+                />
+              ))}
+            </div>
+          </section>
+        </Container>
+      </div>
+    </>
   );
 }

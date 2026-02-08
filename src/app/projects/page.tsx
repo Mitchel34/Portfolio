@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { ProjectCard } from "@/components/ProjectCard";
+import { SchemaScript } from "@/components/SchemaScript";
 import { SectionHeader } from "@/components/SectionHeader";
 import { projects } from "@/lib/content";
-import { createPageMetadata } from "@/lib/seo";
+import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
@@ -19,21 +21,44 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function ProjectsPage() {
-  return (
-    <section className="bg-background pb-16 pt-14 text-foreground">
-      <Container>
-        <SectionHeader
-          eyebrow="Projects"
-          title="Forecasting and software systems"
-          description="Each project includes problem framing, technical approach, measurable outcomes, and implementation lessons."
-        />
+  const projectCollectionSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Mitchel Carson Project Case Studies",
+    itemListElement: projects.map((project, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: project.title,
+      url: absoluteUrl(`/projects/${project.slug}`),
+    })),
+  };
 
-        <div className="mt-10 grid gap-7">
-          {projects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
-        </div>
-      </Container>
-    </section>
+  return (
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Projects", href: "/projects" },
+        ]}
+      />
+      <SchemaScript data={projectCollectionSchema} />
+
+      <section className="bg-background pb-16 pt-14 text-foreground">
+        <Container>
+          <SectionHeader
+            as="h1"
+            eyebrow="Projects"
+            title="Forecasting and software systems"
+            description="Each project includes problem framing, technical approach, measurable outcomes, and implementation lessons."
+          />
+
+          <div className="mt-10 grid gap-7">
+            {projects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
+        </Container>
+      </section>
+    </>
   );
 }

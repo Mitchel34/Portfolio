@@ -18,6 +18,32 @@ export const focusAreas = [
   "Production ML and data pipelines",
 ];
 
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
+export type ProjectCaseStudy = {
+  architecture: string[];
+  reliability: string[];
+  delivery: string[];
+};
+
+export type Project = {
+  slug: string;
+  title: string;
+  subtitle: string;
+  status: "Active" | "Production";
+  problem: string;
+  impact: string;
+  approach: string[];
+  stack: string[];
+  results: string[];
+  learnings: string[];
+  caseStudy: ProjectCaseStudy;
+  links?: ProjectLink[];
+};
+
 export const about = {
   summary: [
     "My journey began in high-stakes environments aboard Air Force 2, where reliability wasn't optional—it was the mission. I brought that same discipline to software engineering at USAA and now to my research in hydrological forecasting.",
@@ -47,10 +73,12 @@ export const about = {
   ],
 };
 
-export const projects = [
+export const projects: Project[] = [
   {
+    slug: "hydra-temporal",
     title: "Hydra Temporal",
     subtitle: "Improving National Streamflow Forecasts (Honors Thesis)",
+    status: "Active",
     problem:
       "National water models often struggle with local precision, leaving communities with uncertain flood warnings.",
     impact:
@@ -78,13 +106,32 @@ export const projects = [
       "Hybrid architectures can correct physical model biases without overfitting.",
       "Rigorous evaluation design is the difference between a demo and a product.",
     ],
+    caseStudy: {
+      architecture: [
+        "Residual-correction pipeline that ingests NOAA NWM forecasts, forcing signals, and basin context.",
+        "Transformer encoder for multi-scale temporal context, paired with a recurrent residual head.",
+        "Config-driven training and evaluation with strict train/validation/test time boundaries.",
+      ],
+      reliability: [
+        "Leakage-safe splitting by basin and time horizon to match operational inference constraints.",
+        "Reproducible runs through fixed seeds, immutable data artifacts, and tracked configuration snapshots.",
+        "Stress-tested against seasonal drift and missing-sensor windows for production realism.",
+      ],
+      delivery: [
+        "Packaged experiments with Hydra + MLflow for repeatable model iteration and comparison.",
+        "Built deployment-ready outputs for downstream operational routing and dashboard consumption.",
+        "Defined clear handoff surfaces so model updates can be integrated without pipeline rewrites.",
+      ],
+    },
     links: [
       { label: "GitHub", href: "https://github.com/Mitchel34" },
     ],
   },
   {
+    slug: "usaa-risk-services",
     title: "USAA Risk Services",
     subtitle: "Secure Production APIs for Financial Services",
+    status: "Production",
     problem:
       "Internal teams needed a reliable, compliant way to access core risk data without navigating legacy complexity.",
     impact:
@@ -109,9 +156,30 @@ export const projects = [
     learnings: [
       "Clear interfaces (API contracts) allow teams to move fast safely.",
     ],
+    caseStudy: {
+      architecture: [
+        "Contract-first GraphQL API layer over core risk services using Java and Spring Boot.",
+        "Typed front-end integrations for operational dashboards and internal support tooling.",
+        "Data-access partitioning to separate source-of-record from troubleshooting data paths.",
+      ],
+      reliability: [
+        "Test-gated deployments with schema validation to prevent API contract regressions.",
+        "Structured logging and observability hooks for rapid incident diagnosis.",
+        "Secure defaults and compliance-aware patterns embedded in service interfaces.",
+      ],
+      delivery: [
+        "Shipped incrementally with Agile team workflows and shared Jira/Git ownership.",
+        "Reduced partner-team support loops by making data retrieval predictable and self-serve.",
+        "Improved deployment confidence through repeatable release and validation checks.",
+      ],
+    },
     links: [{ label: "Experience", href: "/resume" }],
   },
 ];
+
+export function getProjectBySlug(slug: string) {
+  return projects.find((project) => project.slug === slug);
+}
 
 export const research = {
   title:

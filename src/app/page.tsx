@@ -10,18 +10,23 @@ import { ProjectGrid } from "@/components/ProjectGrid";
 import { ResearchSection } from "@/components/ResearchSection";
 import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "AI Engineer Portfolio",
-  description:
-    "Mitchel Carson builds AI forecasting systems with production-grade software engineering discipline.",
-  pathname: "/",
-  keywords: [
-    "AI portfolio",
-    "ML portfolio",
-    "forecasting engineer",
-    "hydrology machine learning",
-  ],
-});
+export const metadata: Metadata = {
+  ...createPageMetadata({
+    title: "AI Engineer Portfolio",
+    description:
+      "Mitchel Carson builds AI forecasting systems with production-grade software engineering discipline.",
+    pathname: "/",
+    keywords: [
+      "AI portfolio",
+      "ML portfolio",
+      "forecasting engineer",
+      "hydrology machine learning",
+    ],
+  }),
+  title: {
+    absolute: "Mitchel Carson | AI Engineer Portfolio",
+  },
+};
 
 export default function Home() {
   return (
