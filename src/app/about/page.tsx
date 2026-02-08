@@ -3,12 +3,20 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ValueCard } from "@/components/ValueCard";
-import { about, focusAreas, site } from "@/lib/content";
+import { about, focusAreas } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `About | ${site.name}`,
-  description: "Professional narrative and values behind the work.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "About",
+  description:
+    "Professional background, values, and engineering principles behind Mitchel Carson's AI and software systems work.",
+  pathname: "/about",
+  keywords: [
+    "about Mitchel Carson",
+    "AI engineer background",
+    "machine learning researcher",
+  ],
+});
 
 export default function AboutPage() {
   return (

@@ -3,11 +3,15 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { education, experience, site } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Resume | ${site.name}`,
-  description: "Professional experience and education timeline.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Resume",
+  description:
+    "Resume and timeline of Mitchel Carson's AI engineering experience, software development work, and academic training.",
+  pathname: "/resume",
+  keywords: ["AI engineer resume", "machine learning resume", "software engineer resume"],
+});
 
 function TimelineCard({
   title,

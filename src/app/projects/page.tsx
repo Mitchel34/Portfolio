@@ -3,12 +3,20 @@ import type { Metadata } from "next";
 import { Container } from "@/components/Container";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SectionHeader } from "@/components/SectionHeader";
-import { projects, site } from "@/lib/content";
+import { projects } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Projects | ${site.name}`,
-  description: "AI, ML, and software engineering projects with real-world impact.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Projects",
+  description:
+    "Applied AI, forecasting, and software engineering projects including Hydra Temporal and production API systems.",
+  pathname: "/projects",
+  keywords: [
+    "AI projects",
+    "forecasting projects",
+    "software engineering portfolio projects",
+  ],
+});
 
 export default function ProjectsPage() {
   return (

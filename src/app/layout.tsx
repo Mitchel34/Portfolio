@@ -4,7 +4,8 @@ import { Fraunces, IBM_Plex_Mono, Sora } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/Footer";
 import { Nav } from "@/components/Nav";
-import { site } from "@/lib/content";
+import { StructuredData } from "@/components/StructuredData";
+import { rootMetadata } from "@/lib/seo";
 
 const sora = Sora({
   variable: "--font-sora",
@@ -22,31 +23,7 @@ const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  metadataBase: new URL("https://mitchelcarson.com"),
-  title: `${site.name} | ${site.title}`,
-  description:
-    "AI engineer focused on forecasting systems, applied ML, and production software.",
-  openGraph: {
-    title: `${site.name} | ${site.title}`,
-    description: "AI engineer focused on forecasting systems, applied ML, and production software.",
-    url: "https://mitchelcarson.com",
-    siteName: site.name,
-    locale: "en_US",
-    type: "website",
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-};
+export const metadata: Metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -58,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${sora.variable} ${fraunces.variable} ${ibmPlexMono.variable} min-h-screen bg-background text-foreground antialiased selection:bg-primary/25`}
       >
+        <StructuredData />
         <Nav />
         <main className="pb-20">{children}</main>
         <Footer />

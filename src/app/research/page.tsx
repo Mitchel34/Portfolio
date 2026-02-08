@@ -2,12 +2,21 @@ import type { Metadata } from "next";
 
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { research, site } from "@/lib/content";
+import { research } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Research | ${site.name}`,
-  description: "Thesis work focused on leakage-safe forecasting and residual correction.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Research",
+  description:
+    "Senior honors thesis research on leakage-safe residual correction for NOAA streamflow forecasts using hybrid deep learning models.",
+  pathname: "/research",
+  keywords: [
+    "AI research",
+    "time-series forecasting research",
+    "streamflow forecasting",
+    "NOAA NWM residual correction",
+  ],
+});
 
 export default function ResearchPage() {
   return (

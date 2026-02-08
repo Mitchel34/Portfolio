@@ -2,12 +2,16 @@ import type { Metadata } from "next";
 
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { contact, site } from "@/lib/content";
+import { contact } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Contact | ${site.name}`,
-  description: "Get in touch for AI engineering roles or research collaborations.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact",
+  description:
+    "Contact Mitchel Carson for AI engineering roles, ML forecasting collaborations, and production software opportunities.",
+  pathname: "/contact",
+  keywords: ["contact AI engineer", "ML engineer contact", "hire forecasting engineer"],
+});
 
 export default function ContactPage() {
   return (
