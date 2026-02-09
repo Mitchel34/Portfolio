@@ -6,16 +6,14 @@ import { ContactSection } from "@/components/ContactSection";
 import { CoreValues } from "@/components/CoreValues";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import { Hero } from "@/components/Hero";
-import { HowIWork } from "@/components/HowIWork";
 import { ProjectGrid } from "@/components/ProjectGrid";
-import { ResearchSection } from "@/components/ResearchSection";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   ...createPageMetadata({
     title: "AI Engineer Portfolio",
     description:
-      "Mitchel Carson builds AI forecasting systems with production-grade software engineering discipline.",
+      "Mitchel Carson builds production-grade ML systems with software engineering discipline — from forecasting to financial risk infrastructure.",
     pathname: "/",
     keywords: [
       "AI portfolio",
@@ -38,8 +36,6 @@ export default function Home() {
       <CoreValues />
       <FeaturedProject />
       <ProjectGrid />
-      <ResearchSection />
-      <HowIWork />
       <ContactSection />
     </main>
   );

@@ -6,13 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { focusAreas, projects, site } from "@/lib/content";
-
-const metrics = [
-  { label: "Forecast accuracy", value: "35% RMSE gain" },
-  { label: "Research depth", value: "Transformer + GRU" },
-  { label: "Deployment", value: "Production-first" },
-];
+import { projects, site } from "@/lib/content";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -42,7 +36,7 @@ export function Hero() {
 
           <div className="space-y-6">
             <h1 className="max-w-3xl font-serif text-4xl font-medium leading-[1.03] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              AI Engineer building production-ready forecasting systems
+              {site.headline}
             </h1>
             <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
               {site.summary}
@@ -51,7 +45,7 @@ export function Hero() {
               I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Machine Learning / Forecasting / Production Engineering
+              Machine Learning / Production Systems / Risk Infrastructure
             </p>
           </div>
 
@@ -75,31 +69,6 @@ export function Hero() {
             >
               Download Resume
             </a>
-          </div>
-
-          <div className="grid gap-3 sm:grid-cols-3">
-            {metrics.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-border/80 bg-card px-4 py-3"
-              >
-                <p className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-                  {item.label}
-                </p>
-                <p className="mt-1.5 text-sm font-semibold text-foreground">{item.value}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {focusAreas.map((area) => (
-              <span
-                key={area}
-                className="rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground"
-              >
-                {area}
-              </span>
-            ))}
           </div>
 
           <div className="flex items-center gap-3 text-muted-foreground">

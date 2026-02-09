@@ -1,7 +1,8 @@
 export const site = {
   name: "Mitchel Carson",
-  title: "AI Engineer building production-ready forecasting systems",
-  headline: "AI Engineer building production-ready forecasting systems",
+  title: "AI Engineer building production-grade ML systems",
+  headline:
+    "AI Engineer building production-grade ML systems \u2014 from real-time forecasting to financial risk infrastructure",
   summary:
     "I design machine-learning systems that hold up under real-world constraints—accuracy, interpretability, and operational reliability. TS/SCI active.",
   resumeUrl: "/resume.pdf",
@@ -46,7 +47,7 @@ export type Project = {
 
 export const about = {
   summary: [
-    "I operate at the intersection of machine learning research and software engineering, focused on systems that are useful outside notebooks. My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
+    "My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
     "My senior thesis achieved a 26–54% error reduction in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.",
   ],
   values: [
@@ -54,16 +55,6 @@ export const about = {
       title: "Reliability in Shared Systems",
       description:
         "I design models and pipelines that teammates can trust—stable metrics, leakage-safe evaluation, and behavior that's predictable under change.",
-    },
-    {
-      title: "Interpretability & Debuggability",
-      description:
-        "Models should explain themselves. Clear diagnostics help teams understand failures quickly and improve systems together.",
-    },
-    {
-      title: "Real-World Impact",
-      description:
-        "Research shouldn't stay in a notebook. I aim for improvements that drive actual decisions for real stakeholders.",
     },
     {
       title: "Engineering Discipline Enables Team Velocity",
@@ -156,8 +147,8 @@ export const projects: Project[] = [
       "PostgreSQL",
     ],
     results: [
-      "Streamlined data access for business partners, reducing support tickets.",
-      "Increased deployment confidence through automated testing pipelines.",
+      "Consolidated fragmented data access into a single self-serve API layer, eliminating recurring partner-team support loops.",
+      "Introduced schema-validated deployment gates that caught contract regressions before production.",
     ],
     learnings: [
       "Clear interfaces (API contracts) allow teams to move fast safely.",
@@ -190,7 +181,7 @@ export const projects: Project[] = [
     problem:
       "Financial markets are noisy, adversarial environments where predictive accuracy alone is insufficient. Sustainable trading systems require disciplined evaluation, strict risk controls, and infrastructure that behaves predictably under stress.",
     impact:
-      "A modular trading application exploring forecasting, risk controls, and production-grade execution pipelines. Harmony is an evolving project, intentionally built in a modular way—open to discussion and collaboration around system design, evaluation methodology, and infrastructure choices.",
+      "A modular algorithmic trading system with independent forecasting, risk management, and execution components \u2014 designed so any module can be evaluated, replaced, or improved without breaking the pipeline.",
     approach: [
       "Design a forecasting and execution pipeline that survives regime shifts.",
       "Emphasize risk management over raw returns.",
@@ -277,7 +268,15 @@ export const research = {
   ],
 };
 
-export const experience = [
+export type ExperienceItem = {
+  role: string;
+  org: string;
+  period: string;
+  highlights: string[];
+  bridgingSentence?: string;
+};
+
+export const experience: ExperienceItem[] = [
   {
     role: "SWE Intern",
     org: "USAA",
@@ -296,10 +295,10 @@ export const experience = [
     period: "August 2020 - April 2023",
     highlights: [
       "Maintained passenger safety and schedule reliability for distinguished guests aboard Air Force 2.",
-      "Responsible for mission planning and communication with the White House.",
-      "Managed logistics, billing, and visa applications for crew and passengers.",
       "Coordinated across flight crew, security teams, and executive staff to meet exacting operational standards.",
     ],
+    bridgingSentence:
+      "Managing logistics for executive missions under zero-margin-for-error conditions shaped how I think about reliability in every system I build.",
   },
 ];
 

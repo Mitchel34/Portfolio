@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Box, Code2, LineChart, ShieldAlert, ShieldCheck } from "lucide-react";
+import { Box, LineChart, ShieldAlert } from "lucide-react";
 
 import { Container } from "@/components/Container";
 import { about } from "@/lib/content";
 
-const icons = [LineChart, Code2, ShieldCheck, Box, ShieldAlert];
+const icons = [LineChart, Box, ShieldAlert];
 
 export function CoreValues() {
   return (
@@ -22,7 +22,7 @@ export function CoreValues() {
           </h2>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="grid gap-5 md:grid-cols-3">
           {about.values.map((value, index) => {
             const Icon = icons[index % icons.length];
             return (
