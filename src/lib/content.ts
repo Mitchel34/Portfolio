@@ -1,8 +1,7 @@
 export const site = {
   name: "Mitchel Carson",
   title: "AI Engineer building production-grade ML systems",
-  headline:
-    "AI Engineer building production-grade ML systems \u2014 from real-time forecasting to financial risk infrastructure",
+  headline: "AI Engineer looking for my next team",
   summary:
     "I design machine-learning systems that hold up under real-world constraints—accuracy, interpretability, and operational reliability. TS/SCI active.",
   resumeUrl: "/resume.pdf",
