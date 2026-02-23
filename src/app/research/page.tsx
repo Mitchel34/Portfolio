@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import Image from "next/image";
+
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -49,7 +51,25 @@ export default function ResearchPage() {
             ))}
           </div>
 
-          <div className="mt-10 grid gap-7 lg:grid-cols-2">
+          <div className="mt-10 mb-10 overflow-hidden rounded-2xl border border-border/80 bg-card">
+            <div className="relative aspect-[16/9] w-full border-b border-border/80">
+              <Image
+                src="/images/projects/hydra-architecture.jpg"
+                alt="HYDRA Model Architecture Flow Diagram"
+                fill
+                className="object-contain"
+                sizes="(max-width: 1200px) 100vw, 1200px"
+                priority
+              />
+            </div>
+            <div className="p-4 bg-muted/30">
+              <p className="text-center text-sm font-medium text-muted-foreground">
+                HYDRA Transformer-GRU Hybrid Architecture connecting sequence encoding, multi-scale temporal attention, and regime-conditioned residual correction.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-7 lg:grid-cols-2">
             <article className="rounded-2xl border border-border/80 bg-card p-6">
               <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Architecture</h3>
               <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground marker:text-primary">

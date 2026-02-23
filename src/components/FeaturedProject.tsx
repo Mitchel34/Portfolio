@@ -5,7 +5,7 @@ import { ArrowRight, BarChart3, Database, Layers } from "lucide-react";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { projects, site } from "@/lib/content";
+import { getProjectPrimaryExternalLink, projects, site, thesisImpactStat } from "@/lib/content";
 
 const project = projects[0];
 
@@ -23,7 +23,7 @@ const statCards = [
   {
     icon: BarChart3,
     title: "Outcome",
-    detail: "Up to 35% RMSE reduction on held-out basins",
+    detail: thesisImpactStat,
   },
 ];
 
@@ -89,7 +89,7 @@ export function FeaturedProject() {
                   <ArrowRight className="h-4 w-4" />
                 </Link>
                 <a
-                  href={project.links?.[0]?.href ?? site.github}
+                  href={getProjectPrimaryExternalLink(project) ?? site.github}
                   className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition hover:opacity-80"
                 >
                   View source

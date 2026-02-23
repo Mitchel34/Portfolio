@@ -44,10 +44,12 @@ export type Project = {
   links?: ProjectLink[];
 };
 
+export const thesisImpactStat = "Up to 48% streamflow error reduction";
+
 export const about = {
   summary: [
     "My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
-    "My senior thesis achieved a 26–54% error reduction in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.",
+    `My senior thesis achieved ${thesisImpactStat.toLowerCase()} in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.`,
   ],
   values: [
     {
@@ -71,17 +73,17 @@ export const about = {
 export const projects: Project[] = [
   {
     slug: "hydra-temporal",
-    title: "Hydra Temporal",
-    subtitle: "Improving National Streamflow Forecasts (Honors Thesis)",
+    title: "HYDRA",
+    subtitle: "Hybrid Deep-learning for Residual Analysis",
     status: "Active",
     problem:
-      "National water models often struggle with local precision, leaving communities with uncertain flood warnings.",
+      "National water models often struggle with local precision. During events like Hurricane Helene, NWM forecasts significantly underestimated peak flows in complex terrain, leaving communities with uncertain flood warnings.",
     impact:
-      "Achieved 26–54% RMSE reduction over baselines, directly improving decision support for water management. Operational water forecasts affect real decisions—flood warnings, resource planning, and risk management. Improving accuracy while maintaining stability directly improves trust in these systems.",
+      "Achieved up to 48% improvement in predicting streamflow across unregulated Appalachian watersheds, directly bolsters early warning systems for extreme hydrometeorological events.",
     approach: [
-      "Developed advanced Transformer-based models to catch residuals that physical models miss.",
+      "Developed an advanced 1-million parameter hybrid GRU-Transformer model to catch residuals that physical models miss.",
       "Integrated multi-source data (NWM v3.0+, ERA5, USGS) for a comprehensive view.",
-      "Designed leakage-safe evaluation to ensure performance holds up in the future.",
+      "Designed leakage-safe evaluation to ensure performance holds up in real-time constraints.",
       "Preparing manuscript for submission to Water Resources Research (AGU).",
     ],
     stack: [
@@ -93,8 +95,8 @@ export const projects: Project[] = [
       "AWS Batch",
     ],
     results: [
-      "26–54% reduction in prediction error (RMSE) on held-out basins.",
-      "Consistent improvement across varying forecast horizons.",
+      "Up to 48% improvement in predictions across unregulated Appalachian watersheds.",
+      "Consistent improvement across varying forecast horizons and extreme storm events.",
       "Demonstrated stability under seasonal distribution shifts.",
     ],
     learnings: [
@@ -120,6 +122,7 @@ export const projects: Project[] = [
       ],
     },
     links: [
+      { label: "Website", href: "https://hydramodel.ai" },
       { label: "GitHub", href: "https://github.com/Mitchel34" },
     ],
   },
@@ -237,32 +240,59 @@ export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
 
+function isExternalLink(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://");
+}
+
+function isRepositoryLink(link: ProjectLink) {
+  const label = link.label.toLowerCase();
+  const href = link.href.toLowerCase();
+
+  return (
+    isExternalLink(link.href) &&
+    (label.includes("github") ||
+      label.includes("repo") ||
+      href.includes("github.com") ||
+      href.includes("gitlab.com") ||
+      href.includes("bitbucket.org"))
+  );
+}
+
+export function getProjectRepositoryUrl(project: Project) {
+  return project.links?.find(isRepositoryLink)?.href;
+}
+
+export function getProjectPrimaryExternalLink(project: Project) {
+  return getProjectRepositoryUrl(project) ?? project.links?.find((link) => isExternalLink(link.href))?.href;
+}
+
 export const research = {
   title:
-    "Senior Honors Thesis: Runoff Forecasting with Deep Learning",
+    "HYDRA: Hybrid Deep-learning for Residual Analysis",
   summary:
-    "Post-processing operational streamflow forecasts with Hybrid Transformer/RNN models to improve accuracy while respecting physical constraints. I'm interested in extending this work through collaboration—across hydrology, ML research, and applied engineering teams—to improve real-world decision support.",
+    "Post-processing operational streamflow forecasts with a compact 1-million parameter Hybrid GRU-Transformer model to improve accuracy while respecting physical constraints. I'm interested in extending this work through collaboration—across hydrology, ML research, and applied engineering teams—to improve real-world decision support.",
   architecture: [
-    "Inputs: Operational NWM forecasts, meteorological forcings, static attributes.",
+    "Inputs: Operational NWM forecasts, meteorological forcings (ERA5), static attributes.",
+    "Temporal Encoding: GRU for capturing sequential patterns.",
     "Encoder: Transformer capturing multi-scale temporal context.",
-    "Integration: Fusing physical model outputs with deep learning corrections.",
     "Pipeline: Automated feature normalization and leakage-safe splitting.",
   ],
   evaluation: [
-    "Metrics: RMSE, NSE, KGE (Hydrology-standard metrics).",
-    "Validation: Spatial holdouts to test generalization.",
-    "Diagnostics: Analyzing error distributions across seasons.",
+    "Metrics: RMSE, NSE, KGE (Hydrology-standard metrics) with bootstrap confidence intervals.",
+    "Validation: Spatial holdouts to test generalization across 3 Appalachian sites.",
+    "Diagnostics: Flow regime analysis across baseflow, rising limbs, and recessions.",
   ],
   reproducibility: [
-    "Config-driven experiments (Hydra) with fixed seeds.",
+    "Config-driven experiments (Hydra) with 19 unique configurations.",
     "Strict data versioning and artifact tracking.",
     "Full environment captures for every run.",
   ],
   constraints: [
-    "Must run within operational latency limits.",
-    "Robustness to missing sensor data.",
+    "Must run within real-time operational latency limits.",
+    "Robustness to complex terrain and flashy watershed dynamics.",
   ],
   links: [
+    { label: "Website", href: "https://hydramodel.ai" },
     { label: "GitHub", href: "https://github.com/Mitchel34" },
   ],
 };
