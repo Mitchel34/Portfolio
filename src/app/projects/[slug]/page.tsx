@@ -6,7 +6,7 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SectionHeader } from "@/components/SectionHeader";
-import { getProjectBySlug, projects, site } from "@/lib/content";
+import { getProjectBySlug, getProjectRepositoryUrl, projects, site } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 type ProjectCaseStudyPageProps = {
@@ -18,9 +18,7 @@ function getProjectSchema(slug: string) {
   if (!project) return null;
 
   const canonical = absoluteUrl(`/projects/${project.slug}`);
-  const repository = project.links?.find(
-    (link) => link.href.startsWith("http://") || link.href.startsWith("https://")
-  )?.href;
+  const repository = getProjectRepositoryUrl(project);
 
   if (repository) {
     return {
