@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { Award, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
 
 import { Container } from "@/components/Container";
+import { thesisImpactStat } from "@/lib/content";
 
 const highlights = [
   {
     icon: Award,
     label: "Thesis Impact",
-    value: "26-54% RMSE reduction",
+    value: thesisImpactStat,
   },
   {
     icon: Wrench,

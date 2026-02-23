@@ -44,10 +44,12 @@ export type Project = {
   links?: ProjectLink[];
 };
 
+export const thesisImpactStat = "Up to 48% streamflow error reduction";
+
 export const about = {
   summary: [
     "My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
-    "My senior thesis achieved a 26–54% error reduction in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.",
+    `My senior thesis achieved ${thesisImpactStat.toLowerCase()} in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.`,
   ],
   values: [
     {
@@ -236,6 +238,32 @@ export const projects: Project[] = [
 
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
+}
+
+function isExternalLink(href: string) {
+  return href.startsWith("http://") || href.startsWith("https://");
+}
+
+function isRepositoryLink(link: ProjectLink) {
+  const label = link.label.toLowerCase();
+  const href = link.href.toLowerCase();
+
+  return (
+    isExternalLink(link.href) &&
+    (label.includes("github") ||
+      label.includes("repo") ||
+      href.includes("github.com") ||
+      href.includes("gitlab.com") ||
+      href.includes("bitbucket.org"))
+  );
+}
+
+export function getProjectRepositoryUrl(project: Project) {
+  return project.links?.find(isRepositoryLink)?.href;
+}
+
+export function getProjectPrimaryExternalLink(project: Project) {
+  return getProjectRepositoryUrl(project) ?? project.links?.find((link) => isExternalLink(link.href))?.href;
 }
 
 export const research = {

@@ -1,5 +1,3 @@
-"use client";
-
 import { Github, Linkedin, Mail } from "lucide-react";
 
 import { Container } from "@/components/Container";
