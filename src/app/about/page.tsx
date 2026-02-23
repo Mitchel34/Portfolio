@@ -1,67 +1,88 @@
 import type { Metadata } from "next";
 
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ValueCard } from "@/components/ValueCard";
-import { about, focusAreas, site } from "@/lib/content";
+import { about, focusAreas } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `About | ${site.name}`,
-  description: "Professional narrative and values behind the work.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "About",
+  description:
+    "Professional background, values, and engineering principles behind Mitchel Carson's AI and software systems work.",
+  pathname: "/about",
+  keywords: [
+    "about Mitchel Carson",
+    "AI engineer background",
+    "machine learning researcher",
+  ],
+});
 
 export default function AboutPage() {
   return (
-    <div className="bg-background text-foreground">
-      <section className="border-b border-white/5 pt-12 pb-12">
-        <Container>
-          <SectionHeader
-            eyebrow="About"
-            title="Engineering-first AI with research credibility"
-            description="I work at the intersection of forecasting research and production software, aiming for models that are reliable, interpretable, and deployable."
-          />
-          <div className="mt-8 max-w-3xl space-y-4 text-lg leading-relaxed text-muted-foreground">
-            {about.summary.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-          </div>
-        </Container>
-      </section>
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", href: "/" },
+          { name: "About", href: "/about" },
+        ]}
+      />
+      <div className="bg-background pb-16 text-foreground">
+        <section className="pt-14">
+          <Container>
+            <SectionHeader
+              as="h1"
+              eyebrow="About"
+              title="Engineering-first AI with research credibility"
+              description="I build at the intersection of forecasting research and production software—focused on reliability, deployment readiness, and working effectively across disciplines."
+            />
 
-      <section className="py-12">
-        <Container>
-          <SectionHeader
-            eyebrow="Focus"
-            title="What I care about"
-            description="These principles shape how I design models, experiments, and systems."
-          />
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
-            {about.values.map((value) => (
-              <ValueCard key={value.title} {...value} />
-            ))}
-          </div>
-        </Container>
-      </section>
+            <div className="mt-10 grid gap-6 lg:grid-cols-2">
+              {about.summary.map((paragraph) => (
+                <article key={paragraph} className="rounded-2xl border border-border/80 bg-card p-6">
+                  <p className="text-base leading-relaxed text-muted-foreground">{paragraph}</p>
+                </article>
+              ))}
+            </div>
+          </Container>
+        </section>
 
-      <section className="border-t border-white/5 bg-surface/30 py-12">
-        <Container>
-          <SectionHeader
-            eyebrow="Focus Areas"
-            title="Applied AI and systems engineering"
-            description="Areas where I have hands-on experience and active interest."
-          />
-          <div className="mt-8 flex flex-wrap gap-2">
-            {focusAreas.map((area) => (
-              <span
-                key={area}
-                className="rounded-full border border-white/5 bg-surface px-4 py-1.5 text-xs font-medium text-muted-foreground transition hover:border-white/10 hover:text-foreground"
-              >
-                {area}
-              </span>
-            ))}
-          </div>
-        </Container>
-      </section>
-    </div>
+        <section className="pt-16">
+          <Container>
+            <SectionHeader
+              eyebrow="Values"
+              title="What I care about"
+              description="Principles that shape model design, team collaboration, and software delivery."
+            />
+            <div className="mt-8 grid gap-5 md:grid-cols-2">
+              {about.values.map((value) => (
+                <ValueCard key={value.title} {...value} />
+              ))}
+            </div>
+          </Container>
+        </section>
+
+        <section className="pt-16">
+          <Container>
+            <SectionHeader
+              eyebrow="Focus Areas"
+              title="Applied AI and systems engineering"
+              description="Domains where I have direct implementation experience."
+            />
+            <div className="mt-8 flex flex-wrap gap-2">
+              {focusAreas.map((area) => (
+                <span
+                  key={area}
+                  className="rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium text-muted-foreground"
+                >
+                  {area}
+                </span>
+              ))}
+            </div>
+          </Container>
+        </section>
+      </div>
+    </>
   );
 }

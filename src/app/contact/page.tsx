@@ -1,59 +1,68 @@
 import type { Metadata } from "next";
 
+import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { contact, site } from "@/lib/content";
+import { contact } from "@/lib/content";
+import { createPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: `Contact | ${site.name}`,
-  description: "Get in touch for AI engineering roles or research collaborations.",
-};
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact",
+  description:
+    "Contact Mitchel Carson for AI engineering roles, ML forecasting collaborations, and production software opportunities.",
+  pathname: "/contact",
+  keywords: ["contact AI engineer", "ML engineer contact", "hire forecasting engineer"],
+});
 
 export default function ContactPage() {
   return (
-    <section className="py-12 bg-background min-h-[calc(100vh-theme(spacing.16))]">
-      <Container>
-        <SectionHeader
-          eyebrow="Contact"
-          title="Let's build reliable forecasting systems"
-          description="Open to AI and ML engineering roles, applied forecasting work, and research collaborations."
-        />
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              Email
-            </p>
-            <a
-              href={`mailto:${contact.email}`}
-              className="mt-3 block text-sm font-semibold text-foreground hover:text-blue-400 transition-colors"
-            >
-              {contact.email}
-            </a>
+    <>
+      <BreadcrumbJsonLd
+        items={[
+          { name: "Home", href: "/" },
+          { name: "Contact", href: "/contact" },
+        ]}
+      />
+      <section className="bg-background pb-16 pt-14 text-foreground">
+        <Container>
+          <SectionHeader
+            as="h1"
+            eyebrow="Contact"
+            title="Let's build something that works in the real world"
+            description="I'm open to collaborating with teams working on forecasting, infrastructure-aware ML, and production systems—whether in industry or research. If you care about reliability, clarity, and shipping useful systems, I'd enjoy connecting."
+          />
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            <article className="rounded-2xl border border-border/80 bg-card p-5">
+              <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Email</p>
+              <a href={`mailto:${contact.email}`} className="mt-3 block text-sm font-semibold text-foreground">
+                {contact.email}
+              </a>
+            </article>
+
+            <article className="rounded-2xl border border-border/80 bg-card p-5">
+              <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">LinkedIn</p>
+              <a href={contact.linkedin} className="mt-3 block text-sm font-semibold text-foreground">
+                {contact.linkedin}
+              </a>
+            </article>
+
+            <article className="rounded-2xl border border-border/80 bg-card p-5">
+              <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">GitHub</p>
+              <a href={contact.github} className="mt-3 block text-sm font-semibold text-foreground">
+                {contact.github}
+              </a>
+            </article>
           </div>
-          <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              LinkedIn
+
+          <div className="mt-8 rounded-2xl border border-border/80 bg-card p-6 text-sm text-muted-foreground">
+            <p>
+              For role outreach, include context on product scope, deployment constraints, and expected model ownership.
             </p>
-            <a
-              href={contact.linkedin}
-              className="mt-3 block text-sm font-semibold text-foreground hover:text-blue-400 transition-colors"
-            >
-              {contact.linkedin}
-            </a>
+            <p className="mt-2">I prioritize teams shipping measurable impact and value cross-functional collaboration.</p>
           </div>
-          <div className="rounded-xl border border-border bg-surface p-5 shadow-sm">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              GitHub
-            </p>
-            <a
-              href={contact.github}
-              className="mt-3 block text-sm font-semibold text-foreground hover:text-blue-400 transition-colors"
-            >
-              {contact.github}
-            </a>
-          </div>
-        </div>
-      </Container>
-    </section>
+        </Container>
+      </section>
+    </>
   );
 }
