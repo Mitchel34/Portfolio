@@ -1,32 +1,32 @@
-# Portfolio
+# Mitchel Carson — Portfolio
 
-A personal portfolio website built with Next.js, Tailwind CSS, and TypeScript.
+M.S. Artificial Intelligence student at the University of Texas at Austin, building production-grade ML systems.
 
-## Getting Started
+**Live site:** [mitchelcarson.com](https://mitchelcarson.com)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## About
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+My work sits at the intersection of applied ML research and production engineering. My senior thesis achieved up to 48% streamflow error reduction in national water forecasts using hybrid deep-learning architectures (HYDRA). I hold an active TS/SCI clearance and previously served as an Executive Missions Aviator in the United States Air Force.
 
-## Deployment
+I'm open to **full-time roles** and **summer 2026 internships** in AI/ML engineering, production systems, and applied research.
 
-The easiest way to deploy this Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Focus Areas
 
-### Steps to Deploy on Vercel (Free Tier)
+- Time-series forecasting & hybrid deep-learning (Transformer + RNN)
+- Applied ML for environmental and operational systems
+- Production ML pipelines, reproducible evaluation, and API-ready systems
+- Risk-aware modeling and leakage-safe temporal validation
 
-1.  Push your code to a Git repository (GitHub, GitLab, or BitBucket).
-2.  Import the project into Vercel.
-3.  Vercel will automatically detect Next.js and configure the build settings.
-4.  Click **Deploy**.
+## Connect
 
-For more details, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
+- **Email:** mitchel.carson@gmail.com
+- **LinkedIn:** [linkedin.com/in/mitchelcarson](https://www.linkedin.com/in/mitchelcarson)
+- **GitHub:** [github.com/Mitchel34](https://github.com/Mitchel34)
+
+---
+
+## Stack
+
+Built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion. Deployed on Vercel.
