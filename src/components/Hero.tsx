@@ -45,7 +45,7 @@ export function Hero() {
               I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Open to Full-Time Roles · Summer 2025 Internships
+              Open to Full-Time Roles · Summer 2026 Internships
             </p>
           </div>
 

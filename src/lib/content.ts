@@ -3,7 +3,7 @@ export const site = {
   title: "AI Engineer building production-grade ML systems",
   headline: "M.S. AI student at UT Austin",
   summary:
-    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI active. Open to full-time roles and summer 2025 internships.",
+    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI active. Open to full-time roles and summer 2026 internships.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
