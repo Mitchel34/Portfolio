@@ -31,7 +31,7 @@ export function Hero() {
           className="space-y-8"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-            AI Engineer / Software Engineer
+            M.S. Artificial Intelligence · UT Austin
           </div>
 
           <div className="space-y-6">
@@ -45,7 +45,7 @@ export function Hero() {
               I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Machine Learning / Production Systems / Risk Infrastructure
+              Open to Full-Time Roles · Summer 2025 Internships
             </p>
           </div>
 
@@ -116,8 +116,8 @@ export function Hero() {
             <div className="space-y-4">
               <div className="overflow-hidden rounded-2xl border border-border/80 bg-surface/55">
                 <Image
-                  src="/hero-illustration.svg"
-                  alt="Forecast trend visualization"
+                  src="/images/projects/hydra-architecture.jpg"
+                  alt="HYDRA architecture diagram"
                   width={840}
                   height={520}
                   className="h-auto w-full"

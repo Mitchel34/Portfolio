@@ -1,9 +1,9 @@
 export const site = {
   name: "Mitchel Carson",
   title: "AI Engineer building production-grade ML systems",
-  headline: "AI Engineer looking for my next team",
+  headline: "M.S. AI student at UT Austin",
   summary:
-    "I design machine-learning systems that hold up under real-world constraints—accuracy, interpretability, and operational reliability. TS/SCI active.",
+    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI active. Open to full-time roles and summer 2025 internships.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
