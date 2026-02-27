@@ -3,9 +3,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Update this to a verified sender address once you verify mitchelcarson.com in Resend.
-// Until then, you can use "onboarding@resend.dev" for testing (Resend sandbox sender).
-const FROM_ADDRESS = "Portfolio Contact <contact@mitchelcarson.com>";
+const FROM_ADDRESS = "onboarding@resend.dev";
 const TO_ADDRESS = "mitchel.carson@gmail.com";
 
 export async function POST(request: Request) {
