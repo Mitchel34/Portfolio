@@ -3,7 +3,7 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_ADDRESS = "onboarding@resend.dev";
+const FROM_ADDRESS = "Portfolio Contact <contact@mitchelcarson.com>";
 const TO_ADDRESS = "mitchel.carson@gmail.com";
 
 export async function POST(request: Request) {
