@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import { AboutSection } from "@/components/AboutSection";
+import { BookingSection } from "@/components/BookingSection";
 import { CredibilityBand } from "@/components/CredibilityBand";
 import { ContactSection } from "@/components/ContactSection";
 import { CoreValues } from "@/components/CoreValues";
@@ -36,6 +37,7 @@ export default function Home() {
       <CoreValues />
       <FeaturedProject />
       <ProjectGrid />
+      <BookingSection />
       <ContactSection />
     </main>
   );
