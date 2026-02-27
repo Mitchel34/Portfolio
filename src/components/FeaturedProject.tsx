@@ -69,16 +69,26 @@ export function FeaturedProject() {
                 ))}
               </ul>
 
-              <div className="flex flex-wrap gap-2">
+              <motion.div
+                className="flex flex-wrap gap-2"
+                variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.08 } } }}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+              >
                 {project.stack.slice(0, 6).map((tech) => (
-                  <span
+                  <motion.span
                     key={tech}
+                    variants={{
+                      hidden: { opacity: 0, scale: 0.85, y: 8 },
+                      visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+                    }}
                     className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-muted-foreground"
                   >
                     {tech}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
 
               <div className="flex flex-wrap items-center gap-4">
                 <Link

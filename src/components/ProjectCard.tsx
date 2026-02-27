@@ -1,7 +1,25 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 import type { Project } from "@/lib/content";
+
+const stackContainerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06 } },
+};
+
+const stackTagVariants = {
+  hidden: { opacity: 0, scale: 0.85, y: 8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+};
 
 type ProjectCardProps = {
   project: Project;
@@ -73,16 +91,23 @@ export function ProjectCard({ project }: ProjectCardProps) {
         </ProjectSection>
 
         <ProjectSection label="Stack">
-          <div className="flex flex-wrap gap-2">
+          <motion.div
+            className="flex flex-wrap gap-2"
+            variants={stackContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+          >
             {project.stack.map((item) => (
-              <span
+              <motion.span
                 key={item}
+                variants={stackTagVariants}
                 className="rounded-full border border-border/80 bg-surface/70 px-2.5 py-1 text-xs font-medium text-muted-foreground"
               >
                 {item}
-              </span>
+              </motion.span>
             ))}
-          </div>
+          </motion.div>
         </ProjectSection>
 
         <ProjectSection label={isWip ? "Current Scope" : "Results"}>
