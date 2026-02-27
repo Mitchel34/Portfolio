@@ -1,5 +1,9 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 
+import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/content";
 
@@ -59,6 +63,25 @@ export function ContactSection() {
               </a>
             </div>
           </div>
+        </div>
+
+        <div className="mt-14">
+          <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">Schedule a Call</p>
+          <h3 className="mt-2 font-serif text-2xl font-medium tracking-tight text-foreground">
+            Book a Zoom meeting
+          </h3>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Pick a time that works for you — a Zoom link will be sent automatically.
+          </p>
+          <motion.div
+            className="mt-6 mx-auto max-w-3xl"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+          >
+            <CalendlyEmbed />
+          </motion.div>
         </div>
 
         <p className="mt-14 text-center text-xs text-muted-foreground">
