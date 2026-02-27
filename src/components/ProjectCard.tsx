@@ -2,16 +2,16 @@
 
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 
 import type { Project } from "@/lib/content";
 
-const stackContainerVariants = {
+const stackContainerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.06 } },
 };
 
-const stackTagVariants = {
+const stackTagVariants: Variants = {
   hidden: { opacity: 0, scale: 0.85, y: 8 },
   visible: {
     opacity: 1,
