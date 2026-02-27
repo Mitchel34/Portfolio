@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-@theme inline {
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
   --color-background: #f5f3ee;
   --color-foreground: #12243a;
 
@@ -56,7 +58,49 @@
       linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 243, 238, 0.95));
   }
 
+  .dark body {
+    background-image:
+      radial-gradient(circle at 6% 10%, rgba(11, 95, 255, 0.09), transparent 30%),
+      radial-gradient(circle at 95% 2%, rgba(240, 138, 36, 0.08), transparent 24%),
+      radial-gradient(circle at 78% 70%, rgba(15, 159, 149, 0.09), transparent 35%),
+      linear-gradient(to bottom, rgba(16, 22, 36, 0.6), rgba(13, 17, 28, 0.98));
+  }
+
   ::selection {
     color: #12243a;
+  }
+
+  .dark ::selection {
+    color: #e8e4dc;
+  }
+
+  .dark {
+    --color-background: #0d111c;
+    --color-foreground: #e8e4dc;
+
+    --color-primary: #4d8bff;
+    --color-primary-foreground: #0a1628;
+
+    --color-secondary: #c97a2a;
+    --color-secondary-foreground: #1a0e00;
+
+    --color-accent: #14a89f;
+    --color-accent-foreground: #001a18;
+
+    --color-muted: #1e2535;
+    --color-muted-foreground: #8b96aa;
+
+    --color-card: #111827;
+    --color-card-foreground: #e8e4dc;
+
+    --color-surface: #161e30;
+    --color-surface-foreground: #e8e4dc;
+
+    --color-popover: #111827;
+    --color-popover-foreground: #e8e4dc;
+
+    --color-border: #2a3347;
+    --color-input: #2a3347;
+    --color-ring: #4d8bff;
   }
 }

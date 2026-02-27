@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { site } from "@/lib/content";
 import { Container } from "./Container";
+import { ThemeToggle } from "./ThemeToggle";
 
 const navItems = [
   { href: "/#about", label: "About" },
@@ -70,6 +71,7 @@ export function Nav() {
             >
               <Github className="h-4 w-4" />
             </a>
+            <ThemeToggle />
           </div>
 
           <button
@@ -135,6 +137,7 @@ export function Nav() {
                 >
                   <Github className="h-4 w-4" />
                 </a>
+                <ThemeToggle />
               </div>
             </Container>
           </motion.div>
