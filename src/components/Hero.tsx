@@ -1,12 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowRight, Calendar, Github, Linkedin, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { projects, site } from "@/lib/content";
+import { projects, site, techStack } from "@/lib/content";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -31,7 +31,7 @@ export function Hero() {
           className="space-y-8"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-            M.S. Artificial Intelligence · UT Austin
+            AI Engineer / Software Engineer
           </div>
 
           <div className="space-y-6">
@@ -45,30 +45,44 @@ export function Hero() {
               I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Open to Full-Time Roles · Summer 2026 Internships
+              Machine Learning / Production Systems / Risk Infrastructure
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
+            <a
+              href={site.calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+            >
+              <Calendar className="h-4 w-4" />
+              Schedule a Call
+            </a>
             <Link
               href="/projects"
-              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+              className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
               View Projects
               <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/research"
-              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
-              View Research
             </Link>
             <a
               href={site.resumeUrl}
               className="inline-flex h-12 items-center rounded-full border border-border/80 px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
-              Download Resume
+              Resume
             </a>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            {techStack.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-full border border-border/80 bg-surface/70 px-3 py-1 text-xs font-medium text-muted-foreground"
+              >
+                {skill}
+              </span>
+            ))}
           </div>
 
           <div className="flex items-center gap-3 text-muted-foreground">
@@ -116,8 +130,8 @@ export function Hero() {
             <div className="space-y-4">
               <div className="overflow-hidden rounded-2xl border border-border/80 bg-surface/55">
                 <Image
-                  src="/images/projects/hydra-architecture.jpg"
-                  alt="HYDRA architecture diagram"
+                  src="/hero-illustration.svg"
+                  alt="Forecast trend visualization"
                   width={840}
                   height={520}
                   className="h-auto w-full"

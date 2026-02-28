@@ -1,12 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
+import { Award, Clock, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
 
 import { Container } from "@/components/Container";
-import { thesisImpactStat } from "@/lib/content";
+import { site, thesisImpactStat } from "@/lib/content";
 
 const highlights = [
+  {
+    icon: Clock,
+    label: "Availability",
+    value: `${site.availability} · ${site.timezone}`,
+  },
   {
     icon: Award,
     label: "Thesis Impact",
@@ -33,7 +38,7 @@ export function CredibilityBand() {
   return (
     <section className="py-8">
       <Container>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {highlights.map((item, index) => {
             const Icon = item.icon;
 

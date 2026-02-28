@@ -1,15 +1,30 @@
 export const site = {
   name: "Mitchel Carson",
   title: "AI Engineer building production-grade ML systems",
-  headline: "M.S. AI student at UT Austin",
+  headline: "AI Engineer looking for my next team",
   summary:
-    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI active. Open to full-time roles and summer 2026 internships.",
+    "I design machine-learning systems that hold up under real-world constraints—accuracy, interpretability, and operational reliability. TS/SCI active.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
   url: "https://mitchelcarson.com",
+  calendlyUrl: "https://calendly.com/mitchel-carson/30min",
+  availability: "Summer 2026",
+  timezone: "EST",
 };
+
+export const techStack = [
+  "Python",
+  "PyTorch",
+  "TypeScript",
+  "React",
+  "Java",
+  "Spring Boot",
+  "GraphQL",
+  "PostgreSQL",
+  "AWS",
+];
 
 export const focusAreas = [
   "Time-series forecasting",
