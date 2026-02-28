@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { projects, site, techStack } from "@/lib/content";
+import { projects, site } from "@/lib/content";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -31,7 +31,7 @@ export function Hero() {
           className="space-y-8"
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-            AI Engineer / Software Engineer
+            M.S. Artificial Intelligence · UT Austin
           </div>
 
           <div className="space-y-6">
@@ -45,7 +45,7 @@ export function Hero() {
               I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Machine Learning / Production Systems / Risk Infrastructure
+              Open to Full-Time Roles · Summer 2026 Internships
             </p>
           </div>
 
@@ -72,17 +72,6 @@ export function Hero() {
             >
               Resume
             </a>
-          </div>
-
-          <div className="flex flex-wrap gap-2">
-            {techStack.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-border/80 bg-surface/70 px-3 py-1 text-xs font-medium text-muted-foreground"
-              >
-                {skill}
-              </span>
-            ))}
           </div>
 
           <div className="flex items-center gap-3 text-muted-foreground">

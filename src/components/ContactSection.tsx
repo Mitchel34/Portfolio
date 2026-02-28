@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar, Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { Container } from "@/components/Container";
@@ -16,34 +16,35 @@ export function ContactSection() {
         <div className="space-y-6">
           <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
-            Let&apos;s talk about your team&apos;s ML challenges
+            I&apos;m looking for teams building production systems that matter
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            I&apos;m seeking full-time AI/ML or software engineering roles starting Summer 2026. Happy to discuss any opportunity where I can help ship reliable, production-grade systems.
+            I&apos;m actively seeking full-time AI/ML or software engineering roles on teams that value reliability, clarity, and shipping useful systems&mdash;in industry or research-adjacent environments.
           </p>
 
           <div className="flex flex-wrap gap-3">
             <a
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-            >
-              <Calendar className="h-4 w-4" />
-              Schedule a call
-            </a>
-            <a
               href={`mailto:${site.email}`}
-              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
+              className="inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
-              Email me
+              Start a conversation
             </a>
             <a
               href={site.resumeUrl}
               className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
-              Resume
+              Download resume
             </a>
+            {calendlyUrl && (
+              <a
+                href={calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
+              >
+                Book a Zoom meeting
+              </a>
+            )}
           </div>
         </div>
 
