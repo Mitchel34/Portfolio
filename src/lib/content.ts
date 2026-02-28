@@ -3,14 +3,14 @@ export const site = {
   title: "AI Engineer building production-grade ML systems",
   headline: "M.S. AI student at UT Austin",
   summary:
-    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI active. Open to full-time roles and summer 2026 internships.",
+    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI cleared. Available now.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
   url: "https://mitchelcarson.com",
   calendlyUrl: "https://calendly.com/mitchel-carson/30min",
-  availability: "Summer 2026",
+  availability: "Now",
   timezone: "EST",
 };
 
@@ -82,7 +82,7 @@ export const projects: Project[] = [
     problem:
       "National water models often struggle with local precision. During events like Hurricane Helene, NWM forecasts significantly underestimated peak flows in complex terrain, leaving communities with uncertain flood warnings.",
     impact:
-      "Achieved up to 48% improvement in predicting streamflow across unregulated Appalachian watersheds, directly bolsters early warning systems for extreme hydrometeorological events.",
+      "Achieved up to 48% improvement in predicting streamflow across unregulated Appalachian watersheds. Live at hydramodel.ai. Manuscript in preparation for Water Resources Research (AGU).",
     approach: [
       "Developed an advanced 1-million parameter hybrid GRU-Transformer model to catch residuals that physical models miss.",
       "Integrated multi-source data (NWM v3.0+, ERA5, USGS) for a comprehensive view.",
@@ -137,7 +137,7 @@ export const projects: Project[] = [
     problem:
       "Internal teams needed a reliable, compliant way to access core risk data without navigating legacy complexity.",
     impact:
-      "Accelerated developer velocity and ensured compliance for partner teams across the organization. Making risk data accessible and predictable reduced cross-team friction and improved decision-making speed.",
+      "Built production APIs that partner teams across the organization now use daily. Worked closely with product owners, backend engineers, and internal stakeholders to make risk data accessible and self-serve.",
     approach: [
       "Designed and deployed strict GraphQL APIs using Java and Spring Boot.",
       "Enhanced internal observability tools by unifying disparate data sources.",

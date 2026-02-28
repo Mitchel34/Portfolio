@@ -8,6 +8,12 @@ import { site, thesisImpactStat } from "@/lib/content";
 
 const highlights = [
   {
+    icon: ShieldCheck,
+    label: "Security Clearance",
+    value: "TS/SCI Active",
+    featured: true,
+  },
+  {
     icon: Clock,
     label: "Availability",
     value: `${site.availability} · ${site.timezone}`,
@@ -27,11 +33,6 @@ const highlights = [
     label: "Education",
     value: "B.S. CS + UT Austin AI",
   },
-  {
-    icon: ShieldCheck,
-    label: "Clearance",
-    value: "TS/SCI active",
-  },
 ];
 
 export function CredibilityBand() {
@@ -41,6 +42,7 @@ export function CredibilityBand() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {highlights.map((item, index) => {
             const Icon = item.icon;
+            const isFeatured = "featured" in item && item.featured;
 
             return (
               <motion.article
@@ -49,15 +51,23 @@ export function CredibilityBand() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.35, delay: index * 0.06 }}
-                className="rounded-2xl border border-border/80 bg-card px-4 py-3"
+                className={`rounded-2xl border px-4 py-3 ${
+                  isFeatured
+                    ? "border-primary/40 bg-primary/5"
+                    : "border-border/80 bg-card"
+                }`}
               >
-                <div className="flex items-center gap-2 text-primary">
+                <div className={`flex items-center gap-2 ${isFeatured ? "text-primary" : "text-primary"}`}>
                   <Icon className="h-4 w-4" />
-                  <p className="text-[11px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
+                  <p className={`text-[11px] font-mono uppercase tracking-[0.16em] ${
+                    isFeatured ? "text-primary" : "text-muted-foreground"
+                  }`}>
                     {item.label}
                   </p>
                 </div>
-                <p className="mt-2 text-sm font-semibold text-foreground">{item.value}</p>
+                <p className={`mt-2 text-sm font-semibold ${
+                  isFeatured ? "text-primary" : "text-foreground"
+                }`}>{item.value}</p>
               </motion.article>
             );
           })}

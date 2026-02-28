@@ -45,7 +45,7 @@ export function Hero() {
               I enjoy working with teams that care about getting the details right and shipping systems that matter.
             </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Open to Full-Time Roles · Summer 2026 Internships
+              Available Now · Full-Time or Summer 2026 Internship
             </p>
           </div>
 
@@ -119,8 +119,8 @@ export function Hero() {
             <div className="space-y-4">
               <div className="overflow-hidden rounded-2xl border border-border/80 bg-surface/55">
                 <Image
-                  src="/hero-illustration.svg"
-                  alt="Forecast trend visualization"
+                  src="/architecture_diagram.png"
+                  alt="HYDRA system architecture diagram"
                   width={840}
                   height={520}
                   className="h-auto w-full"
