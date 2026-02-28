@@ -51,3 +51,4 @@ There are two Calendly integrations:
 2. **Inline widget** - `CalendlyEmbed` component uses `NEXT_PUBLIC_CALENDLY_URL` env var
 
 Both should point to the same URL: `https://calendly.com/mitchel-carson/30min`
+
