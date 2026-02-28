@@ -1,72 +1,88 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { Calendar, Github, Linkedin, Mail } from "lucide-react";
 
+import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/content";
 
 export function ContactSection() {
+  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
+
   return (
     <section className="border-t border-border/70 py-20" id="contact">
       <Container>
-        <div className="grid gap-8 lg:grid-cols-[1.05fr,0.95fr] lg:items-center">
-          <div className="space-y-6">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
-            <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
-              Let&apos;s talk about your team&apos;s ML challenges
-            </h2>
-            <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-              I&apos;m seeking full-time AI/ML or software engineering roles starting Summer 2026. Happy to discuss any opportunity where I can help ship reliable, production-grade systems.
-            </p>
+        <div className="space-y-6">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
+          <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
+            Let&apos;s talk about your team&apos;s ML challenges
+          </h2>
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
+            I&apos;m seeking full-time AI/ML or software engineering roles starting Summer 2026. Happy to discuss any opportunity where I can help ship reliable, production-grade systems.
+          </p>
 
-            <div className="flex flex-wrap gap-3">
-              <a
-                href={site.calendlyUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-              >
-                <Calendar className="h-4 w-4" />
-                Schedule a call
-              </a>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-              >
-                Email me
-              </a>
-              <a
-                href={site.resumeUrl}
-                className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-              >
-                Resume
-              </a>
-            </div>
+          <div className="flex flex-wrap gap-3">
+            <a
+              href={site.calendlyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+            >
+              <Calendar className="h-4 w-4" />
+              Schedule a call
+            </a>
+            <a
+              href={`mailto:${site.email}`}
+              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
+            >
+              Email me
+            </a>
+            <a
+              href={site.resumeUrl}
+              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
+            >
+              Resume
+            </a>
+          </div>
+        </div>
+
+        {calendlyUrl && (
+          <motion.div
+            className="mt-10"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45 }}
+          >
+            <CalendlyEmbed />
+          </motion.div>
+        )}
+
+        <div className="mt-10 rounded-3xl border border-border/80 bg-card p-6">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Reach me</p>
+          <div className="mt-4 space-y-4 text-sm text-foreground">
+            <a href={`mailto:${site.email}`} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
+              {site.email}
+            </a>
+            <a href={site.linkedin} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
+              {site.linkedin.replace("https://", "")}
+            </a>
+            <a href={site.github} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
+              {site.github.replace("https://", "")}
+            </a>
           </div>
 
-          <div className="rounded-3xl border border-border/80 bg-card p-6">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Reach me</p>
-            <div className="mt-4 space-y-4 text-sm text-foreground">
-              <a href={`mailto:${site.email}`} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
-                {site.email}
-              </a>
-              <a href={site.linkedin} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
-                {site.linkedin.replace("https://", "")}
-              </a>
-              <a href={site.github} className="block rounded-xl border border-border bg-surface/70 px-4 py-3 hover:border-primary/35">
-                {site.github.replace("https://", "")}
-              </a>
-            </div>
-
-            <div className="mt-6 flex items-center gap-2 text-muted-foreground">
-              <a href={`mailto:${site.email}`} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="Email">
-                <Mail className="h-4 w-4" />
-              </a>
-              <a href={site.linkedin} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="LinkedIn">
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a href={site.github} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="GitHub">
-                <Github className="h-4 w-4" />
-              </a>
-            </div>
+          <div className="mt-6 flex items-center gap-2 text-muted-foreground">
+            <a href={`mailto:${site.email}`} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="Email">
+              <Mail className="h-4 w-4" />
+            </a>
+            <a href={site.linkedin} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="LinkedIn">
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a href={site.github} className="rounded-lg border border-border bg-surface p-2.5 hover:text-foreground" aria-label="GitHub">
+              <Github className="h-4 w-4" />
+            </a>
           </div>
         </div>
 
