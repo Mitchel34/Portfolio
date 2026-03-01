@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { projects, site } from "@/lib/content";
+import { site } from "@/lib/content";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -109,63 +109,27 @@ export function Hero() {
           <div className="rounded-[2rem] border border-border bg-card p-6 shadow-[0_30px_80px_-45px_rgba(18,36,58,0.35)] sm:p-8">
             <div className="mb-5 flex items-center justify-between">
               <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-                Forecast Lab Snapshot
+                Thesis Work
               </p>
               <span className="rounded-full bg-accent/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-accent">
                 Active
               </span>
             </div>
 
-            <div className="space-y-4">
-              <div className="overflow-hidden rounded-2xl border border-border/80 bg-surface/55">
-                <Image
-                  src="/architecture_diagram.png"
-                  alt="HYDRA system architecture diagram"
-                  width={840}
-                  height={520}
-                  className="h-auto w-full"
-                  priority
-                />
-              </div>
-
-              <div className="rounded-2xl border border-border/80 bg-surface p-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Primary Thesis Work</p>
-                <p className="mt-2 text-sm font-semibold text-foreground">
-                  {projects[0]?.title} - {projects[0]?.subtitle}
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="rounded-2xl border border-border/80 bg-surface p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Evaluation</p>
-                  <p className="mt-2 text-sm font-semibold text-foreground">Leakage-safe temporal splits</p>
-                </div>
-                <div className="rounded-2xl border border-border/80 bg-surface p-4">
-                  <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Metrics</p>
-                  <p className="mt-2 text-sm font-semibold text-foreground">RMSE / NSE / KGE</p>
-                </div>
-              </div>
-
-              <div className="overflow-hidden rounded-2xl border border-border/80 bg-gradient-to-br from-primary/10 via-transparent to-secondary/20 p-5">
-                <div className="mb-4 h-2 w-full rounded-full bg-background/70">
-                  <div className="h-full w-[74%] rounded-full bg-gradient-to-r from-primary to-accent" />
-                </div>
-                <div className="grid grid-cols-3 gap-3 text-center">
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Pipelines</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">Reproducible</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Systems</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">API-ready</p>
-                  </div>
-                  <div>
-                    <p className="text-[11px] uppercase tracking-[0.16em] text-muted-foreground">Outcome</p>
-                    <p className="mt-1 text-sm font-semibold text-foreground">Operational fit</p>
-                  </div>
-                </div>
-              </div>
+            <div className="overflow-hidden rounded-2xl border border-border/80 bg-surface/55">
+              <Image
+                src="/architecture_diagram.png"
+                alt="HYDRA system architecture diagram"
+                width={840}
+                height={520}
+                className="h-auto w-full"
+                priority
+              />
             </div>
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              HYDRA: Hybrid deep-learning for streamflow forecasting
+            </p>
           </div>
         </motion.div>
       </Container>
