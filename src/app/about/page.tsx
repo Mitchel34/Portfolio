@@ -35,7 +35,7 @@ export default function AboutPage() {
               as="h1"
               eyebrow="About"
               title="Engineering-first AI with research credibility"
-              description="I build at the intersection of forecasting research and production software—focused on reliability, deployment readiness, and working effectively across disciplines."
+              description="I build at the intersection of forecasting research and production software, focused on reliability, deployment readiness, and working effectively across disciplines."
             />
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">

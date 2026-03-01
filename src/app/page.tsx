@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "AI Engineer Portfolio",
     description:
-      "Mitchel Carson builds production-grade ML systems with software engineering discipline — from forecasting to financial risk infrastructure.",
+      "Mitchel Carson builds production-grade ML systems with engineering discipline, from forecasting to financial risk infrastructure.",
     pathname: "/",
     keywords: [
       "AI portfolio",

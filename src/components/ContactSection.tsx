@@ -19,7 +19,7 @@ export function ContactSection() {
             I&apos;m looking for teams building production systems that matter
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            I&apos;m actively seeking full-time AI/ML or software engineering roles on teams that value reliability, clarity, and shipping useful systems&mdash;in industry or research-adjacent environments.
+            I&apos;m seeking full-time AI/ML or software engineering roles on teams that value reliability, clarity, and execution. Open to industry or research environments.
           </p>
 
           <div className="flex flex-wrap gap-3">

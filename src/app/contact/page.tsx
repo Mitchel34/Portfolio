@@ -31,7 +31,7 @@ export default function ContactPage() {
             as="h1"
             eyebrow="Contact"
             title="Let's build something that works in the real world"
-            description="I'm open to collaborating with teams working on forecasting, infrastructure-aware ML, and production systems—whether in industry or research. If you care about reliability, clarity, and shipping useful systems, I'd enjoy connecting."
+            description="I work with teams on forecasting, infrastructure-aware ML, and production systems in industry or research. If you value reliability, clarity, and execution, let's connect."
           />
 
           <a
@@ -91,7 +91,7 @@ export default function ContactPage() {
                 Book a Zoom appointment
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
-                Pick a time that works for you — a Zoom link will be generated automatically.
+                Pick a time. A Zoom link will be generated automatically.
               </p>
             </div>
             <CalendlyEmbed />

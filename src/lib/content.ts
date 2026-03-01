@@ -3,7 +3,7 @@ export const site = {
   title: "AI Engineer building production-grade ML systems",
   headline: "M.S. AI student at UT Austin",
   summary:
-    "I build end-to-end ML systems—from model architecture and temporal validation to reproducible pipelines and production APIs. My thesis achieved up to 48% streamflow error reduction using hybrid deep-learning. TS/SCI cleared. Available now.",
+    "I build end-to-end ML systems: model architecture, temporal validation, reproducible pipelines, and production APIs. My thesis achieved 48% streamflow error reduction using hybrid deep-learning. TS/SCI cleared and available now.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
@@ -52,18 +52,18 @@ export const thesisImpactStat = "Up to 48% streamflow error reduction";
 export const about = {
   summary: [
     "My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
-    `My senior thesis achieved ${thesisImpactStat.toLowerCase()} in national water forecasts using hybrid deep-learning architectures. I'm especially effective in teams where research, engineering, and domain knowledge intersect—and where reliability and clarity matter as much as raw performance.`,
+    `My senior thesis achieved ${thesisImpactStat.toLowerCase()} in national water forecasts using hybrid deep-learning architectures. I'm especially effective where research, engineering, and domain expertise intersect. Reliability and clarity matter as much as raw performance.`,
   ],
   values: [
     {
       title: "Reliability in Shared Systems",
       description:
-        "I design models and pipelines that teammates can trust—stable metrics, leakage-safe evaluation, and behavior that's predictable under change.",
+        "I design models and pipelines teammates can trust: stable metrics, leakage-safe evaluation, predictable behavior under change.",
     },
     {
       title: "Engineering Discipline Enables Team Velocity",
       description:
-        "Clean interfaces, reproducible pipelines, and monitoring aren't overhead—they're what let teams move fast without breaking things.",
+        "Clean interfaces, reproducible pipelines, and monitoring aren't overhead; they let teams move fast without breaking things.",
     },
     {
       title: "Risk Awareness",
@@ -186,7 +186,7 @@ export const projects: Project[] = [
     problem:
       "Financial markets are noisy, adversarial environments where predictive accuracy alone is insufficient. Sustainable trading systems require disciplined evaluation, strict risk controls, and infrastructure that behaves predictably under stress.",
     impact:
-      "A modular algorithmic trading system with independent forecasting, risk management, and execution components \u2014 designed so any module can be evaluated, replaced, or improved without breaking the pipeline.",
+      "A modular trading system with independent forecasting, risk, and execution components. Each module can be evaluated, replaced, or improved independently.",
     approach: [
       "Design a forecasting and execution pipeline that survives regime shifts.",
       "Emphasize risk management over raw returns.",
@@ -273,7 +273,7 @@ export const research = {
   title:
     "HYDRA: Hybrid Deep-learning for Residual Analysis",
   summary:
-    "Post-processing operational streamflow forecasts with a compact 1-million parameter Hybrid GRU-Transformer model to improve accuracy while respecting physical constraints. I'm interested in extending this work through collaboration—across hydrology, ML research, and applied engineering teams—to improve real-world decision support.",
+    "Post-processing streamflow forecasts with a hybrid GRU-Transformer to improve accuracy while respecting physical constraints. Seeking collaborations across hydrology, ML, and engineering to build actionable decision support.",
   architecture: [
     "Inputs: Operational NWM forecasts, meteorological forcings (ERA5), static attributes.",
     "Temporal Encoding: GRU for capturing sequential patterns.",
