@@ -1,5 +1,8 @@
+"use client";
+
 import { Github, Linkedin, Mail } from "lucide-react";
 
+import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/content";
 
@@ -49,6 +52,16 @@ export function ContactSection() {
             <a href={site.github} className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
               <Github className="h-4 w-4" />
             </a>
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Schedule a call</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Pick a time and a Zoom link will be generated automatically.
+          </p>
+          <div className="mt-4">
+            <CalendlyEmbed />
           </div>
         </div>
 
