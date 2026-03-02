@@ -104,9 +104,24 @@
     --color-ring: #4d8bff;
   }
 
-  /* Calendly dark mode fixes */
+  /* Calendly light mode */
+  .calendly-container,
+  .calendly-container .calendly-inline-widget {
+    background-color: #f5f3ee !important;
+  }
+
+  .calendly-container iframe {
+    background-color: #f5f3ee !important;
+  }
+
+  /* Calendly dark mode */
+  .dark .calendly-container,
+  .dark .calendly-container .calendly-inline-widget {
+    background-color: #0d111c !important;
+  }
+
   .dark .calendly-container iframe {
-    background-color: #0d111c;
+    background-color: #0d111c !important;
   }
 
   .dark .calendly-overlay {
