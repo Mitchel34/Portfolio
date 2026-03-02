@@ -38,9 +38,9 @@ export function CalendlyEmbed() {
 
     const isDark = resolvedTheme === "dark";
     const colors = {
-      primary: isDark ? "4d8bff" : "0b5fff",
+      primary: isDark ? "2563eb" : "0b5fff",
       background: isDark ? "0d111c" : "f5f3ee",
-      text: isDark ? "e8e4dc" : "12243a",
+      text: isDark ? "e2e8f0" : "12243a",
     };
 
     const url = `${calendlyUrl}?hide_gdpr_banner=1&primary_color=${colors.primary}&background_color=${colors.background}&text_color=${colors.text}`;
