@@ -3,6 +3,8 @@
 import { useTheme } from "next-themes";
 import { useEffect, useRef, useState } from "react";
 
+import { site } from "@/lib/content";
+
 declare global {
   interface Window {
     Calendly?: {
@@ -12,7 +14,7 @@ declare global {
 }
 
 export function CalendlyEmbed() {
-  const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
+  const calendlyUrl = site.calendlyUrl;
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
