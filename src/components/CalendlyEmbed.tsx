@@ -34,7 +34,7 @@ export function CalendlyEmbed() {
 
   // Reinitialize widget when theme changes
   useEffect(() => {
-    if (!mounted || !calendlyUrl || !containerRef.current) return;
+    if (!mounted || !resolvedTheme || !calendlyUrl || !containerRef.current) return;
 
     const isDark = resolvedTheme === "dark";
     const colors = {

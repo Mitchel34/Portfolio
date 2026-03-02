@@ -104,33 +104,27 @@
     --color-ring: #4d8bff;
   }
 
-  /* Calendly widget - force fill container */
+  /* Calendly widget - force fill container width only */
   .calendly-container .calendly-inline-widget,
   .calendly-light .calendly-inline-widget,
   .calendly-dark .calendly-inline-widget {
     min-width: 100% !important;
     width: 100% !important;
-    height: 100% !important;
-    position: relative !important;
   }
 
   .calendly-container iframe,
   .calendly-light iframe,
   .calendly-dark iframe {
     width: 100% !important;
-    height: 100% !important;
     border: none !important;
   }
 
   /* Calendly light mode */
-  .calendly-container,
-  .calendly-container .calendly-inline-widget,
   .calendly-light,
   .calendly-light .calendly-inline-widget {
     background-color: #f5f3ee !important;
   }
 
-  .calendly-container iframe,
   .calendly-light iframe {
     background-color: #f5f3ee !important;
   }
