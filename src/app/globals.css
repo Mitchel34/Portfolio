@@ -103,4 +103,17 @@
     --color-input: #2a3347;
     --color-ring: #4d8bff;
   }
+
+  /* Calendly dark mode fixes */
+  .dark .calendly-container iframe {
+    background-color: #0d111c;
+  }
+
+  .dark .calendly-overlay {
+    background-color: rgba(13, 17, 28, 0.85) !important;
+  }
+
+  .dark .calendly-popup {
+    background-color: #0d111c !important;
+  }
 }

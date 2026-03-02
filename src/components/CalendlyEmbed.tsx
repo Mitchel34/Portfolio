@@ -72,11 +72,17 @@ export function CalendlyEmbed() {
 
   if (!calendlyUrl || !mounted) return null;
 
+  const isDark = resolvedTheme === "dark";
+
   return (
     <div
       ref={containerRef}
-      className="w-full overflow-hidden rounded-2xl border border-border/80 bg-background"
-      style={{ minWidth: 320, height: 700 }}
+      className="calendly-container w-full overflow-hidden rounded-2xl border border-border/80"
+      style={{
+        minWidth: 320,
+        height: 700,
+        backgroundColor: isDark ? "#0d111c" : "#f5f3ee",
+      }}
     />
   );
 }
