@@ -55,6 +55,16 @@ export function FeaturedProject() {
                 <p className="mt-2 text-base text-muted-foreground">{project.subtitle}</p>
               </div>
 
+              <div className="overflow-hidden rounded-2xl border border-border/80">
+                <Image
+                  src="/architecture_diagram.png"
+                  alt="HYDRA system architecture diagram"
+                  width={840}
+                  height={520}
+                  className="h-auto w-full"
+                />
+              </div>
+
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
                 {project.problem} {project.impact}
               </p>
@@ -135,16 +145,6 @@ export function FeaturedProject() {
                   </article>
                 );
               })}
-
-              <div className="overflow-hidden rounded-2xl border border-border/80">
-                <Image
-                  src="/architecture_diagram.png"
-                  alt="HYDRA system architecture diagram"
-                  width={840}
-                  height={520}
-                  className="h-auto w-full"
-                />
-              </div>
             </motion.div>
           </div>
         </div>

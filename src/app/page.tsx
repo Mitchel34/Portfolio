@@ -29,8 +29,8 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <Hero />
-      <AboutSection />
       <FeaturedProject />
+      <AboutSection />
       <ProjectGrid />
       <ContactSection />
     </main>
