@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Github, Linkedin, Mail } from "lucide-react";
 import Link from "next/link";
 
+import { CalendlyPopupButton } from "@/components/CalendlyPopupButton";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/content";
 
@@ -46,15 +47,10 @@ export function Hero() {
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-            >
+            <CalendlyPopupButton className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110">
               <Calendar className="h-4 w-4" />
               Schedule a Call
-            </a>
+            </CalendlyPopupButton>
             <Link
               href="/projects"
               className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { CalendlyEmbed } from "@/components/CalendlyEmbed";
+import { CalendlyPopupButton } from "@/components/CalendlyPopupButton";
 import { ContactForm } from "@/components/ContactForm";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
@@ -34,18 +34,13 @@ export default function ContactPage() {
             description="I work with teams on forecasting, infrastructure-aware ML, and production systems in industry or research. If you value reliability, clarity, and execution, let's connect."
           />
 
-          <a
-            href={site.calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 block rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 transition hover:border-primary/50"
-          >
+          <CalendlyPopupButton className="mt-10 block w-full text-left rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 transition hover:border-primary/50">
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">Fastest way to connect</p>
             <p className="mt-3 text-lg font-semibold text-foreground">Schedule a 30-minute call</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Available {site.availability} · {site.timezone} timezone
             </p>
-          </a>
+          </CalendlyPopupButton>
 
           <div className="mt-6 grid gap-5 md:grid-cols-3">
             <article className="rounded-2xl border border-border/80 bg-card p-5">
@@ -81,20 +76,6 @@ export default function ContactPage() {
             <div className="rounded-2xl border border-border/80 bg-card p-6 sm:p-8">
               <ContactForm />
             </div>
-          </div>
-
-          {/* Calendly Embed */}
-          <div className="mt-14">
-            <div className="mb-6">
-              <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">Schedule a call</p>
-              <h2 className="mt-2 font-serif text-2xl font-medium tracking-tight text-foreground">
-                Book a Zoom appointment
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Pick a time. A Zoom link will be generated automatically.
-              </p>
-            </div>
-            <CalendlyEmbed />
           </div>
         </Container>
       </section>

@@ -2,7 +2,7 @@
 
 import { Github, Linkedin, Mail } from "lucide-react";
 
-import { CalendlyEmbed } from "@/components/CalendlyEmbed";
+import { CalendlyPopupButton } from "@/components/CalendlyPopupButton";
 import { Container } from "@/components/Container";
 import { site } from "@/lib/content";
 
@@ -32,14 +32,9 @@ export function ContactSection() {
             >
               Download resume
             </a>
-            <a
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
+            <CalendlyPopupButton className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40">
               Book a call
-            </a>
+            </CalendlyPopupButton>
           </div>
 
           <div className="flex items-center gap-2 text-muted-foreground">
@@ -52,16 +47,6 @@ export function ContactSection() {
             <a href={site.github} className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
               <Github className="h-4 w-4" />
             </a>
-          </div>
-        </div>
-
-        <div className="mt-12">
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Schedule a call</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Pick a time and a Zoom link will be generated automatically.
-          </p>
-          <div className="mt-4">
-            <CalendlyEmbed />
           </div>
         </div>
 
