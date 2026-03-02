@@ -43,7 +43,7 @@ export function CalendlyEmbed() {
       text: isDark ? "e2e8f0" : "12243a",
     };
 
-    const url = `${calendlyUrl}?hide_gdpr_banner=1&primary_color=${colors.primary}&background_color=${colors.background}&text_color=${colors.text}`;
+    const url = `${calendlyUrl}?hide_landing_page_details=1&hide_gdpr_banner=1&primary_color=${colors.primary}&background_color=${colors.background}&text_color=${colors.text}`;
 
     // Clear previous widget content
     containerRef.current.innerHTML = "";
