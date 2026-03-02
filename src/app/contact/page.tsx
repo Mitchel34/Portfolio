@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { contact } from "@/lib/content";
+import { contact, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -32,7 +32,20 @@ export default function ContactPage() {
             description="I'm open to collaborating with teams working on forecasting, infrastructure-aware ML, and production systems—whether in industry or research. If you care about reliability, clarity, and shipping useful systems, I'd enjoy connecting."
           />
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <a
+            href={site.calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 block rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 transition hover:border-primary/50"
+          >
+            <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">Fastest way to connect</p>
+            <p className="mt-3 text-lg font-semibold text-foreground">Schedule a 30-minute call</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              Available {site.availability} · {site.timezone} timezone
+            </p>
+          </a>
+
+          <div className="mt-6 grid gap-5 md:grid-cols-3">
             <article className="rounded-2xl border border-border/80 bg-card p-5">
               <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Email</p>
               <a href={`mailto:${contact.email}`} className="mt-3 block text-sm font-semibold text-foreground">
@@ -43,23 +56,22 @@ export default function ContactPage() {
             <article className="rounded-2xl border border-border/80 bg-card p-5">
               <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">LinkedIn</p>
               <a href={contact.linkedin} className="mt-3 block text-sm font-semibold text-foreground">
-                {contact.linkedin}
+                {contact.linkedin.replace("https://www.", "")}
               </a>
             </article>
 
             <article className="rounded-2xl border border-border/80 bg-card p-5">
               <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">GitHub</p>
               <a href={contact.github} className="mt-3 block text-sm font-semibold text-foreground">
-                {contact.github}
+                {contact.github.replace("https://", "")}
               </a>
             </article>
           </div>
 
           <div className="mt-8 rounded-2xl border border-border/80 bg-card p-6 text-sm text-muted-foreground">
             <p>
-              For role outreach, include context on product scope, deployment constraints, and expected model ownership.
+              Happy to discuss any AI/ML or software engineering opportunity. I&apos;m especially interested in teams shipping production systems with real-world impact.
             </p>
-            <p className="mt-2">I prioritize teams shipping measurable impact and value cross-functional collaboration.</p>
           </div>
         </Container>
       </section>

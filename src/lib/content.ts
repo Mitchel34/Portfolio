@@ -9,7 +9,22 @@ export const site = {
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
   url: "https://mitchelcarson.com",
+  calendlyUrl: "https://calendly.com/mitchel-carson/30min?hide_landing_page_details=1&hide_gdpr_banner=1&background_color=121212&text_color=ffffff&primary_color=0b5fff",
+  availability: "Summer 2026",
+  timezone: "EST",
 };
+
+export const techStack = [
+  "Python",
+  "PyTorch",
+  "TypeScript",
+  "React",
+  "Java",
+  "Spring Boot",
+  "GraphQL",
+  "PostgreSQL",
+  "AWS",
+];
 
 export const focusAreas = [
   "Time-series forecasting",
