@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, BarChart3, Database, Layers } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
@@ -135,18 +136,15 @@ export function FeaturedProject() {
                 );
               })}
 
-              <article className="rounded-2xl border border-border/80 bg-gradient-to-r from-primary/10 via-transparent to-secondary/20 px-5 py-4">
-                <p className="text-xs font-mono uppercase tracking-[0.16em] text-muted-foreground">
-                  Architecture Snapshot
-                </p>
-                <div className="mt-4 grid grid-cols-[1fr,auto,1fr,auto,1fr] items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-foreground">
-                  <span className="rounded-md bg-card px-2 py-1 text-center">Inputs</span>
-                  <span className="text-muted-foreground">/</span>
-                  <span className="rounded-md bg-card px-2 py-1 text-center">Temporal Encoder</span>
-                  <span className="text-muted-foreground">/</span>
-                  <span className="rounded-md bg-card px-2 py-1 text-center">Residual Head</span>
-                </div>
-              </article>
+              <div className="overflow-hidden rounded-2xl border border-border/80">
+                <Image
+                  src="/architecture_diagram.png"
+                  alt="HYDRA system architecture diagram"
+                  width={840}
+                  height={520}
+                  className="h-auto w-full"
+                />
+              </div>
             </motion.div>
           </div>
         </div>
