@@ -104,18 +104,20 @@
     --color-ring: #4d8bff;
   }
 
-  /* Calendly widget - force fill container width only */
+  /* Calendly widget - children fill container */
   .calendly-container .calendly-inline-widget,
   .calendly-light .calendly-inline-widget,
   .calendly-dark .calendly-inline-widget {
     min-width: 100% !important;
     width: 100% !important;
+    height: 100% !important;
   }
 
   .calendly-container iframe,
   .calendly-light iframe,
   .calendly-dark iframe {
     width: 100% !important;
+    height: 100% !important;
     border: none !important;
   }
 
