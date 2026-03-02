@@ -41,7 +41,7 @@ export function CalendlyEmbed() {
       text: isDark ? "e8e4dc" : "12243a",
     };
 
-    const url = `${calendlyUrl}?hide_gdpr_banner=1&hide_event_type_details=1&primary_color=${colors.primary}&background_color=${colors.background}&text_color=${colors.text}`;
+    const url = `${calendlyUrl}?hide_gdpr_banner=1&primary_color=${colors.primary}&background_color=${colors.background}&text_color=${colors.text}`;
 
     // Clear previous widget content
     containerRef.current.innerHTML = "";
@@ -77,7 +77,7 @@ export function CalendlyEmbed() {
   return (
     <div
       ref={containerRef}
-      className="calendly-container w-full overflow-hidden rounded-2xl border border-border/80"
+      className={`calendly-container w-full overflow-hidden rounded-2xl border border-border/80 ${isDark ? "calendly-dark" : "calendly-light"}`}
       style={{
         minWidth: 320,
         height: 700,

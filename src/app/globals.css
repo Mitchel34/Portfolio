@@ -106,29 +106,43 @@
 
   /* Calendly light mode */
   .calendly-container,
-  .calendly-container .calendly-inline-widget {
+  .calendly-container .calendly-inline-widget,
+  .calendly-light,
+  .calendly-light .calendly-inline-widget {
     background-color: #f5f3ee !important;
   }
 
-  .calendly-container iframe {
+  .calendly-container iframe,
+  .calendly-light iframe {
     background-color: #f5f3ee !important;
   }
 
-  /* Calendly dark mode */
+  /* Calendly dark mode - use explicit class instead of relying on .dark ancestor */
+  .calendly-dark,
+  .calendly-dark .calendly-inline-widget,
   .dark .calendly-container,
   .dark .calendly-container .calendly-inline-widget {
     background-color: #0d111c !important;
   }
 
+  .calendly-dark iframe,
   .dark .calendly-container iframe {
     background-color: #0d111c !important;
   }
 
-  .dark .calendly-overlay {
+  .dark .calendly-overlay,
+  .calendly-dark ~ .calendly-overlay {
     background-color: rgba(13, 17, 28, 0.85) !important;
   }
 
-  .dark .calendly-popup {
+  .dark .calendly-popup,
+  .calendly-dark ~ .calendly-popup {
+    background-color: #0d111c !important;
+  }
+
+  /* Target any child divs Calendly might inject */
+  .calendly-dark > div,
+  .dark .calendly-container > div {
     background-color: #0d111c !important;
   }
 }
