@@ -104,6 +104,24 @@
     --color-ring: #4d8bff;
   }
 
+  /* Calendly widget - force fill container */
+  .calendly-container .calendly-inline-widget,
+  .calendly-light .calendly-inline-widget,
+  .calendly-dark .calendly-inline-widget {
+    min-width: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    position: relative !important;
+  }
+
+  .calendly-container iframe,
+  .calendly-light iframe,
+  .calendly-dark iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+  }
+
   /* Calendly light mode */
   .calendly-container,
   .calendly-container .calendly-inline-widget,
@@ -117,7 +135,7 @@
     background-color: #f5f3ee !important;
   }
 
-  /* Calendly dark mode - use explicit class instead of relying on .dark ancestor */
+  /* Calendly dark mode */
   .calendly-dark,
   .calendly-dark .calendly-inline-widget,
   .dark .calendly-container,
@@ -144,5 +162,7 @@
   .calendly-dark > div,
   .dark .calendly-container > div {
     background-color: #0d111c !important;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
