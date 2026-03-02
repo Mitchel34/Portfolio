@@ -144,21 +144,22 @@
     background-color: #0d111c !important;
   }
 
-  .dark .calendly-overlay,
-  .calendly-dark ~ .calendly-overlay {
+  /* Calendly overlay - injected at body level, use html.dark */
+  html.dark .calendly-overlay {
     background-color: rgba(13, 17, 28, 0.85) !important;
   }
 
-  .dark .calendly-popup,
-  .calendly-dark ~ .calendly-popup {
+  html.dark .calendly-popup {
+    background-color: #0d111c !important;
+  }
+
+  html.dark .calendly-badge-widget {
     background-color: #0d111c !important;
   }
 
   /* Target any child divs Calendly might inject */
-  .calendly-dark > div,
-  .dark .calendly-container > div {
+  html.dark .calendly-inline-widget > div,
+  .calendly-dark > div {
     background-color: #0d111c !important;
-    width: 100% !important;
-    height: 100% !important;
   }
 }
