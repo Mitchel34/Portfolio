@@ -8,7 +8,7 @@ import { site } from "@/lib/content";
 
 export function ContactSection() {
   return (
-    <section className="border-t border-border/70 py-20" id="contact">
+    <section className="border-t border-border/70 bg-background py-20" id="contact">
       <Container>
         <div className="space-y-6">
           <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
