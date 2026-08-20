@@ -10,7 +10,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Professional background, values, and engineering principles behind Mitchel Carson's AI and software systems work.",
+    "Mitchel Carson is an early-career AI/ML engineer, UT Austin M.S. AI student, software engineer, and Air Force veteran based in Austin, Texas.",
   pathname: "/about",
   keywords: [
     "about Mitchel Carson",
@@ -34,8 +34,8 @@ export default function AboutPage() {
             <SectionHeader
               as="h1"
               eyebrow="About"
-              title="Engineering-first AI with research credibility"
-              description="I build at the intersection of forecasting research and production software, focused on reliability, deployment readiness, and working effectively across disciplines."
+              title="Engineering-first AI with research depth"
+              description="I build at the intersection of forecasting research and production software, with an emphasis on reliable evaluation, clear interfaces, and cross-disciplinary delivery."
             />
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">

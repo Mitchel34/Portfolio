@@ -7,19 +7,28 @@ const personJsonLd = {
   "@type": "Person",
   name: site.name,
   url: site.url,
-  image: absoluteUrl("/opengraph-image"),
+  image: absoluteUrl("/images/mitchel-carson-headshot.jpg"),
   jobTitle: site.title,
   email: site.email,
   sameAs: [site.github, site.linkedin],
-  alumniOf: [
-    {
-      "@type": "CollegeOrUniversity",
-      name: "University of Texas at Austin",
-    },
-    {
-      "@type": "CollegeOrUniversity",
-      name: "Appalachian State University",
-    },
+  affiliation: {
+    "@type": "CollegeOrUniversity",
+    name: "University of Texas at Austin",
+  },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "Appalachian State University",
+  },
+  homeLocation: {
+    "@type": "Place",
+    name: site.location,
+  },
+  knowsAbout: [
+    "Machine learning engineering",
+    "Deep learning",
+    "Time-series forecasting",
+    "Research engineering",
+    "Production software",
   ],
 };
 

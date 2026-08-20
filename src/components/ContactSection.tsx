@@ -13,10 +13,12 @@ export function ContactSection() {
         <div className="space-y-6">
           <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
           <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
-            I&apos;m looking for teams building production systems that matter
+            I&apos;m looking for an early-career role in applied AI and software engineering
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            I&apos;m seeking full-time AI/ML or software engineering roles on teams that value reliability, clarity, and execution. Open to industry or research environments.
+            I&apos;m targeting early-career and graduate roles in applied machine learning, research
+            engineering, applied science, software engineering, and data-platform roles. I&apos;m also open to mission-focused AI work
+            where my active TS/SCI clearance is relevant.
           </p>
 
           <div className="flex flex-wrap gap-3">

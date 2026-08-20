@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
@@ -29,20 +30,28 @@ export function Hero() {
           transition={{ duration: 0.55, ease: "easeOut" }}
           className="mx-auto max-w-3xl space-y-8 text-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-            M.S. Artificial Intelligence · UT Austin
+          <div className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-center text-[11px] font-mono uppercase leading-relaxed tracking-[0.18em] text-muted-foreground">
+            UT Austin M.S. Artificial Intelligence · 4.0 GPA · Austin, Texas
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4">
             <h1 className="font-serif text-4xl font-medium leading-[1.03] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {site.headline}
             </h1>
-            <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              {site.summary}
-            </p>
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              Available Now · Full-Time or Summer 2026 Internship
+              {site.availability} · {site.clearance}
             </p>
+          </div>
+
+          <div className="relative mx-auto aspect-square w-44 overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_24px_70px_-48px_rgba(18,36,58,0.6)] sm:w-52">
+            <Image
+              src="/images/mitchel-carson-headshot.jpg"
+              alt="Professional portrait of Mitchel Carson"
+              fill
+              priority
+              sizes="(max-width: 639px) 11rem, 13rem"
+              className="object-cover object-[50%_45%]"
+            />
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3">

@@ -11,7 +11,7 @@ import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Applied AI, forecasting, and software engineering projects including Hydra Temporal and production API systems.",
+    "Applied AI, forecasting research, and software engineering projects including HYDRA, Harmony, and production API systems.",
   pathname: "/projects",
   keywords: [
     "AI projects",
@@ -48,8 +48,8 @@ export default function ProjectsPage() {
           <SectionHeader
             as="h1"
             eyebrow="Projects"
-            title="Forecasting and software systems"
-            description="Each project includes problem framing, technical approach, measurable outcomes, and implementation lessons."
+            title="Applied AI and software systems"
+            description="Each case study separates the problem, technical approach, current evidence, limitations, and implementation lessons."
           />
 
           <div className="mt-10 grid gap-7">

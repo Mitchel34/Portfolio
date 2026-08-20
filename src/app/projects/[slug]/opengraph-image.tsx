@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 
 import { getProjectBySlug, site } from "@/lib/content";
 
-export const runtime = "edge";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -17,9 +16,9 @@ export default async function OpenGraphImage({ params }: Props) {
   const title = project?.title ?? site.name;
   const description = project
     ? `${project.problem} ${project.impact}`.slice(0, 130)
-    : "AI Engineer building production-grade ML systems";
-  const tags = project?.stack.slice(0, 4) ?? ["Time-series ML", "Deep Learning", "Production Software"];
-  const eyebrow = project ? "Case Study" : "AI Engineer Portfolio";
+    : site.summary;
+  const tags = project?.stack.slice(0, 4) ?? ["Applied ML", "Research Engineering", "Production Software"];
+  const eyebrow = project ? "Case Study" : "AI / ML Engineer Portfolio";
 
   return new ImageResponse(
     (

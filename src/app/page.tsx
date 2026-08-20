@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { AboutSection } from "@/components/AboutSection";
 import { ContactSection } from "@/components/ContactSection";
+import { CourseworkSection } from "@/components/CourseworkSection";
+import { CredibilityBand } from "@/components/CredibilityBand";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import { Hero } from "@/components/Hero";
 import { ProjectGrid } from "@/components/ProjectGrid";
@@ -9,9 +11,9 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   ...createPageMetadata({
-    title: "AI Engineer Portfolio",
+    title: "AI / Machine Learning Engineer Portfolio",
     description:
-      "Mitchel Carson builds production-grade ML systems with engineering discipline, from forecasting to financial risk infrastructure.",
+      "Mitchel Carson is an early-career AI/ML engineer and UT Austin M.S. AI student building forecasting research, production software, and reliable machine-learning systems.",
     pathname: "/",
     keywords: [
       "AI portfolio",
@@ -21,7 +23,7 @@ export const metadata: Metadata = {
     ],
   }),
   title: {
-    absolute: "Mitchel Carson | AI Engineer Portfolio",
+    absolute: "Mitchel Carson | AI / Machine Learning Engineer",
   },
 };
 
@@ -29,8 +31,10 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       <Hero />
-      <FeaturedProject />
+      <CredibilityBand />
       <AboutSection />
+      <CourseworkSection />
+      <FeaturedProject />
       <ProjectGrid />
       <ContactSection />
     </main>

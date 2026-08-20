@@ -6,13 +6,18 @@ export const SITE_URL = site.url || "https://mitchelcarson.com";
 
 export const DEFAULT_KEYWORDS = [
   "Mitchel Carson",
-  "AI Engineer",
-  "ML Engineer",
+  "AI / Machine Learning Engineer",
+  "Machine Learning Engineer",
+  "Research Engineer",
+  "Applied Scientist",
+  "ML Platform Engineer",
   "Software Engineer",
   "time-series forecasting",
   "Transformers",
   "streamflow forecasting",
   "production machine learning",
+  "UT Austin M.S. AI",
+  "Austin AI engineer",
 ];
 
 export function absoluteUrl(pathname = "/") {

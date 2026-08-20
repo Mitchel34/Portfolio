@@ -15,8 +15,8 @@ export function ProjectGrid() {
       <Container>
         <SectionHeader
           eyebrow="Additional Projects"
-          title="Systems built to operate under real constraints"
-          description="From regulated financial services to algorithmic trading, my work focuses on reliability, evaluation, and long-term behavior, not just model accuracy."
+          title="Software built for real-world use"
+          description="From production APIs to modular research software, I focus on clear interfaces, careful testing, safe behavior, and maintainable code."
         />
 
         <div className="mt-10 grid gap-7">

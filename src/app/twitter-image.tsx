@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 
 import { site } from "@/lib/content";
 
-export const runtime = "edge";
 export const size = {
   width: 1200,
   height: 630,
@@ -51,7 +50,7 @@ export default function TwitterImage() {
           </div>
 
           <div style={{ marginTop: 22, fontSize: 32, lineHeight: 1.25, color: "#203550" }}>
-            AI systems for forecasting, interpretability, and production impact.
+            Reliable AI systems across forecasting research and production software.
           </div>
         </div>
       </div>

@@ -1,24 +1,27 @@
 export const site = {
   name: "Mitchel Carson",
-  title: "AI Engineer building production-grade ML systems",
-  headline: "M.S. AI student at UT Austin",
+  title: "AI / Machine Learning Engineer",
+  headline: "AI / Machine Learning Engineer",
   summary:
-    "I build end-to-end ML systems: model architecture, temporal validation, reproducible pipelines, and production APIs. My thesis achieved 48% streamflow error reduction using hybrid deep-learning. TS/SCI cleared and available now.",
+    "Early-career AI/ML engineer and UT Austin M.S. AI student building reliable systems across deep-learning research, production software, and reproducible evaluation. Active TS/SCI clearance; based in Austin, Texas.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
   url: "https://mitchelcarson.com",
   calendlyUrl: "https://calendly.com/mitchel-carson/30min",
-  availability: "Now",
-  timezone: "EST",
+  availability: "Open to early-career or graduate roles",
+  location: "Austin, Texas",
+  timezone: "Central Time",
+  clearance: "Active TS/SCI",
 };
 
 export const focusAreas = [
+  "Applied ML systems",
   "Time-series forecasting",
-  "Transformer + RNN hybrids",
-  "Applied ML for environmental systems",
-  "Production ML and data pipelines",
+  "Research engineering and reproducible evaluation",
+  "ML platforms and production software",
+  "Reliability-focused system design",
 ];
 
 export type ProjectLink = {
@@ -47,12 +50,13 @@ export type Project = {
   links?: ProjectLink[];
 };
 
-export const thesisImpactStat = "Up to 48% streamflow error reduction";
+export const thesisImpactStat = "26–54% lower forecast error (RMSE) vs. tested LSTM baselines";
 
 export const about = {
   summary: [
-    "My background spans high-stakes operational environments, production software engineering, and applied ML research. Across all of them, I've learned that strong systems come from clear interfaces, disciplined validation, and good communication between people with different expertise.",
-    `My senior thesis achieved ${thesisImpactStat.toLowerCase()} in national water forecasts using hybrid deep-learning architectures. I'm especially effective where research, engineering, and domain expertise intersect. Reliability and clarity matter as much as raw performance.`,
+    "My background includes U.S. Air Force operations, a software engineering internship at USAA, and applied machine learning research. These experiences taught me to build carefully, test thoroughly, and communicate clearly across technical and nontechnical teams.",
+    "HYDRA began as my senior honors thesis and continues as active research on streamflow forecasting. I am testing whether deep-learning corrections can improve local forecasts; the final analysis and manuscript are still in progress.",
+    "I am pursuing an M.S. in Artificial Intelligence at UT Austin. I have completed coursework in machine learning, deep learning, reinforcement learning, and AI ethics, and I am seeking early-career roles across software engineering, applied AI, and data systems.",
   ],
   values: [
     {
@@ -80,32 +84,32 @@ export const projects: Project[] = [
     subtitle: "Hybrid Deep-learning for Residual Analysis",
     status: "Active",
     problem:
-      "National water models often struggle with local precision. During events like Hurricane Helene, NWM forecasts significantly underestimated peak flows in complex terrain, leaving communities with uncertain flood warnings.",
+      "National forecasts can miss local watershed behavior. HYDRA tests whether deep-learning corrections can improve National Water Model streamflow forecasts using timelines that reflect real forecasting conditions.",
     impact:
-      "Achieved up to 48% improvement in predicting streamflow across unregulated Appalachian watersheds. Live at hydramodel.ai. Manuscript in preparation for Water Resources Research (AGU).",
+      "Early experiments produced 26–54% lower RMSE than the LSTM baselines tested. The final analysis and manuscript are still in progress.",
     approach: [
-      "Developed an advanced 1-million parameter hybrid GRU-Transformer model to catch residuals that physical models miss.",
-      "Integrated multi-source data (NWM v3.0+, ERA5, USGS) for a comprehensive view.",
-      "Designed leakage-safe evaluation to ensure performance holds up in real-time constraints.",
-      "Preparing manuscript for submission to Water Resources Research (AGU).",
+      "Developed Transformer and GRU residual-correction experiments for NOAA National Water Model forecasts.",
+      "Built a modular PyTorch pipeline integrating NWM forecasts, USGS observations, ERA5 signals, and basin context.",
+      "Automated normalization, leakage-aware temporal splits, and hydrologic evaluation with RMSE, NSE, and KGE.",
+      "Continuing the analysis and preparing a manuscript for Water Resources Research.",
     ],
     stack: [
       "PyTorch",
       "Transformer",
-      "Hydra",
+      "GRU",
+      "Hydra Config",
       "MLflow",
       "xarray",
-      "AWS Batch",
     ],
     results: [
-      "Up to 48% improvement in predictions across unregulated Appalachian watersheds.",
-      "Consistent improvement across varying forecast horizons and extreme storm events.",
-      "Demonstrated stability under seasonal distribution shifts.",
+      "Built repeatable evaluations across multiple forecast horizons and watershed sites.",
+      "Produced versioned predictions, diagnostics, and figures for ongoing analysis.",
+      "Results remain under active review and will be updated after the manuscript analysis is complete.",
     ],
     learnings: [
-      "Hybrid architectures can correct physical model biases without overfitting.",
-      "Rigorous evaluation design is the difference between a demo and a product.",
-      "Balancing research goals with operational constraints mirrors how ML systems are built in production teams.",
+      "Residual-correction research depends as much on temporal evaluation design as model architecture.",
+      "Reproducible data and configuration lineage make changing scientific results auditable.",
+      "Research claims should evolve with the evidence rather than outrun the final analysis.",
     ],
     caseStudy: {
       architecture: [
@@ -114,34 +118,31 @@ export const projects: Project[] = [
         "Config-driven training and evaluation with strict train/validation/test time boundaries.",
       ],
       reliability: [
-        "Leakage-safe splitting by basin and time horizon to match operational inference constraints.",
+        "Leakage-aware splitting by time and evaluation horizon to match operational inference constraints.",
         "Reproducible runs through fixed seeds, immutable data artifacts, and tracked configuration snapshots.",
-        "Stress-tested against seasonal drift and missing-sensor windows for production realism.",
+        "Performance tracked by site, horizon, and hydrologic metric instead of a single aggregate score.",
       ],
       delivery: [
-        "Packaged experiments with Hydra + MLflow for repeatable model iteration and comparison.",
-        "Built deployment-ready outputs for downstream operational routing and dashboard consumption.",
-        "Defined clear handoff surfaces so model updates can be integrated without pipeline rewrites.",
+        "Packaged experiments with Hydra configuration and MLflow tracking for repeatable comparison.",
+        "Produced versioned artifacts, diagnostics, figures, and technical documentation for scientific review.",
+        "Maintained a research website while reserving final manuscript claims for the completed analysis.",
       ],
     },
-    links: [
-      { label: "Website", href: "https://hydramodel.ai" },
-      { label: "GitHub", href: "https://github.com/Mitchel34" },
-    ],
+    links: [{ label: "Research Details", href: "/research" }],
   },
   {
     slug: "usaa-risk-services",
     title: "USAA Risk Services",
-    subtitle: "Secure Production APIs for Financial Services",
+    subtitle: "Software APIs for Financial Services",
     status: "Production",
     problem:
-      "Internal teams needed a reliable, compliant way to access core risk data without navigating legacy complexity.",
+      "Internal teams needed a reliable, compliant way to access core risk data without navigating complex legacy systems.",
     impact:
-      "Built production APIs that partner teams across the organization now use daily. Worked closely with product owners, backend engineers, and internal stakeholders to make risk data accessible and self-serve.",
+      "Built GraphQL services and comparison views for internal troubleshooting. Worked with product owners, engineers, and business users to make customer data easier to inspect.",
     approach: [
-      "Designed and deployed strict GraphQL APIs using Java and Spring Boot.",
-      "Enhanced internal observability tools by unifying disparate data sources.",
-      "Built responsive React dashboards to give stakeholders visibility into risk metrics.",
+      "Designed and implemented GraphQL APIs using Java and Spring Boot.",
+      "Added supplementary customer data to an internal troubleshooting tool.",
+      "Built responsive JavaScript comparison views and delivered work through an Agile team workflow.",
     ],
     stack: [
       "Java",
@@ -152,12 +153,12 @@ export const projects: Project[] = [
       "PostgreSQL",
     ],
     results: [
-      "Consolidated fragmented data access into a single self-serve API layer, eliminating recurring partner-team support loops.",
-      "Introduced schema-validated deployment gates that caught contract regressions before production.",
+      "Contributed customer-data API capabilities for enterprise workflows.",
+      "Improved internal data visibility with new comparison views for business users and troubleshooters.",
     ],
     learnings: [
-      "Clear interfaces (API contracts) allow teams to move fast safely.",
-      "Effective production systems require close collaboration between engineers, product owners, and end users.",
+      "Clear API contracts help teams make changes safely.",
+      "Reliable production software depends on close collaboration between engineers, product owners, and end users.",
     ],
     caseStudy: {
       architecture: [
@@ -166,14 +167,14 @@ export const projects: Project[] = [
         "Data-access partitioning to separate source-of-record from troubleshooting data paths.",
       ],
       reliability: [
-        "Test-gated deployments with schema validation to prevent API contract regressions.",
-        "Structured logging and observability hooks for rapid incident diagnosis.",
-        "Secure defaults and compliance-aware patterns embedded in service interfaces.",
+        "Used typed GraphQL contracts and team review workflows to keep service changes predictable.",
+        "Worked within security- and compliance-conscious production engineering practices.",
+        "Validated data presentation with the internal users who depended on the troubleshooting workflow.",
       ],
       delivery: [
         "Shipped incrementally with Agile team workflows and shared Jira/Git ownership.",
-        "Reduced partner-team support loops by making data retrieval predictable and self-serve.",
-        "Improved deployment confidence through repeatable release and validation checks.",
+        "Coordinated API and front-end changes across product, backend, and business stakeholders.",
+        "Participated in sprint planning, stand-ups, code collaboration, and retrospectives using Jira and Git.",
       ],
     },
     links: [{ label: "Experience", href: "/resume" }],
@@ -181,17 +182,17 @@ export const projects: Project[] = [
   {
     slug: "harmony-trading",
     title: "Harmony",
-    subtitle: "Algorithmic trading systems for disciplined decision-making",
+    subtitle: "A modular Python system for forecasting and decision workflows",
     status: "Active Development",
     problem:
-      "Financial markets are noisy, adversarial environments where predictive accuracy alone is insufficient. Sustainable trading systems require disciplined evaluation, strict risk controls, and infrastructure that behaves predictably under stress.",
+      "Forecasting software needs more than a model. It also needs reliable data, repeatable testing, clear controls, and a safe response when inputs are incomplete.",
     impact:
-      "A modular trading system with independent forecasting, risk, and execution components. Each module can be evaluated, replaced, or improved independently.",
+      "Harmony is an active Python software project with separate components for data input, forecasting, validation, controls, and simulation. This design makes each part easier to test, inspect, and replace.",
     approach: [
-      "Design a forecasting and execution pipeline that survives regime shifts.",
-      "Emphasize risk management over raw returns.",
-      "Build components that can be evaluated independently and replaced safely.",
-      "Treat trading as a systems engineering problem, not a single model.",
+      "Separated data, forecasting, validation, controls, and simulation into independent components.",
+      "Saved system state and run records so behavior can be reviewed over time.",
+      "Required validation and safety checks before performance testing.",
+      "Designed the system to stop when data history is incomplete or an action is unsupported.",
     ],
     stack: [
       "Python",
@@ -202,40 +203,37 @@ export const projects: Project[] = [
       "Docker",
     ],
     results: [
-      "Market data ingestion and normalization pipeline.",
-      "Forecasting models for short- and medium-horizon signals.",
-      "Risk engine enforcing position sizing and drawdown limits.",
-      "Backtesting framework with leakage-aware evaluation.",
-      "Execution simulation via paper trading.",
+      "Configurable components for data input and normalization.",
+      "Replaceable forecasting components for time-series experiments.",
+      "Checks that timestamps, prediction targets, transformations, schemas, and evaluation rules are consistent.",
+      "Policy controls and simulation components with saved state.",
     ],
     learnings: [
-      "No model is trusted without adversarial backtesting.",
-      "Risk constraints override model confidence.",
-      "Components must fail safely.",
-      "Performance claims require statistically sound evaluation.",
+      "Data and evaluation definitions must be correct before model performance can be compared.",
+      "Safety controls should take priority over model confidence.",
+      "Modular design makes research components easier to test, review, and replace.",
+      "Performance claims require forward testing, not only historical simulation.",
     ],
     caseStudy: {
       architecture: [
-        "Market data ingestion feeding normalized feature pipelines.",
-        "Forecast models generating short- and medium-horizon signals.",
-        "Risk engine enforcing position sizing, drawdown limits, and exposure controls.",
-        "Execution layer with paper trading simulation and metrics monitoring.",
+        "Data adapters feed normalized, versioned feature pipelines.",
+        "Forecasting components implement shared interfaces for independent comparison.",
+        "Validation and policy layers evaluate meaning and constraints before simulated actions.",
+        "Paper-mode simulation, SQLite state, and monitoring preserve inspectable system behavior.",
       ],
       reliability: [
-        "Risk-adjusted return metrics (Sharpe, Sortino) over raw P&L.",
-        "Maximum drawdown tracking and regime-stability analysis.",
-        "Backtest vs. forward-test divergence monitoring.",
-        "Leakage-aware evaluation to prevent look-ahead bias.",
+        "Fail-closed validation for incomplete timestamps, targets, transformations, schemas, or evaluation meaning.",
+        "Leakage-aware research evaluation and explicit separation between historical, shadow, and paper evidence.",
+        "Controls remain independent from forecast confidence and can stop downstream behavior.",
+        "No live-execution or investment-performance claim is part of the current scope.",
       ],
       delivery: [
-        "Modular component architecture allowing independent evaluation and replacement.",
-        "Incremental development with infrastructure-first approach.",
-        "Design decisions documented for future team onboarding.",
+        "Modular component architecture supports independent testing and replacement.",
+        "Infrastructure-first development keeps state, evidence, and boundaries visible.",
+        "Architecture and operating decisions are documented for reproducibility and future handoff.",
       ],
     },
-    links: [
-      { label: "GitHub", href: "https://github.com/Mitchel34" },
-    ],
+    links: [],
   },
 ];
 
@@ -272,32 +270,52 @@ export function getProjectPrimaryExternalLink(project: Project) {
 export const research = {
   title:
     "HYDRA: Hybrid Deep-learning for Residual Analysis",
+  status: "Ongoing research - preliminary results",
   summary:
-    "Post-processing streamflow forecasts with a hybrid GRU-Transformer to improve accuracy while respecting physical constraints. Seeking collaborations across hydrology, ML, and engineering to build actionable decision support.",
+    "Developing and evaluating Transformer/GRU residual-correction models for National Water Model streamflow forecasts. The pipeline combines hydrologic and meteorological data with leakage-aware temporal evaluation; the final analysis and manuscript are in progress.",
+  preliminaryResult:
+    "Preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested. This interim result will be updated as the ongoing analysis and manuscript are completed.",
   architecture: [
-    "Inputs: Operational NWM forecasts, meteorological forcings (ERA5), static attributes.",
-    "Temporal Encoding: GRU for capturing sequential patterns.",
-    "Encoder: Transformer capturing multi-scale temporal context.",
-    "Pipeline: Automated feature normalization and leakage-safe splitting.",
+    "Inputs: National Water Model forecasts, USGS observations, ERA5 signals, and basin context.",
+    "Temporal modeling: Transformer and GRU experiments for learned residual correction.",
+    "Pipeline: Modular PyTorch training, automated normalization, and configuration-driven experiments.",
+    "Outputs: Versioned predictions, hydrologic diagnostics, figures, and research artifacts.",
   ],
   evaluation: [
-    "Metrics: RMSE, NSE, KGE (Hydrology-standard metrics) with bootstrap confidence intervals.",
-    "Validation: Spatial holdouts to test generalization across 3 Appalachian sites.",
-    "Diagnostics: Flow regime analysis across baseflow, rising limbs, and recessions.",
+    "Metrics: RMSE, NSE, and KGE with results inspected by site and forecast horizon.",
+    "Validation: Leakage-aware temporal splits designed around forecast availability.",
+    "Diagnostics: Comparisons against National Water Model and LSTM baselines.",
   ],
   reproducibility: [
-    "Config-driven experiments (Hydra) with 19 unique configurations.",
-    "Strict data versioning and artifact tracking.",
-    "Full environment captures for every run.",
+    "Configuration-driven experiments with tracked parameters and artifacts.",
+    "Versioned data lineage, manifests, and evaluation outputs.",
+    "Environment and run records designed to support scientific review.",
   ],
   constraints: [
-    "Must run within real-time operational latency limits.",
-    "Robustness to complex terrain and flashy watershed dynamics.",
+    "Research conclusions remain provisional until the final analysis is complete.",
+    "Operational claims must respect the timing and availability of every model input.",
   ],
-  links: [
-    { label: "Website", href: "https://hydramodel.ai" },
-    { label: "GitHub", href: "https://github.com/Mitchel34" },
+  communication: [
+    {
+      title: "AGU26 abstract",
+      status: "Under review",
+      description:
+        "The HYDRA abstract is under review for the H100 machine-learning-in-hydrology session; acceptance and scheduling will be updated when confirmed.",
+    },
+    {
+      title: "AGU26 scientific workshop",
+      status: "Accepted",
+      description:
+        "At the AGU26 Annual Meeting in San Francisco, December 7-11, 2026, I will facilitate Best Practices for AI and Agentic Workflows in Earth Science Research, helping earth and environmental scientists use AI to accelerate research workflows.",
+    },
+    {
+      title: "Water Resources Research manuscript",
+      status: "In progress",
+      description:
+        "The manuscript and final analysis are still being developed. A manuscript link and finalized claims will be added after completion.",
+    },
   ],
+  links: [{ label: "HYDRA Case Study", href: "/projects/hydra-temporal" }],
 };
 
 export type ExperienceItem = {
@@ -310,14 +328,14 @@ export type ExperienceItem = {
 
 export const experience: ExperienceItem[] = [
   {
-    role: "SWE Intern",
+    role: "Software Engineering Intern",
     org: "USAA",
     period: "May 2025 - August 2025",
     highlights: [
       "Designed and implemented GraphQL APIs using Java and Spring Boot to surface core customer data.",
-      "Enhanced internal troubleshooting tools by integrating Non-Source-of-Record data.",
+      "Integrated supplementary data into an internal troubleshooting tool.",
       "Built and refined JavaScript front-end components for data visualization.",
-      "Collaborated in an Agile/Scrum team using Jira and Git.",
+      "Worked with an Agile engineering team using Jira and Git.",
       "Worked closely with product owners, backend engineers, and internal users to ensure APIs were usable, secure, and operationally reliable.",
     ],
   },
@@ -330,7 +348,7 @@ export const experience: ExperienceItem[] = [
       "Coordinated across flight crew, security teams, and executive staff to meet exacting operational standards.",
     ],
     bridgingSentence:
-      "Managing logistics for executive missions under zero-margin-for-error conditions shaped how I think about reliability in every system I build.",
+      "Coordinating complex executive missions taught me to value preparation, reliability, and clear communication in every system I build.",
   },
 ];
 
@@ -338,9 +356,11 @@ export const education = [
   {
     degree: "M.S. Artificial Intelligence",
     org: "University of Texas at Austin",
-    period: "Spring 2026 (Admitted)",
+    period: "In progress - Expected May 2027",
     details: [
-      "Focus on time-series forecasting, deep learning, and applied ML systems.",
+      "Current GPA: 4.0/4.0.",
+      "Completed: AI Ethics, Machine Learning, Deep Learning, and Reinforcement Learning.",
+      "Fall 2026: Advances in Deep Learning; Planning, Reasoning, and Search Under Uncertainty; Natural Language Processing.",
     ],
   },
   {
@@ -348,12 +368,64 @@ export const education = [
     org: "Appalachian State University",
     period: "December 2025",
     details: [
-      "Magna Cum Laude (GPA 3.6/4.0).",
+      "Cum Laude (GPA 3.6/4.0).",
       "Senior Honors Thesis on Runoff Forecasting with Deep Learning.",
       "Data Science Certificate.",
     ],
   },
 ];
+
+export type CourseworkItem = {
+  title: string;
+  status: "Completed" | "Fall 2026";
+  description: string;
+};
+
+export const coursework = {
+  program: "M.S. Artificial Intelligence",
+  institution: "University of Texas at Austin",
+  currentGpa: "4.0/4.0",
+  expectedGraduation: "May 2027",
+  completed: [
+    {
+      title: "AI Ethics",
+      status: "Completed",
+      description: "Responsible AI, governance, and the societal implications of deployed systems.",
+    },
+    {
+      title: "Machine Learning",
+      status: "Completed",
+      description: "Supervised and unsupervised learning, model selection, and empirical evaluation.",
+    },
+    {
+      title: "Deep Learning",
+      status: "Completed",
+      description: "Neural networks, optimization, representation learning, and hands-on implementation.",
+    },
+    {
+      title: "Reinforcement Learning",
+      status: "Completed",
+      description: "Value-based and policy-gradient methods, function approximation, and sequential decisions.",
+    },
+  ] satisfies CourseworkItem[],
+  upcoming: [
+    {
+      title: "Advances in Deep Learning",
+      status: "Fall 2026",
+      description: "Advanced deep-learning methods and current research.",
+    },
+    {
+      title: "Planning, Reasoning, and Search Under Uncertainty",
+      status: "Fall 2026",
+      description: "Planning, search, reasoning, and decision-making under uncertainty.",
+    },
+    {
+      title: "Natural Language Processing",
+      status: "Fall 2026",
+      description: "Computational methods for language understanding and generation.",
+    },
+  ] satisfies CourseworkItem[],
+};
 
 export const contact = {
   email: site.email,

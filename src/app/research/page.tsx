@@ -11,7 +11,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Research",
   description:
-    "Senior honors thesis research on leakage-safe residual correction for NOAA streamflow forecasts using hybrid deep learning models.",
+    "Ongoing HYDRA research on leakage-aware residual correction for National Water Model streamflow forecasts using Transformer and GRU experiments.",
   pathname: "/research",
   keywords: [
     "AI research",
@@ -39,6 +39,15 @@ export default function ResearchPage() {
             description={research.summary}
           />
 
+          <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-6">
+            <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">
+              {research.status}
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-foreground">
+              {research.preliminaryResult}
+            </p>
+          </div>
+
           <div className="mt-6 flex flex-wrap gap-3">
             {research.links.map((link) => (
               <a
@@ -52,10 +61,10 @@ export default function ResearchPage() {
           </div>
 
           <div className="mt-10 mb-10 overflow-hidden rounded-2xl border border-border/80 bg-card">
-            <div className="relative aspect-[16/9] w-full border-b border-border/80">
+            <div className="relative aspect-[11/6] w-full border-b border-border/80">
               <Image
-                src="/images/projects/hydra-architecture.jpg"
-                alt="HYDRA Model Architecture Flow Diagram"
+                src="/images/projects/hydra-architecture-full.jpg"
+                alt="Conceptual HYDRA research architecture diagram"
                 fill
                 className="object-contain"
                 sizes="(max-width: 1200px) 100vw, 1200px"
@@ -64,7 +73,7 @@ export default function ResearchPage() {
             </div>
             <div className="p-4 bg-muted/30">
               <p className="text-center text-sm font-medium text-muted-foreground">
-                HYDRA Transformer-GRU Hybrid Architecture connecting sequence encoding, multi-scale temporal attention, and regime-conditioned residual correction.
+                Conceptual HYDRA research architecture. The implementation and supporting claims will continue to evolve with the ongoing analysis.
               </p>
             </div>
           </div>
@@ -105,6 +114,27 @@ export default function ResearchPage() {
               ))}
             </ul>
           </article>
+
+          <section className="mt-12">
+            <SectionHeader
+              eyebrow="Scientific Communication"
+              title="AGU and manuscript progress"
+              description="Research outputs are labeled by their current status and will be updated as milestones are completed."
+            />
+            <div className="mt-7 grid gap-5 md:grid-cols-2">
+              {research.communication.map((item) => (
+                <article key={item.title} className="rounded-2xl border border-border/80 bg-card p-6">
+                  <p className="text-xs font-mono uppercase tracking-[0.16em] text-primary">
+                    {item.status}
+                  </p>
+                  <h3 className="mt-2 text-base font-semibold text-foreground">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                    {item.description}
+                  </p>
+                </article>
+              ))}
+            </div>
+          </section>
         </Container>
       </div>
     </>

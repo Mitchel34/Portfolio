@@ -11,7 +11,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Mitchel Carson for AI engineering roles, ML forecasting collaborations, and production software opportunities.",
+    "Contact Mitchel Carson about early-career AI/ML engineering, research engineering, applied science, and ML platform opportunities.",
   pathname: "/contact",
   keywords: ["contact AI engineer", "ML engineer contact", "hire forecasting engineer"],
 });
@@ -31,7 +31,7 @@ export default function ContactPage() {
             as="h1"
             eyebrow="Contact"
             title="Let's build something that works in the real world"
-            description="I work with teams on forecasting, infrastructure-aware ML, and production systems in industry or research. If you value reliability, clarity, and execution, let's connect."
+            description="I am based in Austin and interested in early-career or graduate AI/ML roles spanning applied engineering, research, and reliable software systems."
           />
 
           <a
@@ -43,7 +43,7 @@ export default function ContactPage() {
             <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">Fastest way to connect</p>
             <p className="mt-3 text-lg font-semibold text-foreground">Schedule a 30-minute call</p>
             <p className="mt-1 text-sm text-muted-foreground">
-              Available {site.availability} · {site.timezone} timezone
+              {site.location} · {site.timezone} · {site.clearance}
             </p>
           </a>
 

@@ -2,7 +2,6 @@ import { ImageResponse } from "next/og";
 
 import { site } from "@/lib/content";
 
-export const runtime = "edge";
 export const size = {
   width: 1200,
   height: 630,
@@ -68,7 +67,7 @@ export default function OpenGraphImage() {
                 background: "#0b5fff",
               }}
             />
-            AI Engineer Portfolio
+            AI / Machine Learning Engineer
           </div>
 
           <div style={{ fontSize: 72, fontWeight: 700, lineHeight: 1.05 }}>
@@ -83,7 +82,7 @@ export default function OpenGraphImage() {
               color: "#203550",
             }}
           >
-            Forecasting systems that bridge research and production.
+            Applied AI systems bridging research and production software.
           </div>
 
           <div
@@ -95,9 +94,9 @@ export default function OpenGraphImage() {
               color: "#546174",
             }}
           >
-            <span>Time-series ML</span>
+            <span>Applied ML</span>
             <span>•</span>
-            <span>Deep Learning</span>
+            <span>Research Engineering</span>
             <span>•</span>
             <span>Production Software</span>
           </div>

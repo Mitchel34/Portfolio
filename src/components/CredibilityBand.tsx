@@ -4,34 +4,33 @@ import { motion } from "framer-motion";
 import { Award, Clock, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
 
 import { Container } from "@/components/Container";
-import { site, thesisImpactStat } from "@/lib/content";
 
 const highlights = [
   {
     icon: ShieldCheck,
     label: "Security Clearance",
-    value: "TS/SCI Active",
+    value: "Active TS/SCI",
     featured: true,
   },
   {
     icon: Clock,
-    label: "Availability",
-    value: `${site.availability} · ${site.timezone}`,
+    label: "Career Stage",
+    value: "Early-career / graduate",
   },
   {
     icon: Award,
-    label: "Thesis Impact",
-    value: thesisImpactStat,
+    label: "Research",
+    value: "Applied AI for hydrology",
   },
   {
     icon: Wrench,
     label: "Industry",
-    value: "USAA SWE internship",
+    value: "USAA Software Engineering Internship",
   },
   {
     icon: GraduationCap,
-    label: "Education",
-    value: "B.S. CS + UT Austin AI",
+    label: "Graduate Study",
+    value: "UT Austin M.S. AI · 4.0 GPA",
   },
 ];
 

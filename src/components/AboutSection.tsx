@@ -10,7 +10,7 @@ import { about, experience } from "@/lib/content";
 const workStyle = [
   {
     icon: MessageSquare,
-    text: "I ask a lot of questions early to avoid costly assumptions later",
+    text: "I clarify requirements early to avoid costly assumptions",
   },
   {
     icon: Layers,
@@ -22,7 +22,7 @@ const workStyle = [
   },
   {
     icon: GitMerge,
-    text: "I'm comfortable bridging research ideas and production constraints",
+    text: "I connect research ideas with practical software requirements",
   },
 ];
 
@@ -30,11 +30,11 @@ export function AboutSection() {
   return (
     <section className="relative py-20" id="about">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1.02fr,0.98fr]">
+        <div className="grid gap-10 lg:grid-cols-[1.02fr,0.98fr] lg:items-start">
           <div className="space-y-8">
             <SectionHeader
-              eyebrow="About"
-              title="Engineering rigor, research depth, and collaborative delivery"
+              eyebrow="About Me"
+              title="I build reliable software and data systems, and apply AI to real-world problems"
             />
 
             <div className="space-y-5 rounded-3xl border border-border/80 bg-card p-7 shadow-[0_20px_60px_-50px_rgba(18,36,58,0.45)]">

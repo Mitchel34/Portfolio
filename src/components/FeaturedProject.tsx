@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { getProjectPrimaryExternalLink, projects, site, thesisImpactStat } from "@/lib/content";
+import { projects, thesisImpactStat } from "@/lib/content";
 
 const project = projects[0];
 
@@ -14,12 +14,12 @@ const statCards = [
   {
     icon: Database,
     title: "Data Inputs",
-    detail: "NOAA NWM, ERA5, USGS observations",
+    detail: "National Water Model forecasts, weather data, and USGS streamflow observations",
   },
   {
     icon: Layers,
     title: "Model Core",
-    detail: "Transformer encoder with GRU residual head",
+    detail: "Transformer and GRU forecast-correction model",
   },
   {
     icon: BarChart3,
@@ -46,7 +46,7 @@ export function FeaturedProject() {
               className="space-y-6"
             >
               <span className="inline-flex rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
-                Thesis Project
+                Ongoing Research · Preliminary Results
               </span>
               <div>
                 <h3 className="font-serif text-3xl font-medium tracking-tight text-foreground sm:text-4xl">
@@ -56,13 +56,27 @@ export function FeaturedProject() {
               </div>
 
               <div className="overflow-hidden rounded-2xl border border-border/80">
-                <Image
-                  src="/architecture_diagram.png"
-                  alt="HYDRA system architecture diagram"
-                  width={840}
-                  height={520}
-                  className="h-auto w-full"
-                />
+                <a
+                  href="/images/projects/hydra-architecture-full.jpg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Open the full-resolution conceptual HYDRA research architecture diagram in a new tab"
+                  title="Open full-resolution diagram"
+                  className="block cursor-zoom-in"
+                >
+                  <Image
+                    src="/images/projects/hydra-architecture-full.jpg"
+                    alt="Conceptual HYDRA research architecture diagram"
+                    width={2816}
+                    height={1536}
+                    sizes="(max-width: 1024px) calc(100vw - 3.5rem), 50vw"
+                    quality={95}
+                    className="h-auto w-full"
+                  />
+                </a>
+                <p className="border-t border-border/80 bg-muted/30 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
+                  Conceptual research architecture; the implementation will continue to evolve with the ongoing analysis.
+                </p>
               </div>
 
               <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
@@ -109,12 +123,12 @@ export function FeaturedProject() {
                   Read case study
                   <ArrowRight className="h-4 w-4" />
                 </Link>
-                <a
-                  href={getProjectPrimaryExternalLink(project) ?? site.github}
+                <Link
+                  href="/research"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition hover:opacity-80"
                 >
-                  View source
-                </a>
+                  Explore HYDRA research
+                </Link>
               </div>
             </motion.div>
 
@@ -163,7 +177,7 @@ function SectionHeaderBlock() {
         </p>
       </div>
       <h2 className="max-w-3xl font-serif text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
-        Hydrologic forecasting designed for operational reliability
+        Hydrologic forecasting research aimed at improving existing flood prediction systems
       </h2>
     </div>
   );

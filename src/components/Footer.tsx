@@ -21,6 +21,9 @@ export function Footer() {
           <Link href="/research" className="transition hover:text-foreground">
             Research
           </Link>
+          <Link href="/coursework" className="transition hover:text-foreground">
+            Coursework
+          </Link>
           <a href={site.github} className="transition hover:text-foreground">
             GitHub
           </a>

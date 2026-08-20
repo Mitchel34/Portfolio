@@ -1,18 +1,18 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { site } from "@/lib/content";
+import { useIsClient } from "@/lib/useIsClient";
 
 export function CalendlyEmbed({ minHeight }: { minHeight?: string }) {
   const calendlyUrl = site.calendlyUrl;
   const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsClient();
   const height = minHeight || "700px";
 
   useEffect(() => {
-    setMounted(true);
     // Dynamically load the Calendly widget script
     const existing = document.getElementById("calendly-widget-script");
     if (!existing) {
@@ -22,7 +22,7 @@ export function CalendlyEmbed({ minHeight }: { minHeight?: string }) {
       script.async = true;
       document.head.appendChild(script);
     }
-  }, []);
+  }, [calendlyUrl]);
 
   if (!calendlyUrl || !mounted) return null;
 
