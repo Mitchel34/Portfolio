@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   ...createPageMetadata({
     title: "AI / Machine Learning Engineer Portfolio",
     description:
-      "Mitchel Carson is an early-career AI/ML engineer and UT Austin M.S. AI student building forecasting research, production software, and reliable machine-learning systems.",
+      "Mitchel Carson builds production software, applied AI research, and reliable data systems while pursuing an M.S. in Artificial Intelligence at UT Austin.",
     pathname: "/",
     keywords: [
       "AI portfolio",

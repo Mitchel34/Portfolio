@@ -11,7 +11,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Mitchel Carson about early-career AI/ML engineering, research engineering, applied science, and ML platform opportunities.",
+    "Contact Mitchel Carson about applied AI, research engineering, production software, and data systems.",
   pathname: "/contact",
   keywords: ["contact AI engineer", "ML engineer contact", "hire forecasting engineer"],
 });
@@ -30,8 +30,8 @@ export default function ContactPage() {
           <SectionHeader
             as="h1"
             eyebrow="Contact"
-            title="Let's build something that works in the real world"
-            description="I am based in Austin and interested in early-career or graduate AI/ML roles spanning applied engineering, research, and reliable software systems."
+            title="Let’s build AI systems with measurable impact."
+            description="I bring software engineering, applied research, and disciplined delivery to modernize critical workflows and carry ambitious systems from prototype to implementation."
           />
 
           <a

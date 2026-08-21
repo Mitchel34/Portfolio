@@ -4,35 +4,34 @@ import { Github, Linkedin, Mail } from "lucide-react";
 
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { Container } from "@/components/Container";
-import { site } from "@/lib/content";
+import { SectionHeader } from "@/components/SectionHeader";
+import { landingSections, site } from "@/lib/content";
 
 export function ContactSection() {
+  const section = landingSections.contact;
+
   return (
-    <section className="border-t border-border/70 bg-background py-20" id="contact">
+    <section className="scroll-mt-24 border-t border-border/70 bg-background py-20" id={section.id}>
       <Container>
         <div className="space-y-6">
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Contact</p>
-          <h2 className="font-serif text-4xl font-medium leading-tight tracking-tight text-foreground sm:text-5xl">
-            I&apos;m looking for an early-career role in applied AI and software engineering
-          </h2>
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground">
-            I&apos;m targeting early-career and graduate roles in applied machine learning, research
-            engineering, applied science, software engineering, and data-platform roles. I&apos;m also open to mission-focused AI work
-            where my active TS/SCI clearance is relevant.
-          </p>
+          <SectionHeader
+            eyebrow={section.label}
+            title="Let’s build AI systems with measurable impact."
+            description="I bring software engineering, applied research, and disciplined delivery to modernize critical workflows, launch new AI capabilities, and carry ambitious systems from prototype to large-scale implementation."
+          />
 
           <div className="flex flex-wrap gap-3">
             <a
               href={`mailto:${site.email}`}
               className="inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
-              Start a conversation
+              Start a Conversation
             </a>
             <a
               href={site.resumeUrl}
               className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
-              Download resume
+              Download Resume
             </a>
             <a
               href={site.calendlyUrl}
@@ -40,7 +39,7 @@ export function ContactSection() {
               rel="noopener noreferrer"
               className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
-              Book a call
+              Schedule a Call
             </a>
           </div>
 
@@ -48,20 +47,17 @@ export function ContactSection() {
             <a href={`mailto:${site.email}`} className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="Email">
               <Mail className="h-4 w-4" />
             </a>
-            <a href={site.linkedin} className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="LinkedIn">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="LinkedIn">
               <Linkedin className="h-4 w-4" />
             </a>
-            <a href={site.github} className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
+            <a href={site.github} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
               <Github className="h-4 w-4" />
             </a>
           </div>
         </div>
 
         <div className="mt-12">
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Schedule a call</p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Pick a time and a Zoom link will be generated automatically.
-          </p>
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Schedule a Call</p>
           <div className="mt-4">
             <CalendlyEmbed />
           </div>

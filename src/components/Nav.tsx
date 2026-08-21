@@ -5,17 +5,9 @@ import { ArrowUpRight, Github, Linkedin, Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-import { site } from "@/lib/content";
+import { landingNavItems, site } from "@/lib/content";
 import { Container } from "./Container";
 import { ThemeToggle } from "./ThemeToggle";
-
-const navItems = [
-  { href: "/#about", label: "About" },
-  { href: "/#projects", label: "Projects" },
-  { href: "/research", label: "Research" },
-  { href: "/coursework", label: "Coursework" },
-  { href: "/#contact", label: "Contact" },
-];
 
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,8 +25,8 @@ export function Nav() {
         </Link>
 
         <nav className="flex items-center gap-3 sm:gap-6">
-          <div className="hidden items-center gap-6 sm:flex">
-            {navItems.map((item) => (
+          <div className="hidden items-center gap-5 lg:flex">
+            {landingNavItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -47,13 +39,13 @@ export function Nav() {
 
           <Link
             href="/resume"
-            className="hidden h-10 items-center gap-1 rounded-full border border-border bg-card px-4 text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition hover:border-primary/40 hover:text-primary sm:inline-flex"
+            className="hidden h-10 items-center gap-1 rounded-full border border-border bg-card px-4 text-xs font-semibold uppercase tracking-[0.16em] text-foreground transition hover:border-primary/40 hover:text-primary lg:inline-flex"
           >
             Resume
             <ArrowUpRight className="h-3.5 w-3.5" />
           </Link>
 
-          <div className="hidden items-center gap-2 text-muted-foreground sm:flex">
+          <div className="hidden items-center gap-2 text-muted-foreground lg:flex">
             <a
               href={site.linkedin}
               target="_blank"
@@ -77,7 +69,7 @@ export function Nav() {
 
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-foreground sm:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-card text-foreground lg:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label={isOpen ? "Close navigation" : "Open navigation"}
             aria-expanded={isOpen}
@@ -94,10 +86,10 @@ export function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="border-t border-border/70 bg-background sm:hidden"
+            className="border-t border-border/70 bg-background lg:hidden"
           >
             <Container className="space-y-2 py-4">
-              {navItems.map((item) => (
+              {landingNavItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}

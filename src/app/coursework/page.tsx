@@ -8,7 +8,7 @@ import { coursework } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "AI Coursework",
+  title: "Coursework",
   description:
     "Completed and planned graduate artificial intelligence coursework for Mitchel Carson's UT Austin M.S. AI program.",
   pathname: "/coursework",
@@ -35,8 +35,8 @@ export default function CourseworkPage() {
         <Container>
           <SectionHeader
             as="h1"
-            eyebrow="UT Austin M.S. AI"
-            title="Graduate artificial intelligence coursework"
+            eyebrow="Coursework"
+            title="Graduate study across machine learning and AI."
             description={`${coursework.program}, in progress · Current GPA ${coursework.currentGpa} · Expected graduation ${coursework.expectedGraduation}`}
           />
 

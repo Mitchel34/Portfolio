@@ -16,7 +16,7 @@ export function SectionHeader({ eyebrow, title, description, as = "h2" }: Sectio
           {eyebrow}
         </p>
       </div>
-      <HeadingTag className="max-w-3xl font-serif text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
+      <HeadingTag className="max-w-4xl font-serif text-4xl font-medium leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
         {title}
       </HeadingTag>
       {description ? (

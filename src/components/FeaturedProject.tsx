@@ -6,7 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { projects, thesisImpactStat } from "@/lib/content";
+import { SectionHeader } from "@/components/SectionHeader";
+import { landingSections, projects, thesisImpactStat } from "@/lib/content";
 
 const project = projects[0];
 
@@ -29,10 +30,16 @@ const statCards = [
 ];
 
 export function FeaturedProject() {
+  const section = landingSections.research;
+
   return (
-    <section className="py-20" id="projects">
+    <section className="scroll-mt-24 py-20" id={section.id}>
       <Container>
-        <SectionHeaderBlock />
+        <SectionHeader
+          eyebrow={section.label}
+          title="Testing AI methods for better streamflow forecasts."
+          description="HYDRA tests whether Transformer and GRU corrections can improve National Water Model forecasts. Results remain preliminary while the final analysis and manuscript are in progress."
+        />
 
         <div className="relative mt-10 overflow-hidden rounded-[2rem] border border-border/80 bg-card p-7 shadow-[0_26px_80px_-56px_rgba(18,36,58,0.55)] sm:p-10">
           <div className="pointer-events-none absolute -right-20 -top-20 h-52 w-52 rounded-full bg-primary/20 blur-[65px]" />
@@ -164,21 +171,5 @@ export function FeaturedProject() {
         </div>
       </Container>
     </section>
-  );
-}
-
-function SectionHeaderBlock() {
-  return (
-    <div className="space-y-4">
-      <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-card px-4 py-1.5">
-        <span className="h-2 w-2 rounded-full bg-secondary" />
-        <p className="text-[11px] font-mono uppercase tracking-[0.22em] text-muted-foreground">
-          Featured Project
-        </p>
-      </div>
-      <h2 className="max-w-3xl font-serif text-3xl font-medium leading-tight tracking-tight text-foreground sm:text-4xl md:text-5xl">
-        Hydrologic forecasting research aimed at improving existing flood prediction systems
-      </h2>
-    </div>
   );
 }

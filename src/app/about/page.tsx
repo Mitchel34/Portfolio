@@ -8,9 +8,9 @@ import { about, focusAreas } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About",
+  title: "About Me",
   description:
-    "Mitchel Carson is an early-career AI/ML engineer, UT Austin M.S. AI student, software engineer, and Air Force veteran based in Austin, Texas.",
+    "Mitchel Carson is a software and AI engineer, UT Austin M.S. Artificial Intelligence student, and Air Force veteran based in Austin, Texas.",
   pathname: "/about",
   keywords: [
     "about Mitchel Carson",
@@ -25,7 +25,7 @@ export default function AboutPage() {
       <BreadcrumbJsonLd
         items={[
           { name: "Home", href: "/" },
-          { name: "About", href: "/about" },
+          { name: "About Me", href: "/about" },
         ]}
       />
       <div className="bg-background pb-16 text-foreground">
@@ -33,9 +33,9 @@ export default function AboutPage() {
           <Container>
             <SectionHeader
               as="h1"
-              eyebrow="About"
-              title="Engineering-first AI with research depth"
-              description="I build at the intersection of forecasting research and production software, with an emphasis on reliable evaluation, clear interfaces, and cross-disciplinary delivery."
+              eyebrow="About Me"
+              title="Software, data, and AI systems for real problems."
+              description="My work spans enterprise APIs, hydrologic forecasting, research tooling, and small-business software."
             />
 
             <div className="mt-10 grid gap-6 lg:grid-cols-2">

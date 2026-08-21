@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Clock, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
+import { Award, Code2, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
 
 import { Container } from "@/components/Container";
 
@@ -13,9 +13,9 @@ const highlights = [
     featured: true,
   },
   {
-    icon: Clock,
-    label: "Career Stage",
-    value: "Early-career / graduate",
+    icon: Code2,
+    label: "Focus",
+    value: "Applied AI + Software Engineering",
   },
   {
     icon: Award,
@@ -24,8 +24,8 @@ const highlights = [
   },
   {
     icon: Wrench,
-    label: "Industry",
-    value: "USAA Software Engineering Internship",
+    label: "Industry Experience",
+    value: "USAA Global Headquarters",
   },
   {
     icon: GraduationCap,

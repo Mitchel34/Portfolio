@@ -38,8 +38,8 @@ export function Hero() {
             <h1 className="font-serif text-4xl font-medium leading-[1.03] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {site.headline}
             </h1>
-            <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">
-              {site.availability} · {site.clearance}
+            <p className="text-xs font-mono uppercase leading-relaxed tracking-[0.18em] text-muted-foreground">
+              {site.focusLine} · {site.clearance}
             </p>
           </div>
 
@@ -89,6 +89,8 @@ export function Hero() {
             </a>
             <a
               href={site.github}
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-xl border border-border bg-card p-2.5 transition hover:border-primary/40 hover:text-foreground"
               aria-label="GitHub"
             >
@@ -96,6 +98,8 @@ export function Hero() {
             </a>
             <a
               href={site.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-xl border border-border bg-card p-2.5 transition hover:border-primary/40 hover:text-foreground"
               aria-label="LinkedIn"
             >

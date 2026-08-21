@@ -9,7 +9,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Resume",
   description:
-    "Resume for Mitchel Carson, an early-career AI / Machine Learning Engineer and UT Austin M.S. AI student with an active TS/SCI clearance.",
+    "Resume for Mitchel Carson, an AI / Machine Learning Engineer and UT Austin M.S. Artificial Intelligence student with an active TS/SCI clearance.",
   pathname: "/resume",
   keywords: ["AI engineer resume", "machine learning resume", "software engineer resume"],
 });
@@ -58,7 +58,7 @@ export default function ResumePage() {
             as="h1"
             eyebrow="Resume"
             title="Experience and education"
-            description="Early-career AI/ML engineering, research, production software, and mission-focused experience. Updated August 2026."
+            description="Applied AI, production software, research, and mission-focused experience. Updated August 2026."
           />
 
           <div className="mt-6">

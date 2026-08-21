@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { site } from "@/lib/content";
+import { landingNavItems, site } from "@/lib/content";
 import { Container } from "./Container";
 
 export function Footer() {
@@ -15,15 +15,11 @@ export function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center gap-5 text-sm font-medium text-muted-foreground">
-          <Link href="/projects" className="transition hover:text-foreground">
-            Projects
-          </Link>
-          <Link href="/research" className="transition hover:text-foreground">
-            Research
-          </Link>
-          <Link href="/coursework" className="transition hover:text-foreground">
-            Coursework
-          </Link>
+          {landingNavItems.map((item) => (
+            <Link key={item.href} href={item.href} className="transition hover:text-foreground">
+              {item.label}
+            </Link>
+          ))}
           <a href={site.github} className="transition hover:text-foreground">
             GitHub
           </a>

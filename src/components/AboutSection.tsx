@@ -1,115 +1,73 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FileText, GitMerge, Layers, MessageSquare } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { about, experience } from "@/lib/content";
+import { landingSections, proofItems } from "@/lib/content";
 
-const workStyle = [
-  {
-    icon: MessageSquare,
-    text: "I clarify requirements early to avoid costly assumptions",
-  },
-  {
-    icon: Layers,
-    text: "I value clear ownership and well-defined interfaces",
-  },
-  {
-    icon: FileText,
-    text: "I document decisions so teams can move faster over time",
-  },
-  {
-    icon: GitMerge,
-    text: "I connect research ideas with practical software requirements",
-  },
-];
+const cardLinkClass =
+  "mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition hover:opacity-80";
 
 export function AboutSection() {
+  const section = landingSections.about;
+
   return (
-    <section className="relative py-20" id="about">
+    <section className="relative scroll-mt-24 py-20" id={section.id}>
       <Container>
-        <div className="grid gap-10 lg:grid-cols-[1.02fr,0.98fr] lg:items-start">
-          <div className="space-y-8">
-            <SectionHeader
-              eyebrow="About Me"
-              title="I build reliable software and data systems, and apply AI to real-world problems"
-            />
+        <SectionHeader
+          eyebrow={section.label}
+          title="I build software, data, and AI systems that make complex work simpler."
+          description="My work spans enterprise APIs, hydrologic forecasting, research tooling, and small-business software. I focus on clear problems, useful systems, and results people can verify."
+        />
 
-            <div className="space-y-5 rounded-3xl border border-border/80 bg-card p-7 shadow-[0_20px_60px_-50px_rgba(18,36,58,0.45)]">
-              {about.summary.map((paragraph) => (
-                <p key={paragraph} className="text-base leading-relaxed text-muted-foreground">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </div>
+        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+          {proofItems.map((item, index) => {
+            const isExternal = item.href.startsWith("http");
 
-          <div className="space-y-4">
-            <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">
-              Career Timeline
-            </p>
-
-            {experience.map((item, index) => (
+            return (
               <motion.article
-                key={item.role}
+                key={item.title}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: index * 0.08 }}
-                className={`rounded-2xl border border-border/80 bg-card px-5 ${
-                  index === 0 ? "py-5" : "py-4"
-                }`}
+                transition={{ duration: 0.4, delay: index * 0.06 }}
+                className="flex h-full flex-col rounded-2xl border border-border/80 bg-card p-6 transition hover:-translate-y-0.5 hover:border-primary/35"
               >
-                <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
-                  <h3 className="text-sm font-semibold uppercase tracking-[0.08em] text-primary">
-                    {item.role}
-                  </h3>
-                  <span className="text-xs font-mono text-muted-foreground">{item.period}</span>
-                </div>
-                <p className="text-sm font-medium text-foreground">{item.org}</p>
-                <ul className="mt-3 space-y-1.5 pl-4 text-sm text-muted-foreground list-disc marker:text-secondary">
-                  {item.highlights.map((highlight) => (
-                    <li key={highlight}>{highlight}</li>
-                  ))}
-                </ul>
-                {item.bridgingSentence && (
-                  <p className="mt-3 border-l-2 border-secondary/50 pl-3 text-sm italic leading-relaxed text-muted-foreground">
-                    {item.bridgingSentence}
-                  </p>
+                <p className="text-[11px] font-mono uppercase tracking-[0.17em] text-primary">
+                  {item.role}
+                </p>
+                <h3 className="mt-3 font-serif text-2xl font-medium tracking-tight text-foreground">
+                  {item.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {item.description}
+                </p>
+                <p className="mt-5 border-l-2 border-secondary/60 pl-3 text-sm leading-relaxed text-foreground">
+                  <span className="font-semibold">Ask me about:</span> {item.askAbout}
+                </p>
+
+                {isExternal ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cardLinkClass}
+                  >
+                    {item.linkLabel}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </a>
+                ) : (
+                  <Link href={item.href} className={cardLinkClass}>
+                    {item.linkLabel}
+                    <ArrowUpRight className="h-4 w-4" />
+                  </Link>
                 )}
               </motion.article>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-14">
-          <p className="mb-6 text-center text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">
-            How I Work
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {workStyle.map((item, index) => {
-              const Icon = item.icon;
-              return (
-                <motion.div
-                  key={item.text}
-                  initial={{ opacity: 0, y: 14 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.07, duration: 0.4 }}
-                  className="flex items-start gap-4 rounded-2xl border border-border/80 bg-card px-5 py-4 transition hover:-translate-y-0.5 hover:border-primary/35"
-                >
-                  <div className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-                    <Icon className="h-4 w-4" />
-                  </div>
-                  <p className="text-sm leading-relaxed text-foreground">
-                    {item.text}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
+            );
+          })}
         </div>
       </Container>
     </section>

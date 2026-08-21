@@ -1,6 +1,6 @@
 # Mitchel Carson — Portfolio
 
-Early-career AI / Machine Learning Engineer and M.S. Artificial Intelligence student at the University of Texas at Austin, building reliable research and production software systems.
+AI / Machine Learning Engineer and M.S. Artificial Intelligence student at the University of Texas at Austin, building reliable research and production software systems.
 
 **Live site:** [mitchelcarson.com](https://mitchelcarson.com)
 
@@ -10,7 +10,7 @@ Early-career AI / Machine Learning Engineer and M.S. Artificial Intelligence stu
 
 My work sits at the intersection of applied ML research and production engineering. HYDRA began as my senior honors thesis and continues as active research; preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested. The final analysis and manuscript remain in progress. I hold an active TS/SCI clearance and previously served as an Executive Missions Aviator in the United States Air Force.
 
-I'm based in **Austin, Texas** and open to **early-career and graduate roles** in AI/ML engineering, research engineering, applied science, and ML/software platforms.
+I'm based in **Austin, Texas**, building across applied AI, research engineering, production software, and data systems.
 
 ## Focus Areas
 

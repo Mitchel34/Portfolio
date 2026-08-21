@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { coursework, type CourseworkItem } from "@/lib/content";
+import { coursework, landingSections, type CourseworkItem } from "@/lib/content";
 
 export function CourseworkCards({
   items,
@@ -41,12 +41,14 @@ export function CourseworkCards({
 }
 
 export function CourseworkSection() {
+  const section = landingSections.coursework;
+
   return (
-    <section className="py-20">
+    <section className="scroll-mt-24 py-20" id={section.id}>
       <Container>
         <SectionHeader
-          eyebrow="Graduate Coursework"
-          title="Coursework in machine learning and modern AI"
+          eyebrow={section.label}
+          title="Graduate study across machine learning and AI."
           description={`UT Austin M.S. Artificial Intelligence · Current GPA ${coursework.currentGpa} · Expected graduation: ${coursework.expectedGraduation}`}
         />
 

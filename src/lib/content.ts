@@ -3,25 +3,35 @@ export const site = {
   title: "AI / Machine Learning Engineer",
   headline: "AI / Machine Learning Engineer",
   summary:
-    "Early-career AI/ML engineer and UT Austin M.S. AI student building reliable systems across deep-learning research, production software, and reproducible evaluation. Active TS/SCI clearance; based in Austin, Texas.",
+    "Software engineer and UT Austin M.S. Artificial Intelligence student building production software, applied AI research, and reliable data systems. Active TS/SCI clearance; based in Austin, Texas.",
   resumeUrl: "/resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
   url: "https://mitchelcarson.com",
   calendlyUrl: "https://calendly.com/mitchel-carson/30min",
-  availability: "Open to early-career or graduate roles",
+  focusLine: "Applied AI · Research Engineering · Production Software",
   location: "Austin, Texas",
   timezone: "Central Time",
   clearance: "Active TS/SCI",
 };
 
+export const landingSections = {
+  about: { id: "about-me", label: "About Me", href: "/#about-me" },
+  coursework: { id: "coursework", label: "Coursework", href: "/#coursework" },
+  research: { id: "research", label: "Research", href: "/#research" },
+  projects: { id: "projects", label: "Projects", href: "/#projects" },
+  contact: { id: "contact", label: "Contact", href: "/#contact" },
+} as const;
+
+export const landingNavItems = Object.values(landingSections);
+
 export const focusAreas = [
-  "Applied ML systems",
-  "Time-series forecasting",
-  "Research engineering and reproducible evaluation",
-  "ML platforms and production software",
-  "Reliability-focused system design",
+  "Applied AI and ML systems",
+  "Forecasting",
+  "Research engineering",
+  "Data engineering and ML platforms",
+  "Reliable production software",
 ];
 
 export type ProjectLink = {
@@ -54,28 +64,76 @@ export const thesisImpactStat = "26–54% lower forecast error (RMSE) vs. tested
 
 export const about = {
   summary: [
-    "My background includes U.S. Air Force operations, a software engineering internship at USAA, and applied machine learning research. These experiences taught me to build carefully, test thoroughly, and communicate clearly across technical and nontechnical teams.",
-    "HYDRA began as my senior honors thesis and continues as active research on streamflow forecasting. I am testing whether deep-learning corrections can improve local forecasts; the final analysis and manuscript are still in progress.",
-    "I am pursuing an M.S. in Artificial Intelligence at UT Austin. I have completed coursework in machine learning, deep learning, reinforcement learning, and AI ethics, and I am seeking early-career roles across software engineering, applied AI, and data systems.",
+    "My work spans production software at USAA, applied hydrology research, modular AI systems, and small-business software consulting.",
+    "I build clear interfaces, test carefully, and document decisions so other people can trust and extend the work.",
+    "I am pursuing an M.S. in Artificial Intelligence at UT Austin with a 4.0 GPA, building on completed coursework in machine learning, deep learning, reinforcement learning, and AI ethics.",
   ],
   values: [
     {
-      title: "Reliability in Shared Systems",
+      title: "Reliable Systems",
       description:
-        "I design models and pipelines teammates can trust: stable metrics, leakage-safe evaluation, predictable behavior under change.",
+        "I design models and pipelines teammates can trust, with clear metrics, careful evaluation, and predictable behavior when inputs change.",
     },
     {
-      title: "Engineering Discipline Enables Team Velocity",
+      title: "Clear Engineering",
       description:
-        "Clean interfaces, reproducible pipelines, and monitoring aren't overhead; they let teams move fast without breaking things.",
+        "Simple interfaces, repeatable pipelines, and useful monitoring help teams move faster.",
     },
     {
-      title: "Risk Awareness",
+      title: "Risk-Aware Design",
       description:
-        "Systems should explicitly model uncertainty and downside, not just optimize expected outcomes.",
+        "Good systems make uncertainty, limits, and failure modes visible.",
     },
   ],
 };
+
+export type ProofItem = {
+  title: string;
+  role: string;
+  description: string;
+  askAbout: string;
+  href: string;
+  linkLabel: string;
+};
+
+export const proofItems: ProofItem[] = [
+  {
+    title: "USAA",
+    role: "Software Engineering Intern · Global Headquarters",
+    description:
+      "At USAA’s global headquarters in San Antonio, I built a GraphQL API with Java and Spring Boot and expanded an internal troubleshooting tool with customer-data comparison views.",
+    askAbout: "GraphQL API design, customer-data flows, and enterprise delivery.",
+    href: "/projects/usaa-risk-services",
+    linkLabel: "View project",
+  },
+  {
+    title: "HYDRA",
+    role: "Applied AI for Hydrology · Research in Progress",
+    description:
+      "I am testing Transformer and GRU corrections for National Water Model streamflow forecasts in a reproducible PyTorch pipeline. Early experiments produced 26–54% lower RMSE than the LSTM baselines tested; final analysis and the manuscript remain in progress.",
+    askAbout: "Temporal leakage, forecast evaluation, and defensible research claims.",
+    href: "/research",
+    linkLabel: "View research",
+  },
+  {
+    title: "GreenSpace Lawn Care",
+    role: "Software Consultant",
+    description:
+      "I built and launched GreenSpaceLawnCare.us and advise the company on social media strategy, translating business needs into a clear digital experience.",
+    askAbout: "Client discovery, website delivery, and translating business goals into software.",
+    href: "https://www.greenspacelawncare.us/",
+    linkLabel: "Visit website",
+  },
+  {
+    title: "Harmony",
+    role: "Part-Time Software Product · Active Development",
+    description:
+      "I am building a modular Python system for data input, forecasting, validation, controls, and simulation. Fail-closed checks stop workflows when data or evaluation rules are incomplete.",
+    askAbout: "Semantic validation, modular architecture, and reproducible system state.",
+    href: "/projects/harmony",
+    linkLabel: "View project",
+  },
+];
 
 export const projects: Project[] = [
   {
@@ -132,13 +190,13 @@ export const projects: Project[] = [
   },
   {
     slug: "usaa-risk-services",
-    title: "USAA Risk Services",
-    subtitle: "Software APIs for Financial Services",
+    title: "USAA Software Engineering",
+    subtitle: "Enterprise APIs and Troubleshooting Software",
     status: "Production",
     problem:
-      "Internal teams needed a reliable, compliant way to access core risk data without navigating complex legacy systems.",
+      "Internal teams needed customer data presented through dependable services and clear troubleshooting views.",
     impact:
-      "Built GraphQL services and comparison views for internal troubleshooting. Worked with product owners, engineers, and business users to make customer data easier to inspect.",
+      "During my internship at USAA’s global headquarters in San Antonio, I built GraphQL API capabilities with Java and Spring Boot and expanded an internal troubleshooting tool with customer-data comparison views.",
     approach: [
       "Designed and implemented GraphQL APIs using Java and Spring Boot.",
       "Added supplementary customer data to an internal troubleshooting tool.",
@@ -180,7 +238,7 @@ export const projects: Project[] = [
     links: [{ label: "Experience", href: "/resume" }],
   },
   {
-    slug: "harmony-trading",
+    slug: "harmony",
     title: "Harmony",
     subtitle: "A modular Python system for forecasting and decision workflows",
     status: "Active Development",
@@ -332,7 +390,7 @@ export const experience: ExperienceItem[] = [
     org: "USAA",
     period: "May 2025 - August 2025",
     highlights: [
-      "Designed and implemented GraphQL APIs using Java and Spring Boot to surface core customer data.",
+      "At USAA’s global headquarters in San Antonio, designed and implemented GraphQL APIs using Java and Spring Boot to surface core customer data.",
       "Integrated supplementary data into an internal troubleshooting tool.",
       "Built and refined JavaScript front-end components for data visualization.",
       "Worked with an Agile engineering team using Jira and Git.",
