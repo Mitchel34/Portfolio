@@ -64,7 +64,7 @@ export default function ResumePage() {
           <div className="mt-6">
             <a
               href={site.resumeUrl}
-              download
+              download={site.resumeFilename}
               className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
               Download PDF

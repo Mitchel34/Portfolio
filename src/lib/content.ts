@@ -4,7 +4,8 @@ export const site = {
   headline: "AI / Machine Learning Engineer",
   summary:
     "Software engineer and UT Austin M.S. Artificial Intelligence student building production software, applied AI research, and reliable data systems. Active TS/SCI clearance; based in Austin, Texas.",
-  resumeUrl: "/resume.pdf",
+  resumeFilename: "mitchelcarson_resume.pdf",
+  resumeUrl: "/mitchelcarson_resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",

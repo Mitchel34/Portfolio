@@ -29,6 +29,7 @@ export function ContactSection() {
             </a>
             <a
               href={site.resumeUrl}
+              download={site.resumeFilename}
               className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
               Download Resume
