@@ -149,11 +149,13 @@ export const projects: Project[] = [
     approach: [
       "Developed Transformer and GRU residual-correction experiments for NOAA National Water Model forecasts.",
       "Built a modular PyTorch pipeline integrating NWM forecasts, USGS observations, ERA5 signals, and basin context.",
+      "Used Google Cloud BigQuery and Cloud Storage to acquire issued NWM forecasts while preserving initialization, lead, valid-time, version, and source metadata.",
       "Automated normalization, leakage-aware temporal splits, and hydrologic evaluation with RMSE, NSE, and KGE.",
       "Continuing the analysis and preparing a manuscript for Water Resources Research.",
     ],
     stack: [
       "PyTorch",
+      "Google Cloud",
       "Transformer",
       "GRU",
       "Hydra Config",
@@ -252,6 +254,7 @@ export const projects: Project[] = [
       "Saved system state and run records so behavior can be reviewed over time.",
       "Required validation and safety checks before performance testing.",
       "Designed the system to stop when data history is incomplete or an action is unsupported.",
+      "Designed an AWS research-compute path for isolated, reproducible CPU/GPU experiments while keeping local tooling as the control and review plane.",
     ],
     stack: [
       "Python",
@@ -260,6 +263,7 @@ export const projects: Project[] = [
       "NumPy",
       "PostgreSQL",
       "Docker",
+      "AWS",
     ],
     results: [
       "Configurable components for data input and normalization.",
@@ -419,7 +423,7 @@ export const education = [
     details: [
       "Current GPA: 4.0/4.0.",
       "Completed: AI Ethics, Machine Learning, Deep Learning, and Reinforcement Learning.",
-      "Fall 2026: Advances in Deep Learning; Planning, Reasoning, and Search Under Uncertainty; Natural Language Processing.",
+      "Fall 2026: Advances in Deep Learning; Optimization; Natural Language Processing.",
     ],
   },
   {
@@ -474,9 +478,9 @@ export const coursework = {
       description: "Advanced deep-learning methods and current research.",
     },
     {
-      title: "Planning, Reasoning, and Search Under Uncertainty",
+      title: "Optimization",
       status: "Fall 2026",
-      description: "Planning, search, reasoning, and decision-making under uncertainty.",
+      description: "Optimization foundations and methods for artificial intelligence and machine learning.",
     },
     {
       title: "Natural Language Processing",

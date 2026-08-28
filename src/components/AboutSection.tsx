@@ -54,13 +54,14 @@ export function AboutSection() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
+                    data-cursor-label="Open"
                     className={cardLinkClass}
                   >
                     {item.linkLabel}
                     <ArrowUpRight className="h-4 w-4" />
                   </a>
                 ) : (
-                  <Link href={item.href} className={cardLinkClass}>
+                  <Link href={item.href} data-cursor-label="Open" className={cardLinkClass}>
                     {item.linkLabel}
                     <ArrowUpRight className="h-4 w-4" />
                   </Link>

@@ -23,7 +23,7 @@ I'm based in **Austin, Texas**, building across applied AI, research engineering
 ## Graduate Coursework
 
 - **Completed:** AI Ethics, Machine Learning, Deep Learning, Reinforcement Learning
-- **Fall 2026:** Advances in Deep Learning; Planning, Reasoning, and Search Under Uncertainty; Natural Language Processing
+- **Fall 2026:** Advances in Deep Learning; Optimization; Natural Language Processing
 - **Current GPA:** 4.0/4.0 · **Expected graduation:** May 2027
 
 ## AGU26

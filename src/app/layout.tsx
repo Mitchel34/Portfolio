@@ -3,7 +3,9 @@ import { Fraunces, IBM_Plex_Mono, Sora } from "next/font/google";
 
 import "./globals.css";
 import { Footer } from "@/components/Footer";
+import { MotionProvider } from "@/components/MotionProvider";
 import { Nav } from "@/components/Nav";
+import { SemanticCursor } from "@/components/SemanticCursor";
 import { StructuredData } from "@/components/StructuredData";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { rootMetadata } from "@/lib/seo";
@@ -37,10 +39,19 @@ export default function RootLayout({
         className={`${sora.variable} ${fraunces.variable} ${ibmPlexMono.variable} min-h-screen bg-background text-foreground antialiased selection:bg-primary/25`}
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <StructuredData />
-          <Nav />
-          <main className="pb-20">{children}</main>
-          <Footer />
+          <MotionProvider>
+            <a
+              href="#main-content"
+              className="fixed left-4 top-3 z-[100] -translate-y-20 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-lg transition focus:translate-y-0"
+            >
+              Skip to content
+            </a>
+            <StructuredData />
+            <Nav />
+            <main id="main-content" tabIndex={-1} className="pb-20">{children}</main>
+            <Footer />
+            <SemanticCursor />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

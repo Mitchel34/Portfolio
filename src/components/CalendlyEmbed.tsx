@@ -1,49 +1,118 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { site } from "@/lib/content";
-import { useIsClient } from "@/lib/useIsClient";
+
+type CalendlyApi = {
+  initInlineWidget: (options: { url: string; parentElement: HTMLElement }) => void;
+};
+
+type CalendlyWindow = Window & {
+  Calendly?: CalendlyApi;
+};
 
 export function CalendlyEmbed({ minHeight }: { minHeight?: string }) {
   const calendlyUrl = site.calendlyUrl;
   const { resolvedTheme } = useTheme();
-  const mounted = useIsClient();
   const height = minHeight || "700px";
-
-  useEffect(() => {
-    // Dynamically load the Calendly widget script
-    const existing = document.getElementById("calendly-widget-script");
-    if (!existing) {
-      const script = document.createElement("script");
-      script.id = "calendly-widget-script";
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      document.head.appendChild(script);
-    }
-  }, [calendlyUrl]);
-
-  if (!calendlyUrl || !mounted) return null;
+  const boundaryRef = useRef<HTMLDivElement>(null);
+  const widgetRef = useRef<HTMLDivElement>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
 
   const isDark = resolvedTheme === "dark";
   const colors = {
-    // Note: Calendly expects hex without hashes
     primary: isDark ? "4d8bff" : "0b5fff",
     background: isDark ? "0d111c" : "f5f3ee",
     text: isDark ? "e8e4dc" : "12243a",
   };
-
-  // The magic happens in these URL parameters:
   const urlWithParams = `${calendlyUrl}?hide_gdpr_banner=1&background_color=${colors.background}&text_color=${colors.text}&primary_color=${colors.primary}`;
 
+  useEffect(() => {
+    if (shouldLoad) return;
+
+    const boundary = boundaryRef.current;
+    if (!boundary || !("IntersectionObserver" in window)) {
+      const fallbackFrame = requestAnimationFrame(() => setShouldLoad(true));
+      return () => cancelAnimationFrame(fallbackFrame);
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setShouldLoad(true);
+        observer.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+
+    observer.observe(boundary);
+    return () => observer.disconnect();
+  }, [shouldLoad]);
+
+  useEffect(() => {
+    if (!shouldLoad || !calendlyUrl) return;
+
+    let cancelled = false;
+    const target = widgetRef.current;
+    const scriptId = "calendly-widget-script";
+
+    const initialize = () => {
+      if (cancelled || !target) return;
+
+      const calendly = (window as CalendlyWindow).Calendly;
+      if (!calendly) return;
+
+      target.replaceChildren();
+      calendly.initInlineWidget({ url: urlWithParams, parentElement: target });
+    };
+
+    const existing = document.getElementById(scriptId) as HTMLScriptElement | null;
+    let script = existing;
+
+    if (existing) {
+      if ((window as CalendlyWindow).Calendly) {
+        initialize();
+      } else {
+        existing.addEventListener("load", initialize, { once: true });
+      }
+    } else {
+      script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://assets.calendly.com/assets/external/widget.js";
+      script.async = true;
+      script.addEventListener("load", initialize, { once: true });
+      document.head.appendChild(script);
+    }
+
+    return () => {
+      cancelled = true;
+      script?.removeEventListener("load", initialize);
+    };
+  }, [calendlyUrl, shouldLoad, urlWithParams]);
+
+  if (!calendlyUrl) return null;
+
   return (
-    <div className="flex justify-center w-full">
+    <div ref={boundaryRef} className="flex w-full min-w-0 justify-center">
       <div
-        className="calendly-inline-widget min-w-[320px] max-w-[1060px] rounded-2xl border border-border/80 overflow-hidden"
-        data-url={urlWithParams}
-        style={{ width: "100%", height }}
-      />
+        className="calendly-container relative w-full min-w-0 max-w-[1060px] overflow-hidden rounded-2xl border border-border/80 bg-surface/40"
+        style={{ height }}
+      >
+        {!shouldLoad ? (
+          <div className="absolute inset-0 grid place-items-center px-6 text-center">
+            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+              Scheduling interface loads as you approach
+            </p>
+          </div>
+        ) : null}
+        <div
+          ref={widgetRef}
+          aria-label="Schedule a meeting with Mitchel Carson"
+          className="h-full w-full min-w-0"
+        />
+      </div>
     </div>
   );
 }

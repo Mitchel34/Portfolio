@@ -1,33 +1,16 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, BarChart3, Database, Layers } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Container } from "@/components/Container";
+import { ModelEvidenceExplorer } from "@/components/ModelEvidenceExplorer";
 import { SectionHeader } from "@/components/SectionHeader";
-import { landingSections, projects, thesisImpactStat } from "@/lib/content";
+import { landingSections, projects } from "@/lib/content";
 
 const project = projects[0];
-
-const statCards = [
-  {
-    icon: Database,
-    title: "Data Inputs",
-    detail: "National Water Model forecasts, weather data, and USGS streamflow observations",
-  },
-  {
-    icon: Layers,
-    title: "Model Core",
-    detail: "Transformer and GRU forecast-correction model",
-  },
-  {
-    icon: BarChart3,
-    title: "Outcome",
-    detail: thesisImpactStat,
-  },
-];
 
 export function FeaturedProject() {
   const section = landingSections.research;
@@ -69,6 +52,7 @@ export function FeaturedProject() {
                   rel="noopener noreferrer"
                   aria-label="Open the full-resolution conceptual HYDRA research architecture diagram in a new tab"
                   title="Open full-resolution diagram"
+                  data-cursor-label="Inspect"
                   className="block cursor-zoom-in"
                 >
                   <Image
@@ -125,6 +109,7 @@ export function FeaturedProject() {
               <div className="flex flex-wrap items-center gap-4">
                 <Link
                   href={`/projects/${project.slug}`}
+                  data-cursor-label="Open"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
                 >
                   Read case study
@@ -132,6 +117,7 @@ export function FeaturedProject() {
                 </Link>
                 <Link
                   href="/research"
+                  data-cursor-label="Research"
                   className="inline-flex items-center gap-2 text-sm font-semibold text-foreground transition hover:opacity-80"
                 >
                   Explore HYDRA research
@@ -144,28 +130,9 @@ export function FeaturedProject() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: 0.08 }}
-              className="space-y-4"
+              className="self-start lg:sticky lg:top-24"
             >
-              {statCards.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <article
-                    key={item.title}
-                    className="rounded-2xl border border-border/80 bg-surface/65 px-5 py-4"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="rounded-lg bg-primary/10 p-2 text-primary">
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <p className="text-xs font-mono uppercase tracking-[0.16em] text-muted-foreground">
-                        {item.title}
-                      </p>
-                    </div>
-                    <p className="mt-3 text-sm font-medium text-foreground">{item.detail}</p>
-                  </article>
-                );
-              })}
+              <ModelEvidenceExplorer />
             </motion.div>
           </div>
         </div>

@@ -49,6 +49,11 @@
     scroll-behavior: smooth;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+
   body {
     @apply bg-background text-foreground;
     background-image:
@@ -56,6 +61,21 @@
       radial-gradient(circle at 95% 2%, rgba(240, 138, 36, 0.14), transparent 24%),
       radial-gradient(circle at 78% 70%, rgba(15, 159, 149, 0.12), transparent 35%),
       linear-gradient(to bottom, rgba(255, 255, 255, 0.6), rgba(245, 243, 238, 0.95));
+  }
+
+  .model-graph-grid {
+    background-image:
+      linear-gradient(rgba(11, 95, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 95, 255, 0.055) 1px, transparent 1px),
+      radial-gradient(circle at center, rgba(10, 95, 89, 0.12), transparent 45%);
+    background-size: 42px 42px, 42px 42px, 100% 100%;
+  }
+
+  .dark .model-graph-grid {
+    background-image:
+      linear-gradient(rgba(77, 139, 255, 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(77, 139, 255, 0.07) 1px, transparent 1px),
+      radial-gradient(circle at center, rgba(20, 168, 159, 0.1), transparent 45%);
   }
 
   .dark body {
@@ -161,5 +181,26 @@
   html.dark .calendly-inline-widget > div,
   .calendly-dark > div {
     background-color: #0d111c !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  @media (forced-colors: active) {
+    .neural-field {
+      display: none;
+    }
   }
 }

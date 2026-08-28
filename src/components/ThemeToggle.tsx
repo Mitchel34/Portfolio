@@ -10,7 +10,7 @@ export function ThemeToggle() {
   const mounted = useIsClient();
 
   if (!mounted) {
-    return <div className="h-8 w-8 rounded-lg" aria-hidden="true" />;
+    return <div className="h-11 w-11 rounded-lg" aria-hidden="true" />;
   }
 
   const isDark = resolvedTheme === "dark";
@@ -19,7 +19,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="rounded-lg p-2 text-muted-foreground transition hover:bg-surface hover:text-foreground"
+      className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-muted-foreground transition hover:bg-surface hover:text-foreground"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
     >
       {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

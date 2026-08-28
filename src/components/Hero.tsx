@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Github, Linkedin, Mail } from "lucide-react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,13 +14,26 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
+const NeuralField = dynamic(
+  () => import("@/components/NeuralField").then((module) => module.NeuralField),
+  { ssr: false },
+);
+
 export function Hero() {
   return (
-    <section className="relative overflow-hidden pb-20 pt-20 sm:pt-24 lg:pb-24 lg:pt-28">
+    <section className="relative isolate overflow-hidden pb-20 pt-20 sm:pt-24 lg:pb-24 lg:pt-28">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-14 top-8 h-60 w-60 rounded-full bg-primary/20 blur-[90px]" />
-        <div className="absolute right-0 top-6 h-48 w-48 rounded-full bg-secondary/25 blur-[80px]" />
-        <div className="absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/20 blur-[90px]" />
+        <NeuralField />
+        <div className="absolute -left-14 top-8 h-60 w-60 rounded-full bg-primary/16 blur-[90px]" />
+        <div className="absolute right-0 top-6 h-48 w-48 rounded-full bg-secondary/18 blur-[80px]" />
+        <div className="absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/16 blur-[90px]" />
+      </div>
+
+      <div aria-hidden="true" className="absolute inset-x-0 top-24 hidden px-10 lg:block">
+        <div className="mx-auto flex max-w-6xl items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/75">
+          <span>Signal 01 · Forecasting</span>
+          <span>Signal 02 · Reliable Systems</span>
+        </div>
       </div>
 
       <Container className="relative z-10">
@@ -59,6 +73,7 @@ export function Hero() {
               href={site.calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor-label="Connect"
               className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
               <Calendar className="h-4 w-4" />
@@ -66,6 +81,7 @@ export function Hero() {
             </a>
             <Link
               href="/projects"
+              data-cursor-label="Explore"
               className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
               View Projects
@@ -73,6 +89,7 @@ export function Hero() {
             </Link>
             <a
               href={site.resumeUrl}
+              data-cursor-label="Resume"
               className="inline-flex h-12 items-center rounded-full border border-border/80 px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
               Resume
@@ -82,7 +99,8 @@ export function Hero() {
           <div className="flex items-center justify-center gap-3 text-muted-foreground">
             <a
               href={`mailto:${site.email}`}
-              className="rounded-xl border border-border bg-card p-2.5 transition hover:border-primary/40 hover:text-foreground"
+              data-cursor-label="Email"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card transition hover:border-primary/40 hover:text-foreground"
               aria-label="Email"
             >
               <Mail className="h-4 w-4" />
@@ -91,7 +109,8 @@ export function Hero() {
               href={site.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-border bg-card p-2.5 transition hover:border-primary/40 hover:text-foreground"
+              data-cursor-label="GitHub"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card transition hover:border-primary/40 hover:text-foreground"
               aria-label="GitHub"
             >
               <Github className="h-4 w-4" />
@@ -100,7 +119,8 @@ export function Hero() {
               href={site.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-xl border border-border bg-card p-2.5 transition hover:border-primary/40 hover:text-foreground"
+              data-cursor-label="LinkedIn"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card transition hover:border-primary/40 hover:text-foreground"
               aria-label="LinkedIn"
             >
               <Linkedin className="h-4 w-4" />

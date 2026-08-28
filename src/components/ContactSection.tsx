@@ -23,6 +23,7 @@ export function ContactSection() {
           <div className="flex flex-wrap gap-3">
             <a
               href={`mailto:${site.email}`}
+              data-cursor-label="Connect"
               className="inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
               Start a Conversation
@@ -30,6 +31,7 @@ export function ContactSection() {
             <a
               href={site.resumeUrl}
               download={site.resumeFilename}
+              data-cursor-label="Resume"
               className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
               Download Resume
@@ -38,6 +40,7 @@ export function ContactSection() {
               href={site.calendlyUrl}
               target="_blank"
               rel="noopener noreferrer"
+              data-cursor-label="Schedule"
               className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
             >
               Schedule a Call
@@ -45,13 +48,13 @@ export function ContactSection() {
           </div>
 
           <div className="flex items-center gap-2 text-muted-foreground">
-            <a href={`mailto:${site.email}`} className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="Email">
+            <a href={`mailto:${site.email}`} data-cursor-label="Email" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card hover:border-primary/40 hover:text-foreground" aria-label="Email">
               <Mail className="h-4 w-4" />
             </a>
-            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="LinkedIn">
+            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" data-cursor-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card hover:border-primary/40 hover:text-foreground" aria-label="LinkedIn">
               <Linkedin className="h-4 w-4" />
             </a>
-            <a href={site.github} target="_blank" rel="noopener noreferrer" className="rounded-lg border border-border bg-card p-2.5 hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
+            <a href={site.github} target="_blank" rel="noopener noreferrer" data-cursor-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
               <Github className="h-4 w-4" />
             </a>
           </div>

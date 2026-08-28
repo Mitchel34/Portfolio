@@ -62,6 +62,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
         <div className="flex flex-wrap gap-2">
           <Link
             href={`/projects/${project.slug}`}
+            data-cursor-label="Open"
             className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
           >
             Case Study
@@ -70,6 +71,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
             <a
               key={link.label}
               href={link.href}
+              data-cursor-label={link.label}
               className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
             >
               {link.label}
