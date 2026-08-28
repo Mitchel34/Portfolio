@@ -1,155 +1,170 @@
-# Portfolio Feature Implementation Plan
+# Career and Portfolio Operating Plan
 
-## Overview
-Four features to implement on branch `claude/add-dark-mode-3MBQP`:
-1. Contact form (Resend)
-2. Animated skill tags (Framer Motion)
-3. Per-project OG image generation (next/og)
-4. Inline Calendly embed for Zoom appointments
+Updated: 2026-08-20
 
----
+This is the governing plan for the career work associated with Mitchel Carson's portfolio. It replaces the completed feature-specific implementation plan that previously lived here.
 
-## 0. Prerequisites (manual steps before deployment)
+## Objective
 
-### Resend (contact form email)
-1. Sign up at **resend.com** (free — 3,000 emails/month)
-2. Verify your domain: Resend dashboard → Domains → Add `mitchelcarson.com` → add the 3 DNS records it provides
-3. Generate an API key: Resend dashboard → API Keys → Create
-4. Add to Vercel env vars: `RESEND_API_KEY=re_...`
-5. Add to local `.env.local`: `RESEND_API_KEY=re_...`
+Build a coherent career system that connects five activities:
 
-### Calendly (Zoom appointments)
-1. Sign up at **calendly.com** (free tier is enough)
-2. Connect Zoom: Calendly Settings → Integrations → Video Conferencing → Zoom → Connect
-3. Create an event type (e.g., "30-Minute Chat") — Zoom link will be auto-generated for each booking
-4. Copy your booking URL (e.g., `https://calendly.com/mitchel-carson/30min`)
-5. Add to Vercel env vars: `NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/mitchel-carson/...`
-6. Add to local `.env.local`: `NEXT_PUBLIC_CALENDLY_URL=https://calendly.com/mitchel-carson/...`
+1. Maintain a truthful, current public portfolio at `mitchelcarson.com`.
+2. Maintain one evidence-backed master resume and produce role-specific variants from it.
+3. Track target companies, roles, deadlines, applications, and follow-ups.
+4. Coordinate career work with the Fall 2026 UT M.S. Artificial Intelligence workload.
+5. Turn current work in HYDRA, AGU, Harmony, and graduate coursework into clear, bounded evidence of applied AI, research, and engineering capability.
 
----
+## Current implementation status
 
-## 1. Install Dependencies
+As of 2026-08-20:
 
-```bash
-npm install resend
-```
+- The local portfolio has been rewritten around the confirmed AI / Machine Learning Engineer headline.
+- HYDRA is labeled as ongoing research and its 26-54% RMSE result is explicitly preliminary and relative to LSTM baselines.
+- Harmony is framed as a modular software, validation, and reliability system.
+- Completed and Fall 2026 coursework are separated on a dedicated page.
+- A new one-page general resume has been generated and installed at every existing public resume path.
+- Lint, production build, PDF/ATS extraction, link, and responsive visual checks pass locally.
+- No production deployment has been made; preview and production review remain pending.
 
-No other packages needed:
-- `framer-motion` already installed
-- `next/og` is built into Next.js (already used in `opengraph-image.tsx`)
-- Calendly uses a CDN script — no npm package needed
+## Career narrative
 
----
+The portfolio should present one connected story rather than a collection of unrelated projects:
 
-## 2. Contact Form with Resend
+> An applied AI and software engineer who builds reliable systems from research through delivery, with experience spanning production software, deep-learning research, high-stakes operations, and graduate AI study.
 
-### 2a. API Route — `/src/app/api/contact/route.ts`
-- POST endpoint
-- Validates required fields: `name`, `email`, `message` (subject optional)
-- Uses Resend SDK to send email to `mitchel.carson@gmail.com`
-- Returns JSON `{ success: true }` or `{ error: "..." }` with appropriate status codes
-- Rate limit protection: check `Content-Type` header, reject non-JSON bodies
-- Server-side only — `RESEND_API_KEY` never exposed to client
+The story has five evidence pillars:
 
-### 2b. ContactForm component — `/src/components/ContactForm.tsx`
-- Client component (`"use client"`)
-- Controlled form: name, email, subject, message fields
-- Inline validation (required fields, email format) — no external library, keep it simple
-- Submit state: idle → submitting → success/error
-- On success: show a confirmation message, reset form
-- On error: show an error banner
-- Styled with existing design tokens (card background, primary color buttons, border colors)
-- Framer Motion entrance animation (matches existing `fadeInUp` pattern)
+- **HYDRA and hydrologic research:** time-series forecasting, residual correction, temporal validation, reproducible experimentation, scientific communication, and domain collaboration.
+- **AGU and research communication:** communicating technical work to hydrologists, environmental scientists, and broader scientific audiences. Public wording must distinguish submitted, accepted, presented, and published work.
+- **Harmony:** modular data, forecasting, semantic-validation, policy-control, and simulation software with fail-safe system boundaries. Do not imply live execution, profitability, or validated investment performance.
+- **UT M.S. AI coursework:** completed AI Ethics, Machine Learning, Deep Learning, and Reinforcement Learning, plus Fall 2026 study in Advances in Deep Learning, Optimization, and Natural Language Processing.
+- **Production and operational experience:** USAA software engineering and Air Force mission experience as evidence of dependable delivery, cross-functional communication, and work in consequential environments.
 
-### 2c. Update contact page — `/src/app/contact/page.tsx`
-- Replace the current static email/social links layout
-- Keep the social links (LinkedIn, GitHub) as secondary actions
-- Add `<ContactForm />` as the primary section
-- Add `<CalendlyEmbed />` below the form (see Feature 4)
+## Target role lanes
 
----
+These lanes were confirmed on 2026-08-20. Every target role should map to one primary lane.
 
-## 3. Animated Skill Tags
+1. **AI / Machine Learning Engineer** - primary site headline and default lane for early-career and graduate roles; emphasizes end-to-end systems, model evaluation, and production delivery.
+2. **Research Engineer / Applied Scientist** - primary supporting lane; emphasizes HYDRA, scientific rigor, experiments, publications, and technical communication.
+3. **ML Platform / Software Engineer** - primary supporting lane; emphasizes APIs, data pipelines, reproducibility, reliability, and production engineering.
+4. **Mission-oriented AI / data roles** - secondary targeted lane for clearance- and defense-relevant opportunities.
 
-### 3a. Update `ProjectCard.tsx`
-- Wrap the tech stack tag list in a `motion.div` container with `variants` using `staggerChildren: 0.06`
-- Wrap each individual tag `<span>` in a `motion.span` with:
-  - initial: `{ opacity: 0, scale: 0.85, y: 8 }`
-  - animate: `{ opacity: 1, scale: 1, y: 0 }`
-  - transition: `{ duration: 0.3, ease: "easeOut" }`
-- Use `whileInView` with `viewport={{ once: true, margin: "-40px" }}` so animation triggers as card scrolls into view
-- No change to visual appearance — only the entrance animation is added
+## Source-of-truth rules
 
-### 3b. Update `FeaturedProject.tsx`
-- Apply the same stagger pattern to the tech stack tags in the featured project section
-- Slightly longer stagger (`0.08`) and softer animation since featured project is larger/more prominent
+- `src/lib/content.ts` is the source of truth for public website copy.
+- `public/resume.pdf` is the exact resume published by the site.
+- `career/resumes/` is the local source of truth for master and tailored resume work.
+- `career/companies.csv` is the local source of truth for companies and applications.
+- `career/calendar.md` is the local source of truth for career milestones and workload decisions.
+- `career/claims.csv` is the local claim ledger. No material metric, status, credential, course, publication, or availability statement should be published unless it has a current ledger entry.
 
----
+The entire `career/` directory is intentionally ignored by Git because the website repository may be public. It may contain application strategy and working documents, but it must not contain account credentials, government identifiers, private references, interview recordings, or other unnecessary sensitive data.
 
-## 4. Per-Project OG Image Generation
+## Eight-week roadmap
 
-### 4a. Dynamic project OG — `/src/app/projects/[slug]/opengraph-image.tsx`
-- `export const runtime = 'edge'`
-- `export const size = { width: 1200, height: 630 }`
-- Receives `{ params: { slug } }` prop
-- Calls `getProjectBySlug(slug)` to get project title, description, and tech stack
-- Returns `ImageResponse` with layout matching the existing global `opengraph-image.tsx` style:
-  - Same warm gradient background
-  - Project title in Fraunces serif font (large)
-  - Project description in Sora (smaller, muted color)
-  - Tech stack shown as pill badges (2–4 tags, truncated if more)
-  - "mitchelcarson.com" branding in bottom-right corner
-  - Blue accent dot / pill matching global OG style
-- Graceful fallback: if slug not found, renders generic image with site name
+### Phase 1 - Foundation (August 20-30)
 
-### 4b. Update SEO metadata in `/src/app/projects/[slug]/page.tsx`
-- The existing `generateMetadata` function returns `createPageMetadata(...)`
-- After adding `opengraph-image.tsx` at the same route level, Next.js automatically picks it up
-- No changes to `seo.ts` needed — Next.js file-based OG image convention handles it
+- Confirm target-role priority and geographic/remote constraints.
+- Inventory current resumes, site claims, project evidence, coursework, and AGU status.
+- Build the master resume content bank and resolve inconsistent HYDRA metrics.
+- Decide whether and how to mention clearance, availability, and graduation timing.
 
----
+### Phase 2 - Positioning and resume system (August 31-September 13)
 
-## 5. Calendly Embed (Zoom Appointments)
+- Produce a general Applied ML / AI Engineer resume.
+- Produce reusable Research Engineer and ML/Software Engineer variants.
+- Establish a repeatable company-and-job tailoring workflow.
+- Verify ATS readability and rendered PDF quality.
 
-### 5a. CalendlyEmbed component — `/src/components/CalendlyEmbed.tsx`
-- Client component (`"use client"`)
-- Uses `useEffect` to inject the Calendly widget script into `document.head` (idempotent — checks if already added)
-- Renders a container `<div>` with class `calendly-inline-widget` and `data-url={process.env.NEXT_PUBLIC_CALENDLY_URL}`
-- Sets a fixed height (650px) which is Calendly's recommended minimum for inline embeds
-- Styled wrapper: card background, rounded corners, subtle border — matches the site's card design
-- Hides Calendly's own scrollbar; integrates cleanly into the page
-- Shows a skeleton/loading placeholder while the script loads
-- Wraps in a section with a heading: "Schedule a Zoom Call" + brief description
+### Phase 3 - Portfolio content update (September 14-27)
 
-### 5b. Add to contact page — `/src/app/contact/page.tsx`
-- Section order: ContactForm → CalendlyEmbed
-- Section heading above CalendlyEmbed: "Or book a time directly"
-- Framer Motion entrance animation on the section wrapper
+- Rewrite the home page around the unified career narrative.
+- Expand HYDRA into a research case study with safe, sourced claims.
+- Reframe Harmony around system architecture, validation, and risk controls.
+- Add AGU activity and a coursework/learning section with explicit status labels.
+- Update About, Research, Projects, Resume, metadata, and downloadable PDF together.
 
----
+### Phase 4 - Release and application rhythm (September 28-October 11)
 
-## 6. File Change Summary
+- Test responsive layout, links, accessibility, metadata, and the production build.
+- Review a Vercel preview before changing production.
+- Publish only after a final claim and resume audit.
+- Begin a sustainable application cadence that fits the verified course calendar.
 
-| File | Action | Feature |
-|------|--------|---------|
-| `src/app/api/contact/route.ts` | Create | Contact form |
-| `src/components/ContactForm.tsx` | Create | Contact form |
-| `src/components/CalendlyEmbed.tsx` | Create | Calendar |
-| `src/app/projects/[slug]/opengraph-image.tsx` | Create | OG images |
-| `src/app/contact/page.tsx` | Update | Contact form + Calendar |
-| `src/components/ProjectCard.tsx` | Update | Animated tags |
-| `src/components/FeaturedProject.tsx` | Update | Animated tags |
-| `.env.local` | Create | Resend + Calendly keys |
-| `package.json` | Update | Add `resend` |
+### Phase 5 - Iterate from evidence (October 12 onward)
 
----
+- Review application response rates by role lane and resume variant.
+- Refine positioning based on job descriptions and interview feedback.
+- Add project or coursework evidence only when it becomes complete and demonstrable.
+- Keep the site, resume, LinkedIn, and application answers consistent.
 
-## 7. Implementation Order
+## Weekly operating rhythm
 
-1. `npm install resend`
-2. Animated skill tags (self-contained, no env vars needed — ship first)
-3. Per-project OG images (no env vars needed)
-4. Contact form API route + component
-5. Calendly embed component
-6. Update contact page to wire everything together
-7. Commit and push to `claude/add-dark-mode-3MBQP`
+Until the Fall 2026 syllabi and personal calendar are reviewed, use this as a proposal rather than a fixed commitment:
+
+- One 30-minute weekly review to update deadlines, next actions, and course conflicts.
+- Two 60-90 minute application/tailoring blocks on weekdays.
+- One 2-3 hour deep-work block for portfolio or master-resume work.
+- A maximum weekly application target set only after the academic workload is visible.
+- No career deadline may silently displace a graded assignment or exam; conflicts are resolved in `career/calendar.md`.
+
+## Resume workflow
+
+1. Capture verified facts and bullets in the master content bank.
+2. Save the job description and map it to one role lane.
+3. Select only supportable experience and keywords.
+4. Create a role-specific resume; do not overwrite the master.
+5. Check text extraction, links, spelling, visual rendering, and one-page density.
+6. Record the exact version in `career/companies.csv` before applying.
+7. Update `public/resume.pdf` only when intentionally changing the general public resume.
+
+Recommended application filename:
+
+`Mitchel_Carson_<Lane>_<Company>_<Role>_<YYYY-MM-DD>.pdf`
+
+## Website backlog
+
+### Must have
+
+- Current positioning, education status, availability, and resume.
+- HYDRA, AGU, and Harmony descriptions with bounded status language.
+- A coursework section separating completed, current, and planned courses.
+- Clear role-relevant calls to action and working contact links.
+- Consistent claims across home, About, Projects, Research, Resume, README, metadata, and structured data.
+
+### Strong additions
+
+- Dedicated case-study structure: problem, contribution, evidence, validation, limitations, and current status.
+- A research/publications/presentations area that can evolve from submitted work to accepted or published work without rewriting the whole site.
+- A compact learning timeline for graduate coursework and selected artifacts.
+- Downloadable general resume plus role-lane landing pages if they become useful.
+
+### Deferred unless evidence supports them
+
+- Profit or performance claims for Harmony.
+- Publication, presentation, grant, or award claims that have not reached that status.
+- Generic skill lists disconnected from a project, course, or work example.
+- A production deploy before the resume and claim ledger agree with the site.
+
+## Release gate for mitchelcarson.com
+
+A portfolio release is complete only when:
+
+- all public claims are current and supported;
+- the published PDF is the intended general resume;
+- `npm run lint` and `npm run build` pass;
+- desktop and mobile layouts are visually reviewed;
+- links, downloads, contact actions, metadata, and structured data are checked;
+- a preview deployment is reviewed; and
+- Mitchel explicitly approves the production content and release.
+
+## Decisions to make together
+
+1. Define remote/hybrid and relocation constraints within the confirmed Austin, Texas location context.
+2. Confirm current AGU abstract, travel-grant, manuscript, and presentation statuses.
+3. Decide whether Harmony's repository can be linked publicly; the public framing is now software architecture, validation, and reliability.
+4. Set a realistic weekly application cadence after the fall course deadlines are mapped.
+
+## Immediate next milestone
+
+Review the refreshed site and general resume, map Fall 2026 syllabus deadlines into the calendar, and begin the prioritized company list. After content approval, create a preview deployment before releasing to production.
