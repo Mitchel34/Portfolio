@@ -209,7 +209,7 @@ export function ModelGraphMenu({ isOpen, onClose, triggerRef }: ModelGraphMenuPr
                 <BrainCircuit className="h-7 w-7" />
               </motion.div>
 
-              <div className="relative z-10 grid gap-3 md:block md:h-full">
+              <div className="relative z-10 grid gap-3 md:absolute md:inset-0 md:block">
                 {graphItems.map((item, index) => {
                   const nodeStyle = {
                     "--graph-x": `${item.position.x}%`,
