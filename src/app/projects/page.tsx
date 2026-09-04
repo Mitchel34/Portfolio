@@ -50,7 +50,7 @@ export default function ProjectsPage() {
           lede="Problem, approach, current evidence, limits, and lessons, for the HYDRA pipeline, USAA production APIs, and the Harmony forecasting system."
         />
         <Container>
-          <div className="mt-10">
+          <div className="mt-10 [&>article:first-child]:border-t-0 [&>article:first-child]:pt-0">
             {projects.map((project) => (
               <ProjectCard key={project.slug} project={project} variant="full" />
             ))}
