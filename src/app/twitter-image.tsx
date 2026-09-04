@@ -8,55 +8,89 @@ export const size = {
 };
 export const contentType = "image/png";
 
+const PAPER = "#f7f4ed";
+const INK = "#171a21";
+const MUTED = "#565c6b";
+const RED = "#a8271f";
+
 export default function TwitterImage() {
   return new ImageResponse(
     (
       <div
         style={{
-          alignItems: "center",
-          background: "linear-gradient(120deg, #f5f3ee 0%, #e7eefb 55%, #dce9e4 100%)",
-          color: "#12243a",
           display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
           height: "100%",
-          justifyContent: "center",
           width: "100%",
-          fontFamily: "Sora, Arial, sans-serif",
+          padding: "56px 72px",
+          background: PAPER,
+          color: INK,
+          fontFamily: 'Georgia, "Times New Roman", serif',
         }}
       >
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
-            width: "90%",
-            border: "2px solid rgba(18, 36, 58, 0.12)",
-            borderRadius: 28,
-            padding: "48px 56px",
-            background: "rgba(255, 253, 248, 0.76)",
+            justifyContent: "space-between",
+            paddingBottom: 18,
+            borderBottom: `1px solid #d6d0c4`,
+            fontFamily: "ui-monospace, Menlo, monospace",
+            fontSize: 20,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: MUTED,
           }}
         >
+          <span>{site.runningHead}</span>
+          <span>{site.location}</span>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ fontSize: 92, fontWeight: 500, lineHeight: 1.02, letterSpacing: "-0.02em" }}>
+            {site.name}
+          </div>
+          <div style={{ marginTop: 26, fontSize: 34, lineHeight: 1.3, fontStyle: "italic", maxWidth: 980 }}>
+            {site.tagline}
+          </div>
           <div
             style={{
-              fontSize: 24,
-              textTransform: "uppercase",
+              marginTop: 24,
+              fontFamily: "ui-monospace, Menlo, monospace",
+              fontSize: 22,
               letterSpacing: "0.08em",
-              color: "#546174",
+              textTransform: "uppercase",
+              color: RED,
             }}
           >
             {site.title}
           </div>
+        </div>
 
-          <div style={{ marginTop: 20, fontSize: 68, fontWeight: 700, lineHeight: 1.05 }}>
-            {site.name}
-          </div>
-
-          <div style={{ marginTop: 22, fontSize: 32, lineHeight: 1.25, color: "#203550" }}>
-            Reliable AI systems across forecasting research and production software.
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <div style={{ height: 1, background: INK }} />
+          <div style={{ height: 3, background: PAPER }} />
+          <div style={{ height: 1, background: INK }} />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: 16,
+              fontFamily: "ui-monospace, Menlo, monospace",
+              fontSize: 20,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: MUTED,
+            }}
+          >
+            <span>{site.focusLine}</span>
+            <span>mitchelcarson.com</span>
           </div>
         </div>
       </div>
     ),
     {
       ...size,
-    }
+    },
   );
 }

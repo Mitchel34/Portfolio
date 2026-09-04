@@ -8,7 +8,8 @@ const personJsonLd = {
   name: site.name,
   url: site.url,
   image: absoluteUrl("/images/mitchel-carson-headshot.jpg"),
-  jobTitle: site.title,
+  jobTitle: site.schemaJobTitle,
+  description: site.summary,
   email: site.email,
   sameAs: [site.github, site.linkedin],
   affiliation: {
@@ -24,11 +25,13 @@ const personJsonLd = {
     name: site.location,
   },
   knowsAbout: [
-    "Machine learning engineering",
-    "Deep learning",
     "Time-series forecasting",
-    "Research engineering",
-    "Production software",
+    "Residual correction for operational forecasts",
+    "Leakage-aware temporal evaluation",
+    "Reproducible machine learning pipelines",
+    "Deep learning",
+    "Hydrologic forecasting",
+    "Production software engineering",
   ],
 };
 

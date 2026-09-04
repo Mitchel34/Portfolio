@@ -4,9 +4,9 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { BarChart3, BrainCircuit, Database, ShieldCheck } from "lucide-react";
 import { type KeyboardEvent, useRef, useState } from "react";
 
-import { research, thesisImpactStat } from "@/lib/content";
+import { preliminaryResultStat, research } from "@/lib/content";
 
-const resultRange = thesisImpactStat.match(/\d+[–-]\d+%/)?.[0] ?? "Preliminary";
+const resultRange = preliminaryResultStat.match(/\d+[–-]\d+%/)?.[0] ?? "Preliminary";
 
 const evidenceTabs = [
   {
@@ -45,7 +45,7 @@ const evidenceTabs = [
     eyebrow: resultRange,
     icon: BarChart3,
     title: "A promising signal, presented with its boundary.",
-    detail: thesisImpactStat,
+    detail: preliminaryResultStat,
     note: "Preliminary result. The final analysis and manuscript remain in progress.",
     tokens: ["Preliminary", "RMSE", "Tested LSTM baselines"],
   },

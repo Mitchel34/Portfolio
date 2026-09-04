@@ -33,6 +33,7 @@ const graphPositions = [
   { x: 84, y: 76 },
   { x: 50, y: 86 },
   { x: 16, y: 76 },
+  { x: 50, y: 50 },
 ];
 
 const graphItems = [

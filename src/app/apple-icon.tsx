@@ -18,12 +18,12 @@ export default function AppleIcon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #0b5fff 0%, #0a3a8f 100%)",
-          color: "#ffffff",
-          fontSize: 90,
-          fontWeight: 700,
-          fontFamily: "Sora, Arial, sans-serif",
-          letterSpacing: "-0.04em",
+          background: "#171a21",
+          color: "#f7f4ed",
+          fontSize: 108,
+          fontWeight: 500,
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          letterSpacing: "-0.02em",
         }}
       >
         {site.name.charAt(0)}
@@ -31,6 +31,6 @@ export default function AppleIcon() {
     ),
     {
       ...size,
-    }
+    },
   );
 }

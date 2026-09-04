@@ -5,7 +5,7 @@ import Image from "next/image";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { SectionHeader } from "@/components/SectionHeader";
-import { research } from "@/lib/content";
+import { evidenceWord, research, talks } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -122,10 +122,10 @@ export default function ResearchPage() {
               description="Research outputs are labeled by their current status and will be updated as milestones are completed."
             />
             <div className="mt-7 grid gap-5 md:grid-cols-2">
-              {research.communication.map((item) => (
-                <article key={item.title} className="rounded-2xl border border-border/80 bg-card p-6">
+              {talks.map((item) => (
+                <article key={item.id} className="rounded-2xl border border-border/80 bg-card p-6">
                   <p className="text-xs font-mono uppercase tracking-[0.16em] text-primary">
-                    {item.status}
+                    {evidenceWord[item.status]}
                   </p>
                   <h3 className="mt-2 text-base font-semibold text-foreground">{item.title}</h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

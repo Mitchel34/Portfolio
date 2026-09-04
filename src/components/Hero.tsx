@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Github, Linkedin, Mail } from "lucide-react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,16 +13,10 @@ const fadeInUp = {
   visible: { opacity: 1, y: 0 },
 };
 
-const NeuralField = dynamic(
-  () => import("@/components/NeuralField").then((module) => module.NeuralField),
-  { ssr: false },
-);
-
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden pb-20 pt-20 sm:pt-24 lg:pb-24 lg:pt-28">
       <div className="pointer-events-none absolute inset-0">
-        <NeuralField />
         <div className="absolute -left-14 top-8 h-60 w-60 rounded-full bg-primary/16 blur-[90px]" />
         <div className="absolute right-0 top-6 h-48 w-48 rounded-full bg-secondary/18 blur-[80px]" />
         <div className="absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/16 blur-[90px]" />
