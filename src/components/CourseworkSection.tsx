@@ -1,80 +1,60 @@
-import { ArrowRight, BookOpen, CheckCircle2 } from "lucide-react";
-import Link from "next/link";
+import { Reveal } from "@/components/Reveal";
+import { SectionFrame } from "@/components/SectionFrame";
+import { StatusLabel } from "@/components/StatusLabel";
+import { TextLink } from "@/components/TextLink";
+import { courseEvidenceStatus, coursework, type CourseworkItem, landingSections, sectionCopy } from "@/lib/content";
 
-import { Container } from "@/components/Container";
-import { SectionHeader } from "@/components/SectionHeader";
-import { coursework, landingSections, type CourseworkItem } from "@/lib/content";
-
-export function CourseworkCards({
-  items,
-  planned = false,
-}: {
-  items: CourseworkItem[];
-  planned?: boolean;
-}) {
-  const Icon = planned ? BookOpen : CheckCircle2;
-
+/** Hairline course list; the status word is visible in every row. Also used by /coursework. */
+export function CourseworkList({ items }: { items: CourseworkItem[] }) {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <ul className="mt-3 border-b border-border">
       {items.map((course) => (
-        <article key={course.title} className="rounded-2xl border border-border/80 bg-card p-5">
-          <div className="flex items-start gap-3">
-            <div
-              className={`mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl ${
-                planned ? "bg-secondary/10 text-secondary" : "bg-primary/10 text-primary"
-              }`}
-            >
-              <Icon className="h-4 w-4" />
-            </div>
-            <div>
-              <p className="text-[11px] font-mono uppercase tracking-[0.16em] text-muted-foreground">
-                {course.status}
-              </p>
-              <h3 className="mt-1 text-sm font-semibold text-foreground">{course.title}</h3>
-            </div>
+        <li key={course.title} className="border-t border-border py-4">
+          <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h3 className="text-body font-medium text-foreground">{course.title}</h3>
+            <StatusLabel
+              status={courseEvidenceStatus(course.status)}
+              suffix={course.status === "Fall 2026" ? "Fall 2026" : undefined}
+            />
           </div>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{course.description}</p>
-        </article>
+          <p className="mt-1 text-body-sm text-muted-foreground">{course.description}</p>
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
 export function CourseworkSection() {
-  const section = landingSections.coursework;
-
   return (
-    <section className="scroll-mt-24 py-20" id={section.id}>
-      <Container>
-        <SectionHeader
-          eyebrow={section.label}
-          title="Graduate study across machine learning and AI."
-          description={`UT Austin M.S. Artificial Intelligence · Current GPA ${coursework.currentGpa} · Expected graduation: ${coursework.expectedGraduation}`}
-        />
-
-        <div className="mt-10 grid gap-8 lg:grid-cols-2">
-          <div>
-            <p className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-primary">
-              Completed
-            </p>
-            <CourseworkCards items={coursework.completed} />
+    <SectionFrame
+      id={landingSections.coursework.id}
+      number="06"
+      label="Graduate Study"
+      title={sectionCopy.coursework.title}
+      lede={sectionCopy.coursework.lede}
+      meta={
+        <span className="mono-label text-muted-foreground">
+          {coursework.institution} · {coursework.program} · GPA {coursework.currentGpa} · expected{" "}
+          {coursework.expectedGraduation}
+        </span>
+      }
+    >
+      <Reveal>
+        <div className="lg:grid lg:grid-cols-10 lg:gap-x-8">
+          <div className="lg:col-span-5">
+            <p className="mono-label text-muted-foreground">Completed</p>
+            <CourseworkList items={coursework.completed} />
           </div>
-          <div>
-            <p className="mb-4 text-xs font-mono uppercase tracking-[0.18em] text-secondary">
-              Fall 2026
-            </p>
-            <CourseworkCards items={coursework.upcoming} planned />
+          <div className="mt-10 lg:col-span-5 lg:mt-0">
+            <p className="mono-label text-muted-foreground">Fall 2026</p>
+            <CourseworkList items={coursework.upcoming} />
           </div>
         </div>
 
-        <Link
-          href="/coursework"
-          className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:opacity-80"
-        >
-          View coursework details
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-      </Container>
-    </section>
+        <TextLink className="mt-6" href="/coursework">
+          Coursework details
+        </TextLink>
+      </Reveal>
+    </SectionFrame>
   );
 }

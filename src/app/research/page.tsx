@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-
 import Image from "next/image";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { Container } from "@/components/Container";
-import { SectionHeader } from "@/components/SectionHeader";
-import { evidenceWord, research, talks } from "@/lib/content";
+import { FigureWell } from "@/components/FigureWell";
+import { NoteRef } from "@/components/Notes";
+import { OfficeHours } from "@/components/OfficeHours";
+import { PageHeader } from "@/components/PageHeader";
+import { Readout } from "@/components/Readout";
+import { SectionFrame } from "@/components/SectionFrame";
+import { StatusLabel } from "@/components/StatusLabel";
+import { TalksList } from "@/components/TalksSection";
+import { TextLink } from "@/components/TextLink";
+import { research, talks } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Research",
   description:
-    "Ongoing HYDRA research on leakage-aware residual correction for National Water Model streamflow forecasts using Transformer and GRU experiments.",
+    "HYDRA: leakage-aware Transformer and GRU residual correction for National Water Model streamflow forecasts. Preliminary results; manuscript in progress.",
   pathname: "/research",
   keywords: [
     "AI research",
@@ -20,6 +26,13 @@ export const metadata: Metadata = createPageMetadata({
     "NOAA NWM residual correction",
   ],
 });
+
+const methodGroups: { label: string; items: string[] }[] = [
+  { label: "Architecture", items: research.architecture },
+  { label: "Evaluation", items: research.evaluation },
+  { label: "Constraints", items: research.constraints },
+  { label: "Reproducibility", items: research.reproducibility },
+];
 
 export default function ResearchPage() {
   return (
@@ -30,112 +43,75 @@ export default function ResearchPage() {
           { name: "Research", href: "/research" },
         ]}
       />
-      <div className="bg-background pb-16 pt-14 text-foreground">
-        <Container>
-          <SectionHeader
-            as="h1"
-            eyebrow="Research"
-            title={research.title}
-            description={research.summary}
+      <div className="pb-20">
+        <PageHeader
+          label="Research"
+          title={research.title}
+          lede={research.summary}
+          ledeStyle="italic"
+          meta={<StatusLabel status="preliminary" prefix="Ongoing research" />}
+        />
+
+        <SectionFrame
+          rule="none"
+          label="Result"
+          title="Preliminary result"
+          notes={[{ id: "1", text: research.preliminaryNote }]}
+        >
+          <Readout
+            className="max-w-md"
+            value="26–54%"
+            unit="lower RMSE than the LSTM baselines tested"
+            status="preliminary"
+            footnote={
+              <>
+                {research.resultQualifier}. Final analysis and manuscript in progress.
+                <NoteRef id="1" />
+              </>
+            }
           />
 
-          <div className="mt-8 rounded-2xl border border-primary/30 bg-primary/5 p-6">
-            <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">
-              {research.status}
-            </p>
-            <p className="mt-3 text-sm leading-relaxed text-foreground">
-              {research.preliminaryResult}
-            </p>
-          </div>
+          <FigureWell number={1} padded={false} caption={research.figures.architecture} className="mt-8">
+            <Image
+              src="/images/projects/hydra-architecture-full.jpg"
+              alt="Conceptual HYDRA research architecture diagram"
+              width={2816}
+              height={1536}
+              sizes="(min-width: 1024px) 60rem, calc(100vw - 2.5rem)"
+              className="h-auto w-full"
+              priority
+            />
+          </FigureWell>
+        </SectionFrame>
 
-          <div className="mt-6 flex flex-wrap gap-3">
-            {research.links.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="rounded-full border border-border bg-card px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
-              >
-                {link.label}
-              </a>
+        <SectionFrame label="Method" title="Architecture, evaluation, constraints, reproducibility">
+          <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2">
+            {methodGroups.map((group) => (
+              <div key={group.label}>
+                <h3 className="mono-label text-muted-foreground">{group.label}</h3>
+                <ol className="mt-2 list-decimal space-y-2 pl-5 text-body-sm text-foreground marker:font-mono marker:text-muted-foreground">
+                  {group.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ol>
+              </div>
             ))}
           </div>
+        </SectionFrame>
 
-          <div className="mt-10 mb-10 overflow-hidden rounded-2xl border border-border/80 bg-card">
-            <div className="relative aspect-[11/6] w-full border-b border-border/80">
-              <Image
-                src="/images/projects/hydra-architecture-full.jpg"
-                alt="Conceptual HYDRA research architecture diagram"
-                fill
-                className="object-contain"
-                sizes="(max-width: 1200px) 100vw, 1200px"
-                priority
-              />
-            </div>
-            <div className="p-4 bg-muted/30">
-              <p className="text-center text-sm font-medium text-muted-foreground">
-                Conceptual HYDRA research architecture. The implementation and supporting claims will continue to evolve with the ongoing analysis.
-              </p>
-            </div>
+        <SectionFrame
+          id="communication"
+          label="Communication"
+          title="Scientific communication, labelled by status."
+          lede="Outputs are listed with their current status and updated as milestones are confirmed."
+        >
+          <TalksList items={talks} />
+          <OfficeHours className="mt-12" />
+          <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2">
+            <TextLink href="/projects/hydra-temporal">Case study</TextLink>
+            <TextLink href="https://github.com/Mitchel34/hydra-nwm-streamflow-correction">Code</TextLink>
           </div>
-
-          <div className="grid gap-7 lg:grid-cols-2">
-            <article className="rounded-2xl border border-border/80 bg-card p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-primary">Architecture</h3>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground marker:text-primary">
-                {research.architecture.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="rounded-2xl border border-border/80 bg-card p-6">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-secondary">Evaluation</h3>
-              <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground marker:text-secondary">
-                {research.evaluation.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <h4 className="mt-6 text-sm font-semibold uppercase tracking-[0.12em] text-accent">Constraints</h4>
-              <ul className="mt-3 list-disc space-y-2 pl-5 text-sm text-muted-foreground marker:text-accent">
-                {research.constraints.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </article>
-          </div>
-
-          <article className="mt-7 rounded-2xl border border-border/80 bg-card p-6">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-foreground">Reproducibility</h3>
-            <ul className="mt-4 grid gap-3 md:grid-cols-2">
-              {research.reproducibility.map((item) => (
-                <li key={item} className="rounded-lg border border-border/70 bg-surface/70 px-3 py-2 text-sm text-muted-foreground">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </article>
-
-          <section className="mt-12">
-            <SectionHeader
-              eyebrow="Scientific Communication"
-              title="AGU and manuscript progress"
-              description="Research outputs are labeled by their current status and will be updated as milestones are completed."
-            />
-            <div className="mt-7 grid gap-5 md:grid-cols-2">
-              {talks.map((item) => (
-                <article key={item.id} className="rounded-2xl border border-border/80 bg-card p-6">
-                  <p className="text-xs font-mono uppercase tracking-[0.16em] text-primary">
-                    {evidenceWord[item.status]}
-                  </p>
-                  <h3 className="mt-2 text-base font-semibold text-foreground">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {item.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </section>
-        </Container>
+        </SectionFrame>
       </div>
     </>
   );

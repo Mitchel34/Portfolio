@@ -1,124 +1,107 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Calendar, Github, Linkedin, Mail } from "lucide-react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
 
 import { Container } from "@/components/Container";
-import { site } from "@/lib/content";
+import { EvidenceLegend, StatusLabel } from "@/components/StatusLabel";
+import { TextLink } from "@/components/TextLink";
+import { buttonClass } from "@/components/ui/Button";
+import { site, talks } from "@/lib/content";
 
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
+const EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1];
+
+/** Parent orchestrates the one-time stagger; each block fades up 12px. */
+const stagger: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.06 } },
 };
 
+const block: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
+};
+
+/** The "Now" line is derived from `talks`, so status has exactly one source of truth. */
+const nowItems = talks.filter((talk) => talk.heroLabel).sort((a, b) => a.order - b.order);
+
 export function Hero() {
+  const reduce = useReducedMotion();
+
   return (
-    <section className="relative isolate overflow-hidden pb-20 pt-20 sm:pt-24 lg:pb-24 lg:pt-28">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-14 top-8 h-60 w-60 rounded-full bg-primary/16 blur-[90px]" />
-        <div className="absolute right-0 top-6 h-48 w-48 rounded-full bg-secondary/18 blur-[80px]" />
-        <div className="absolute bottom-0 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-accent/16 blur-[90px]" />
-      </div>
+    <section className="pt-10 pb-10 sm:pt-14 lg:pt-20">
+      <Container>
+        <motion.div variants={stagger} initial={reduce ? false : "hidden"} animate="visible">
+          <motion.div
+            variants={block}
+            className="mono-label flex items-center justify-between border-b border-border pb-3 text-muted-foreground"
+          >
+            <span>{site.runningHead}</span>
+            <span>Updated {site.updated}</span>
+          </motion.div>
 
-      <div aria-hidden="true" className="absolute inset-x-0 top-24 hidden px-10 lg:block">
-        <div className="mx-auto flex max-w-6xl items-center justify-between font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground/75">
-          <span>Signal 01 · Forecasting</span>
-          <span>Signal 02 · Reliable Systems</span>
-        </div>
-      </div>
+          <div className="mt-8 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-8">
+            <motion.div variants={block} className="lg:col-span-2">
+              <div className="relative h-[72px] w-[72px] overflow-hidden rounded-[4px] border border-border lg:h-28 lg:w-28">
+                <Image
+                  src="/images/mitchel-carson-headshot.jpg"
+                  alt="Portrait of Mitchel Carson"
+                  fill
+                  priority
+                  sizes="(min-width:1024px) 7rem, 4.5rem"
+                  className="object-cover object-[50%_40%]"
+                />
+              </div>
+              <p className="mono-label mt-3 text-muted-foreground">
+                {site.location} · {site.timezone}
+              </p>
+            </motion.div>
 
-      <Container className="relative z-10">
-        <motion.div
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
-          transition={{ duration: 0.55, ease: "easeOut" }}
-          className="mx-auto max-w-3xl space-y-8 text-center"
-        >
-          <div className="inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-border bg-card px-4 py-1.5 text-center text-[11px] font-mono uppercase leading-relaxed tracking-[0.18em] text-muted-foreground">
-            UT Austin M.S. Artificial Intelligence · 4.0 GPA · Austin, Texas
+            <div className="mt-8 lg:col-span-10 lg:mt-0">
+              <motion.div variants={block}>
+                <h1 className="font-serif text-display text-balance text-foreground sm:text-[3.75rem] lg:text-[4.5rem]">
+                  {site.name}
+                </h1>
+                <p className="mt-5 max-w-[44ch] font-serif text-lede italic text-foreground lg:text-[1.25rem]">
+                  {site.tagline}
+                </p>
+                <p className="mt-3 max-w-[60ch] text-body text-muted-foreground">{site.role}</p>
+              </motion.div>
+
+              <motion.div variants={block} className="mt-6">
+                <p className="mono-label text-muted-foreground">Now · updated {site.updated}</p>
+                <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
+                  {nowItems.map((talk) => (
+                    <li key={talk.id}>
+                      <StatusLabel status={talk.status} prefix={talk.heroLabel} />
+                    </li>
+                  ))}
+                </ul>
+                <EvidenceLegend className="mt-3" />
+              </motion.div>
+
+              <motion.div
+                variants={block}
+                className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+              >
+                <a
+                  className={buttonClass("primary")}
+                  href={site.calendlyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Schedule a conversation
+                </a>
+                <TextLink href="/#research">Read the research</TextLink>
+                <TextLink href={site.github}>Code on GitHub</TextLink>
+                <TextLink href={site.resumeUrl} external>
+                  Résumé (PDF)
+                </TextLink>
+              </motion.div>
+            </div>
           </div>
 
-          <div className="space-y-4">
-            <h1 className="font-serif text-4xl font-medium leading-[1.03] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-              {site.headline}
-            </h1>
-            <p className="text-xs font-mono uppercase leading-relaxed tracking-[0.18em] text-muted-foreground">
-              {site.focusLine} · {site.clearance}
-            </p>
-          </div>
-
-          <div className="relative mx-auto aspect-square w-44 overflow-hidden rounded-[2rem] border border-border/80 bg-card shadow-[0_24px_70px_-48px_rgba(18,36,58,0.6)] sm:w-52">
-            <Image
-              src="/images/mitchel-carson-headshot.jpg"
-              alt="Professional portrait of Mitchel Carson"
-              fill
-              priority
-              sizes="(max-width: 639px) 11rem, 13rem"
-              className="object-cover object-[50%_45%]"
-            />
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <a
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-label="Connect"
-              className="inline-flex h-12 items-center gap-2 rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-            >
-              <Calendar className="h-4 w-4" />
-              Schedule a Call
-            </a>
-            <Link
-              href="/projects"
-              data-cursor-label="Explore"
-              className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
-              View Projects
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-            <a
-              href={site.resumeUrl}
-              data-cursor-label="Resume"
-              className="inline-flex h-12 items-center rounded-full border border-border/80 px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
-              Resume
-            </a>
-          </div>
-
-          <div className="flex items-center justify-center gap-3 text-muted-foreground">
-            <a
-              href={`mailto:${site.email}`}
-              data-cursor-label="Email"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card transition hover:border-primary/40 hover:text-foreground"
-              aria-label="Email"
-            >
-              <Mail className="h-4 w-4" />
-            </a>
-            <a
-              href={site.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-label="GitHub"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card transition hover:border-primary/40 hover:text-foreground"
-              aria-label="GitHub"
-            >
-              <Github className="h-4 w-4" />
-            </a>
-            <a
-              href={site.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-label="LinkedIn"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-border bg-card transition hover:border-primary/40 hover:text-foreground"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-4 w-4" />
-            </a>
-          </div>
+          <div className="rule-double mt-10" aria-hidden="true" />
         </motion.div>
       </Container>
     </section>

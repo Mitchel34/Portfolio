@@ -6,11 +6,7 @@ export type SectionHeaderProps = {
   /** "01" on the home page; omitted on secondary pages. */
   number?: string;
   /** Short mono label rendered in the margin column, e.g. "Research". */
-  label?: string;
-  /** @deprecated transitional alias for `label`; removed after the refresh lands. */
-  eyebrow?: string;
-  /** @deprecated transitional alias for `lede`; removed after the refresh lands. */
-  description?: string;
+  label: string;
   title: string;
   lede?: string;
   /** italic = one-sentence serif abstract; plain = sans description. */
@@ -29,11 +25,9 @@ export type SectionHeaderProps = {
  */
 export function SectionHeader({
   number,
-  label: labelProp,
-  eyebrow,
+  label,
   title,
-  lede: ledeProp,
-  description,
+  lede,
   ledeStyle = "plain",
   meta,
   aside,
@@ -41,8 +35,6 @@ export function SectionHeader({
 }: SectionHeaderProps) {
   const HeadingTag = as;
   const isPage = as === "h1";
-  const label = labelProp ?? eyebrow ?? "";
-  const lede = ledeProp ?? description;
 
   return (
     <>

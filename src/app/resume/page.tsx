@@ -1,45 +1,38 @@
 import type { Metadata } from "next";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { Container } from "@/components/Container";
-import { SectionHeader } from "@/components/SectionHeader";
+import { Entry, EntryList } from "@/components/Entry";
+import { FigureWell } from "@/components/FigureWell";
+import { PageHeader } from "@/components/PageHeader";
+import { SectionFrame } from "@/components/SectionFrame";
+import { buttonClass } from "@/components/ui/Button";
 import { education, experience, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Resume",
   description:
-    "Resume for Mitchel Carson, an AI / Machine Learning Engineer and UT Austin M.S. Artificial Intelligence student with an active TS/SCI clearance.",
+    "Resume for Mitchel Carson: machine learning engineer and applied AI researcher, UT Austin M.S. AI (expected May 2027), USAA, U.S. Air Force, active TS/SCI.",
   pathname: "/resume",
   keywords: ["AI engineer resume", "machine learning resume", "software engineer resume"],
 });
 
-function TimelineCard({
-  title,
-  org,
-  period,
-  items,
-}: {
-  title: string;
-  org: string;
-  period: string;
-  items: string[];
-}) {
+function EntryMeta({ period, org }: { period: string; org: string }) {
   return (
-    <article className="rounded-2xl border border-border/80 bg-card p-6">
-      <div className="flex flex-wrap items-start justify-between gap-2">
-        <div>
-          <h3 className="text-base font-semibold text-foreground">{title}</h3>
-          <p className="text-sm text-muted-foreground">{org}</p>
-        </div>
-        <span className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">{period}</span>
-      </div>
-      <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm text-muted-foreground marker:text-primary">
-        {items.map((item) => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    </article>
+    <>
+      <p className="mono-label tabular-nums text-foreground">{period}</p>
+      <p className="mt-1 text-body-sm text-muted-foreground">{org}</p>
+    </>
+  );
+}
+
+function DetailList({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-2 list-disc space-y-1.5 pl-5 text-body-sm text-foreground marker:text-border">
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ul>
   );
 }
 
@@ -52,71 +45,56 @@ export default function ResumePage() {
           { name: "Resume", href: "/resume" },
         ]}
       />
-      <div className="bg-background pb-16 pt-14 text-foreground">
-        <Container>
-          <SectionHeader
-            as="h1"
-            eyebrow="Resume"
-            title="Experience and education"
-            description="Applied AI, production software, research, and mission-focused experience. Updated August 2026."
-          />
-
-          <div className="mt-6">
-            <a
-              href={site.resumeUrl}
-              download={site.resumeFilename}
-              className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-            >
+      <div className="pb-20">
+        <PageHeader
+          label="Résumé"
+          title="Experience and education."
+          lede="Machine learning research, production software, mission operations, and graduate AI study."
+          meta={<span className="mono-label text-muted-foreground">PDF updated {site.resumePdfUpdated}</span>}
+          actions={
+            <a href={site.resumeUrl} download={site.resumeFilename} className={buttonClass("primary")}>
               Download PDF
             </a>
-          </div>
+          }
+        />
 
-          <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-card shadow-[0_22px_70px_-48px_rgba(18,36,58,0.75)]">
+        <SectionFrame rule="none" label="PDF" title="Résumé (PDF)">
+          <FigureWell
+            padded={false}
+            caption="Résumé (PDF). The PDF's Fall 2026 course list predates the current site list; see Coursework for the current plan."
+          >
             <iframe
               src={`${site.resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
-              className="h-[520px] w-full border-none md:h-[840px]"
               title="Resume PDF"
+              className="h-[520px] w-full border-0 md:h-[840px]"
             />
-          </div>
+          </FigureWell>
+        </SectionFrame>
 
-          <section className="mt-12">
-            <SectionHeader
-              eyebrow="Experience"
-              title="Industry and research work"
-              description="Roles that shaped my approach to building reliable ML systems."
-            />
-            <div className="mt-7 grid gap-5">
-              {experience.map((role) => (
-                <TimelineCard
-                  key={role.role}
-                  title={role.role}
-                  org={role.org}
-                  period={role.period}
-                  items={role.highlights}
-                />
-              ))}
-            </div>
-          </section>
+        <SectionFrame label="Experience" title="Industry and service">
+          <EntryList>
+            {experience.map((item) => (
+              <Entry key={item.role} meta={<EntryMeta period={item.period} org={item.org} />}>
+                <h3 className="font-serif text-title text-foreground">{item.role}</h3>
+                <DetailList items={item.highlights} />
+                {item.bridgingSentence ? (
+                  <p className="mt-3 font-serif text-body-sm italic text-muted-foreground">{item.bridgingSentence}</p>
+                ) : null}
+              </Entry>
+            ))}
+          </EntryList>
+        </SectionFrame>
 
-          <section className="mt-12">
-            <SectionHeader
-              eyebrow="Education"
-              title="Academic foundation"
-              description="Graduate AI training grounded in computer science fundamentals."
-            />
-            <div className="mt-7 grid gap-5">
-              {education.map((item) => (
-                <TimelineCard
-                  key={item.degree}
-                  title={item.degree}
-                  org={item.org}
-                  period={item.period}
-                  items={item.details}
-                />
-              ))}
-            </div>
-          </section>
-        </Container>
+        <SectionFrame label="Education" title="Academic foundation">
+          <EntryList>
+            {education.map((item) => (
+              <Entry key={item.degree} meta={<EntryMeta period={item.period} org={item.org} />}>
+                <h3 className="font-serif text-title text-foreground">{item.degree}</h3>
+                <DetailList items={item.details} />
+              </Entry>
+            ))}
+          </EntryList>
+        </SectionFrame>
       </div>
     </>
   );

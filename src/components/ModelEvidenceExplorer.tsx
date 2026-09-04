@@ -1,19 +1,31 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { BarChart3, BrainCircuit, Database, ShieldCheck } from "lucide-react";
 import { type KeyboardEvent, useRef, useState } from "react";
 
+import { KeywordLine } from "@/components/KeywordLine";
+import { Readout } from "@/components/Readout";
 import { preliminaryResultStat, research } from "@/lib/content";
 
 const resultRange = preliminaryResultStat.match(/\d+[–-]\d+%/)?.[0] ?? "Preliminary";
 
-const evidenceTabs = [
+type EvidenceTabId = "inputs" | "architecture" | "evaluation" | "outcome";
+
+type EvidenceTab = {
+  id: EvidenceTabId;
+  label: string;
+  eyebrow: string;
+  title: string;
+  detail: string;
+  note: string;
+  tokens: string[];
+};
+
+const evidenceTabs: EvidenceTab[] = [
   {
     id: "inputs",
-    label: "Inputs",
+    label: "(a) Inputs",
     eyebrow: "4 source families",
-    icon: Database,
     title: "Forecast context enters with its timing intact.",
     detail: research.architecture[0],
     note: "Each signal is aligned to the information that would have been available at forecast time.",
@@ -21,9 +33,8 @@ const evidenceTabs = [
   },
   {
     id: "architecture",
-    label: "Model",
+    label: "(b) Model",
     eyebrow: "Residual correction",
-    icon: BrainCircuit,
     title: "The network learns the correction, not the river from scratch.",
     detail: research.architecture[1] + " " + research.architecture[2],
     note: "Transformer and GRU experiments stay comparable through a modular, configuration-driven pipeline.",
@@ -31,9 +42,8 @@ const evidenceTabs = [
   },
   {
     id: "evaluation",
-    label: "Evaluation",
+    label: "(c) Evaluation",
     eyebrow: "Leakage-aware",
-    icon: ShieldCheck,
     title: "Evaluation mirrors real forecasting constraints.",
     detail: research.evaluation[0] + " " + research.evaluation[1],
     note: research.evaluation[2],
@@ -41,68 +51,75 @@ const evidenceTabs = [
   },
   {
     id: "outcome",
-    label: "Outcome",
-    eyebrow: resultRange,
-    icon: BarChart3,
+    label: "(d) Outcome",
+    eyebrow: "Preliminary result",
     title: "A promising signal, presented with its boundary.",
     detail: preliminaryResultStat,
     note: "Preliminary result. The final analysis and manuscript remain in progress.",
     tokens: ["Preliminary", "RMSE", "Tested LSTM baselines"],
   },
-] as const;
+];
 
-type EvidenceTab = (typeof evidenceTabs)[number];
+const inputNodes: Array<[label: string, position: string]> = [
+  ["NWM", "left-2 top-2"],
+  ["USGS", "right-2 top-2"],
+  ["ERA5", "bottom-2 left-2"],
+  ["Basin", "bottom-2 right-2"],
+];
 
 function InputsVisual() {
   return (
-    <div aria-hidden="true" className="relative mx-auto h-48 max-w-sm">
-      <svg className="absolute inset-0 h-full w-full text-primary/35" viewBox="0 0 360 192">
-        <path d="M62 42 L180 96 L298 42 M62 150 L180 96 L298 150" fill="none" stroke="currentColor" strokeDasharray="4 5" />
+    <div aria-hidden="true" className="relative mx-auto h-48 w-full max-w-[22.5rem]">
+      <svg
+        className="absolute inset-0 h-full w-full"
+        viewBox="0 0 360 192"
+        preserveAspectRatio="none"
+        focusable="false"
+      >
+        <path
+          d="M56 32 L180 96 L304 32 M56 160 L180 96 L304 160"
+          fill="none"
+          className="stroke-muted-foreground"
+          strokeDasharray="4 5"
+        />
       </svg>
-      {[
-        ["NWM", "left-2 top-2"],
-        ["USGS", "right-2 top-2"],
-        ["ERA5", "bottom-2 left-2"],
-        ["BASIN", "bottom-2 right-2"],
-      ].map(([label, position]) => (
+      {inputNodes.map(([label, position]) => (
         <div
           key={label}
           className={
             "absolute " +
             position +
-            " flex h-14 w-20 items-center justify-center rounded-xl border border-border bg-card/95 font-mono text-[10px] tracking-[0.16em] text-muted-foreground shadow-sm"
+            " grid h-12 w-24 place-items-center rounded-[4px] border border-input bg-card mono-label text-muted-foreground"
           }
         >
           {label}
         </div>
       ))}
-      <div className="absolute left-1/2 top-1/2 grid h-20 w-20 -translate-x-1/2 -translate-y-1/2 rotate-45 place-items-center rounded-2xl border border-primary/40 bg-primary/10 shadow-[0_0_48px_-18px_rgba(11,95,255,0.9)]">
-        <Database className="h-6 w-6 -rotate-45 text-primary" />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-[4px] border border-input bg-card px-3 py-2 mono-label text-foreground">
+        Align at issue time
       </div>
     </div>
   );
 }
 
+const architectureSteps: Array<[step: string, label: string]> = [
+  ["01", "NWM forecast"],
+  ["02", "Residual model"],
+  ["03", "Corrected forecast"],
+];
+
 function ArchitectureVisual() {
   return (
     <div aria-hidden="true" className="grid min-h-48 place-items-center">
-      <div className="grid w-full max-w-md grid-cols-[1fr,auto,1fr,auto,1fr] items-center gap-2">
-        {[
-          ["01", "Forecast"],
-          ["02", "Residual"],
-          ["03", "Corrected"],
-        ].map(([step, label], index) => (
+      <div className="grid w-full max-w-md grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2">
+        {architectureSteps.map(([step, label], index) => (
           <div key={step} className="contents">
-            <div className="rounded-xl border border-border bg-card/90 px-2 py-4 text-center shadow-sm">
-              <span className="block font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
-                {step}
-              </span>
-              <span className="mt-2 block text-xs font-semibold text-foreground sm:text-sm">{label}</span>
+            <div className="rounded-[4px] border border-input bg-card px-2 py-4 text-center">
+              <span className="block mono-label text-primary">{step}</span>
+              <span className="mt-2 block text-body-sm font-medium text-foreground">{label}</span>
             </div>
-            {index < 2 ? (
-              <span className="font-mono text-sm text-primary" aria-hidden="true">
-                →
-              </span>
+            {index < architectureSteps.length - 1 ? (
+              <span className="font-mono text-foreground">→</span>
             ) : null}
           </div>
         ))}
@@ -111,36 +128,55 @@ function ArchitectureVisual() {
   );
 }
 
+/* Time ruler geometry (viewBox units). Bands span x=8..352; the Test band starts at issue time. */
+const RULER_START = 8;
+const RULER_END = 352;
+const ISSUE_TIME_X = 272;
+const tickPositions = Array.from(
+  { length: Math.floor((RULER_END - RULER_START) / 24) + 1 },
+  (_, index) => RULER_START + index * 24,
+);
+
 function EvaluationVisual() {
   return (
-    <div aria-hidden="true" className="grid min-h-48 place-items-center">
-      <div className="w-full max-w-md">
-        <div className="grid grid-cols-3 gap-3">
-          {["RMSE", "NSE", "KGE"].map((metric, index) => (
-            <div
-              key={metric}
-              className="relative grid aspect-square place-items-center overflow-hidden rounded-full border border-border bg-card/90"
-            >
-              <span
-                className="absolute inset-2 rounded-full border border-dashed border-primary/35"
-                style={{ transform: "rotate(" + index * 32 + "deg)" }}
-              />
-              <span className="font-mono text-[10px] font-semibold tracking-[0.14em] text-foreground">
-                {metric}
-              </span>
-            </div>
-          ))}
-        </div>
-        <div className="mt-5 flex items-center gap-2">
-          {["Train", "Validate", "Test"].map((split, index) => (
-            <div key={split} className="flex min-w-0 flex-1 items-center gap-2">
-              <div className="min-w-0 flex-1 rounded-md border border-border bg-card/75 px-2 py-2 text-center font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
-                {split}
-              </div>
-              {index < 2 ? <span className="text-[10px] text-primary">→</span> : null}
-            </div>
-          ))}
-        </div>
+    <div aria-hidden="true">
+      <svg viewBox="0 0 360 64" className="h-16 w-full" focusable="false">
+        <rect x={8} y={20} width={192} height={18} rx={2} className="fill-muted" />
+        <rect x={200} y={20} width={72} height={18} rx={2} className="fill-border" />
+        <rect x={272} y={20} width={80} height={18} rx={2} className="fill-foreground/10" />
+        <line x1={RULER_START} x2={RULER_END} y1={44} y2={44} className="stroke-input" />
+        {tickPositions.map((x) => (
+          <line key={x} x1={x} x2={x} y1={44} y2={48} className="stroke-muted-foreground" />
+        ))}
+        <line
+          x1={ISSUE_TIME_X}
+          x2={ISSUE_TIME_X}
+          y1={10}
+          y2={52}
+          className="stroke-primary"
+          strokeWidth={1.5}
+        />
+        <polygon
+          points={`${ISSUE_TIME_X - 3},10 ${ISSUE_TIME_X + 3},10 ${ISSUE_TIME_X},4`}
+          className="fill-primary"
+        />
+      </svg>
+      <div className="mx-[2.2222%] grid grid-cols-[192fr_72fr_80fr] mono-label text-muted-foreground">
+        <span>Train</span>
+        <span>Validation</span>
+        <span>Test</span>
+      </div>
+      <p className="mt-2 text-footnote text-muted-foreground">
+        <span className="text-primary">▲</span> forecast issue time: model inputs are restricted to what
+        existed before it.
+      </p>
+      <div className="mt-4 grid grid-cols-3 gap-2">
+        {["RMSE", "NSE", "KGE"].map((metric) => (
+          <div key={metric} className="rounded-[4px] border border-border bg-card px-2 py-2 text-center">
+            <p className="mono-label text-foreground">{metric}</p>
+            <p className="text-footnote text-muted-foreground">by site × horizon</p>
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -148,26 +184,12 @@ function EvaluationVisual() {
 
 function OutcomeVisual() {
   return (
-    <div aria-hidden="true" className="grid min-h-48 place-items-center">
-      <div className="w-full max-w-md rounded-2xl border border-primary/25 bg-primary/[0.055] p-5">
-        <p className="font-serif text-5xl font-medium tracking-tight text-foreground sm:text-6xl">
-          {resultRange}
-        </p>
-        <p className="mt-2 font-mono text-[9px] uppercase tracking-[0.18em] text-muted-foreground">
-          observed RMSE reduction range
-        </p>
-        <div className="relative mt-7 h-1 rounded-full bg-border">
-          <div className="absolute left-[26%] right-[46%] h-1 rounded-full bg-gradient-to-r from-primary to-accent" />
-          <span className="absolute left-[26%] top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background bg-primary" />
-          <span className="absolute left-[54%] top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-background bg-accent" />
-        </div>
-        <div className="mt-3 flex justify-between font-mono text-[8px] uppercase tracking-[0.12em] text-muted-foreground">
-          <span>0%</span>
-          <span>Tested LSTM baselines</span>
-          <span>100%</span>
-        </div>
-      </div>
-    </div>
+    <Readout
+      value={resultRange}
+      unit="lower RMSE than the LSTM baselines tested"
+      status="preliminary"
+      footnote="Final analysis and manuscript in progress; see note 1."
+    />
   );
 }
 
@@ -205,34 +227,16 @@ export function ModelEvidenceExplorer() {
   };
 
   return (
-    <section
-      aria-labelledby="hydra-evidence-title"
-      className="overflow-hidden rounded-[1.5rem] border border-border/80 bg-background/80 shadow-[0_24px_70px_-48px_rgba(11,95,255,0.65)]"
-    >
-      <div className="border-b border-border/75 px-5 py-4">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-primary">
-              Interactive evidence trace
-            </p>
-            <h4 id="hydra-evidence-title" className="mt-1.5 text-lg font-semibold tracking-tight text-foreground">
-              Inside the HYDRA pipeline
-            </h4>
-          </div>
-          <span className="mt-0.5 inline-flex shrink-0 items-center gap-1.5 rounded-full border border-accent/30 bg-accent/10 px-2.5 py-1 font-mono text-[8px] uppercase tracking-[0.14em] text-accent">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Research
-          </span>
-        </div>
+    <section aria-labelledby="hydra-evidence-title" className="rounded-[4px] border border-border bg-card">
+      <div className="border-b border-border px-5 py-4">
+        <p className="mono-label text-muted-foreground">Figure 2 · interactive</p>
+        <h4 id="hydra-evidence-title" className="mt-1 font-serif text-title text-foreground">
+          Inside the HYDRA pipeline
+        </h4>
       </div>
 
-      <div
-        role="tablist"
-        aria-label="HYDRA evidence layers"
-        className="grid grid-cols-2 gap-px border-b border-border/75 bg-border/75 sm:grid-cols-4"
-      >
+      <div role="tablist" aria-label="HYDRA evidence layers" className="flex flex-wrap border-b border-border px-2">
         {evidenceTabs.map((tab, index) => {
-          const Icon = tab.icon;
           const selected = index === activeIndex;
 
           return (
@@ -247,17 +251,15 @@ export function ModelEvidenceExplorer() {
               aria-selected={selected}
               aria-controls={"hydra-panel-" + tab.id}
               tabIndex={selected ? 0 : -1}
-              data-cursor-label={tab.label}
               onClick={() => setActiveIndex(index)}
               onKeyDown={(event) => handleTabKeyDown(event, index)}
               className={
-                "flex min-h-14 items-center justify-center gap-2 bg-card px-3 py-3 text-xs font-semibold transition " +
+                "mono-label -mb-px h-11 border-b-2 px-3 transition-colors duration-200 " +
                 (selected
-                  ? "text-primary shadow-[inset_0_-2px_0_0_currentColor]"
-                  : "text-muted-foreground hover:text-foreground")
+                  ? "border-primary text-foreground"
+                  : "border-transparent text-muted-foreground hover:text-foreground")
               }
             >
-              <Icon className="h-3.5 w-3.5" />
               {tab.label}
             </button>
           );
@@ -271,39 +273,21 @@ export function ModelEvidenceExplorer() {
           role="tabpanel"
           aria-labelledby={"hydra-tab-" + activeTab.id}
           tabIndex={0}
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={prefersReducedMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+          initial={prefersReducedMotion ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: prefersReducedMotion ? 0 : 0.2 }}
           className="p-5 sm:p-6"
         >
-          <div className="rounded-2xl border border-border/70 bg-surface/45 p-4">
+          <div className="rounded-[4px] border border-border bg-surface p-4">
             <EvidenceVisual tab={activeTab} />
           </div>
 
-          <div className="mt-5">
-            <p className="font-mono text-[9px] uppercase tracking-[0.18em] text-primary">
-              {activeTab.eyebrow}
-            </p>
-            <h5 className="mt-2 font-serif text-2xl font-medium tracking-tight text-foreground">
-              {activeTab.title}
-            </h5>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{activeTab.detail}</p>
-            <p className="mt-3 border-l-2 border-accent/50 pl-3 text-xs leading-relaxed text-muted-foreground">
-              {activeTab.note}
-            </p>
-          </div>
-
-          <ul className="mt-5 flex flex-wrap gap-2" aria-label={activeTab.label + " evidence markers"}>
-            {activeTab.tokens.map((token) => (
-              <li
-                key={token}
-                className="rounded-full border border-border bg-card px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.1em] text-muted-foreground"
-              >
-                {token}
-              </li>
-            ))}
-          </ul>
+          <p className="mt-5 mono-label text-muted-foreground">{activeTab.eyebrow}</p>
+          <h5 className="mt-2 font-serif text-title text-foreground">{activeTab.title}</h5>
+          <p className="mt-3 text-body-sm text-muted-foreground">{activeTab.detail}</p>
+          <p className="mt-3 border-l border-border pl-3 text-footnote text-muted-foreground">{activeTab.note}</p>
+          <KeywordLine label="Markers" items={activeTab.tokens} className="mt-4" />
         </motion.div>
       </AnimatePresence>
     </section>

@@ -1,76 +1,43 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Award, Code2, GraduationCap, ShieldCheck, Wrench } from "lucide-react";
+import Link from "next/link";
 
 import { Container } from "@/components/Container";
+import { credentials, type Credential } from "@/lib/content";
 
-const highlights = [
-  {
-    icon: ShieldCheck,
-    label: "Security Clearance",
-    value: "Active TS/SCI",
-    featured: true,
-  },
-  {
-    icon: Code2,
-    label: "Focus",
-    value: "Applied AI + Software Engineering",
-  },
-  {
-    icon: Award,
-    label: "Research",
-    value: "Applied AI for hydrology",
-  },
-  {
-    icon: Wrench,
-    label: "Industry Experience",
-    value: "USAA Global Headquarters",
-  },
-  {
-    icon: GraduationCap,
-    label: "Graduate Study",
-    value: "UT Austin M.S. AI · 4.0 GPA",
-  },
-];
+const valueLinkClass = "link-text hover:text-primary hover:decoration-primary";
 
+function CredentialValue({ credential }: { credential: Credential }) {
+  if (!credential.href) return <>{credential.value}</>;
+
+  if (/^https?:\/\//.test(credential.href)) {
+    return (
+      <a href={credential.href} target="_blank" rel="noopener noreferrer" className={valueLinkClass}>
+        {credential.value}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={credential.href} className={valueLinkClass}>
+      {credential.value}
+    </Link>
+  );
+}
+
+/** Credentials strip under the masthead: a definition list, no icons, no motion, no bottom border. */
 export function CredibilityBand() {
   return (
-    <section className="py-8">
+    <section aria-label="Credentials" className="py-5">
       <Container>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-          {highlights.map((item, index) => {
-            const Icon = item.icon;
-            const isFeatured = "featured" in item && item.featured;
-
-            return (
-              <motion.article
-                key={item.label}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: index * 0.06 }}
-                className={`rounded-2xl border px-4 py-3 ${
-                  isFeatured
-                    ? "border-primary/40 bg-primary/5"
-                    : "border-border/80 bg-card"
-                }`}
-              >
-                <div className={`flex items-center gap-2 ${isFeatured ? "text-primary" : "text-primary"}`}>
-                  <Icon className="h-4 w-4" />
-                  <p className={`text-[11px] font-mono uppercase tracking-[0.16em] ${
-                    isFeatured ? "text-primary" : "text-muted-foreground"
-                  }`}>
-                    {item.label}
-                  </p>
-                </div>
-                <p className={`mt-2 text-sm font-semibold ${
-                  isFeatured ? "text-primary" : "text-foreground"
-                }`}>{item.value}</p>
-              </motion.article>
-            );
-          })}
-        </div>
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-border">
+          {credentials.map((credential) => (
+            <div key={credential.label} className="lg:px-6 lg:first:pl-0 lg:last:pr-0">
+              <dt className="mono-label text-muted-foreground">{credential.label}</dt>
+              <dd className="mt-1 text-body-sm text-foreground">
+                <CredentialValue credential={credential} />
+              </dd>
+            </div>
+          ))}
+        </dl>
       </Container>
     </section>
   );

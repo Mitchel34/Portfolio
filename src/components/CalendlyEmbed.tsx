@@ -96,13 +96,10 @@ export function CalendlyEmbed({ minHeight }: { minHeight?: string }) {
 
   return (
     <div ref={boundaryRef} className="flex w-full min-w-0 justify-center">
-      <div
-        className="calendly-container relative w-full min-w-0 max-w-[1060px] overflow-hidden rounded-2xl border border-border/80 bg-surface/40"
-        style={{ height }}
-      >
+      <div className="calendly-container relative w-full min-w-0" style={{ height }}>
         {!shouldLoad ? (
           <div className="absolute inset-0 grid place-items-center px-6 text-center">
-            <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
+            <p className="mono-label text-muted-foreground">
               Scheduling interface loads as you approach
             </p>
           </div>

@@ -1,11 +1,23 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { useState } from "react";
-import { motion } from "framer-motion";
+
+import { StatusLabel } from "@/components/StatusLabel";
+import { Button } from "@/components/ui/Button";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+const EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1];
+
+const labelClass = "mono-label text-muted-foreground";
+const inputClass =
+  "h-11 w-full rounded-[2px] border border-input bg-card px-3 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring disabled:opacity-60";
+const textareaClass =
+  "min-h-40 w-full resize-y rounded-[2px] border border-input bg-card px-3 py-2 text-base text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-ring disabled:opacity-60";
+
 export function ContactForm() {
+  const reduce = useReducedMotion();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
@@ -14,6 +26,7 @@ export function ContactForm() {
   const [errorMessage, setErrorMessage] = useState("");
 
   const isSubmitting = formState === "submitting";
+  const initial = reduce ? false : { opacity: 0, y: 12 };
 
   function validate(): string | null {
     if (!name.trim()) return "Name is required.";
@@ -62,17 +75,17 @@ export function ContactForm() {
   if (formState === "success") {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 12 }}
+        initial={initial}
         animate={{ opacity: 1, y: 0 }}
-        className="rounded-2xl border border-accent/30 bg-accent/10 p-8 text-center"
+        transition={{ duration: 0.45, ease: EASE }}
+        className="border-y border-border py-6"
       >
-        <p className="text-lg font-semibold text-foreground">Message sent!</p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Thanks for reaching out. I&apos;ll get back to you soon.
-        </p>
+        <StatusLabel status="delivered" prefix="Message sent" />
+        <p className="mt-2 text-body-sm text-muted-foreground">Thanks for reaching out. I’ll get back to you soon.</p>
         <button
+          type="button"
           onClick={() => setFormState("idle")}
-          className="mt-4 text-sm font-semibold text-primary transition hover:opacity-80"
+          className="link-text mt-3 text-body-sm font-medium text-foreground hover:text-primary hover:decoration-primary"
         >
           Send another message
         </button>
@@ -82,54 +95,47 @@ export function ContactForm() {
 
   return (
     <motion.form
-      initial={{ opacity: 0, y: 12 }}
+      initial={initial}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.45, ease: EASE }}
       onSubmit={handleSubmit}
-      className="space-y-5"
+      className="max-w-2xl space-y-5"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <label
-            htmlFor="cf-name"
-            className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground"
-          >
+          <label htmlFor="cf-name" className={labelClass}>
             Name *
           </label>
           <input
             id="cf-name"
             type="text"
+            autoComplete="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isSubmitting}
             placeholder="Your name"
-            className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 transition"
+            className={inputClass}
           />
         </div>
         <div className="space-y-1.5">
-          <label
-            htmlFor="cf-email"
-            className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground"
-          >
+          <label htmlFor="cf-email" className={labelClass}>
             Email *
           </label>
           <input
             id="cf-email"
             type="email"
+            autoComplete="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isSubmitting}
             placeholder="you@example.com"
-            className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 transition"
+            className={inputClass}
           />
         </div>
       </div>
 
       <div className="space-y-1.5">
-        <label
-          htmlFor="cf-subject"
-          className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground"
-        >
+        <label htmlFor="cf-subject" className={labelClass}>
           Subject
         </label>
         <input
@@ -139,15 +145,12 @@ export function ContactForm() {
           onChange={(e) => setSubject(e.target.value)}
           disabled={isSubmitting}
           placeholder="What's this about?"
-          className="w-full rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 transition"
+          className={inputClass}
         />
       </div>
 
       <div className="space-y-1.5">
-        <label
-          htmlFor="cf-message"
-          className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground"
-        >
+        <label htmlFor="cf-message" className={labelClass}>
           Message *
         </label>
         <textarea
@@ -157,23 +160,19 @@ export function ContactForm() {
           disabled={isSubmitting}
           rows={5}
           placeholder="Tell me about your project, role, or idea..."
-          className="w-full resize-none rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:border-primary/50 focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-50 transition"
+          className={textareaClass}
         />
       </div>
 
       {formState === "error" && (
-        <p className="rounded-xl border border-red-300/50 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-800/50 dark:bg-red-950/30 dark:text-red-400">
+        <p role="alert" className="text-footnote text-primary">
           {errorMessage}
         </p>
       )}
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="inline-flex h-11 items-center rounded-full bg-primary px-8 text-sm font-semibold text-primary-foreground transition hover:brightness-110 disabled:opacity-60"
-      >
+      <Button variant="primary" type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Sending…" : "Send Message"}
-      </button>
+      </Button>
     </motion.form>
   );
 }

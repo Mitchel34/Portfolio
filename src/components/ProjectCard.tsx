@@ -1,133 +1,123 @@
-"use client";
-
 import type { ReactNode } from "react";
-import Link from "next/link";
-import { motion, type Variants } from "framer-motion";
 
-import type { Project } from "@/lib/content";
-
-const stackContainerVariants: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } },
-};
-
-const stackTagVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.85, y: 8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-};
+import { Entry } from "@/components/Entry";
+import { NoteRef } from "@/components/Notes";
+import { StatusLabel } from "@/components/StatusLabel";
+import { TextLink } from "@/components/TextLink";
+import { type Project, projectEvidenceStatus } from "@/lib/content";
 
 type ProjectCardProps = {
   project: Project;
+  /** compact = an Entry row in the home 04 list; full = a ruled article on /projects. */
+  variant: "compact" | "full";
+  /** Footnote id appended to the title (compact variant only). */
+  noteId?: string;
 };
 
-function ProjectSection({ label, children }: { label: string; children: ReactNode }) {
+const numberedListClass =
+  "mt-2 list-decimal space-y-2 pl-5 text-body-sm text-foreground marker:font-mono marker:text-muted-foreground";
+
+function LabeledBlock({ label, children }: { label: string; children: ReactNode }) {
   return (
-    <div className="space-y-2">
-      <p className="text-[11px] font-mono uppercase tracking-[0.18em] text-muted-foreground">
-        {label}
-      </p>
-      <div className="text-sm leading-relaxed text-foreground/90">{children}</div>
+    <div>
+      <p className="mono-label text-muted-foreground">{label}</p>
+      {children}
     </div>
   );
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
-  const isWip = project.status === "Active Development";
+function NumberedList({ items }: { items: string[] }) {
+  return (
+    <ol className={numberedListClass}>
+      {items.map((item) => (
+        <li key={item}>{item}</li>
+      ))}
+    </ol>
+  );
+}
+
+function CompactCard({ project, noteId }: { project: Project; noteId?: string }) {
+  return (
+    <Entry
+      meta={
+        <>
+          <StatusLabel status={projectEvidenceStatus(project.status)} />
+          <p className="mt-3 mono-label leading-relaxed text-muted-foreground">
+            {project.stack.slice(0, 5).join(" · ")}
+          </p>
+        </>
+      }
+    >
+      <h3 className="font-serif text-title text-foreground">
+        {project.title}
+        {noteId ? <NoteRef id={noteId} /> : null}
+      </h3>
+      <p className="mt-1 text-body-sm text-muted-foreground">{project.subtitle}</p>
+
+      <div className="mt-5 space-y-5">
+        <LabeledBlock label="Problem">
+          <p className="mt-2 max-w-[65ch] text-body-sm text-foreground">{project.problem}</p>
+        </LabeledBlock>
+        <LabeledBlock label="Why it matters">
+          <p className="mt-2 max-w-[65ch] text-body-sm text-foreground">{project.impact}</p>
+        </LabeledBlock>
+      </div>
+
+      <TextLink className="mt-3" href={`/projects/${project.slug}`}>
+        Read case study
+      </TextLink>
+    </Entry>
+  );
+}
+
+function FullCard({ project }: { project: Project }) {
+  const isActiveDevelopment = project.status === "Active Development";
 
   return (
-    <article
-      className={`rounded-2xl border bg-card p-6 shadow-[0_18px_48px_-42px_rgba(18,36,58,0.65)] ${
-        isWip ? "border-dashed border-amber-400/60" : "border-border/80"
-      }`}
-    >
-      <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
-        <div>
-          {isWip && (
-            <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-amber-400/30 bg-amber-50 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-amber-700">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
-              Active Development
-            </span>
-          )}
-          <h3 className="font-serif text-2xl font-medium tracking-tight text-foreground">
-            {project.title}
-          </h3>
-          <p className="mt-1 text-sm text-muted-foreground">{project.subtitle}</p>
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          <Link
-            href={`/projects/${project.slug}`}
-            data-cursor-label="Open"
-            className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
-          >
-            Case Study
-          </Link>
+    <article className="border-t border-foreground pt-8 pb-12 lg:grid lg:grid-cols-10 lg:gap-x-8">
+      <div className="lg:col-span-3">
+        <StatusLabel status={projectEvidenceStatus(project.status)} />
+        <p className="mt-3 mono-label leading-relaxed text-muted-foreground">{project.stack.join(" · ")}</p>
+        <div className="mt-4 flex flex-col items-start gap-y-1">
+          <TextLink href={`/projects/${project.slug}`}>Case study</TextLink>
           {project.links?.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              data-cursor-label={link.label}
-              className="rounded-full border border-border bg-background px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground transition hover:border-primary/40 hover:text-primary"
-            >
+            <TextLink key={link.href} href={link.href}>
               {link.label}
-            </a>
+            </TextLink>
           ))}
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <ProjectSection label="Problem">{project.problem}</ProjectSection>
-        <ProjectSection label="Why it matters">{project.impact}</ProjectSection>
+      <div className="mt-8 lg:col-span-7 lg:mt-0">
+        <h2 className="font-serif text-heading text-balance text-foreground">{project.title}</h2>
+        <p className="mt-1 text-body-sm text-muted-foreground">{project.subtitle}</p>
 
-        <ProjectSection label="Approach">
-          <ul className="list-disc space-y-1 pl-5 marker:text-primary">
-            {project.approach.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </ProjectSection>
-
-        <ProjectSection label="Stack">
-          <motion.div
-            className="flex flex-wrap gap-2"
-            variants={stackContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-40px" }}
-          >
-            {project.stack.map((item) => (
-              <motion.span
-                key={item}
-                variants={stackTagVariants}
-                className="rounded-full border border-border/80 bg-surface/70 px-2.5 py-1 text-xs font-medium text-muted-foreground"
-              >
-                {item}
-              </motion.span>
-            ))}
-          </motion.div>
-        </ProjectSection>
-
-        <ProjectSection label={isWip ? "Current Scope" : "Results"}>
-          <ul className="list-disc space-y-1 pl-5 marker:text-accent">
-            {project.results.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </ProjectSection>
-
-        <ProjectSection label={isWip ? "Design Principles" : "What I learned"}>
-          <ul className="list-disc space-y-1 pl-5 marker:text-secondary">
-            {project.learnings.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </ProjectSection>
+        <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+          <LabeledBlock label="Problem">
+            <p className="mt-2 max-w-[65ch] text-body-sm text-foreground">{project.problem}</p>
+          </LabeledBlock>
+          <LabeledBlock label="Why it matters">
+            <p className="mt-2 max-w-[65ch] text-body-sm text-foreground">{project.impact}</p>
+          </LabeledBlock>
+          <LabeledBlock label="Approach">
+            <NumberedList items={project.approach} />
+          </LabeledBlock>
+          <LabeledBlock label={isActiveDevelopment ? "Current Scope" : "Results"}>
+            <NumberedList items={project.results} />
+          </LabeledBlock>
+          <LabeledBlock label={isActiveDevelopment ? "Design Principles" : "What I learned"}>
+            <NumberedList items={project.learnings} />
+          </LabeledBlock>
+        </div>
       </div>
     </article>
   );
+}
+
+export function ProjectCard({ project, variant, noteId }: ProjectCardProps) {
+  if (variant === "compact") {
+    return <CompactCard project={project} noteId={noteId} />;
+  }
+
+  return <FullCard project={project} />;
 }

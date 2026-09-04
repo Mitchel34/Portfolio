@@ -1,6 +1,6 @@
 # Career and Portfolio Operating Plan
 
-Updated: 2026-08-20
+Updated: 2026-09-04
 
 This is the governing plan for the career work associated with Mitchel Carson's portfolio. It replaces the completed feature-specific implementation plan that previously lived here.
 
@@ -15,6 +15,14 @@ Build a coherent career system that connects five activities:
 5. Turn current work in HYDRA, AGU, Harmony, and graduate coursework into clear, bounded evidence of applied AI, research, and engineering capability.
 
 ## Current implementation status
+
+As of 2026-09-04 (visual refresh branch `claude/personal-website-refresh-jffal0`):
+
+- The site has been redesigned around an editorial "preprint" system: paper and ink tokens, Newsreader with IBM Plex Sans and Mono, numbered sections with a margin column, figure wells with captions, footnoted claims, and a three-state evidence glyph (confirmed / provisional / not yet) that labels every output.
+- Home order is now Research, Open Source, Talks & Discussions, Projects, About, Graduate Study, Contact. Two sections are new: Open Source (verified public repositories, grouped, no vanity counts) and Talks & Discussions (AGU26 workshop, abstract, manuscript, thesis with status labels, plus discussion invitations and office hours).
+- Positioning moved from "AI / Machine Learning Engineer" to "Machine Learning Engineer & Applied AI Researcher" with a research-first tagline; the Person schema job title stays factual (M.S. student). Confirm or revert this wording before release.
+- The particle canvas, custom cursor, and graph menu were replaced by flat paper, a table-of-contents index, and one reduced-motion-safe fade.
+- Open decisions from the refresh are listed under "Decisions to make together".
 
 As of 2026-08-20:
 
@@ -164,7 +172,11 @@ A portfolio release is complete only when:
 2. Confirm current AGU abstract, travel-grant, manuscript, and presentation statuses.
 3. Decide whether Harmony's repository can be linked publicly; the public framing is now software architecture, validation, and reliability.
 4. Set a realistic weekly application cadence after the fall course deadlines are mapped.
+5. Reconcile the HYDRA headline metric. The site and resume say "26–54% lower RMSE than the LSTM baselines tested"; the public manuscript draft reports RMSE reductions relative to raw National Water Model output at three gauges, with and without lagged gauge observations, and does not report an LSTM comparison. Record the provenance of every public number in the claim ledger and publish one canonical sentence everywhere (site, resume, README, repository README).
+6. Confirm the clearance descriptor on the site matches current status wording, and confirm the AGU26 abstract title, the honors thesis title, and whether a public thesis presentation should be listed under Talks.
+7. Regenerate `public/mitchelcarson_resume.pdf`: the current PDF still lists the older Fall 2026 course plan and the previous headline, so the resume page carries a caption noting the mismatch until it is replaced.
+8. Confirm the tooling named in the HYDRA stack (Hydra configuration, MLflow, BigQuery acquisition) is either visible in the public repository or described as private infrastructure.
 
 ## Immediate next milestone
 
-Review the refreshed site and general resume, map Fall 2026 syllabus deadlines into the calendar, and begin the prioritized company list. After content approval, create a preview deployment before releasing to production.
+Review the visual refresh branch (preview deployment, desktop and mobile, both themes), resolve decisions 5 through 8 above, regenerate the resume PDF, then merge to `master`. In parallel, follow the private career memo delivered with the refresh: settle manuscript status and authorship with co-authors, add the missing baselines the manuscript needs, and decide the Fall 2027 PhD lane by early October.

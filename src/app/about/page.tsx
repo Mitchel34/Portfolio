@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { Container } from "@/components/Container";
-import { SectionHeader } from "@/components/SectionHeader";
-import { ValueCard } from "@/components/ValueCard";
-import { about, focusAreas } from "@/lib/content";
+import { Entry, EntryList } from "@/components/Entry";
+import { KeywordLine } from "@/components/KeywordLine";
+import { PageHeader } from "@/components/PageHeader";
+import { SectionFrame } from "@/components/SectionFrame";
+import { TextLink } from "@/components/TextLink";
+import { about, focusAreas, proofItems } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "About Me",
+  title: "About",
   description:
-    "Mitchel Carson is a software and AI engineer, UT Austin M.S. Artificial Intelligence student, and Air Force veteran based in Austin, Texas.",
+    "Mitchel Carson: UT Austin M.S. AI student and Air Force veteran researching streamflow forecast correction; former USAA software engineering intern.",
   pathname: "/about",
-  keywords: [
-    "about Mitchel Carson",
-    "AI engineer background",
-    "machine learning researcher",
-  ],
+  keywords: ["about Mitchel Carson", "AI engineer background", "machine learning researcher"],
 });
+
+const aboutProof = proofItems.filter((item) => item.showOnAbout);
 
 export default function AboutPage() {
   return (
@@ -25,63 +26,67 @@ export default function AboutPage() {
       <BreadcrumbJsonLd
         items={[
           { name: "Home", href: "/" },
-          { name: "About Me", href: "/about" },
+          { name: "About", href: "/about" },
         ]}
       />
-      <div className="bg-background pb-16 text-foreground">
-        <section className="pt-14">
-          <Container>
-            <SectionHeader
-              as="h1"
-              eyebrow="About Me"
-              title="Software, data, and AI systems for real problems."
-              description="My work spans enterprise APIs, hydrologic forecasting, research tooling, and small-business software."
-            />
-
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
-              {about.summary.map((paragraph) => (
-                <article key={paragraph} className="rounded-2xl border border-border/80 bg-card p-6">
-                  <p className="text-base leading-relaxed text-muted-foreground">{paragraph}</p>
-                </article>
-              ))}
+      <div className="pb-20">
+        <PageHeader
+          label="About"
+          title="Operations, production software, research."
+          lede={about.summary[0]}
+          ledeStyle="italic"
+          aside={
+            <div className="relative mt-4 aspect-[4/5] w-full max-w-[14rem] overflow-hidden rounded-[4px] border border-border">
+              <Image
+                src="/images/mitchel-carson-headshot.jpg"
+                alt="Portrait of Mitchel Carson"
+                fill
+                sizes="14rem"
+                className="object-cover object-[50%_35%]"
+              />
             </div>
-          </Container>
-        </section>
+          }
+        />
 
-        <section className="pt-16">
-          <Container>
-            <SectionHeader
-              eyebrow="Values"
-              title="What I care about"
-              description="Principles that shape model design, team collaboration, and software delivery."
-            />
-            <div className="mt-8 grid gap-5 md:grid-cols-2">
-              {about.values.map((value) => (
-                <ValueCard key={value.title} {...value} />
-              ))}
-            </div>
-          </Container>
-        </section>
+        <SectionFrame rule="none" label="Background" title="Background">
+          <div className="max-w-[65ch] space-y-5 text-body text-foreground">
+            {about.summary.slice(1).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </SectionFrame>
 
-        <section className="pt-16">
-          <Container>
-            <SectionHeader
-              eyebrow="Focus Areas"
-              title="Applied AI and systems engineering"
-              description="Domains where I have direct implementation experience."
-            />
-            <div className="mt-8 flex flex-wrap gap-2">
-              {focusAreas.map((area) => (
-                <span
-                  key={area}
-                  className="rounded-full border border-border bg-card px-4 py-1.5 text-xs font-medium text-muted-foreground"
-                >
-                  {area}
-                </span>
-              ))}
-            </div>
-          </Container>
-        </section>
+        <SectionFrame label="Experience" title="Selected experience">
+          <EntryList>
+            {aboutProof.map((item) => (
+              <Entry
+                key={item.title}
+                meta={<p className="mono-label leading-relaxed text-muted-foreground">{item.role}</p>}
+              >
+                <h3 className="font-serif text-title text-foreground">{item.title}</h3>
+                <p className="mt-2 text-body-sm text-foreground">{item.description}</p>
+                <p className="mt-2 text-footnote text-muted-foreground">Ask me about: {item.askAbout}</p>
+                <TextLink className="mt-3" href={item.href}>
+                  {item.linkLabel}
+                </TextLink>
+              </Entry>
+            ))}
+          </EntryList>
+        </SectionFrame>
+
+        <SectionFrame label="Values" title="What I care about">
+          <EntryList>
+            {about.values.map((value) => (
+              <Entry key={value.title} meta={<h3 className="font-serif text-title text-foreground">{value.title}</h3>}>
+                <p className="text-body-sm text-foreground">{value.description}</p>
+              </Entry>
+            ))}
+          </EntryList>
+        </SectionFrame>
+
+        <SectionFrame label="Focus" title="Focus areas">
+          <KeywordLine label="Areas" items={focusAreas} />
+        </SectionFrame>
       </div>
     </>
   );

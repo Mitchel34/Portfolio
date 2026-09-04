@@ -3,18 +3,33 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { ContactForm } from "@/components/ContactForm";
-import { Container } from "@/components/Container";
-import { SectionHeader } from "@/components/SectionHeader";
-import { contact, site } from "@/lib/content";
+import { FigureWell } from "@/components/FigureWell";
+import { OfficeHours } from "@/components/OfficeHours";
+import { PageHeader } from "@/components/PageHeader";
+import { SectionFrame } from "@/components/SectionFrame";
+import { buttonClass } from "@/components/ui/Button";
+import { sectionCopy, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    "Contact Mitchel Carson about applied AI, research engineering, production software, and data systems.",
+    "Contact Mitchel Carson about applied AI research, forecasting and evaluation, research engineering, and production ML. Book 30 minutes or send a message.",
   pathname: "/contact",
   keywords: ["contact AI engineer", "ML engineer contact", "hire forecasting engineer"],
 });
+
+const linkClass = "link-text text-body-sm text-foreground hover:text-primary hover:decoration-primary";
+const externalProps = { target: "_blank", rel: "noopener noreferrer" } as const;
+
+type ReachRow = { term: string; href: string; label: string; external?: boolean };
+
+const reachRows: ReachRow[] = [
+  { term: "Email", href: `mailto:${site.email}`, label: site.email },
+  { term: "Schedule", href: site.calendlyUrl, label: "30-minute conversation", external: true },
+  { term: "GitHub", href: site.github, label: "github.com/Mitchel34", external: true },
+  { term: "LinkedIn", href: site.linkedin, label: "linkedin.com/in/mitchelcarson", external: true },
+];
 
 export default function ContactPage() {
   return (
@@ -25,79 +40,56 @@ export default function ContactPage() {
           { name: "Contact", href: "/contact" },
         ]}
       />
-      <section className="bg-background pb-16 pt-14 text-foreground">
-        <Container>
-          <SectionHeader
-            as="h1"
-            eyebrow="Contact"
-            title="Let’s build AI systems with measurable impact."
-            description="I bring software engineering, applied research, and disciplined delivery to modernize critical workflows and carry ambitious systems from prototype to implementation."
-          />
+      <div className="pb-20">
+        <PageHeader
+          label="Contact"
+          title={sectionCopy.contact.title}
+          lede="Research engineer, applied scientist, and ML engineering conversations; collaboration on forecasting and evaluation; or questions about the AGU26 workshop. Fastest path is a 30-minute call."
+        />
 
-          <a
-            href={site.calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 block rounded-2xl border-2 border-primary/30 bg-primary/5 p-6 transition hover:border-primary/50"
-          >
-            <p className="text-xs font-mono uppercase tracking-[0.18em] text-primary">Fastest way to connect</p>
-            <p className="mt-3 text-lg font-semibold text-foreground">Schedule a 30-minute call</p>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {site.location} · {site.timezone} · {site.clearance}
-            </p>
-          </a>
+        <SectionFrame rule="none" label="Reach me" title="Email, scheduling, profiles">
+          <dl className="max-w-2xl divide-y divide-border border-y border-border">
+            {reachRows.map((row) => (
+              <div key={row.term} className="grid grid-cols-[7rem_1fr] gap-x-4 py-3">
+                <dt className="mono-label self-center text-muted-foreground">{row.term}</dt>
+                <dd>
+                  <a href={row.href} className={linkClass} {...(row.external ? externalProps : {})}>
+                    {row.label}
+                    {row.external ? (
+                      <span aria-hidden="true" className="ml-1 font-mono">
+                        ↗
+                      </span>
+                    ) : null}
+                  </a>
+                </dd>
+              </div>
+            ))}
+          </dl>
 
-          <div className="mt-6 grid gap-5 md:grid-cols-3">
-            <article className="rounded-2xl border border-border/80 bg-card p-5">
-              <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">Email</p>
-              <a href={`mailto:${contact.email}`} className="mt-3 block text-sm font-semibold text-foreground">
-                {contact.email}
-              </a>
-            </article>
-
-            <article className="rounded-2xl border border-border/80 bg-card p-5">
-              <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">LinkedIn</p>
-              <a href={contact.linkedin} className="mt-3 block text-sm font-semibold text-foreground truncate">
-                {contact.linkedin.replace("https://www.", "")}
-              </a>
-            </article>
-
-            <article className="rounded-2xl border border-border/80 bg-card p-5">
-              <p className="text-xs font-mono uppercase tracking-[0.18em] text-muted-foreground">GitHub</p>
-              <a href={contact.github} className="mt-3 block text-sm font-semibold text-foreground truncate">
-                {contact.github.replace("https://", "")}
-              </a>
-            </article>
+          <div className="mt-6">
+            <a href={site.calendlyUrl} className={buttonClass("primary")} {...externalProps}>
+              Schedule a conversation
+            </a>
           </div>
+          <p className="mt-4 mono-label text-muted-foreground">
+            {site.location} · {site.timezone} · {site.clearance}
+          </p>
+        </SectionFrame>
 
-          {/* Contact Form */}
-          <div className="mt-14">
-            <div className="mb-6">
-              <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">Send a message</p>
-              <h2 className="mt-2 font-serif text-2xl font-medium tracking-tight text-foreground">
-                Get in touch directly
-              </h2>
-            </div>
-            <div className="rounded-2xl border border-border/80 bg-card p-6 sm:p-8">
-              <ContactForm />
-            </div>
-          </div>
+        <SectionFrame label="Message" title="Send a message">
+          <ContactForm />
+        </SectionFrame>
 
-          {/* Calendly Embed */}
-          <div className="mt-14">
-            <div className="mb-6">
-              <p className="text-xs font-mono uppercase tracking-[0.22em] text-muted-foreground">Schedule a call</p>
-              <h2 className="mt-2 font-serif text-2xl font-medium tracking-tight text-foreground">
-                Book a Zoom appointment
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Pick a time. A Zoom link will be generated automatically.
-              </p>
-            </div>
+        <SectionFrame label="Discussions" title="Office hours">
+          <OfficeHours />
+        </SectionFrame>
+
+        <SectionFrame label="Schedule" title="Book a 30-minute conversation">
+          <FigureWell padded={false} caption="Pick a time; a Zoom link is generated automatically.">
             <CalendlyEmbed />
-          </div>
-        </Container>
-      </section>
+          </FigureWell>
+        </SectionFrame>
+      </div>
     </>
   );
 }
