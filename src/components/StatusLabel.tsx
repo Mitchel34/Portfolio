@@ -65,13 +65,16 @@ export function EvidenceLegend({ className }: { className?: string }) {
     <p className={cn("text-footnote text-muted-foreground", className)}>
       <span>How I label evidence: </span>
       {evidenceLegend.map((item, index) => (
-        <span key={item.tone} className="whitespace-nowrap">
-          {index > 0 ? <span className="whitespace-normal"> · </span> : null}
-          <StatusGlyph
-            tone={item.tone}
-            className={cn("mr-1.5 inline-block align-[-1px]", toneClass[item.tone])}
-          />
-          {item.label} ({item.meaning})
+        <span key={item.tone}>
+          {index > 0 ? " · " : null}
+          <span className="whitespace-nowrap">
+            <StatusGlyph
+              tone={item.tone}
+              className={cn("mr-1.5 inline-block align-[-1px]", toneClass[item.tone])}
+            />
+            {item.label}
+          </span>{" "}
+          ({item.meaning})
         </span>
       ))}
     </p>

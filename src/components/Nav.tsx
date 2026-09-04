@@ -41,7 +41,7 @@ export function Nav() {
 
           <Link
             href="/resume"
-            className="mono-label hidden h-9 items-center text-foreground transition-colors hover:text-primary lg:inline-flex"
+            className="mono-label hidden h-9 items-center text-foreground transition-colors hover:text-primary lg:ml-3 lg:inline-flex"
           >
             Résumé
           </Link>

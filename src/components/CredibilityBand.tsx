@@ -1,27 +1,5 @@
-import Link from "next/link";
-
 import { Container } from "@/components/Container";
-import { credentials, type Credential } from "@/lib/content";
-
-const valueLinkClass = "link-text hover:text-primary hover:decoration-primary";
-
-function CredentialValue({ credential }: { credential: Credential }) {
-  if (!credential.href) return <>{credential.value}</>;
-
-  if (/^https?:\/\//.test(credential.href)) {
-    return (
-      <a href={credential.href} target="_blank" rel="noopener noreferrer" className={valueLinkClass}>
-        {credential.value}
-      </a>
-    );
-  }
-
-  return (
-    <Link href={credential.href} className={valueLinkClass}>
-      {credential.value}
-    </Link>
-  );
-}
+import { credentials } from "@/lib/content";
 
 /** Credentials strip under the masthead: a definition list, no icons, no motion, no bottom border. */
 export function CredibilityBand() {
@@ -32,9 +10,7 @@ export function CredibilityBand() {
           {credentials.map((credential) => (
             <div key={credential.label} className="lg:px-6 lg:first:pl-0 lg:last:pr-0">
               <dt className="mono-label text-muted-foreground">{credential.label}</dt>
-              <dd className="mt-1 text-body-sm text-foreground">
-                <CredentialValue credential={credential} />
-              </dd>
+              <dd className="mt-1 text-body-sm text-foreground">{credential.value}</dd>
             </div>
           ))}
         </dl>

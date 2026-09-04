@@ -106,6 +106,7 @@ export function CalendlyEmbed({ minHeight }: { minHeight?: string }) {
         ) : null}
         <div
           ref={widgetRef}
+          role="region"
           aria-label="Schedule a meeting with Mitchel Carson"
           className="h-full w-full min-w-0"
         />

@@ -230,9 +230,9 @@ export function ModelEvidenceExplorer() {
     <section aria-labelledby="hydra-evidence-title" className="rounded-[4px] border border-border bg-card">
       <div className="border-b border-border px-5 py-4">
         <p className="mono-label text-muted-foreground">Figure 2 · interactive</p>
-        <h4 id="hydra-evidence-title" className="mt-1 font-serif text-title text-foreground">
+        <h3 id="hydra-evidence-title" className="mt-1 font-serif text-title text-foreground">
           Inside the HYDRA pipeline
-        </h4>
+        </h3>
       </div>
 
       <div role="tablist" aria-label="HYDRA evidence layers" className="flex flex-wrap border-b border-border px-2">
@@ -284,7 +284,7 @@ export function ModelEvidenceExplorer() {
           </div>
 
           <p className="mt-5 mono-label text-muted-foreground">{activeTab.eyebrow}</p>
-          <h5 className="mt-2 font-serif text-title text-foreground">{activeTab.title}</h5>
+          <h4 className="mt-2 font-serif text-title text-foreground">{activeTab.title}</h4>
           <p className="mt-3 text-body-sm text-muted-foreground">{activeTab.detail}</p>
           <p className="mt-3 border-l border-border pl-3 text-footnote text-muted-foreground">{activeTab.note}</p>
           <KeywordLine label="Markers" items={activeTab.tokens} className="mt-4" />

@@ -221,33 +221,28 @@ export const sectionCopy = {
 // Credentials strip (under the masthead).
 // ---------------------------------------------------------------------------
 
-export type Credential = { label: string; value: string; href?: string };
+export type Credential = { label: string; value: string };
 
 export const credentials: Credential[] = [
   {
     label: "Graduate study",
     value: "The University of Texas at Austin · M.S. Artificial Intelligence · GPA 4.0 · expected May 2027",
-    href: "/#coursework",
   },
   {
     label: "Research",
     value: "HYDRA · deep-learning residual correction for National Water Model forecasts · manuscript in progress",
-    href: "/#research",
   },
   {
     label: "AGU26",
     value: "Scientific workshop facilitator · Accepted",
-    href: "/#talks",
   },
   {
     label: "Industry",
     value: "USAA · Software Engineering Intern · 2025",
-    href: "/projects/usaa-risk-services",
   },
   {
     label: "Service and clearance",
     value: "U.S. Air Force · Executive Missions Aviator · 2020–2023 · Active TS/SCI",
-    href: "/resume",
   },
 ];
 
