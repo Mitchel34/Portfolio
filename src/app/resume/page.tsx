@@ -6,7 +6,9 @@ import { FigureWell } from "@/components/FigureWell";
 import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
 import { buttonClass } from "@/components/ui/Button";
-import { education, experience, site } from "@/lib/content";
+import { KeywordLine } from "@/components/KeywordLine";
+import { StatusLabel } from "@/components/StatusLabel";
+import { education, experience, projectEvidenceStatus, projects, site, skills } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -61,7 +63,7 @@ export default function ResumePage() {
         <SectionFrame rule="none" label="PDF" title="Résumé (PDF)">
           <FigureWell
             padded={false}
-            caption="Résumé (PDF). The PDF's Fall 2026 course list predates the current site list; see Coursework for the current plan."
+            caption={`Résumé (PDF), one page, generated from this site's content. Updated ${site.resumePdfUpdated}.`}
           >
             <iframe
               src={`${site.resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
@@ -69,6 +71,38 @@ export default function ResumePage() {
               className="h-[520px] w-full border-0 md:h-[840px]"
             />
           </FigureWell>
+        </SectionFrame>
+
+        <SectionFrame label="Research" title="Research and selected projects">
+          <EntryList>
+            {projects
+              .filter((project) => project.slug === "hydra-temporal" || project.slug === "harmony")
+              .map((project) => (
+                <Entry
+                  key={project.slug}
+                  meta={
+                    <>
+                      <StatusLabel status={projectEvidenceStatus(project.status)} />
+                      <p className="mt-3 mono-label leading-relaxed text-muted-foreground">
+                        {project.stack.slice(0, 5).join(" · ")}
+                      </p>
+                    </>
+                  }
+                >
+                  <h3 className="font-serif text-title text-foreground">{project.title}</h3>
+                  <p className="mt-1 text-body-sm text-muted-foreground">{project.subtitle}</p>
+                  <DetailList items={project.approach.slice(0, 3)} />
+                </Entry>
+              ))}
+          </EntryList>
+        </SectionFrame>
+
+        <SectionFrame label="Skills" title="Tools and platforms">
+          <div className="space-y-3">
+            {skills.map((group) => (
+              <KeywordLine key={group.label} label={group.label} items={group.items} />
+            ))}
+          </div>
         </SectionFrame>
 
         <SectionFrame label="Experience" title="Industry and service">

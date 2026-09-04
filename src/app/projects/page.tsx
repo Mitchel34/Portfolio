@@ -6,13 +6,13 @@ import { PageHeader } from "@/components/PageHeader";
 import { Notes } from "@/components/Notes";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SchemaScript } from "@/components/SchemaScript";
-import { harmonyBoundaryNote, research, projects } from "@/lib/content";
+import { harmonyBoundaryNote, projects } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Case studies in applied AI and production software: HYDRA residual correction, USAA GraphQL services, and Harmony's fail-closed forecasting architecture.",
+    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, and Harmony's fail-closed research system.",
   pathname: "/projects",
   keywords: [
     "AI projects",
@@ -57,15 +57,12 @@ export default function ProjectsPage() {
                 key={project.slug}
                 project={project}
                 variant="full"
-                noteId={project.slug === "hydra-temporal" ? "1" : project.slug === "harmony" ? "2" : undefined}
+                noteId={project.slug === "harmony" ? "2" : undefined}
               />
             ))}
           </div>
         <Notes
-            items={[
-              { id: "1", text: research.preliminaryNote },
-              { id: "2", text: harmonyBoundaryNote },
-            ]}
+            items={[{ id: "2", text: harmonyBoundaryNote }]}
           />
         </Container>
       </div>

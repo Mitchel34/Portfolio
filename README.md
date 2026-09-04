@@ -1,6 +1,6 @@
 # Mitchel Carson — Portfolio
 
-Machine learning engineer and applied AI researcher; M.S. Artificial Intelligence student at the University of Texas at Austin researching deep-learning residual correction for NOAA National Water Model streamflow forecasts.
+Machine learning engineer and applied AI researcher; M.S. Artificial Intelligence student at the University of Texas at Austin researching deep-learning post-processing for NOAA NextGen streamflow forecasts at 1–18 hour lead times.
 
 **Live site:** [mitchelcarson.com](https://mitchelcarson.com)
 
@@ -8,16 +8,16 @@ Machine learning engineer and applied AI researcher; M.S. Artificial Intelligenc
 
 ## About
 
-My work sits at the intersection of applied ML research and production engineering. HYDRA began as my senior honors thesis and continues as active research; preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested, and the final analysis and manuscript for Water Resources Research remain in progress. Research code is public at [hydra-nwm-streamflow-correction](https://github.com/Mitchel34/hydra-nwm-streamflow-correction). I hold an active TS/SCI clearance and previously served as an Executive Missions Aviator in the United States Air Force.
+My work sits at the intersection of applied ML research and production engineering. HYDRA began as my senior honors thesis and continues as active research: reforecast generation software for NOAA's NextGen framework and a deep-learning post-processor that improves streamflow forecasts at 1–18 hour lead times, comparing LSTM, vanilla Transformer, and Mamba-style state-space models. A results manuscript for Water Resources Research and a software paper for Environmental Modelling & Software are in preparation. Data tooling is public at [NextGen_Hydra](https://github.com/Mitchel34/NextGen_Hydra). I hold an active TS/SCI clearance and previously served as an Executive Missions Aviator in the United States Air Force.
 
 I'm based in **Austin, Texas**, building across applied AI, research engineering, production software, and data systems.
 
 ## Focus Areas
 
-- Time-series forecasting & hybrid deep-learning (Transformer + RNN)
-- Applied ML for environmental and operational systems
-- Production ML pipelines, reproducible evaluation, and API-ready systems
-- Risk-aware modeling and leakage-safe temporal validation
+- Streamflow forecast post-processing with LSTM, Transformer, and Mamba-style state-space models
+- Reforecast generation and data tooling for NOAA's NextGen framework
+- Leakage-aware temporal evaluation by site and lead time
+- Cloud research compute: Google Cloud (BigQuery, Cloud Storage) for hydrology; AWS for AI-agent and finance research
 - Reliability-focused modular software systems
 
 ## Graduate Coursework
@@ -30,7 +30,8 @@ I'm based in **Austin, Texas**, building across applied AI, research engineering
 
 - **AGU26 scientific workshop (accepted):** *Best Practices for AI and Agentic Workflows in Earth Science Research*, San Francisco, December 7–11, 2026. Facilitator.
 - **AGU26 HYDRA abstract (under review):** submitted to the H100 machine-learning-in-hydrology session.
-- **Water Resources Research manuscript (in progress).**
+- **Water Resources Research results manuscript (in progress).**
+- **Environmental Modelling & Software paper on the NextGen reforecast generation software (planned).**
 - **Senior Honors Thesis (completed, December 2025):** runoff forecasting with deep learning, Appalachian State University.
 
 ## Site

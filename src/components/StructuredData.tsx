@@ -26,7 +26,8 @@ const personJsonLd = {
   },
   knowsAbout: [
     "Time-series forecasting",
-    "Residual correction for operational forecasts",
+    "Post-processing of operational streamflow forecasts",
+    "State-space and attention sequence models",
     "Leakage-aware temporal evaluation",
     "Reproducible machine learning pipelines",
     "Deep learning",

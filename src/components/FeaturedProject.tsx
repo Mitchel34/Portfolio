@@ -1,10 +1,8 @@
-import Image from "next/image";
 import type { ReactNode } from "react";
 
 import { FigureWell } from "@/components/FigureWell";
 import { KeywordLine } from "@/components/KeywordLine";
 import { ModelEvidenceExplorer } from "@/components/ModelEvidenceExplorer";
-import { NoteRef } from "@/components/Notes";
 import { Reveal } from "@/components/Reveal";
 import { SectionFrame } from "@/components/SectionFrame";
 import { StatusLabel } from "@/components/StatusLabel";
@@ -13,27 +11,6 @@ import { getProjectRepositoryUrl, landingSections, projects, research, sectionCo
 
 const project = projects[0];
 const repositoryUrl = getProjectRepositoryUrl(project);
-
-/** The impact statement with the preliminary-result footnote marker after its first sentence. */
-function ImpactWithNote({ impact, noteId }: { impact: string; noteId: string }) {
-  const breakIndex = impact.indexOf(". ");
-  if (breakIndex === -1) {
-    return (
-      <>
-        {impact}
-        <NoteRef id={noteId} />
-      </>
-    );
-  }
-
-  return (
-    <>
-      {impact.slice(0, breakIndex + 1)}
-      <NoteRef id={noteId} />
-      {impact.slice(breakIndex + 1)}
-    </>
-  );
-}
 
 function ProseBlock({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -55,36 +32,14 @@ export function FeaturedProject() {
       label="Research"
       title={sectionCopy.research.title}
       lede={sectionCopy.research.lede}
-      meta={<StatusLabel status="preliminary" prefix="Ongoing research" />}
-      notes={[{ id: "1", text: research.preliminaryNote }]}
+      meta={<StatusLabel status="in-progress" prefix="Ongoing research" />}
     >
       <Reveal>
-        <FigureWell number={1} padded={false} caption={research.figures.architecture}>
-          <a
-            href="/images/projects/hydra-architecture-full.jpg"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Open the full-resolution conceptual HYDRA research architecture diagram in a new tab"
-            title="Open full-resolution diagram"
-            className="block"
-          >
-            <Image
-              src="/images/projects/hydra-architecture-full.jpg"
-              alt="Conceptual HYDRA research architecture diagram"
-              width={2816}
-              height={1536}
-              sizes="(min-width: 1024px) 60rem, calc(100vw - 2.5rem)"
-              quality={95}
-              className="h-auto w-full"
-            />
-          </a>
-        </FigureWell>
-
-        <div className="mt-10 xl:grid xl:grid-cols-10 xl:gap-x-8">
+        <div className="xl:grid xl:grid-cols-10 xl:gap-x-8">
           <div className="xl:col-span-5">
             <ProseBlock label="Abstract">
               <p className="mt-2 max-w-[65ch] text-body text-foreground">
-                {project.problem} <ImpactWithNote impact={project.impact} noteId="1" />
+                {project.problem} {project.impact}
               </p>
             </ProseBlock>
 
@@ -106,13 +61,15 @@ export function FeaturedProject() {
           </div>
 
           <div className="mt-10 xl:col-span-5 xl:mt-0">
-            <FigureWell number={2} caption={research.figures.explorer}>
+            <FigureWell number={1} caption={research.figures.explorer}>
               <ModelEvidenceExplorer />
             </FigureWell>
           </div>
         </div>
 
-        <KeywordLine items={project.stack} className="mt-10" />
+        <p className="mt-8 max-w-[65ch] text-footnote text-muted-foreground">{research.scopeNote}</p>
+
+        <KeywordLine items={project.stack} className="mt-6" />
 
         <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2">
           <TextLink href="/research">Full research page</TextLink>

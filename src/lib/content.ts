@@ -4,17 +4,17 @@ export const site = {
   headline: "Machine Learning Engineer & Applied AI Researcher",
   tagline: "Forecast corrections, evaluated the way they’d be used.",
   role:
-    "I research deep-learning residual correction for NOAA National Water Model streamflow forecasts and build the reproducible pipelines behind it. M.S. Artificial Intelligence at UT Austin, expected May 2027; production software at USAA before that.",
+    "I build reforecast generation software for NOAA’s NextGen framework and post-processing models that improve its streamflow forecasts at 1–18 hour lead times, evaluated the way they would be used. M.S. Artificial Intelligence at UT Austin, expected May 2027; production software at USAA before that.",
   summary:
-    "Mitchel Carson is a machine learning engineer and UT Austin M.S. Artificial Intelligence student (expected May 2027) researching deep-learning residual correction for NOAA National Water Model streamflow forecasts. He previously built GraphQL services as a software engineering intern at USAA and served as an Executive Missions Aviator in the U.S. Air Force; he holds an active TS/SCI clearance and is based in Austin, Texas.",
+    "Mitchel Carson is a machine learning engineer and UT Austin M.S. Artificial Intelligence student (expected May 2027) researching deep-learning post-processing of NOAA NextGen streamflow reforecasts at 1–18 hour lead times. He previously built GraphQL services as a software engineering intern at USAA and served as an Executive Missions Aviator in the U.S. Air Force; he holds an active TS/SCI clearance and is based in Austin, Texas.",
   metaDescription:
-    "Machine learning engineer and UT Austin M.S. AI student researching residual correction for NOAA National Water Model streamflow forecasts. Austin, TX.",
+    "Machine learning engineer and UT Austin M.S. AI student researching deep-learning post-processing for NOAA NextGen streamflow forecasts at 1–18 hour lead times. Austin, TX.",
   schemaJobTitle: "M.S. Artificial Intelligence student, The University of Texas at Austin",
   focusLine: "Applied AI Research · Reproducible ML · Production Software",
   runningHead: "Mitchel Carson · Portfolio",
   updated: "September 2026",
   updatedYear: "2026",
-  resumePdfUpdated: "August 2026",
+  resumePdfUpdated: "September 2026",
   resumeFilename: "mitchelcarson_resume.pdf",
   resumeUrl: "/mitchelcarson_resume.pdf",
   email: "mitchel.carson@gmail.com",
@@ -100,7 +100,7 @@ export const landingSections = {
     label: "Research",
     navLabel: "Research",
     href: "/#research",
-    description: "HYDRA: residual correction for National Water Model forecasts",
+    description: "HYDRA: post-processing AI for NextGen streamflow reforecasts",
     inHeader: true,
   },
   openSource: {
@@ -181,9 +181,9 @@ export type SectionCopy = { title: string; lede: string };
 
 export const sectionCopy = {
   research: {
-    title: "Residual correction for National Water Model streamflow forecasts.",
+    title: "Post-processing NextGen streamflow reforecasts at 1–18 hour lead times.",
     lede:
-      "HYDRA tests Transformer and GRU residual-correction models on NOAA National Water Model forecasts, using USGS observations, ERA5 signals, and basin context, with leakage-aware temporal splits and RMSE, NSE, and KGE reported by site and horizon.",
+      "HYDRA pairs reforecast generation software for NOAA’s NextGen framework with a post-processing model that learns to improve the forecasts it produces. LSTM, vanilla Transformer, and Mamba-style state-space models are compared under leakage-aware evaluation by lead time.",
   },
   openSource: {
     title: "The code behind the claims.",
@@ -230,7 +230,7 @@ export const credentials: Credential[] = [
   },
   {
     label: "Research",
-    value: "HYDRA · deep-learning residual correction for National Water Model forecasts · manuscript in progress",
+    value: "HYDRA · post-processing AI for NextGen streamflow reforecasts · two manuscripts in preparation",
   },
   {
     label: "AGU26",
@@ -247,11 +247,38 @@ export const credentials: Credential[] = [
 ];
 
 export const focusAreas = [
-  "Time-series forecasting research",
-  "Leakage-aware evaluation",
-  "Reproducible ML pipelines",
+  "Streamflow forecast post-processing",
+  "Sequence models: LSTM, Transformer, Mamba",
+  "Leakage-aware evaluation by lead time",
+  "Reproducible research software",
+  "Cloud research compute: Google Cloud, AWS",
   "Production software and APIs",
-  "Modular forecasting systems",
+];
+
+export type SkillGroup = { label: string; items: string[] };
+
+export const skills: SkillGroup[] = [
+  { label: "Languages", items: ["Python", "Java", "JavaScript/TypeScript", "SQL", "R"] },
+  {
+    label: "Machine learning",
+    items: [
+      "PyTorch",
+      "LSTM, Transformer, and Mamba-style state-space sequence models",
+      "Forecast post-processing",
+      "Leakage-aware temporal evaluation",
+      "Hydrologic metrics (RMSE, NSE, KGE)",
+      "pandas, NumPy, xarray",
+    ],
+  },
+  {
+    label: "Cloud",
+    items: [
+      "Google Cloud (BigQuery, Cloud Storage) for hydrologic forecast data",
+      "AWS research compute (isolated CPU/GPU) for AI-agent and finance research",
+      "Docker",
+    ],
+  },
+  { label: "Software", items: ["Spring Boot", "GraphQL", "React", "Node.js", "PostgreSQL", "Git", "Jira"] },
 ];
 
 export type ProjectLink = {
@@ -291,8 +318,6 @@ export function projectEvidenceStatus(status: Project["status"]): EvidenceStatus
       return "in-progress";
   }
 }
-
-export const preliminaryResultStat = "Preliminary: 26–54% lower RMSE vs. the LSTM baselines tested";
 
 export const about = {
   summary: [
@@ -355,8 +380,8 @@ export const proofItems: ProofItem[] = [
     title: "HYDRA",
     role: "Applied AI for Hydrology · Research in Progress",
     description:
-      "I am testing Transformer and GRU corrections for National Water Model streamflow forecasts in a reproducible PyTorch pipeline. Preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested; final analysis and the manuscript remain in progress.",
-    askAbout: "Temporal leakage, forecast evaluation, and defensible research claims.",
+      "I build reforecast generation software for NOAA’s NextGen framework and a post-processing model that improves its streamflow forecasts at 1–18 hour lead times, comparing LSTM, Transformer, and Mamba-style models under leakage-aware evaluation.",
+    askAbout: "Temporal leakage, forecast evaluation by lead time, and defensible research claims.",
     href: "/research",
     linkLabel: "View research",
     showOnHome: false,
@@ -375,9 +400,9 @@ export const proofItems: ProofItem[] = [
   },
   {
     title: "Harmony",
-    role: "Part-Time Software Product · Active Development",
+    role: "AI-agent and finance research system · Active development",
     description:
-      "I am building a modular Python system for data input, forecasting, validation, controls, and simulation. Fail-closed checks stop workflows when data or evaluation rules are incomplete.",
+      "I am building a modular Python research system for data input, forecasting, validation, controls, and simulation, with an isolated AWS compute path for reproducible experiments. Fail-closed checks stop workflows when data or evaluation rules are incomplete.",
     askAbout: "Semantic validation, modular architecture, and reproducible system state.",
     href: "/projects/harmony",
     linkLabel: "View project",
@@ -390,58 +415,59 @@ export const projects: Project[] = [
   {
     slug: "hydra-temporal",
     title: "HYDRA",
-    subtitle: "Hybrid Deep-learning for Residual Analysis",
+    subtitle: "Reforecast generation and post-processing AI for NOAA NextGen streamflow forecasts",
     status: "Active",
     problem:
-      "National forecasts can miss local watershed behavior. HYDRA tests whether deep-learning corrections can improve National Water Model streamflow forecasts using timelines that reflect real forecasting conditions.",
+      "Short-lead streamflow forecasts from NOAA’s NextGen framework carry errors that a learned post-processor may be able to reduce. HYDRA asks whether a model trained on reforecasts generated with the same framework can improve forecasts at 1–18 hour lead times without leaking future information.",
     impact:
-      "Preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested. The final analysis and manuscript are still in progress.",
+      "The work has two parts: software that generates NextGen reforecasts and prepares the data, and a post-processing model evaluated by lead time. A results manuscript for Water Resources Research and a software paper for Environmental Modelling & Software are in preparation.",
     approach: [
-      "Developed Transformer and GRU residual-correction experiments for NOAA National Water Model forecasts.",
-      "Built a modular PyTorch pipeline integrating NWM forecasts, USGS observations, ERA5 signals, and basin context.",
-      "Used Google Cloud BigQuery and Cloud Storage to acquire issued NWM forecasts while preserving initialization, lead, valid-time, version, and source metadata.",
-      "Automated normalization, leakage-aware temporal splits, and hydrologic evaluation with RMSE, NSE, and KGE.",
-      "Continuing the analysis and preparing a manuscript for Water Resources Research.",
+      "Built NextGen reforecast generation software that produces retrospective streamflow forecasts, plus tooling that acquires, verifies, and tidies the data.",
+      "Designing a deep-learning post-processor that improves NextGen streamflow forecasts at 1–18 hour lead times.",
+      "Comparing LSTM, vanilla Transformer, and Mamba-style state-space models (with attention) on identical inputs and splits.",
+      "Using Google Cloud BigQuery and Cloud Storage for hydrologic data acquisition while preserving initialization, lead, valid-time, version, and source metadata.",
+      "Evaluating with leakage-aware temporal splits and hydrologic metrics reported by site and lead time.",
+      "Preparing a results manuscript for Water Resources Research and a software manuscript for Environmental Modelling & Software.",
     ],
     stack: [
       "PyTorch",
-      "Google Cloud",
+      "LSTM",
       "Transformer",
-      "GRU",
-      "Hydra Config",
-      "MLflow",
+      "Mamba (state-space)",
+      "NextGen",
+      "Google Cloud",
       "xarray",
     ],
     results: [
-      "Built repeatable evaluations across multiple forecast horizons and watershed sites.",
-      "Produced versioned predictions, diagnostics, and figures for ongoing analysis.",
-      "Results remain under active review and will be updated after the manuscript analysis is complete.",
+      "Reforecast generation software and data tooling are in place; the NextGen_Hydra repository is public.",
+      "Model comparison and lead-time evaluation are in progress; results will be posted when the analysis is complete.",
+      "Two manuscripts are in preparation.",
     ],
     learnings: [
-      "Residual-correction research depends as much on temporal evaluation design as model architecture.",
+      "Post-processing depends as much on how reforecasts are generated and aligned as on model architecture.",
       "Reproducible data and configuration lineage make changing scientific results auditable.",
-      "Research claims should evolve with the evidence rather than outrun the final analysis.",
+      "Research claims should evolve with the evidence rather than outrun the analysis.",
     ],
     caseStudy: {
       architecture: [
-        "Residual-correction pipeline that ingests NOAA NWM forecasts, forcing signals, and basin context.",
-        "Transformer encoder for multi-scale temporal context, paired with a recurrent residual head.",
+        "Reforecast generation software drives NOAA’s NextGen framework to produce retrospective forecasts with consistent metadata.",
+        "A post-processing model consumes reforecasts and observations to produce improved forecasts at 1–18 hour lead times.",
         "Config-driven training and evaluation with strict train/validation/test time boundaries.",
       ],
       reliability: [
-        "Leakage-aware splitting by time and evaluation horizon to match operational inference constraints.",
+        "Leakage-aware splitting by time and lead time to match operational inference constraints.",
         "Reproducible runs through fixed seeds, immutable data artifacts, and tracked configuration snapshots.",
-        "Performance tracked by site, horizon, and hydrologic metric instead of a single aggregate score.",
+        "Performance tracked by site, lead time, and hydrologic metric instead of a single aggregate score.",
       ],
       delivery: [
-        "Packaged experiments with Hydra configuration and MLflow tracking for repeatable comparison.",
-        "Produced versioned artifacts, diagnostics, figures, and technical documentation for scientific review.",
-        "Maintained a research website while reserving final manuscript claims for the completed analysis.",
+        "Packaged data acquisition and reforecast generation as reusable software intended for a software paper.",
+        "Produced versioned artifacts, diagnostics, and technical documentation for scientific review.",
+        "Maintained a research website while reserving claims for the completed analysis.",
       ],
     },
     links: [
       { label: "Research Details", href: "/research" },
-      { label: "GitHub repository", href: "https://github.com/Mitchel34/hydra-nwm-streamflow-correction" },
+      { label: "GitHub repository", href: "https://github.com/Mitchel34/NextGen_Hydra" },
     ],
   },
   {
@@ -496,7 +522,7 @@ export const projects: Project[] = [
   {
     slug: "harmony",
     title: "Harmony",
-    subtitle: "A modular Python system for forecasting and decision workflows",
+    subtitle: "A modular Python research system for AI-agent and finance workflows on AWS",
     status: "Active Development",
     problem:
       "Forecasting software needs more than a model. It also needs reliable data, repeatable testing, clear controls, and a safe response when inputs are incomplete.",
@@ -587,31 +613,26 @@ export function getProjectPrimaryExternalLink(project: Project) {
 }
 
 export const research = {
-  title: "HYDRA: Hybrid Deep-learning for Residual Analysis",
-  status: "Ongoing research · preliminary results",
+  title: "HYDRA: post-processing AI for NextGen streamflow reforecasts",
+  status: "Ongoing research · results pending",
   summary:
-    "Developing and evaluating Transformer/GRU residual-correction models for National Water Model streamflow forecasts. The pipeline combines hydrologic and meteorological data with leakage-aware temporal evaluation; the final analysis and manuscript are in progress.",
-  preliminaryResult:
-    "Preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested. This interim result will be updated as the ongoing analysis and manuscript are completed.",
-  resultQualifier: "Preliminary · relative to the LSTM baselines tested",
-  preliminaryNote:
-    "Preliminary result from early experiments; RMSE relative to the LSTM baselines tested. The final analysis and the Water Resources Research manuscript are in progress.",
+    "Developing reforecast generation software for NOAA’s NextGen framework and a deep-learning post-processor that improves streamflow forecasts at 1–18 hour lead times, with LSTM, vanilla Transformer, and Mamba-style state-space models compared under leakage-aware evaluation. Two manuscripts are in preparation.",
+  scopeNote:
+    "No performance number is reported on this site until the analysis is complete; results will be published with the manuscripts.",
   figures: {
-    architecture:
-      "Conceptual HYDRA research architecture: NWM forecasts, USGS observations, ERA5 signals, and basin context feed a residual-correction model whose output corrects the issued forecast. The implementation continues to evolve with the analysis.",
     explorer:
-      "Interactive trace of the HYDRA pipeline: inputs aligned to issue time, residual learning, leakage-aware evaluation, and a bounded outcome. Panel (d) reports a preliminary result; see note 1.",
+      "Interactive trace of the HYDRA pipeline: reforecast generation, the three model families compared, leakage-aware evaluation by lead time, and the planned outputs.",
   },
   architecture: [
-    "Inputs: National Water Model forecasts, USGS observations, ERA5 signals, and basin context.",
-    "Temporal modeling: Transformer and GRU experiments for learned residual correction.",
-    "Pipeline: Modular PyTorch training, automated normalization, and configuration-driven experiments.",
-    "Outputs: Versioned predictions, hydrologic diagnostics, figures, and research artifacts.",
+    "Reforecasts: NextGen reforecast generation software produces retrospective forecasts with consistent initialization, lead-time, and version metadata.",
+    "Inputs: NextGen reforecasts and streamflow observations aligned to forecast issue time.",
+    "Models: LSTM, vanilla Transformer, and Mamba-style state-space models (with attention) trained as post-processors on identical inputs.",
+    "Outputs: Improved forecasts at 1–18 hour lead times, diagnostics, and research artifacts.",
   ],
   evaluation: [
-    "Metrics: RMSE, NSE, and KGE with results inspected by site and forecast horizon.",
+    "Metrics: Hydrologic error and skill metrics (RMSE, NSE, KGE) reported by site and lead time.",
     "Validation: Leakage-aware temporal splits designed around forecast availability.",
-    "Diagnostics: Comparisons against National Water Model and LSTM baselines.",
+    "Reference: Raw NextGen reforecasts at every lead time.",
   ],
   reproducibility: [
     "Configuration-driven experiments with tracked parameters and artifacts.",
@@ -619,7 +640,7 @@ export const research = {
     "Environment and run records designed to support scientific review.",
   ],
   constraints: [
-    "Research conclusions remain provisional until the final analysis is complete.",
+    "Research conclusions remain provisional until the analysis is complete; no performance numbers are reported yet.",
     "Operational claims must respect the timing and availability of every model input.",
   ],
   links: [{ label: "HYDRA Case Study", href: "/projects/hydra-temporal" }],
@@ -654,22 +675,23 @@ export type OpenSourceEntry = {
 
 export const openSource: OpenSourceEntry[] = [
   {
-    name: "hydra-nwm-streamflow-correction",
-    url: "https://github.com/Mitchel34/hydra-nwm-streamflow-correction",
-    language: "Python",
-    kind: "maintained",
-    group: "Research code",
-    what: "GRU, Transformer, and conditioning-head models for time-series regression on National Water Model streamflow.",
-    why: "The current HYDRA pipeline, in the open, so the method can be inspected directly.",
-  },
-  {
     name: "NextGen_Hydra",
     url: "https://github.com/Mitchel34/NextGen_Hydra",
     language: "Python",
     kind: "maintained",
     group: "Research code",
     what: "End-to-end automation to acquire, verify, and tidy historical NOAA NextGen streamflow data.",
-    why: "Scripted data acquisition and verification is the precondition for a defensible forecast evaluation.",
+    why: "Data tooling behind the NextGen reforecast work; the software paper builds on it.",
+  },
+  {
+    name: "hydra-nwm-streamflow-correction",
+    url: "https://github.com/Mitchel34/hydra-nwm-streamflow-correction",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    note: "earlier phase · 2025–2026",
+    what: "GRU, Transformer, and conditioning-head models for National Water Model streamflow time-series regression.",
+    why: "Earlier HYDRA phase on the National Water Model, kept public for lineage.",
   },
   {
     name: "Runoff_Forcasting",
@@ -755,7 +777,7 @@ export const talks: TalkItem[] = [
     whenLabel: "Decision pending",
     status: "under-review",
     description:
-      "Residual correction of National Water Model streamflow forecasts with Transformer and GRU models. Acceptance and scheduling will be posted when confirmed.",
+      "Abstract on the HYDRA streamflow-forecasting work. Acceptance and scheduling will be posted when confirmed.",
     links: [{ label: "Research details", href: "/research" }],
     heroLabel: "AGU26 abstract",
   },
@@ -763,19 +785,34 @@ export const talks: TalkItem[] = [
     id: "wrr-manuscript",
     kind: "Manuscript",
     order: 3,
-    title: "HYDRA manuscript",
+    title: "HYDRA results manuscript",
     venue: "Water Resources Research (target journal)",
     whenLabel: "In preparation",
     status: "in-progress",
     role: "Author",
-    description: "Final analysis and writing are in progress. A link will be added when one exists.",
+    description:
+      "Post-processing results for NextGen streamflow reforecasts at 1–18 hour lead times. Analysis and writing are in progress; a link will be added when one exists.",
     links: [{ label: "Research details", href: "/research" }],
     heroLabel: "WRR manuscript",
   },
   {
+    id: "ems-software-paper",
+    kind: "Manuscript",
+    order: 4,
+    title: "NextGen reforecast generation software",
+    venue: "Environmental Modelling & Software (target journal)",
+    whenLabel: "Planned",
+    status: "planned",
+    role: "Author",
+    description:
+      "Software paper describing the reforecast generation and data tooling, planned alongside the code release.",
+    links: [{ label: "Code on GitHub", href: "https://github.com/Mitchel34/NextGen_Hydra" }],
+    heroLabel: "EM&S software paper",
+  },
+  {
     id: "honors-thesis",
     kind: "Thesis",
-    order: 4,
+    order: 5,
     title: "Senior Honors Thesis on runoff forecasting with deep learning",
     venue: "Appalachian State University",
     whenLabel: "December 2025",
@@ -804,9 +841,14 @@ export const discussions = {
       groundedIn: "/research",
     },
     {
-      title: "Residual correction for operational forecasts",
+      title: "Post-processing operational forecasts by lead time",
       prompt:
-        "Why learn the correction on top of the National Water Model instead of replacing it, and what that buys in evaluation.",
+        "Why learn a correction on top of NextGen reforecasts instead of replacing the model, and what changes between 1 and 18 hours ahead.",
+      groundedIn: "/research",
+    },
+    {
+      title: "Sequence models for hydrology: LSTM, Transformer, Mamba",
+      prompt: "What a fair comparison between recurrent, attention, and state-space models needs before anyone declares a winner.",
       groundedIn: "/research",
     },
     {
@@ -817,7 +859,7 @@ export const discussions = {
     {
       title: "Reproducible research pipelines",
       prompt:
-        "Hydra configs, MLflow tracking, versioned data lineage, and metrics by site and horizon instead of one aggregate score.",
+        "Reforecast generation you can rerun, versioned data lineage, and metrics by site and lead time instead of one aggregate score.",
       groundedIn: "/projects/hydra-temporal",
     },
     {

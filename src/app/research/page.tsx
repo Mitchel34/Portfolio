@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FigureWell } from "@/components/FigureWell";
-import { NoteRef } from "@/components/Notes";
+import { ModelEvidenceExplorer } from "@/components/ModelEvidenceExplorer";
 import { OfficeHours } from "@/components/OfficeHours";
 import { PageHeader } from "@/components/PageHeader";
 import { Readout } from "@/components/Readout";
@@ -17,13 +16,14 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Research",
   description:
-    "HYDRA: leakage-aware Transformer and GRU residual correction for National Water Model streamflow forecasts. Preliminary results; manuscript in progress.",
+    "HYDRA: reforecast generation software and deep-learning post-processing for NOAA NextGen streamflow forecasts at 1–18 hour lead times. Two manuscripts in preparation.",
   pathname: "/research",
   keywords: [
     "AI research",
     "time-series forecasting research",
     "streamflow forecasting",
-    "NOAA NWM residual correction",
+    "NextGen streamflow forecast post-processing",
+    "LSTM Transformer Mamba comparison",
   ],
 });
 
@@ -49,38 +49,34 @@ export default function ResearchPage() {
           title={research.title}
           lede={research.summary}
           ledeStyle="italic"
-          meta={<StatusLabel status="preliminary" prefix="Ongoing research" />}
+          meta={<StatusLabel status="in-progress" prefix="Ongoing research" />}
         />
 
-        <SectionFrame
-          rule="none"
-          label="Result"
-          title="Preliminary result"
-          notes={[{ id: "1", text: research.preliminaryNote }]}
-        >
-          <Readout
-            className="max-w-md"
-            value="26–54%"
-            unit="lower RMSE than the LSTM baselines tested"
-            status="preliminary"
-            footnote={
-              <>
-                Relative to the LSTM baselines tested. Final analysis and manuscript in progress.
-                <NoteRef id="1" />
-              </>
-            }
-          />
+        <SectionFrame rule="none" label="Scope" title="What is being built and tested">
+          <div className="lg:grid lg:grid-cols-10 lg:gap-x-8 lg:items-start">
+            <div className="lg:col-span-4">
+              <Readout
+                value="1–18 h"
+                unit="forecast lead times targeted by the post-processing model"
+                status="in-progress"
+                footnote={research.scopeNote}
+              />
+            </div>
+            <div className="mt-6 max-w-[65ch] space-y-4 text-body text-foreground lg:col-span-6 lg:mt-0">
+              <p>
+                Reforecast generation software drives NOAA’s NextGen framework to produce the retrospective forecasts the
+                model learns from, with initialization, lead-time, and version metadata preserved so every training
+                example is traceable.
+              </p>
+              <p>
+                LSTM, vanilla Transformer, and Mamba-style state-space models are trained as post-processors on identical
+                inputs and splits and compared against the raw reforecasts at every lead time from 1 to 18 hours.
+              </p>
+            </div>
+          </div>
 
-          <FigureWell number={1} padded={false} caption={research.figures.architecture} className="mt-8">
-            <Image
-              src="/images/projects/hydra-architecture-full.jpg"
-              alt="Conceptual HYDRA research architecture diagram"
-              width={2816}
-              height={1536}
-              sizes="(min-width: 1024px) 60rem, calc(100vw - 2.5rem)"
-              className="h-auto w-full"
-              priority
-            />
+          <FigureWell number={1} caption={research.figures.explorer} className="mt-10">
+            <ModelEvidenceExplorer />
           </FigureWell>
         </SectionFrame>
 

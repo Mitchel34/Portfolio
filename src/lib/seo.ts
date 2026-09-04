@@ -21,7 +21,8 @@ export const DEFAULT_KEYWORDS = [
   "AI research engineer",
   "hydrology machine learning",
   "National Water Model",
-  "residual correction",
+  "forecast post-processing",
+  "NextGen streamflow forecasts",
   "leakage-aware evaluation",
   "open source research code",
 ];

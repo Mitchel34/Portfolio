@@ -5,9 +5,7 @@ import { type KeyboardEvent, useRef, useState } from "react";
 
 import { KeywordLine } from "@/components/KeywordLine";
 import { Readout } from "@/components/Readout";
-import { preliminaryResultStat, research } from "@/lib/content";
-
-const resultRange = preliminaryResultStat.match(/\d+[–-]\d+%/)?.[0] ?? "Preliminary";
+import { research } from "@/lib/content";
 
 type EvidenceTabId = "inputs" | "architecture" | "evaluation" | "outcome";
 
@@ -24,47 +22,48 @@ type EvidenceTab = {
 const evidenceTabs: EvidenceTab[] = [
   {
     id: "inputs",
-    label: "(a) Inputs",
-    eyebrow: "4 source families",
-    title: "Forecast context enters with its timing intact.",
-    detail: research.architecture[0],
-    note: "Each signal is aligned to the information that would have been available at forecast time.",
-    tokens: ["NWM forecasts", "USGS observations", "ERA5 signals", "Basin context"],
+    label: "(a) Reforecasts",
+    eyebrow: "Reforecast generation",
+    title: "The forecasts to learn from are generated, not scraped.",
+    detail: research.architecture[0] + " " + research.architecture[1],
+    note: "Consistent initialization, lead-time, and version metadata make every training example traceable to the forecast that produced it.",
+    tokens: ["NextGen", "Reforecasts", "USGS observations", "Issue time"],
   },
   {
     id: "architecture",
-    label: "(b) Model",
-    eyebrow: "Residual correction",
-    title: "The network learns the correction, not the river from scratch.",
-    detail: research.architecture[1] + " " + research.architecture[2],
-    note: "Transformer and GRU experiments stay comparable through a modular, configuration-driven pipeline.",
-    tokens: ["Transformer", "GRU", "PyTorch", "Hydra Config"],
+    label: "(b) Models",
+    eyebrow: "Three model families",
+    title: "Recurrent, attention, and state-space models on identical inputs.",
+    detail: research.architecture[2],
+    note: "LSTM, vanilla Transformer, and Mamba-style state-space models are trained as post-processors with the same inputs and the same splits, so differences are attributable to the model.",
+    tokens: ["LSTM", "Transformer", "Mamba (SSM)", "PyTorch"],
   },
   {
     id: "evaluation",
     label: "(c) Evaluation",
-    eyebrow: "Leakage-aware",
+    eyebrow: "Leakage-aware · by lead time",
     title: "Evaluation mirrors real forecasting constraints.",
     detail: research.evaluation[0] + " " + research.evaluation[1],
     note: research.evaluation[2],
-    tokens: ["RMSE", "NSE", "KGE", "Site × horizon"],
+    tokens: ["1–18 h lead times", "Site × lead time", "Temporal splits"],
   },
   {
     id: "outcome",
-    label: "(d) Outcome",
-    eyebrow: "Preliminary result",
-    title: "A preliminary signal, presented with its boundary.",
-    detail: preliminaryResultStat,
-    note: "Preliminary result. The final analysis and manuscript remain in progress.",
-    tokens: ["Preliminary", "RMSE", "Tested LSTM baselines"],
+    label: "(d) Outputs",
+    eyebrow: "Planned outputs",
+    title: "Two manuscripts and the software behind them.",
+    detail:
+      "A results manuscript for Water Resources Research and a software paper for Environmental Modelling & Software are in preparation.",
+    note: research.scopeNote,
+    tokens: ["WRR manuscript", "EM&S software paper", "Public code"],
   },
 ];
 
 const inputNodes: Array<[label: string, position: string]> = [
-  ["NWM", "left-2 top-2"],
+  ["NextGen", "left-2 top-2"],
   ["USGS", "right-2 top-2"],
-  ["ERA5", "bottom-2 left-2"],
-  ["Basin", "bottom-2 right-2"],
+  ["Lead time", "bottom-2 left-2"],
+  ["Version", "bottom-2 right-2"],
 ];
 
 function InputsVisual() {
@@ -103,9 +102,9 @@ function InputsVisual() {
 }
 
 const architectureSteps: Array<[step: string, label: string]> = [
-  ["01", "NWM forecast"],
-  ["02", "Residual model"],
-  ["03", "Corrected forecast"],
+  ["01", "NextGen reforecast"],
+  ["02", "Post-processing model"],
+  ["03", "Improved forecast"],
 ];
 
 function ArchitectureVisual() {
@@ -174,7 +173,7 @@ function EvaluationVisual() {
         {["RMSE", "NSE", "KGE"].map((metric) => (
           <div key={metric} className="rounded-[4px] border border-border bg-card px-2 py-2 text-center">
             <p className="mono-label text-foreground">{metric}</p>
-            <p className="text-footnote text-muted-foreground">by site × horizon</p>
+            <p className="text-footnote text-muted-foreground">by site × lead time</p>
           </div>
         ))}
       </div>
@@ -185,10 +184,10 @@ function EvaluationVisual() {
 function OutcomeVisual() {
   return (
     <Readout
-      value={resultRange}
-      unit="lower RMSE than the LSTM baselines tested"
-      status="preliminary"
-      footnote="Final analysis and manuscript in progress; see note 1."
+      value="1–18 h"
+      unit="forecast lead times targeted by the post-processing model"
+      status="in-progress"
+      footnote="Results will be published with the manuscripts; no performance number is reported yet."
     />
   );
 }
@@ -229,7 +228,7 @@ export function ModelEvidenceExplorer() {
   return (
     <section aria-labelledby="hydra-evidence-title" className="rounded-[4px] border border-border bg-card">
       <div className="border-b border-border px-5 py-4">
-        <p className="mono-label text-muted-foreground">Figure 2 · interactive</p>
+        <p className="mono-label text-muted-foreground">Figure 1 · interactive</p>
         <h3 id="hydra-evidence-title" className="mt-1 font-serif text-title text-foreground">
           Inside the HYDRA pipeline
         </h3>

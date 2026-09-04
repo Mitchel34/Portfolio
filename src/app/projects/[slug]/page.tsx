@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { FigureWell } from "@/components/FigureWell";
 import { KeywordLine } from "@/components/KeywordLine";
-import { NoteRef } from "@/components/Notes";
 import { PageHeader } from "@/components/PageHeader";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SectionFrame } from "@/components/SectionFrame";
@@ -94,27 +91,6 @@ export async function generateMetadata({ params }: ProjectCaseStudyPageProps): P
   });
 }
 
-/** The impact statement with the preliminary-result footnote marker after its first sentence. */
-function ImpactWithNote({ impact, noteId }: { impact: string; noteId: string }) {
-  const breakIndex = impact.indexOf(". ");
-  if (breakIndex === -1) {
-    return (
-      <>
-        {impact}
-        <NoteRef id={noteId} />
-      </>
-    );
-  }
-
-  return (
-    <>
-      {impact.slice(0, breakIndex + 1)}
-      <NoteRef id={noteId} />
-      {impact.slice(breakIndex + 1)}
-    </>
-  );
-}
-
 function CaseStudyGroup({ number, title, items }: { number: number; title: string; items: string[] }) {
   return (
     <section className="border-t border-border pt-6">
@@ -194,7 +170,6 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
           rule="none"
           label="Summary"
           title="Problem and impact"
-          notes={isHydra ? [{ id: "1", text: research.preliminaryNote }] : undefined}
         >
           <div>
             <p className="mono-label text-muted-foreground">Problem</p>
@@ -203,31 +178,12 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
           <div className="mt-6">
             <p className="mono-label text-muted-foreground">Impact</p>
             <p className="mt-2 max-w-[65ch] text-body text-foreground">
-              {isHydra ? <ImpactWithNote impact={project.impact} noteId="1" /> : project.impact}
+              {project.impact}
             </p>
           </div>
 
           {isHydra ? (
-            <FigureWell number={1} padded={false} caption={research.figures.architecture} className="mt-8">
-              <a
-                href="/images/projects/hydra-architecture-full.jpg"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Open the full-resolution conceptual HYDRA research architecture diagram in a new tab"
-                title="Open full-resolution diagram"
-                className="block"
-              >
-                <Image
-                  src="/images/projects/hydra-architecture-full.jpg"
-                  alt="Conceptual HYDRA research architecture diagram"
-                  width={2816}
-                  height={1536}
-                  sizes="(min-width: 1024px) 60rem, calc(100vw - 2.5rem)"
-                  quality={95}
-                  className="h-auto w-full"
-                />
-              </a>
-            </FigureWell>
+            <p className="mt-8 max-w-[65ch] text-footnote text-muted-foreground">{research.scopeNote}</p>
           ) : null}
         </SectionFrame>
 
