@@ -8,7 +8,7 @@ import { OfficeHours } from "@/components/OfficeHours";
 import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
 import { buttonClass } from "@/components/ui/Button";
-import { sectionCopy, site } from "@/lib/content";
+import { discussions, sectionCopy, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -80,8 +80,8 @@ export default function ContactPage() {
           <ContactForm />
         </SectionFrame>
 
-        <SectionFrame label="Discussions" title="Office hours">
-          <OfficeHours />
+        <SectionFrame label="Discussions" title={discussions.title} lede={discussions.intro}>
+          <OfficeHours showHeader={false} />
         </SectionFrame>
 
         <SectionFrame label="Schedule" title="Book a 30-minute conversation">

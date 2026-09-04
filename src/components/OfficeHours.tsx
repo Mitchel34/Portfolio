@@ -4,17 +4,23 @@ import { discussions } from "@/lib/content";
 
 type OfficeHoursProps = {
   className?: string;
+  /** Set false when the surrounding section already carries the title and intro. */
+  showHeader?: boolean;
 };
 
 /** Discussion topics and the booking call to action. Used on the home Talks section, /contact and /research. */
-export function OfficeHours({ className }: OfficeHoursProps) {
+export function OfficeHours({ className, showHeader = true }: OfficeHoursProps) {
   return (
     <div className={className}>
-      <p className="mono-label text-muted-foreground">Discussions · office hours</p>
-      <h3 className="mt-1 font-serif text-title text-balance text-foreground">{discussions.title}</h3>
-      <p className="mt-2 max-w-[65ch] text-body-sm text-muted-foreground">{discussions.intro}</p>
+      {showHeader ? (
+        <>
+          <p className="mono-label text-muted-foreground">Discussions · office hours</p>
+          <h3 className="mt-1 font-serif text-title text-balance text-foreground">{discussions.title}</h3>
+          <p className="mt-2 max-w-[65ch] text-body-sm text-muted-foreground">{discussions.intro}</p>
+        </>
+      ) : null}
 
-      <ul className="mt-4 divide-y divide-border border-y border-border">
+      <ul className={showHeader ? "mt-4 divide-y divide-border border-y border-border" : "divide-y divide-border border-y border-border"}>
         {discussions.topics.map((topic) => (
           <li key={topic.title} className="py-3">
             <p className="text-body-sm font-medium text-foreground">{topic.title}</p>

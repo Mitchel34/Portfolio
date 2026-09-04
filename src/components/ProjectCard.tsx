@@ -10,7 +10,7 @@ type ProjectCardProps = {
   project: Project;
   /** compact = an Entry row in the home 04 list; full = a ruled article on /projects. */
   variant: "compact" | "full";
-  /** Footnote id appended to the title (compact variant only). */
+  /** Footnote id appended to the title. */
   noteId?: string;
 };
 
@@ -70,7 +70,7 @@ function CompactCard({ project, noteId }: { project: Project; noteId?: string })
   );
 }
 
-function FullCard({ project }: { project: Project }) {
+function FullCard({ project, noteId }: { project: Project; noteId?: string }) {
   const isActiveDevelopment = project.status === "Active Development";
 
   return (
@@ -89,7 +89,10 @@ function FullCard({ project }: { project: Project }) {
       </div>
 
       <div className="mt-8 lg:col-span-7 lg:mt-0">
-        <h2 className="font-serif text-heading text-balance text-foreground">{project.title}</h2>
+        <h2 className="font-serif text-heading text-balance text-foreground">
+          {project.title}
+          {noteId ? <NoteRef id={noteId} /> : null}
+        </h2>
         <p className="mt-1 text-body-sm text-muted-foreground">{project.subtitle}</p>
 
         <div className="mt-6 grid gap-x-8 gap-y-6 sm:grid-cols-2">
@@ -119,5 +122,5 @@ export function ProjectCard({ project, variant, noteId }: ProjectCardProps) {
     return <CompactCard project={project} noteId={noteId} />;
   }
 
-  return <FullCard project={project} />;
+  return <FullCard project={project} noteId={noteId} />;
 }

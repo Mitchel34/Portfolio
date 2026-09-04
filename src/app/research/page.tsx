@@ -65,7 +65,7 @@ export default function ResearchPage() {
             status="preliminary"
             footnote={
               <>
-                {research.resultQualifier}. Final analysis and manuscript in progress.
+                Relative to the LSTM baselines tested. Final analysis and manuscript in progress.
                 <NoteRef id="1" />
               </>
             }
@@ -102,7 +102,7 @@ export default function ResearchPage() {
         <SectionFrame
           id="communication"
           label="Communication"
-          title="Scientific communication, labelled by status."
+          title="Scientific communication, labeled by status."
           lede="Outputs are listed with their current status and updated as milestones are confirmed."
         >
           <TalksList items={talks} />

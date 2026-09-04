@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-import { getProjectBySlug, site } from "@/lib/content";
+import { evidenceWord, getProjectBySlug, projectEvidenceStatus, site } from "@/lib/content";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -22,7 +22,7 @@ export default async function OpenGraphImage({ params }: Props) {
   const title = project?.title ?? site.name;
   const description = project ? `${project.problem} ${project.impact}`.slice(0, 150) : site.tagline;
   const keywords = project?.stack.slice(0, 5) ?? site.focusLine.split(" · ");
-  const eyebrow = project ? `${project.status} · Case study` : site.title;
+  const eyebrow = project ? `${evidenceWord[projectEvidenceStatus(project.status)]} · Case study` : site.title;
 
   return new ImageResponse(
     (

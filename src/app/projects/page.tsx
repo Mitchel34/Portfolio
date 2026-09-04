@@ -3,9 +3,10 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
+import { Notes } from "@/components/Notes";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SchemaScript } from "@/components/SchemaScript";
-import { projects } from "@/lib/content";
+import { harmonyBoundaryNote, research, projects } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -52,9 +53,20 @@ export default function ProjectsPage() {
         <Container>
           <div className="mt-10 [&>article:first-child]:border-t-0 [&>article:first-child]:pt-0">
             {projects.map((project) => (
-              <ProjectCard key={project.slug} project={project} variant="full" />
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                variant="full"
+                noteId={project.slug === "hydra-temporal" ? "1" : project.slug === "harmony" ? "2" : undefined}
+              />
             ))}
           </div>
+        <Notes
+            items={[
+              { id: "1", text: research.preliminaryNote },
+              { id: "2", text: harmonyBoundaryNote },
+            ]}
+          />
         </Container>
       </div>
     </>

@@ -53,7 +53,7 @@ const evidenceTabs: EvidenceTab[] = [
     id: "outcome",
     label: "(d) Outcome",
     eyebrow: "Preliminary result",
-    title: "A promising signal, presented with its boundary.",
+    title: "A preliminary signal, presented with its boundary.",
     detail: preliminaryResultStat,
     note: "Preliminary result. The final analysis and manuscript remain in progress.",
     tokens: ["Preliminary", "RMSE", "Tested LSTM baselines"],

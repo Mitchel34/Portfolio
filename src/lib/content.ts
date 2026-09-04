@@ -109,7 +109,7 @@ export const landingSections = {
     label: "Open Source",
     navLabel: "Open Source",
     href: "/#open-source",
-    description: "Research code and tooling, published in the open",
+    description: "Research code and tooling, in the open",
     inHeader: true,
   },
   talks: {
@@ -855,7 +855,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Software Engineering Intern",
     org: "USAA",
-    period: "May 2025 - August 2025",
+    period: "May 2025 – August 2025",
     highlights: [
       "At USAA’s global headquarters in San Antonio, designed and implemented GraphQL APIs using Java and Spring Boot to surface core customer data.",
       "Integrated supplementary data into an internal troubleshooting tool.",
@@ -867,7 +867,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Executive Missions Aviator",
     org: "United States Air Force",
-    period: "August 2020 - April 2023",
+    period: "August 2020 – April 2023",
     highlights: [
       "Maintained passenger safety and schedule reliability for distinguished guests aboard Air Force 2.",
       "Coordinated across flight crew, security teams, and executive staff to meet exacting operational standards.",
@@ -881,7 +881,7 @@ export const education = [
   {
     degree: "M.S. Artificial Intelligence",
     org: "University of Texas at Austin",
-    period: "In progress - Expected May 2027",
+    period: "In progress – expected May 2027",
     details: [
       "Current GPA: 4.0/4.0.",
       "Completed: AI Ethics, Machine Learning, Deep Learning, and Reinforcement Learning.",

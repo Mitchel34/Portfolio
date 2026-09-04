@@ -171,7 +171,7 @@ export function ContactForm() {
       )}
 
       <Button variant="primary" type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Sending…" : "Send Message"}
+        {isSubmitting ? "Sending…" : "Send message"}
       </Button>
     </motion.form>
   );

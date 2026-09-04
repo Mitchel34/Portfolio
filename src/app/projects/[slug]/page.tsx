@@ -19,8 +19,7 @@ import {
   projectEvidenceStatus,
   projects,
   research,
-  site,
-} from "@/lib/content";
+  site, evidenceWord } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 type ProjectCaseStudyPageProps = {
@@ -170,7 +169,7 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
 
       <div className="pb-20">
         <PageHeader
-          label={`${project.status} · Case study`}
+          label={`${evidenceWord[projectEvidenceStatus(project.status)]} · Case study`}
           title={project.title}
           lede={project.subtitle}
           ledeStyle="italic"
