@@ -1,76 +1,93 @@
-"use client";
-
-import { Github, Linkedin, Mail } from "lucide-react";
+import type { ReactNode } from "react";
 
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
-import { Container } from "@/components/Container";
-import { SectionHeader } from "@/components/SectionHeader";
-import { landingSections, site } from "@/lib/content";
+import { FigureWell } from "@/components/FigureWell";
+import { Reveal } from "@/components/Reveal";
+import { SectionFrame } from "@/components/SectionFrame";
+import { buttonClass } from "@/components/ui/Button";
+import { landingSections, sectionCopy, site } from "@/lib/content";
+
+const rowLinkClass = "link-text text-body-sm text-foreground hover:text-primary hover:decoration-primary";
+
+/** "https://www.linkedin.com/in/x" → "linkedin.com/in/x" for display. */
+function displayUrl(url: string) {
+  return url.replace(/^https?:\/\/(www\.)?/, "");
+}
+
+function ContactRow({ term, children }: { term: string; children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-[7rem_1fr] gap-x-4 py-3">
+      <dt className="mono-label self-center text-muted-foreground">{term}</dt>
+      <dd>{children}</dd>
+    </div>
+  );
+}
+
+function ExternalRowLink({ href, children }: { href: string; children: ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={rowLinkClass}>
+      {children}
+      <span aria-hidden="true" className="ml-1 font-mono">
+        ↗
+      </span>
+    </a>
+  );
+}
 
 export function ContactSection() {
-  const section = landingSections.contact;
-
   return (
-    <section className="scroll-mt-24 border-t border-border/70 bg-background py-20" id={section.id}>
-      <Container>
-        <div className="space-y-6">
-          <SectionHeader
-            eyebrow={section.label}
-            title="Let’s build AI systems with measurable impact."
-            description="I bring software engineering, applied research, and disciplined delivery to modernize critical workflows, launch new AI capabilities, and carry ambitious systems from prototype to large-scale implementation."
-          />
+    <SectionFrame
+      id={landingSections.contact.id}
+      number="07"
+      label="Contact"
+      title={sectionCopy.contact.title}
+      lede={sectionCopy.contact.lede}
+    >
+      <Reveal>
+        <div className="lg:grid lg:grid-cols-10 lg:items-start lg:gap-x-8">
+          <dl className="divide-y divide-border border-y border-border lg:col-span-6">
+            <ContactRow term="Email">
+              <a href={`mailto:${site.email}`} className={rowLinkClass}>
+                {site.email}
+              </a>
+            </ContactRow>
+            <ContactRow term="Schedule">
+              <ExternalRowLink href={site.calendlyUrl}>30-minute conversation</ExternalRowLink>
+            </ContactRow>
+            <ContactRow term="GitHub">
+              <ExternalRowLink href={site.github}>{displayUrl(site.github)}</ExternalRowLink>
+            </ContactRow>
+            <ContactRow term="LinkedIn">
+              <ExternalRowLink href={site.linkedin}>{displayUrl(site.linkedin)}</ExternalRowLink>
+            </ContactRow>
+          </dl>
 
-          <div className="flex flex-wrap gap-3">
-            <a
-              href={`mailto:${site.email}`}
-              data-cursor-label="Connect"
-              className="inline-flex h-12 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-            >
-              Start a Conversation
-            </a>
-            <a
-              href={site.resumeUrl}
-              download={site.resumeFilename}
-              data-cursor-label="Resume"
-              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
-              Download Resume
-            </a>
-            <a
-              href={site.calendlyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-label="Schedule"
-              className="inline-flex h-12 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
-              Schedule a Call
-            </a>
-          </div>
-
-          <div className="flex items-center gap-2 text-muted-foreground">
-            <a href={`mailto:${site.email}`} data-cursor-label="Email" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card hover:border-primary/40 hover:text-foreground" aria-label="Email">
-              <Mail className="h-4 w-4" />
-            </a>
-            <a href={site.linkedin} target="_blank" rel="noopener noreferrer" data-cursor-label="LinkedIn" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card hover:border-primary/40 hover:text-foreground" aria-label="LinkedIn">
-              <Linkedin className="h-4 w-4" />
-            </a>
-            <a href={site.github} target="_blank" rel="noopener noreferrer" data-cursor-label="GitHub" className="inline-flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-card hover:border-primary/40 hover:text-foreground" aria-label="GitHub">
-              <Github className="h-4 w-4" />
-            </a>
+          <div className="mt-8 lg:col-span-4 lg:mt-0">
+            <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+              <a
+                className={buttonClass("primary")}
+                href={site.calendlyUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Schedule a conversation
+              </a>
+              <a className={buttonClass("outline")} href={site.resumeUrl} download={site.resumeFilename}>
+                Résumé (PDF)
+              </a>
+            </div>
+            <p className="mono-label mt-4 text-muted-foreground">
+              {site.location} · {site.timezone} · {site.clearance}
+            </p>
           </div>
         </div>
 
         <div className="mt-12">
-          <p className="text-xs font-mono uppercase tracking-[0.2em] text-muted-foreground">Schedule a Call</p>
-          <div className="mt-4">
+          <FigureWell padded={false} caption="Pick a time; a Zoom link is generated automatically.">
             <CalendlyEmbed />
-          </div>
+          </FigureWell>
         </div>
-
-        <p className="mt-14 text-center text-xs text-muted-foreground">
-          {new Date().getFullYear()} {site.name}.
-        </p>
-      </Container>
-    </section>
+      </Reveal>
+    </SectionFrame>
   );
 }

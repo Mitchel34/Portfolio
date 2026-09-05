@@ -2,16 +2,17 @@ import type { Metadata } from "next";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
+import { PageHeader } from "@/components/PageHeader";
+import { Notes } from "@/components/Notes";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SchemaScript } from "@/components/SchemaScript";
-import { SectionHeader } from "@/components/SectionHeader";
-import { projects } from "@/lib/content";
+import { harmonyBoundaryNote, projects } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Applied AI, forecasting research, and software engineering projects including HYDRA, Harmony, and production API systems.",
+    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, and Harmony's fail-closed research system.",
   pathname: "/projects",
   keywords: [
     "AI projects",
@@ -43,22 +44,28 @@ export default function ProjectsPage() {
       />
       <SchemaScript data={projectCollectionSchema} />
 
-      <section className="bg-background pb-16 pt-14 text-foreground">
+      <div className="pb-20">
+        <PageHeader
+          label="Projects"
+          title="Engineering case studies."
+          lede="Problem, approach, current evidence, limits, and lessons, for the HYDRA pipeline, USAA production APIs, and the Harmony forecasting system."
+        />
         <Container>
-          <SectionHeader
-            as="h1"
-            eyebrow="Projects"
-            title="Applied AI and software systems"
-            description="Each case study separates the problem, technical approach, current evidence, limitations, and implementation lessons."
-          />
-
-          <div className="mt-10 grid gap-7">
+          <div className="mt-10 [&>article:first-child]:border-t-0 [&>article:first-child]:pt-0">
             {projects.map((project) => (
-              <ProjectCard key={project.title} project={project} />
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                variant="full"
+                noteId={project.slug === "harmony" ? "2" : undefined}
+              />
             ))}
           </div>
+        <Notes
+            items={[{ id: "2", text: harmonyBoundaryNote }]}
+          />
         </Container>
-      </section>
+      </div>
     </>
   );
 }

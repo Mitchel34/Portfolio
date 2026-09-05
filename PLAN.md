@@ -1,6 +1,6 @@
 # Career and Portfolio Operating Plan
 
-Updated: 2026-08-20
+Updated: 2026-09-04
 
 This is the governing plan for the career work associated with Mitchel Carson's portfolio. It replaces the completed feature-specific implementation plan that previously lived here.
 
@@ -16,10 +16,19 @@ Build a coherent career system that connects five activities:
 
 ## Current implementation status
 
+As of 2026-09-04 (visual refresh branch `claude/personal-website-refresh-jffal0`):
+
+- The site has been redesigned around an editorial "preprint" system: paper and ink tokens, Newsreader with IBM Plex Sans and Mono, numbered sections with a margin column, figure wells with captions, footnoted claims, and a three-state evidence glyph (confirmed / provisional / not yet) that labels every output.
+- Home order is now Research, Open Source, Talks & Discussions, Projects, About, Graduate Study, Contact. Two sections are new: Open Source (verified public repositories, grouped, no vanity counts) and Talks & Discussions (AGU26 workshop, abstract, manuscript, thesis with status labels, plus discussion invitations and office hours).
+- Positioning moved from "AI / Machine Learning Engineer" to "Machine Learning Engineer & Applied AI Researcher" with a research-first tagline; the Person schema job title stays factual (M.S. student). Confirm or revert this wording before release.
+- HYDRA is now framed around NextGen reforecast generation software and a post-processing model for 1–18 hour lead times (LSTM, vanilla Transformer, and Mamba-style state-space models compared), with two manuscripts in preparation. The earlier residual-correction phase remains visible only as an "earlier phase" repository in Open Source.
+- The particle canvas, custom cursor, and graph menu were replaced by flat paper, a table-of-contents index, and one reduced-motion-safe fade.
+- Open decisions from the refresh are listed under "Decisions to make together".
+
 As of 2026-08-20:
 
 - The local portfolio has been rewritten around the confirmed AI / Machine Learning Engineer headline.
-- HYDRA is labeled as ongoing research and its 26-54% RMSE result is explicitly preliminary and relative to LSTM baselines.
+- HYDRA was labeled as ongoing research with a preliminary RMSE result relative to LSTM baselines (retired on 2026-09-04; see below).
 - Harmony is framed as a modular software, validation, and reliability system.
 - Completed and Fall 2026 coursework are separated on a dedicated page.
 - A new one-page general resume has been generated and installed at every existing public resume path.
@@ -34,7 +43,7 @@ The portfolio should present one connected story rather than a collection of unr
 
 The story has five evidence pillars:
 
-- **HYDRA and hydrologic research:** time-series forecasting, residual correction, temporal validation, reproducible experimentation, scientific communication, and domain collaboration.
+- **HYDRA and hydrologic research:** NextGen reforecast generation software, deep-learning post-processing at 1–18 hour lead times, comparison of LSTM, Transformer, and Mamba-style models, leakage-aware evaluation, reproducible experimentation, and scientific communication (Water Resources Research results paper; Environmental Modelling & Software software paper).
 - **AGU and research communication:** communicating technical work to hydrologists, environmental scientists, and broader scientific audiences. Public wording must distinguish submitted, accepted, presented, and published work.
 - **Harmony:** modular data, forecasting, semantic-validation, policy-control, and simulation software with fail-safe system boundaries. Do not imply live execution, profitability, or validated investment performance.
 - **UT M.S. AI coursework:** completed AI Ethics, Machine Learning, Deep Learning, and Reinforcement Learning, plus Fall 2026 study in Advances in Deep Learning, Optimization, and Natural Language Processing.
@@ -164,7 +173,11 @@ A portfolio release is complete only when:
 2. Confirm current AGU abstract, travel-grant, manuscript, and presentation statuses.
 3. Decide whether Harmony's repository can be linked publicly; the public framing is now software architecture, validation, and reliability.
 4. Set a realistic weekly application cadence after the fall course deadlines are mapped.
+5. The former HYDRA headline metric ("26–54% lower RMSE than the LSTM baselines tested") was retired from the site, resume, and README on 2026-09-04 along with the residual-correction framing; no performance number is published until the NextGen post-processing analysis is complete. Update the public repository README to match.
+6. Confirm the clearance descriptor on the site matches current status wording, and confirm the AGU26 abstract title, the honors thesis title, and whether a public thesis presentation should be listed under Talks.
+7. The resume PDF was regenerated on 2026-09-04 from the site content (new HYDRA direction, AWS and Google Cloud experience, current Fall 2026 course list); keep it in step with `src/lib/content.ts`.
+8. Confirm the NextGen reforecast generation software will be released publicly with the Environmental Modelling & Software paper, and link it from the Open Source section when it is.
 
 ## Immediate next milestone
 
-Review the refreshed site and general resume, map Fall 2026 syllabus deadlines into the calendar, and begin the prioritized company list. After content approval, create a preview deployment before releasing to production.
+Review the visual refresh branch (preview deployment, desktop and mobile, both themes), resolve decisions 5 through 8 above, regenerate the resume PDF, then merge to `master`. In parallel, follow the private career memo delivered with the refresh: settle manuscript status and authorship with co-authors, add the missing baselines the manuscript needs, and decide the Fall 2027 PhD lane by early October.

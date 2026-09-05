@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { Container } from "@/components/Container";
-import { CourseworkCards } from "@/components/CourseworkSection";
-import { SectionHeader } from "@/components/SectionHeader";
+import { CourseworkList } from "@/components/CourseworkSection";
+import { PageHeader } from "@/components/PageHeader";
+import { SectionFrame } from "@/components/SectionFrame";
 import { coursework } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -30,38 +30,27 @@ export default function CourseworkPage() {
           { name: "Coursework", href: "/coursework" },
         ]}
       />
+      <div className="pb-20">
+        <PageHeader
+          label="Coursework"
+          title="Graduate coursework"
+          lede="Completed courses represent finished graduate study. Fall 2026 courses are listed as planned and move to completed only after the semester ends."
+          meta={
+            <span className="mono-label text-muted-foreground">
+              {coursework.institution} · {coursework.program} · GPA {coursework.currentGpa} · expected{" "}
+              {coursework.expectedGraduation}
+            </span>
+          }
+        />
 
-      <section className="bg-background pb-16 pt-14 text-foreground">
-        <Container>
-          <SectionHeader
-            as="h1"
-            eyebrow="Coursework"
-            title="Graduate study across machine learning and AI."
-            description={`${coursework.program}, in progress · Current GPA ${coursework.currentGpa} · Expected graduation ${coursework.expectedGraduation}`}
-          />
+        <SectionFrame rule="none" label="Completed" title="Completed coursework">
+          <CourseworkList items={coursework.completed} />
+        </SectionFrame>
 
-          <div className="mt-10 rounded-2xl border border-primary/25 bg-primary/5 p-6">
-            <p className="text-sm leading-relaxed text-foreground">
-              Completed courses represent finished graduate study. Fall 2026 courses are listed as planned and
-              will move to the completed section only after the semester is finished.
-            </p>
-          </div>
-
-          <section className="mt-12">
-            <p className="mb-5 text-xs font-mono uppercase tracking-[0.18em] text-primary">
-              Completed coursework
-            </p>
-            <CourseworkCards items={coursework.completed} />
-          </section>
-
-          <section className="mt-12">
-            <p className="mb-5 text-xs font-mono uppercase tracking-[0.18em] text-secondary">
-              Planned for Fall 2026
-            </p>
-            <CourseworkCards items={coursework.upcoming} planned />
-          </section>
-        </Container>
-      </section>
+        <SectionFrame label="Fall 2026" title="Planned for Fall 2026">
+          <CourseworkList items={coursework.upcoming} />
+        </SectionFrame>
+      </div>
     </>
   );
 }

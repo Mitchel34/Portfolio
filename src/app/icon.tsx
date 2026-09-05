@@ -18,12 +18,12 @@ export default function Icon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          background: "radial-gradient(circle at 30% 20%, #e7eefb 0%, #0b5fff 60%, #0a3a8f 100%)",
-          color: "#f8fbff",
-          fontSize: 228,
-          fontWeight: 700,
-          fontFamily: "Sora, Arial, sans-serif",
-          letterSpacing: "-0.04em",
+          background: "#171a21",
+          color: "#f7f4ed",
+          fontSize: 300,
+          fontWeight: 500,
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          letterSpacing: "-0.02em",
         }}
       >
         {site.name.charAt(0)}
@@ -31,6 +31,6 @@ export default function Icon() {
     ),
     {
       ...size,
-    }
+    },
   );
 }

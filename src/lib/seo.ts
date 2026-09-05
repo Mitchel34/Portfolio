@@ -18,6 +18,13 @@ export const DEFAULT_KEYWORDS = [
   "production machine learning",
   "UT Austin M.S. AI",
   "Austin AI engineer",
+  "AI research engineer",
+  "hydrology machine learning",
+  "National Water Model",
+  "forecast post-processing",
+  "NextGen streamflow forecasts",
+  "leakage-aware evaluation",
+  "open source research code",
 ];
 
 export function absoluteUrl(pathname = "/") {

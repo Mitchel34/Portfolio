@@ -3,15 +3,27 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
-import { Container } from "@/components/Container";
+import { KeywordLine } from "@/components/KeywordLine";
+import { PageHeader } from "@/components/PageHeader";
 import { SchemaScript } from "@/components/SchemaScript";
-import { SectionHeader } from "@/components/SectionHeader";
-import { getProjectBySlug, getProjectRepositoryUrl, projects, site } from "@/lib/content";
+import { SectionFrame } from "@/components/SectionFrame";
+import { StatusLabel } from "@/components/StatusLabel";
+import { TextLink } from "@/components/TextLink";
+import { buttonClass } from "@/components/ui/Button";
+import {
+  getProjectBySlug,
+  getProjectRepositoryUrl,
+  projectEvidenceStatus,
+  projects,
+  research,
+  site, evidenceWord } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 type ProjectCaseStudyPageProps = {
   params: Promise<{ slug: string }>;
 };
+
+const HYDRA_SLUG = "hydra-temporal";
 
 function getProjectSchema(slug: string) {
   const project = getProjectBySlug(slug);
@@ -79,16 +91,19 @@ export async function generateMetadata({ params }: ProjectCaseStudyPageProps): P
   });
 }
 
-function CaseStudySection({ title, items }: { title: string; items: string[] }) {
+function CaseStudyGroup({ number, title, items }: { number: number; title: string; items: string[] }) {
   return (
-    <article className="rounded-2xl border border-border/80 bg-card p-6">
-      <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground">{title}</h2>
-      <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-muted-foreground marker:text-primary">
+    <section className="border-t border-border pt-6">
+      <h3 className="flex gap-3 font-serif text-title text-foreground">
+        <span className="mono-label pt-2 text-primary">{String(number).padStart(2, "0")}</span>
+        {title}
+      </h3>
+      <ol className="mt-3 list-decimal space-y-2 pl-5 text-body-sm text-foreground marker:font-mono marker:text-muted-foreground">
         {items.map((item) => (
           <li key={item}>{item}</li>
         ))}
-      </ul>
-    </article>
+      </ol>
+    </section>
   );
 }
 
@@ -101,6 +116,21 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
   }
 
   const schema = getProjectSchema(slug);
+  const isHydra = project.slug === HYDRA_SLUG;
+  const isActiveDevelopment = project.status === "Active Development";
+  const projectLinks = project.links ?? [];
+
+  const caseStudyGroups: Array<{ title: string; items: string[] }> = [
+    { title: isActiveDevelopment ? "Project Goals" : "Technical Approach", items: project.approach },
+    { title: "Architecture Decisions", items: project.caseStudy.architecture },
+    {
+      title: isActiveDevelopment ? "Evaluation Methodology" : "Reliability and Evaluation",
+      items: project.caseStudy.reliability,
+    },
+    { title: "Delivery and Operations", items: project.caseStudy.delivery },
+    { title: isActiveDevelopment ? "Current Scope" : "Results", items: project.results },
+    { title: isActiveDevelopment ? "Design Principles" : "What I Learned", items: project.learnings },
+  ];
 
   return (
     <>
@@ -113,78 +143,69 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
       />
       {schema ? <SchemaScript data={schema} /> : null}
 
-      <section className="bg-background pb-16 pt-14 text-foreground">
-        <Container>
-          <SectionHeader
-            as="h1"
-            eyebrow={`${project.status} Case Study`}
-            title={project.title}
-            description={project.subtitle}
-          />
+      <div className="pb-20">
+        <PageHeader
+          label={`${evidenceWord[projectEvidenceStatus(project.status)]} · Case study`}
+          title={project.title}
+          lede={project.subtitle}
+          ledeStyle="italic"
+          meta={
+            <>
+              <StatusLabel status={projectEvidenceStatus(project.status)} />
+              <KeywordLine items={project.stack} />
+            </>
+          }
+          actions={
+            projectLinks.length > 0
+              ? projectLinks.map((link) => (
+                  <TextLink key={link.href} href={link.href}>
+                    {link.label}
+                  </TextLink>
+                ))
+              : undefined
+          }
+        />
 
-          <div className="mt-8 grid gap-6 lg:grid-cols-2">
-            <article className="rounded-2xl border border-border/80 bg-card p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground">Problem</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.problem}</p>
-            </article>
-
-            <article className="rounded-2xl border border-border/80 bg-card p-6">
-              <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-foreground">Impact</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{project.impact}</p>
-            </article>
+        <SectionFrame
+          rule="none"
+          label="Summary"
+          title="Problem and impact"
+        >
+          <div>
+            <p className="mono-label text-muted-foreground">Problem</p>
+            <p className="mt-2 max-w-[65ch] text-body text-foreground">{project.problem}</p>
+          </div>
+          <div className="mt-6">
+            <p className="mono-label text-muted-foreground">Impact</p>
+            <p className="mt-2 max-w-[65ch] text-body text-foreground">
+              {project.impact}
+            </p>
           </div>
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            {project.stack.map((tech) => (
-              <span
-                key={tech}
-                className="rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground"
-              >
-                {tech}
-              </span>
+          {isHydra ? (
+            <p className="mt-8 max-w-[65ch] text-footnote text-muted-foreground">{research.scopeNote}</p>
+          ) : null}
+        </SectionFrame>
+
+        <SectionFrame label="Case study" title="Approach, architecture, evaluation, delivery">
+          <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2">
+            {caseStudyGroups.map((group, index) => (
+              <CaseStudyGroup key={group.title} number={index + 1} title={group.title} items={group.items} />
             ))}
           </div>
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            <CaseStudySection
-              title={project.status === "Active Development" ? "Project Goals" : "Technical Approach"}
-              items={project.approach}
-            />
-            <CaseStudySection title="Architecture Decisions" items={project.caseStudy.architecture} />
-            <CaseStudySection
-              title={project.status === "Active Development" ? "Evaluation Methodology" : "Reliability and Evaluation"}
-              items={project.caseStudy.reliability}
-            />
-            <CaseStudySection title="Delivery and Operations" items={project.caseStudy.delivery} />
-            <CaseStudySection
-              title={project.status === "Active Development" ? "Current Scope" : "Results"}
-              items={project.results}
-            />
-            <CaseStudySection
-              title={project.status === "Active Development" ? "Design Principles" : "What I Learned"}
-              items={project.learnings}
-            />
-          </div>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/projects"
-              className="inline-flex h-11 items-center rounded-full border border-border bg-card px-6 text-sm font-semibold text-foreground transition hover:border-primary/40"
-            >
-              Back to Projects
+          <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
+            <Link href="/projects" className={buttonClass("outline")}>
+              Back to projects
             </Link>
-            {project.links?.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="inline-flex h-11 items-center rounded-full bg-primary px-6 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
-              >
+            {projectLinks.map((link) => (
+              <TextLink key={link.href} href={link.href}>
                 {link.label}
-              </a>
+              </TextLink>
             ))}
           </div>
-        </Container>
-      </section>
+        </SectionFrame>
+      </div>
     </>
   );
 }

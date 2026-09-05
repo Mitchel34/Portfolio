@@ -1,38 +1,284 @@
 export const site = {
   name: "Mitchel Carson",
-  title: "AI / Machine Learning Engineer",
-  headline: "AI / Machine Learning Engineer",
+  title: "Machine Learning Engineer & Applied AI Researcher",
+  headline: "Machine Learning Engineer & Applied AI Researcher",
+  tagline: "Forecast corrections, evaluated the way they’d be used.",
+  role:
+    "I build reforecast generation software for NOAA’s NextGen framework and post-processing models that improve its streamflow forecasts at 1–18 hour lead times, evaluated the way they would be used. M.S. Artificial Intelligence at UT Austin, expected May 2027; production software at USAA before that.",
   summary:
-    "Software engineer and UT Austin M.S. Artificial Intelligence student building production software, applied AI research, and reliable data systems. Active TS/SCI clearance; based in Austin, Texas.",
+    "Mitchel Carson is a machine learning engineer and UT Austin M.S. Artificial Intelligence student (expected May 2027) researching deep-learning post-processing of NOAA NextGen streamflow reforecasts at 1–18 hour lead times. He previously built GraphQL services as a software engineering intern at USAA and served as an Executive Missions Aviator in the U.S. Air Force; he holds an active TS/SCI clearance and is based in Austin, Texas.",
+  metaDescription:
+    "Machine learning engineer and UT Austin M.S. AI student researching deep-learning post-processing for NOAA NextGen streamflow forecasts at 1–18 hour lead times. Austin, TX.",
+  schemaJobTitle: "M.S. Artificial Intelligence student, The University of Texas at Austin",
+  focusLine: "Applied AI Research · Reproducible ML · Production Software",
+  runningHead: "Mitchel Carson · Portfolio",
+  updated: "September 2026",
+  updatedYear: "2026",
+  resumePdfUpdated: "September 2026",
   resumeFilename: "mitchelcarson_resume.pdf",
   resumeUrl: "/mitchelcarson_resume.pdf",
   email: "mitchel.carson@gmail.com",
   github: "https://github.com/Mitchel34",
+  sourceUrl: "https://github.com/Mitchel34/Portfolio",
   linkedin: "https://www.linkedin.com/in/mitchelcarson",
   url: "https://mitchelcarson.com",
   calendlyUrl: "https://calendly.com/mitchel-carson/30min",
-  focusLine: "Applied AI · Research Engineering · Production Software",
   location: "Austin, Texas",
   timezone: "Central Time",
   clearance: "Active TS/SCI",
 };
 
-export const landingSections = {
-  about: { id: "about-me", label: "About Me", href: "/#about-me" },
-  coursework: { id: "coursework", label: "Coursework", href: "/#coursework" },
-  research: { id: "research", label: "Research", href: "/#research" },
-  projects: { id: "projects", label: "Projects", href: "/#projects" },
-  contact: { id: "contact", label: "Contact", href: "/#contact" },
-} as const;
+// ---------------------------------------------------------------------------
+// Evidence status system. Every research output, project, and course carries a
+// status word next to a glyph; the tone decides the glyph (filled / half / hollow).
+// ---------------------------------------------------------------------------
 
-export const landingNavItems = Object.values(landingSections);
+export type EvidenceStatus =
+  | "accepted"
+  | "completed"
+  | "production"
+  | "delivered"
+  | "under-review"
+  | "preliminary"
+  | "submitted"
+  | "in-progress"
+  | "planned"
+  | "active-development";
+
+export type EvidenceTone = "confirmed" | "provisional" | "pending";
+
+export const evidenceTone: Record<EvidenceStatus, EvidenceTone> = {
+  accepted: "confirmed",
+  completed: "confirmed",
+  production: "confirmed",
+  delivered: "confirmed",
+  "under-review": "provisional",
+  preliminary: "provisional",
+  submitted: "provisional",
+  "in-progress": "pending",
+  planned: "pending",
+  "active-development": "pending",
+};
+
+export const evidenceWord: Record<EvidenceStatus, string> = {
+  accepted: "Accepted",
+  completed: "Completed",
+  production: "Production",
+  delivered: "Delivered",
+  "under-review": "Under review",
+  preliminary: "Preliminary",
+  submitted: "Submitted",
+  "in-progress": "In progress",
+  planned: "Planned",
+  "active-development": "Active development",
+};
+
+export const evidenceLegend: { tone: EvidenceTone; label: string; meaning: string }[] = [
+  { tone: "confirmed", label: "confirmed", meaning: "accepted, completed, production" },
+  { tone: "provisional", label: "provisional", meaning: "under review, preliminary" },
+  { tone: "pending", label: "not yet", meaning: "in progress, planned, active development" },
+];
+
+// ---------------------------------------------------------------------------
+// Navigation. Insertion order is the home-page order; numbers are rendered.
+// ---------------------------------------------------------------------------
+
+export type LandingSection = {
+  id: string;
+  number: string;
+  label: string;
+  navLabel: string;
+  href: string;
+  description: string;
+  inHeader: boolean;
+};
+
+export const landingSections = {
+  research: {
+    id: "research",
+    number: "01",
+    label: "Research",
+    navLabel: "Research",
+    href: "/#research",
+    description: "HYDRA: post-processing AI for NextGen streamflow reforecasts",
+    inHeader: true,
+  },
+  openSource: {
+    id: "open-source",
+    number: "02",
+    label: "Open Source",
+    navLabel: "Open Source",
+    href: "/#open-source",
+    description: "Research code and tooling, in the open",
+    inHeader: true,
+  },
+  talks: {
+    id: "talks",
+    number: "03",
+    label: "Talks & Discussions",
+    navLabel: "Talks",
+    href: "/#talks",
+    description: "AGU26 workshop, abstract status, and discussion topics",
+    inHeader: true,
+  },
+  projects: {
+    id: "projects",
+    number: "04",
+    label: "Projects",
+    navLabel: "Projects",
+    href: "/#projects",
+    description: "Production APIs and modular AI software",
+    inHeader: true,
+  },
+  about: {
+    id: "about-me",
+    number: "05",
+    label: "About",
+    navLabel: "About",
+    href: "/#about-me",
+    description: "Background, experience, and what I bring",
+    inHeader: true,
+  },
+  coursework: {
+    id: "coursework",
+    number: "06",
+    label: "Graduate Study",
+    navLabel: "Graduate Study",
+    href: "/#coursework",
+    description: "UT Austin M.S. Artificial Intelligence, 4.0 GPA",
+    inHeader: false,
+  },
+  contact: {
+    id: "contact",
+    number: "07",
+    label: "Contact",
+    navLabel: "Contact",
+    href: "/#contact",
+    description: "Email, scheduling, and profiles",
+    inHeader: true,
+  },
+} as const satisfies Record<string, LandingSection>;
+
+export const landingSectionList: LandingSection[] = Object.values(landingSections);
+export const landingNavItems: LandingSection[] = landingSectionList.filter((section) => section.inHeader);
+
+export type SitePage = { label: string; href: string; description: string };
+
+export const sitePages: SitePage[] = [
+  { label: "About", href: "/about", description: "Background, values, focus areas" },
+  { label: "Projects", href: "/projects", description: "All case studies" },
+  { label: "Research", href: "/research", description: "HYDRA in full" },
+  { label: "Coursework", href: "/coursework", description: "Completed and planned graduate courses" },
+  { label: "Résumé", href: "/resume", description: "PDF, experience, education" },
+  { label: "Contact", href: "/contact", description: "Form and scheduling" },
+];
+
+// ---------------------------------------------------------------------------
+// Home-page section copy (titles and ledes). Components read these, never inline copy.
+// ---------------------------------------------------------------------------
+
+export type SectionCopy = { title: string; lede: string };
+
+export const sectionCopy = {
+  research: {
+    title: "Post-processing NextGen streamflow reforecasts at 1–18 hour lead times.",
+    lede:
+      "HYDRA pairs reforecast generation software for NOAA’s NextGen framework with a post-processing model that learns to improve the forecasts it produces. LSTM, vanilla Transformer, and Mamba-style state-space models are compared under leakage-aware evaluation by lead time.",
+  },
+  openSource: {
+    title: "The code behind the claims.",
+    lede:
+      "I publish research code and tooling in the open so results can be inspected and reproduced. A selection follows; everything else is on GitHub.",
+  },
+  talks: {
+    title: "Upcoming, under review, and in progress.",
+    lede:
+      "One accepted AGU26 workshop, one abstract under review, one manuscript in progress, and the thesis this work grew from, each labeled with its current status and updated as milestones land. Alongside them: topics I am glad to talk through.",
+  },
+  projects: {
+    title: "Engineering beyond HYDRA.",
+    lede:
+      "Production GraphQL services at USAA and a modular forecasting system with fail-closed validation. Each case study separates problem, approach, current evidence, and limits.",
+  },
+  about: {
+    title: "Operations, production software, research.",
+    lede:
+      "Air Force executive missions taught me preparation and reliability. USAA taught me production engineering. HYDRA is where I apply both to open questions, with clear metrics, careful evaluation, and documentation others can extend.",
+  },
+  coursework: {
+    title: "UT Austin M.S. Artificial Intelligence.",
+    lede:
+      "Completed courses represent finished graduate study. Fall 2026 courses are listed as planned and move to completed only after the semester ends.",
+  },
+  contact: {
+    title: "Let’s talk research, systems, or both.",
+    lede:
+      "Open to conversations about research engineer, applied scientist, and machine learning engineering roles, and to collaboration on forecasting and evaluation.",
+  },
+} satisfies Record<string, SectionCopy>;
+
+// ---------------------------------------------------------------------------
+// Credentials strip (under the masthead).
+// ---------------------------------------------------------------------------
+
+export type Credential = { label: string; value: string };
+
+export const credentials: Credential[] = [
+  {
+    label: "Graduate study",
+    value: "The University of Texas at Austin · M.S. Artificial Intelligence · GPA 4.0 · expected May 2027",
+  },
+  {
+    label: "Research",
+    value: "HYDRA · post-processing AI for NextGen streamflow reforecasts · two manuscripts in preparation",
+  },
+  {
+    label: "AGU26",
+    value: "Scientific workshop facilitator · Accepted",
+  },
+  {
+    label: "Industry",
+    value: "USAA · Software Engineering Intern · 2025",
+  },
+  {
+    label: "Service and clearance",
+    value: "U.S. Air Force · Executive Missions Aviator · 2020–2023 · Active TS/SCI",
+  },
+];
 
 export const focusAreas = [
-  "Applied AI and ML systems",
-  "Forecasting",
-  "Research engineering",
-  "Data engineering and ML platforms",
-  "Reliable production software",
+  "Streamflow forecast post-processing",
+  "Sequence models: LSTM, Transformer, Mamba",
+  "Leakage-aware evaluation by lead time",
+  "Reproducible research software",
+  "Cloud research compute: Google Cloud, AWS",
+  "Production software and APIs",
+];
+
+export type SkillGroup = { label: string; items: string[] };
+
+export const skills: SkillGroup[] = [
+  { label: "Languages", items: ["Python", "Java", "JavaScript/TypeScript", "SQL", "R"] },
+  {
+    label: "Machine learning",
+    items: [
+      "PyTorch",
+      "LSTM, Transformer, and Mamba-style state-space sequence models",
+      "Forecast post-processing",
+      "Leakage-aware temporal evaluation",
+      "Hydrologic metrics (RMSE, NSE, KGE)",
+      "pandas, NumPy, xarray",
+    ],
+  },
+  {
+    label: "Cloud",
+    items: [
+      "Google Cloud (BigQuery, Cloud Storage) for hydrologic forecast data",
+      "AWS research compute (isolated CPU/GPU) for AI-agent and finance research",
+      "Docker",
+    ],
+  },
+  { label: "Software", items: ["Spring Boot", "GraphQL", "React", "Node.js", "PostgreSQL", "Git", "Jira"] },
 ];
 
 export type ProjectLink = {
@@ -61,29 +307,37 @@ export type Project = {
   links?: ProjectLink[];
 };
 
-export const thesisImpactStat = "26–54% lower forecast error (RMSE) vs. tested LSTM baselines";
+export function projectEvidenceStatus(status: Project["status"]): EvidenceStatus {
+  switch (status) {
+    case "Production":
+      return "production";
+    case "Active Development":
+      return "active-development";
+    case "Active":
+    default:
+      return "in-progress";
+  }
+}
 
 export const about = {
   summary: [
-    "My work spans production software at USAA, applied hydrology research, modular AI systems, and small-business software consulting.",
-    "I build clear interfaces, test carefully, and document decisions so other people can trust and extend the work.",
-    "I am pursuing an M.S. in Artificial Intelligence at UT Austin with a 4.0 GPA, building on completed coursework in machine learning, deep learning, reinforcement learning, and AI ethics.",
+    "I came to AI through operations first: as an Executive Missions Aviator aboard Air Force 2, where preparation, reliability, and clear communication were the whole job.",
+    "I then studied computer science at Appalachian State, wrote a senior honors thesis on runoff forecasting with deep learning, and interned at USAA building GraphQL services in Java and Spring Boot. I also build and advise on software for a small business.",
+    "Today I am completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA) and continuing that thesis as HYDRA, with a manuscript in progress. I test carefully, document decisions, and label results by how much evidence stands behind them.",
   ],
   values: [
     {
-      title: "Reliable Systems",
+      title: "Evaluation under forecast-time constraints",
       description:
         "I design models and pipelines teammates can trust, with clear metrics, careful evaluation, and predictable behavior when inputs change.",
     },
     {
-      title: "Clear Engineering",
-      description:
-        "Simple interfaces, repeatable pipelines, and useful monitoring help teams move faster.",
+      title: "Reproducible by default",
+      description: "Configs, seeds, data manifests, and tracked runs ship with the result, not after it.",
     },
     {
-      title: "Risk-Aware Design",
-      description:
-        "Good systems make uncertainty, limits, and failure modes visible.",
+      title: "Limits made visible",
+      description: "Good systems make uncertainty, limits, and failure modes visible.",
     },
   ],
 };
@@ -95,26 +349,43 @@ export type ProofItem = {
   askAbout: string;
   href: string;
   linkLabel: string;
+  showOnHome: boolean;
+  showOnAbout: boolean;
 };
 
 export const proofItems: ProofItem[] = [
   {
     title: "USAA",
-    role: "Software Engineering Intern · Global Headquarters",
+    role: "Software Engineering Intern · Global Headquarters · 2025",
     description:
       "At USAA’s global headquarters in San Antonio, I built a GraphQL API with Java and Spring Boot and expanded an internal troubleshooting tool with customer-data comparison views.",
     askAbout: "GraphQL API design, customer-data flows, and enterprise delivery.",
     href: "/projects/usaa-risk-services",
     linkLabel: "View project",
+    showOnHome: true,
+    showOnAbout: true,
+  },
+  {
+    title: "United States Air Force",
+    role: "Executive Missions Aviator · 2020–2023",
+    description:
+      "I maintained passenger safety, logistics, and schedule reliability for distinguished guests aboard Air Force 2, coordinating mission planning with flight crews, security teams, and executive staff.",
+    askAbout: "Operating under exacting standards, mission planning, and what an active clearance does and does not change.",
+    href: "/resume",
+    linkLabel: "Experience",
+    showOnHome: true,
+    showOnAbout: true,
   },
   {
     title: "HYDRA",
     role: "Applied AI for Hydrology · Research in Progress",
     description:
-      "I am testing Transformer and GRU corrections for National Water Model streamflow forecasts in a reproducible PyTorch pipeline. Early experiments produced 26–54% lower RMSE than the LSTM baselines tested; final analysis and the manuscript remain in progress.",
-    askAbout: "Temporal leakage, forecast evaluation, and defensible research claims.",
+      "I build reforecast generation software for NOAA’s NextGen framework and a post-processing model that improves its streamflow forecasts at 1–18 hour lead times, comparing LSTM, Transformer, and Mamba-style models under leakage-aware evaluation.",
+    askAbout: "Temporal leakage, forecast evaluation by lead time, and defensible research claims.",
     href: "/research",
     linkLabel: "View research",
+    showOnHome: false,
+    showOnAbout: false,
   },
   {
     title: "GreenSpace Lawn Care",
@@ -124,15 +395,19 @@ export const proofItems: ProofItem[] = [
     askAbout: "Client discovery, website delivery, and translating business goals into software.",
     href: "https://www.greenspacelawncare.us/",
     linkLabel: "Visit website",
+    showOnHome: false,
+    showOnAbout: true,
   },
   {
     title: "Harmony",
-    role: "Part-Time Software Product · Active Development",
+    role: "AI-agent and finance research system · Active development",
     description:
-      "I am building a modular Python system for data input, forecasting, validation, controls, and simulation. Fail-closed checks stop workflows when data or evaluation rules are incomplete.",
+      "I am building a modular Python research system for data input, forecasting, validation, controls, and simulation, with an isolated AWS compute path for reproducible experiments. Fail-closed checks stop workflows when data or evaluation rules are incomplete.",
     askAbout: "Semantic validation, modular architecture, and reproducible system state.",
     href: "/projects/harmony",
     linkLabel: "View project",
+    showOnHome: false,
+    showOnAbout: false,
   },
 ];
 
@@ -140,56 +415,60 @@ export const projects: Project[] = [
   {
     slug: "hydra-temporal",
     title: "HYDRA",
-    subtitle: "Hybrid Deep-learning for Residual Analysis",
+    subtitle: "Reforecast generation and post-processing AI for NOAA NextGen streamflow forecasts",
     status: "Active",
     problem:
-      "National forecasts can miss local watershed behavior. HYDRA tests whether deep-learning corrections can improve National Water Model streamflow forecasts using timelines that reflect real forecasting conditions.",
+      "Short-lead streamflow forecasts from NOAA’s NextGen framework carry errors that a learned post-processor may be able to reduce. HYDRA asks whether a model trained on reforecasts generated with the same framework can improve forecasts at 1–18 hour lead times without leaking future information.",
     impact:
-      "Early experiments produced 26–54% lower RMSE than the LSTM baselines tested. The final analysis and manuscript are still in progress.",
+      "The work has two parts: software that generates NextGen reforecasts and prepares the data, and a post-processing model evaluated by lead time. A results manuscript for Water Resources Research and a software paper for Environmental Modelling & Software are in preparation.",
     approach: [
-      "Developed Transformer and GRU residual-correction experiments for NOAA National Water Model forecasts.",
-      "Built a modular PyTorch pipeline integrating NWM forecasts, USGS observations, ERA5 signals, and basin context.",
-      "Used Google Cloud BigQuery and Cloud Storage to acquire issued NWM forecasts while preserving initialization, lead, valid-time, version, and source metadata.",
-      "Automated normalization, leakage-aware temporal splits, and hydrologic evaluation with RMSE, NSE, and KGE.",
-      "Continuing the analysis and preparing a manuscript for Water Resources Research.",
+      "Built NextGen reforecast generation software that produces retrospective streamflow forecasts, plus tooling that acquires, verifies, and tidies the data.",
+      "Designing a deep-learning post-processor that improves NextGen streamflow forecasts at 1–18 hour lead times.",
+      "Comparing LSTM, vanilla Transformer, and Mamba-style state-space models (with attention) on identical inputs and splits.",
+      "Using Google Cloud BigQuery and Cloud Storage for hydrologic data acquisition while preserving initialization, lead, valid-time, version, and source metadata.",
+      "Evaluating with leakage-aware temporal splits and hydrologic metrics reported by site and lead time.",
+      "Preparing a results manuscript for Water Resources Research and a software manuscript for Environmental Modelling & Software.",
     ],
     stack: [
       "PyTorch",
-      "Google Cloud",
+      "LSTM",
       "Transformer",
-      "GRU",
-      "Hydra Config",
-      "MLflow",
+      "Mamba (state-space)",
+      "NextGen",
+      "Google Cloud",
       "xarray",
     ],
     results: [
-      "Built repeatable evaluations across multiple forecast horizons and watershed sites.",
-      "Produced versioned predictions, diagnostics, and figures for ongoing analysis.",
-      "Results remain under active review and will be updated after the manuscript analysis is complete.",
+      "Reforecast generation software and data tooling are in place; the NextGen_Hydra repository is public.",
+      "Model comparison and lead-time evaluation are in progress; results will be posted when the analysis is complete.",
+      "Two manuscripts are in preparation.",
     ],
     learnings: [
-      "Residual-correction research depends as much on temporal evaluation design as model architecture.",
+      "Post-processing depends as much on how reforecasts are generated and aligned as on model architecture.",
       "Reproducible data and configuration lineage make changing scientific results auditable.",
-      "Research claims should evolve with the evidence rather than outrun the final analysis.",
+      "Research claims should evolve with the evidence rather than outrun the analysis.",
     ],
     caseStudy: {
       architecture: [
-        "Residual-correction pipeline that ingests NOAA NWM forecasts, forcing signals, and basin context.",
-        "Transformer encoder for multi-scale temporal context, paired with a recurrent residual head.",
+        "Reforecast generation software drives NOAA’s NextGen framework to produce retrospective forecasts with consistent metadata.",
+        "A post-processing model consumes reforecasts and observations to produce improved forecasts at 1–18 hour lead times.",
         "Config-driven training and evaluation with strict train/validation/test time boundaries.",
       ],
       reliability: [
-        "Leakage-aware splitting by time and evaluation horizon to match operational inference constraints.",
+        "Leakage-aware splitting by time and lead time to match operational inference constraints.",
         "Reproducible runs through fixed seeds, immutable data artifacts, and tracked configuration snapshots.",
-        "Performance tracked by site, horizon, and hydrologic metric instead of a single aggregate score.",
+        "Performance tracked by site, lead time, and hydrologic metric instead of a single aggregate score.",
       ],
       delivery: [
-        "Packaged experiments with Hydra configuration and MLflow tracking for repeatable comparison.",
-        "Produced versioned artifacts, diagnostics, figures, and technical documentation for scientific review.",
-        "Maintained a research website while reserving final manuscript claims for the completed analysis.",
+        "Packaged data acquisition and reforecast generation as reusable software intended for a software paper.",
+        "Produced versioned artifacts, diagnostics, and technical documentation for scientific review.",
+        "Maintained a research website while reserving claims for the completed analysis.",
       ],
     },
-    links: [{ label: "Research Details", href: "/research" }],
+    links: [
+      { label: "Research Details", href: "/research" },
+      { label: "GitHub repository", href: "https://github.com/Mitchel34/NextGen_Hydra" },
+    ],
   },
   {
     slug: "usaa-risk-services",
@@ -243,7 +522,7 @@ export const projects: Project[] = [
   {
     slug: "harmony",
     title: "Harmony",
-    subtitle: "A modular Python system for forecasting and decision workflows",
+    subtitle: "A modular Python research system for AI-agent and finance workflows on AWS",
     status: "Active Development",
     problem:
       "Forecasting software needs more than a model. It also needs reliable data, repeatable testing, clear controls, and a safe response when inputs are incomplete.",
@@ -300,6 +579,9 @@ export const projects: Project[] = [
   },
 ];
 
+export const harmonyBoundaryNote =
+  "Active development. Scope is limited to the components listed. No live-execution or investment-performance claim is part of the current scope.";
+
 export function getProjectBySlug(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
@@ -331,23 +613,26 @@ export function getProjectPrimaryExternalLink(project: Project) {
 }
 
 export const research = {
-  title:
-    "HYDRA: Hybrid Deep-learning for Residual Analysis",
-  status: "Ongoing research - preliminary results",
+  title: "HYDRA: post-processing AI for NextGen streamflow reforecasts",
+  status: "Ongoing research · results pending",
   summary:
-    "Developing and evaluating Transformer/GRU residual-correction models for National Water Model streamflow forecasts. The pipeline combines hydrologic and meteorological data with leakage-aware temporal evaluation; the final analysis and manuscript are in progress.",
-  preliminaryResult:
-    "Preliminary experiments produced 26–54% lower RMSE than the LSTM baselines tested. This interim result will be updated as the ongoing analysis and manuscript are completed.",
+    "Developing reforecast generation software for NOAA’s NextGen framework and a deep-learning post-processor that improves streamflow forecasts at 1–18 hour lead times, with LSTM, vanilla Transformer, and Mamba-style state-space models compared under leakage-aware evaluation. Two manuscripts are in preparation.",
+  scopeNote:
+    "No performance number is reported on this site until the analysis is complete; results will be published with the manuscripts.",
+  figures: {
+    explorer:
+      "Interactive trace of the HYDRA pipeline: reforecast generation, the three model families compared, leakage-aware evaluation by lead time, and the planned outputs.",
+  },
   architecture: [
-    "Inputs: National Water Model forecasts, USGS observations, ERA5 signals, and basin context.",
-    "Temporal modeling: Transformer and GRU experiments for learned residual correction.",
-    "Pipeline: Modular PyTorch training, automated normalization, and configuration-driven experiments.",
-    "Outputs: Versioned predictions, hydrologic diagnostics, figures, and research artifacts.",
+    "Reforecasts: NextGen reforecast generation software produces retrospective forecasts with consistent initialization, lead-time, and version metadata.",
+    "Inputs: NextGen reforecasts and streamflow observations aligned to forecast issue time.",
+    "Models: LSTM, vanilla Transformer, and Mamba-style state-space models (with attention) trained as post-processors on identical inputs.",
+    "Outputs: Improved forecasts at 1–18 hour lead times, diagnostics, and research artifacts.",
   ],
   evaluation: [
-    "Metrics: RMSE, NSE, and KGE with results inspected by site and forecast horizon.",
+    "Metrics: Hydrologic error and skill metrics (RMSE, NSE, KGE) reported by site and lead time.",
     "Validation: Leakage-aware temporal splits designed around forecast availability.",
-    "Diagnostics: Comparisons against National Water Model and LSTM baselines.",
+    "Reference: Raw NextGen reforecasts at every lead time.",
   ],
   reproducibility: [
     "Configuration-driven experiments with tracked parameters and artifacts.",
@@ -355,30 +640,249 @@ export const research = {
     "Environment and run records designed to support scientific review.",
   ],
   constraints: [
-    "Research conclusions remain provisional until the final analysis is complete.",
+    "Research conclusions remain provisional until the analysis is complete; no performance numbers are reported yet.",
     "Operational claims must respect the timing and availability of every model input.",
   ],
-  communication: [
-    {
-      title: "AGU26 abstract",
-      status: "Under review",
-      description:
-        "The HYDRA abstract is under review for the H100 machine-learning-in-hydrology session; acceptance and scheduling will be updated when confirmed.",
-    },
-    {
-      title: "AGU26 scientific workshop",
-      status: "Accepted",
-      description:
-        "At the AGU26 Annual Meeting in San Francisco, December 7-11, 2026, I will facilitate Best Practices for AI and Agentic Workflows in Earth Science Research, helping earth and environmental scientists use AI to accelerate research workflows.",
-    },
-    {
-      title: "Water Resources Research manuscript",
-      status: "In progress",
-      description:
-        "The manuscript and final analysis are still being developed. A manuscript link and finalized claims will be added after completion.",
-    },
-  ],
   links: [{ label: "HYDRA Case Study", href: "/projects/hydra-temporal" }],
+};
+
+// ---------------------------------------------------------------------------
+// Open source. Only verified public repositories; no counts or vanity metrics.
+// An "Upstream contributions" group exists for future pull requests to other
+// projects; a group with no entries is not rendered.
+// ---------------------------------------------------------------------------
+
+export type OpenSourceGroup = "Research code" | "Upstream contributions" | "Tooling" | "Coursework & explorations";
+
+export const openSourceGroupOrder: OpenSourceGroup[] = [
+  "Research code",
+  "Upstream contributions",
+  "Tooling",
+  "Coursework & explorations",
+];
+
+export type OpenSourceEntry = {
+  name: string;
+  url: string;
+  language: string;
+  kind: "maintained" | "contribution";
+  group: OpenSourceGroup;
+  what: string;
+  why: string;
+  note?: string;
+  upstream?: { repo: string; prTitle: string; prUrl: string; mergedLabel: string };
+};
+
+export const openSource: OpenSourceEntry[] = [
+  {
+    name: "NextGen_Hydra",
+    url: "https://github.com/Mitchel34/NextGen_Hydra",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    what: "End-to-end automation to acquire, verify, and tidy historical NOAA NextGen streamflow data.",
+    why: "Data tooling behind the NextGen reforecast work; the software paper builds on it.",
+  },
+  {
+    name: "hydra-nwm-streamflow-correction",
+    url: "https://github.com/Mitchel34/hydra-nwm-streamflow-correction",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    note: "earlier phase · 2025–2026",
+    what: "GRU, Transformer, and conditioning-head models for National Water Model streamflow time-series regression.",
+    why: "Earlier HYDRA phase on the National Water Model, kept public for lineage.",
+  },
+  {
+    name: "Runoff_Forcasting",
+    url: "https://github.com/Mitchel34/Runoff_Forcasting",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    note: "thesis-era · 2025",
+    what: "Thesis-era pipeline: preprocess data, train a deep-learning model, evaluate the corrected forecasts.",
+    why: "Predecessor to HYDRA from the senior honors thesis, kept public so the lineage is visible.",
+  },
+  {
+    name: "Portfolio",
+    url: "https://github.com/Mitchel34/Portfolio",
+    language: "TypeScript",
+    kind: "maintained",
+    group: "Tooling",
+    what: "This website: Next.js 16, React 19, Tailwind CSS 4, a Resend contact API, and a Calendly embed.",
+    why: "The content and every claim on this site are versioned in the same repository that deploys it.",
+  },
+  {
+    name: "Bayesian_Network",
+    url: "https://github.com/Mitchel34/Bayesian_Network",
+    language: "R",
+    kind: "maintained",
+    group: "Coursework & explorations",
+    what: "Probabilistic reasoning with Bayesian networks: D-separation testing and inference.",
+    why: "Probabilistic foundations that shape how I treat forecast uncertainty.",
+  },
+  {
+    name: "MazeApp",
+    url: "https://github.com/Mitchel34/MazeApp",
+    language: "Java",
+    kind: "maintained",
+    group: "Coursework & explorations",
+    what: "Maze generator and solver: randomized DFS generation and A* search, with a Swing GUI.",
+    why: "Search algorithms, implemented and visualized.",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Talks, workshops, and writing. Single source of truth for the hero "Now" line,
+// the home Talks section, and /research. Statuses use the evidence system.
+// ---------------------------------------------------------------------------
+
+export type TalkKind = "Workshop" | "Talk" | "Abstract" | "Manuscript" | "Thesis" | "Poster";
+
+export type TalkItem = {
+  id: string;
+  kind: TalkKind;
+  order: number;
+  title: string;
+  venue: string;
+  whenLabel: string;
+  status: EvidenceStatus;
+  role?: string;
+  description: string;
+  links?: { label: string; href: string }[];
+  heroLabel?: string;
+  past?: boolean;
+};
+
+export const talks: TalkItem[] = [
+  {
+    id: "agu26-workshop",
+    kind: "Workshop",
+    order: 1,
+    title: "Best Practices for AI and Agentic Workflows in Earth Science Research",
+    venue: "AGU26 Annual Meeting · San Francisco · December 7–11, 2026",
+    whenLabel: "December 2026",
+    status: "accepted",
+    role: "Scientific workshop facilitator",
+    description:
+      "Teaching earth and environmental scientists practical AI methods for their research workflows.",
+    heroLabel: "AGU26 workshop facilitator",
+  },
+  {
+    id: "agu26-abstract",
+    kind: "Abstract",
+    order: 2,
+    title: "HYDRA streamflow-forecasting abstract",
+    venue: "AGU26 · Hydrology session H100 (machine learning in hydrology)",
+    whenLabel: "Decision pending",
+    status: "under-review",
+    description:
+      "Abstract on the HYDRA streamflow-forecasting work. Acceptance and scheduling will be posted when confirmed.",
+    links: [{ label: "Research details", href: "/research" }],
+    heroLabel: "AGU26 abstract",
+  },
+  {
+    id: "wrr-manuscript",
+    kind: "Manuscript",
+    order: 3,
+    title: "HYDRA results manuscript",
+    venue: "Water Resources Research (target journal)",
+    whenLabel: "In preparation",
+    status: "in-progress",
+    role: "Author",
+    description:
+      "Post-processing results for NextGen streamflow reforecasts at 1–18 hour lead times. Analysis and writing are in progress; a link will be added when one exists.",
+    links: [{ label: "Research details", href: "/research" }],
+    heroLabel: "WRR manuscript",
+  },
+  {
+    id: "ems-software-paper",
+    kind: "Manuscript",
+    order: 4,
+    title: "NextGen reforecast generation software",
+    venue: "Environmental Modelling & Software (target journal)",
+    whenLabel: "Planned",
+    status: "planned",
+    role: "Author",
+    description:
+      "Software paper describing the reforecast generation and data tooling, planned alongside the code release.",
+    links: [{ label: "Code on GitHub", href: "https://github.com/Mitchel34/NextGen_Hydra" }],
+    heroLabel: "EM&S software paper",
+  },
+  {
+    id: "honors-thesis",
+    kind: "Thesis",
+    order: 5,
+    title: "Senior Honors Thesis on runoff forecasting with deep learning",
+    venue: "Appalachian State University",
+    whenLabel: "December 2025",
+    status: "completed",
+    role: "Author",
+    description: "The deep-learning runoff-forecasting work that became HYDRA.",
+    links: [{ label: "Thesis-era code on GitHub", href: "https://github.com/Mitchel34/Runoff_Forcasting" }],
+    past: true,
+  },
+];
+
+export type DiscussionTopic = {
+  title: string;
+  prompt: string;
+  groundedIn?: string;
+};
+
+export const discussions = {
+  title: "Topics I am glad to talk through.",
+  intro: "These are invitations, not past talks. Book 30 minutes or email me if one of these is your problem too.",
+  topics: [
+    {
+      title: "Leakage-safe temporal evaluation",
+      prompt:
+        "What “available at forecast time” really means for train, validation, and test splits, and how easy it is to cheat by accident.",
+      groundedIn: "/research",
+    },
+    {
+      title: "Post-processing operational forecasts by lead time",
+      prompt:
+        "Why learn a correction on top of NextGen reforecasts instead of replacing the model, and what changes between 1 and 18 hours ahead.",
+      groundedIn: "/research",
+    },
+    {
+      title: "Sequence models for hydrology: LSTM, Transformer, Mamba",
+      prompt: "What a fair comparison between recurrent, attention, and state-space models needs before anyone declares a winner.",
+      groundedIn: "/research",
+    },
+    {
+      title: "AI and agentic workflows in earth-science research",
+      prompt: "What I am putting in front of scientists at AGU26: what is worth adopting, and what to be cautious about.",
+      groundedIn: "/#talks",
+    },
+    {
+      title: "Reproducible research pipelines",
+      prompt:
+        "Reforecast generation you can rerun, versioned data lineage, and metrics by site and lead time instead of one aggregate score.",
+      groundedIn: "/projects/hydra-temporal",
+    },
+    {
+      title: "From production software to research code",
+      prompt: "What transfers from GraphQL services at USAA to research code, and what had to be unlearned.",
+      groundedIn: "/resume",
+    },
+    {
+      title: "Fail-closed validation in forecasting systems",
+      prompt:
+        "Why controls should not depend on model confidence, and how Harmony stops when data or evaluation rules are incomplete.",
+      groundedIn: "/projects/harmony",
+    },
+    {
+      title: "Reliability lessons from executive-missions operations",
+      prompt:
+        "What Air Force executive-missions operations taught me about reliability, and what an active TS/SCI clearance does and does not change.",
+      groundedIn: "/resume",
+    },
+  ] satisfies DiscussionTopic[],
+  calendlyCta: { label: "Book a 30-minute conversation", href: site.calendlyUrl },
+  emailCta: { label: "Or email me", href: `mailto:${site.email}` },
+  supportingLine: `${site.location} · ${site.timezone}`,
 };
 
 export type ExperienceItem = {
@@ -393,7 +897,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Software Engineering Intern",
     org: "USAA",
-    period: "May 2025 - August 2025",
+    period: "May 2025 – August 2025",
     highlights: [
       "At USAA’s global headquarters in San Antonio, designed and implemented GraphQL APIs using Java and Spring Boot to surface core customer data.",
       "Integrated supplementary data into an internal troubleshooting tool.",
@@ -405,7 +909,7 @@ export const experience: ExperienceItem[] = [
   {
     role: "Executive Missions Aviator",
     org: "United States Air Force",
-    period: "August 2020 - April 2023",
+    period: "August 2020 – April 2023",
     highlights: [
       "Maintained passenger safety and schedule reliability for distinguished guests aboard Air Force 2.",
       "Coordinated across flight crew, security teams, and executive staff to meet exacting operational standards.",
@@ -419,7 +923,7 @@ export const education = [
   {
     degree: "M.S. Artificial Intelligence",
     org: "University of Texas at Austin",
-    period: "In progress - Expected May 2027",
+    period: "In progress – expected May 2027",
     details: [
       "Current GPA: 4.0/4.0.",
       "Completed: AI Ethics, Machine Learning, Deep Learning, and Reinforcement Learning.",
@@ -443,6 +947,10 @@ export type CourseworkItem = {
   status: "Completed" | "Fall 2026";
   description: string;
 };
+
+export function courseEvidenceStatus(status: CourseworkItem["status"]): EvidenceStatus {
+  return status === "Completed" ? "completed" : "planned";
+}
 
 export const coursework = {
   program: "M.S. Artificial Intelligence",

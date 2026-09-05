@@ -1,29 +1,77 @@
-type SectionHeaderProps = {
-  eyebrow: string;
+import type { ReactNode } from "react";
+
+import { cn } from "@/lib/utils";
+
+export type SectionHeaderProps = {
+  /** "01" on the home page; omitted on secondary pages. */
+  number?: string;
+  /** Short mono label rendered in the margin column, e.g. "Research". */
+  label: string;
   title: string;
-  description?: string;
+  lede?: string;
+  /** italic = one-sentence serif abstract; plain = sans description. */
+  ledeStyle?: "italic" | "plain";
+  /** Row of mono labels / StatusLabels under the lede. */
+  meta?: ReactNode;
+  /** Rendered in the margin column under the label (e.g. a portrait on /about). */
+  aside?: ReactNode;
   as?: "h1" | "h2";
 };
 
-export function SectionHeader({ eyebrow, title, description, as = "h2" }: SectionHeaderProps) {
+/**
+ * Heading block for the editorial grid. Renders TWO grid children (margin column + body column),
+ * so it must be placed directly inside an `lg:grid lg:grid-cols-12` element. SectionFrame and
+ * PageHeader do this for you.
+ */
+export function SectionHeader({
+  number,
+  label,
+  title,
+  lede,
+  ledeStyle = "plain",
+  meta,
+  aside,
+  as = "h2",
+}: SectionHeaderProps) {
   const HeadingTag = as;
+  const isPage = as === "h1";
 
   return (
-    <div className="space-y-4">
-      <div className="inline-flex items-center gap-3 rounded-full border border-border/80 bg-card px-4 py-2">
-        <span className="h-2.5 w-2.5 rounded-full bg-secondary" />
-        <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted-foreground">
-          {eyebrow}
+    <>
+      <div className="lg:col-span-2 lg:row-span-2 lg:sticky lg:top-20 lg:self-start">
+        <p className="mono-label text-muted-foreground">
+          {number ? <span className="text-primary">{number}</span> : null}
+          <span className={cn(number && "lg:mt-1 lg:block")}>
+            {number ? <span className="lg:hidden"> · </span> : null}
+            {label}
+          </span>
         </p>
+        {aside}
       </div>
-      <HeadingTag className="max-w-4xl font-serif text-4xl font-medium leading-[1.08] tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-        {title}
-      </HeadingTag>
-      {description ? (
-        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {description}
-        </p>
-      ) : null}
-    </div>
+
+      <div className="mt-4 lg:col-span-10 lg:mt-0">
+        <HeadingTag
+          className={cn(
+            "max-w-[22ch] font-serif text-balance text-foreground",
+            isPage ? "text-display lg:text-[3.5rem]" : "text-heading lg:text-[2.5rem]",
+          )}
+        >
+          {title}
+        </HeadingTag>
+        {lede ? (
+          <p
+            className={cn(
+              "mt-4 max-w-[65ch]",
+              ledeStyle === "italic"
+                ? "font-serif text-lede italic text-foreground lg:text-[1.25rem]"
+                : "text-lede text-muted-foreground",
+            )}
+          >
+            {lede}
+          </p>
+        ) : null}
+        {meta ? <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">{meta}</div> : null}
+      </div>
+    </>
   );
 }

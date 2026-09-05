@@ -6,24 +6,27 @@ import { CourseworkSection } from "@/components/CourseworkSection";
 import { CredibilityBand } from "@/components/CredibilityBand";
 import { FeaturedProject } from "@/components/FeaturedProject";
 import { Hero } from "@/components/Hero";
+import { OpenSourceSection } from "@/components/OpenSourceSection";
 import { ProjectGrid } from "@/components/ProjectGrid";
+import { TalksSection } from "@/components/TalksSection";
+import { site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = {
   ...createPageMetadata({
-    title: "AI / Machine Learning Engineer Portfolio",
-    description:
-      "Mitchel Carson builds production software, applied AI research, and reliable data systems while pursuing an M.S. in Artificial Intelligence at UT Austin.",
+    title: site.title,
+    description: site.metaDescription,
     pathname: "/",
     keywords: [
       "AI portfolio",
       "ML portfolio",
-      "forecasting engineer",
+      "research engineer portfolio",
+      "open source research code",
       "hydrology machine learning",
     ],
   }),
   title: {
-    absolute: "Mitchel Carson | AI / Machine Learning Engineer",
+    absolute: `${site.name} | ${site.title}`,
   },
 };
 
@@ -32,10 +35,12 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <Hero />
       <CredibilityBand />
+      <FeaturedProject />
+      <OpenSourceSection />
+      <TalksSection />
+      <ProjectGrid />
       <AboutSection />
       <CourseworkSection />
-      <FeaturedProject />
-      <ProjectGrid />
       <ContactSection />
     </div>
   );

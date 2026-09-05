@@ -1,31 +1,37 @@
-"use client";
-
-import { Container } from "@/components/Container";
 import { ProjectCard } from "@/components/ProjectCard";
-import { SectionHeader } from "@/components/SectionHeader";
-import { landingSections, projects } from "@/lib/content";
+import { Reveal } from "@/components/Reveal";
+import { SectionFrame } from "@/components/SectionFrame";
+import { TextLink } from "@/components/TextLink";
+import { harmonyBoundaryNote, landingSections, projects, sectionCopy } from "@/lib/content";
 
-const secondaryProjects = projects.slice(1);
+const secondaryProjects = projects.filter((project) => project.slug !== "hydra-temporal");
 
 export function ProjectGrid() {
   if (secondaryProjects.length === 0) return null;
-  const section = landingSections.projects;
 
   return (
-    <section className="scroll-mt-24 py-20" id={section.id}>
-      <Container>
-        <SectionHeader
-          eyebrow={section.label}
-          title="Software built for real use."
-          description="Enterprise APIs and modular AI software, each tied to a clear problem, implementation, and outcome."
-        />
+    <SectionFrame
+      id={landingSections.projects.id}
+      number="04"
+      label="Projects"
+      title={sectionCopy.projects.title}
+      lede={sectionCopy.projects.lede}
+      notes={[{ id: "2", text: harmonyBoundaryNote }]}
+    >
+      <Reveal as="ul" className="border-b border-border">
+        {secondaryProjects.map((project) => (
+          <ProjectCard
+            key={project.slug}
+            project={project}
+            variant="compact"
+            noteId={project.slug === "harmony" ? "2" : undefined}
+          />
+        ))}
+      </Reveal>
 
-        <div className="mt-10 grid gap-7">
-          {secondaryProjects.map((project) => (
-            <ProjectCard key={project.title} project={project} />
-          ))}
-        </div>
-      </Container>
-    </section>
+      <TextLink href="/projects" className="mt-6">
+        All projects
+      </TextLink>
+    </SectionFrame>
   );
 }
