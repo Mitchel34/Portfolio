@@ -57,7 +57,7 @@ export function ServiceSection() {
 
         <Reveal className="mt-16 lg:mt-20">
           <h3 className="mono-label text-navy-muted">The job</h3>
-          <ul className="mt-5 grid gap-px overflow-hidden rounded-[4px] border border-navy-border bg-navy-border sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-5 grid gap-px overflow-hidden rounded-[4px] border border-navy-border bg-navy-border md:grid-cols-3">
             {service.duties.map((duty) => (
               <li key={duty.title} className="bg-navy p-6">
                 <p className="font-serif text-title text-navy-foreground">{duty.title}</p>

@@ -9,7 +9,7 @@ export function SkillsSection() {
     <HomeSection section={landingSections.skills} title={sectionCopy.skills.title} lede={sectionCopy.skills.lede}>
       <Reveal as="ul" className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {toolkit.map((group) => {
-          const isService = group.label === "Operations and leadership";
+          const isService = group.service === true;
 
           return (
             <li
@@ -44,15 +44,17 @@ export function SkillsSection() {
                   </li>
                 ))}
               </ul>
-              <p
-                className={cn(
-                  "mt-auto border-t pt-4 text-footnote",
-                  isService ? "border-navy-border text-navy-muted" : "border-border text-muted-foreground",
-                )}
-              >
-                <span className="mono-label mr-2">Used in</span>
-                {group.usedIn}
-              </p>
+              {group.usedIn ? (
+                <p
+                  className={cn(
+                    "mt-auto border-t pt-4 text-footnote",
+                    isService ? "border-navy-border text-navy-muted" : "border-border text-muted-foreground",
+                  )}
+                >
+                  <span className="mono-label mr-2">Used in</span>
+                  {group.usedIn}
+                </p>
+              ) : null}
             </li>
           );
         })}

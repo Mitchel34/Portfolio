@@ -1,6 +1,6 @@
 # Mitchel Carson — Portfolio
 
-U.S. Air Force veteran and machine learning engineer. I flew executive missions aboard Air Force Two, and I'm now an M.S. Artificial Intelligence student at the University of Texas at Austin researching deep-learning post-processing for NOAA NextGen streamflow forecasts at 1–18 hour lead times.
+Software engineer focused on applied AI and scientific computing, and a U.S. Air Force veteran. I flew on 50+ executive airlift missions with the 89th Airlift Wing, and I'm now an M.S. Artificial Intelligence student at the University of Texas at Austin researching watershed forecasting with deep learning.
 
 **Live site:** [mitchelcarson.com](https://mitchelcarson.com)
 
@@ -8,19 +8,19 @@ U.S. Air Force veteran and machine learning engineer. I flew executive missions 
 
 ## About
 
-From 2020 to 2023 I was an Executive Missions Aviator in the U.S. Air Force at Joint Base Andrews, responsible for the safety, schedule, and comfort of distinguished guests aboard Air Force Two and for planning missions with White House staff. That work taught me the habits I bring to engineering: preparation, clear communication, and a standard that does not move. I hold an active TS/SCI clearance.
+From 2020 to 2023 I was an Executive Missions Aviator in the U.S. Air Force's 89th Airlift Wing. I flew on 50+ executive airlift missions across 30+ countries, all completed with zero safety-related incidents, working directly onboard with distinguished visitors including the Vice President and the Secretary of State. It was while serving that I chose to pursue AI, and the habits of that job came with me: preparation, clear communication, and a standard that does not move. I hold an active TS/SCI clearance.
 
-My work now sits at the intersection of applied ML research and production engineering. HYDRA began as my senior honors thesis and continues as active research: reforecast generation software for NOAA's NextGen framework and a deep-learning post-processor that improves streamflow forecasts at 1–18 hour lead times, comparing LSTM, vanilla Transformer, and Mamba-style state-space models. A results manuscript for Water Resources Research and a software paper for Environmental Modelling & Software are in preparation. Data tooling is public at [NextGen_Hydra](https://github.com/Mitchel34/NextGen_Hydra).
+I focus on applied AI that makes complex data useful to the people relying on it. HYDRA, motivated by experiencing Hurricane Helene in Boone, began as my senior honors thesis and continues as ongoing research on watershed dynamics and forecast reliability: NextGen reforecast generation software and Google Cloud data workflows, plus deep-learning post-processing for 1–18 hour streamflow forecasts comparing LSTM, Transformer, and Mamba-style models. Results are pending; data tooling is public at [NextGen_Hydra](https://github.com/Mitchel34/NextGen_Hydra). At USAA I built Java and Spring Boot GraphQL APIs and reduced troubleshooting time by 30%.
 
-I'm based in **Austin, Texas**, building across applied AI, research engineering, production software, and data systems.
+I'm based in **Austin, Texas**, building across software engineering, applied AI, and scientific computing.
 
 ## Focus Areas
 
 - Streamflow forecast post-processing with LSTM, Transformer, and Mamba-style state-space models
 - Reforecast generation and data tooling for NOAA's NextGen framework
 - Leakage-aware temporal evaluation by site and lead time
-- Cloud research compute: Google Cloud (BigQuery, Cloud Storage) for hydrology; AWS for AI-agent and finance research
-- Reliability-focused modular software systems
+- Cloud research compute: Google Cloud (BigQuery, Cloud Storage) for hydrology; AWS for Harmony experiments
+- Decision systems with bounded LLM autonomy: advisory nodes that can flag or veto, human approval for consequential actions
 
 ## Graduate Coursework
 
@@ -32,8 +32,6 @@ I'm based in **Austin, Texas**, building across applied AI, research engineering
 
 - **AGU26 scientific workshop (accepted):** *Best Practices for AI and Agentic Workflows in Earth Science Research*, San Francisco, December 7–11, 2026. Facilitator.
 - **AGU26 HYDRA abstract (under review):** submitted to the H100 machine-learning-in-hydrology session.
-- **Water Resources Research results manuscript (in progress).**
-- **Environmental Modelling & Software paper on the NextGen reforecast generation software (planned).**
 - **Senior Honors Thesis (completed, December 2025):** runoff forecasting with deep learning, Appalachian State University.
 
 ## Site

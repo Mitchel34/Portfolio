@@ -80,6 +80,14 @@ function WorkCardItem({ card }: { card: WorkCard }) {
       </div>
       <h3 className="mt-4 font-serif text-[1.75rem] leading-tight font-medium text-foreground">{card.title}</h3>
       <p className="mt-1 text-body-sm font-medium text-foreground">{card.subtitle}</p>
+      {card.metric ? (
+        <p className="mt-5 flex items-baseline gap-3 border-y border-border py-3">
+          <span className="font-serif text-[2.25rem] leading-none font-medium tracking-[-0.02em] text-primary">
+            {card.metric.value}
+          </span>
+          <span className="text-body-sm text-foreground">{card.metric.label}</span>
+        </p>
+      ) : null}
       <p className="mt-4 text-body-sm text-muted-foreground">{card.body}</p>
       <ul className="mt-5 flex flex-wrap gap-2" aria-label="Tools">
         {card.tags.map((tag) => (

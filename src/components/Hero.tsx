@@ -51,9 +51,13 @@ export function Hero() {
                 {site.name}
               </motion.h1>
 
+              <motion.p variants={block} className="mt-3 font-serif text-title italic text-muted-foreground">
+                {site.title}
+              </motion.p>
+
               <motion.p
                 variants={block}
-                className="mt-6 max-w-[32ch] font-serif text-[1.5rem] leading-[1.3] text-foreground sm:text-[1.75rem] lg:text-[2rem]"
+                className="mt-7 max-w-[32ch] font-serif text-[1.5rem] leading-[1.3] text-foreground sm:text-[1.75rem] lg:text-[2rem]"
               >
                 {hero.statement}
               </motion.p>

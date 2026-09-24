@@ -25,14 +25,15 @@ const personJsonLd = {
     name: site.location,
   },
   knowsAbout: [
-    "Time-series forecasting",
-    "Post-processing of operational streamflow forecasts",
+    "Software engineering",
+    "Applied AI",
+    "Scientific computing",
+    "Watershed and streamflow forecasting",
+    "Deep learning",
     "State-space and attention sequence models",
     "Leakage-aware temporal evaluation",
-    "Reproducible machine learning pipelines",
-    "Deep learning",
-    "Hydrologic forecasting",
-    "Production software engineering",
+    "Java and Spring Boot GraphQL APIs",
+    "LLM decision systems with human approval",
   ],
 };
 

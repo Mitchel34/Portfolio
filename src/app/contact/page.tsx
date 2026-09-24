@@ -45,7 +45,7 @@ export default function ContactPage() {
         <PageHeader
           label="Contact"
           title={sectionCopy.contact.title}
-          lede="Research engineer, applied scientist, and ML engineering conversations; collaboration on forecasting and evaluation; or questions about the AGU26 workshop. Fastest path is a 30-minute call."
+          lede="Software engineering and applied AI conversations, including scientific computing and mission-driven teams; collaboration on forecasting and evaluation; or questions about the AGU26 workshop. Fastest path is a 30-minute call."
         />
 
         <SectionFrame rule="none" label="Reach me" title="Email, scheduling, profiles">

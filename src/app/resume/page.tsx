@@ -8,15 +8,16 @@ import { SectionFrame } from "@/components/SectionFrame";
 import { buttonClass } from "@/components/ui/Button";
 import { KeywordLine } from "@/components/KeywordLine";
 import { StatusLabel } from "@/components/StatusLabel";
-import { education, experience, projectEvidenceStatus, projects, site, toolkit } from "@/lib/content";
+import { TalksList } from "@/components/TalksSection";
+import { education, experience, projectEvidenceStatus, projects, site, talks, toolkit } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Resume",
   description:
-    "Resume for Mitchel Carson: U.S. Air Force veteran (Executive Missions Aviator, Air Force Two), machine learning engineer and applied AI researcher, UT Austin M.S. AI (expected May 2027), USAA, active TS/SCI.",
+    "Resume for Mitchel Carson: software engineer in applied AI and scientific computing, U.S. Air Force veteran (89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI (expected May 2027), USAA, active TS/SCI.",
   pathname: "/resume",
-  keywords: ["AI engineer resume", "machine learning resume", "software engineer resume"],
+  keywords: ["software engineer resume", "applied AI resume", "Air Force veteran resume"],
 });
 
 function EntryMeta({ period, org }: { period: string; org: string }) {
@@ -51,7 +52,7 @@ export default function ResumePage() {
         <PageHeader
           label="Résumé"
           title="Experience and education."
-          lede="Machine learning research, production software, mission operations, and graduate AI study."
+          lede="Software engineering, applied AI research, Air Force executive airlift, and graduate AI study. The sections below follow the PDF."
           meta={<span className="mono-label text-muted-foreground">PDF updated {site.resumePdfUpdated}</span>}
           actions={
             <a href={site.resumeUrl} download={site.resumeFilename} className={buttonClass("primary")}>
@@ -63,7 +64,7 @@ export default function ResumePage() {
         <SectionFrame rule="none" label="PDF" title="Résumé (PDF)">
           <FigureWell
             padded={false}
-            caption={`Résumé (PDF), one page, generated from this site's content. Updated ${site.resumePdfUpdated}.`}
+            caption={`Résumé (PDF), one page. Updated ${site.resumePdfUpdated}.`}
           >
             <iframe
               src={`${site.resumeUrl}#toolbar=0&navpanes=0&scrollbar=0`}
@@ -71,6 +72,20 @@ export default function ResumePage() {
               className="h-[520px] w-full border-0 md:h-[840px]"
             />
           </FigureWell>
+        </SectionFrame>
+
+        <SectionFrame label="Experience" title="Professional experience">
+          <EntryList>
+            {experience.map((item) => (
+              <Entry key={item.role} meta={<EntryMeta period={item.period} org={item.org} />}>
+                <h3 className="font-serif text-title text-foreground">{item.role}</h3>
+                <DetailList items={item.highlights} />
+                {item.bridgingSentence ? (
+                  <p className="mt-3 font-serif text-body-sm italic text-muted-foreground">{item.bridgingSentence}</p>
+                ) : null}
+              </Entry>
+            ))}
+          </EntryList>
         </SectionFrame>
 
         <SectionFrame label="Research" title="Research and selected projects">
@@ -91,32 +106,14 @@ export default function ResumePage() {
                 >
                   <h3 className="font-serif text-title text-foreground">{project.title}</h3>
                   <p className="mt-1 text-body-sm text-muted-foreground">{project.subtitle}</p>
-                  <DetailList items={project.approach.slice(0, 3)} />
+                  <DetailList items={project.approach} />
                 </Entry>
               ))}
           </EntryList>
         </SectionFrame>
 
-        <SectionFrame label="Skills" title="Tools and platforms">
-          <div className="space-y-3">
-            {toolkit.map((group) => (
-              <KeywordLine key={group.label} label={group.label} items={group.items} />
-            ))}
-          </div>
-        </SectionFrame>
-
-        <SectionFrame label="Experience" title="Industry and service">
-          <EntryList>
-            {experience.map((item) => (
-              <Entry key={item.role} meta={<EntryMeta period={item.period} org={item.org} />}>
-                <h3 className="font-serif text-title text-foreground">{item.role}</h3>
-                <DetailList items={item.highlights} />
-                {item.bridgingSentence ? (
-                  <p className="mt-3 font-serif text-body-sm italic text-muted-foreground">{item.bridgingSentence}</p>
-                ) : null}
-              </Entry>
-            ))}
-          </EntryList>
+        <SectionFrame label="Conferences" title="Conference activities">
+          <TalksList items={talks.filter((item) => item.kind === "Workshop" || item.kind === "Abstract")} />
         </SectionFrame>
 
         <SectionFrame label="Education" title="Academic foundation">
@@ -128,6 +125,14 @@ export default function ResumePage() {
               </Entry>
             ))}
           </EntryList>
+        </SectionFrame>
+
+        <SectionFrame label="Skills" title="Technical skills">
+          <div className="space-y-3">
+            {toolkit.map((group) => (
+              <KeywordLine key={group.label} label={group.label} items={group.items} />
+            ))}
+          </div>
         </SectionFrame>
       </div>
     </>

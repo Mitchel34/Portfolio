@@ -14,7 +14,7 @@ import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, Harmony's fail-closed research system, and open-source research code.",
+    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, Harmony's decision system with bounded LLM autonomy, and open-source research code.",
   pathname: "/projects",
   keywords: [
     "AI projects",

@@ -19,12 +19,14 @@ Build a coherent career system that connects five activities:
 As of 2026-09-24 (narrative refresh branch `claude/relaxed-goodall-qfq8i4`):
 
 - The home page is rebuilt around one story: hero ("From Air Force Two to applied AI"), a full-bleed navy Service section, a Path timeline, Work, Research & Talks, Skills, and Contact.
-- Military service is now the foundation of the narrative. Every service fact comes from Mitchel's own résumés (Air Force Two, Joint Base Andrews, White House mission planning, logistics, visas, billing, active TS/SCI); nothing is inferred. Swap in details from the newest résumé (unit, awards, mission counts) only once confirmed.
+- Military service is now the foundation of the narrative. Service facts come from Mitchel's 2026-09-23 résumé (89th Airlift Wing; 50+ executive airlift missions across 30+ countries with zero safety-related incidents; onboard with the Vice President and Secretary of State; safety and logistics with flight crews, security teams, and White House staff; chose to pursue AI while serving) plus the station and Air Force Two wording from his earlier résumés. Nothing is inferred.
+- Positioning follows the new résumé: "Software Engineer · Applied AI & Scientific Computing". HYDRA is framed as watershed forecasting research motivated by experiencing Hurricane Helene in Boone; Harmony as an automated decision system with bounded LLM autonomy; USAA carries the 30% troubleshooting-time reduction.
+- Manuscript claims (Water Resources Research, Environmental Modelling & Software) were removed from the site because the new résumé no longer lists them. Restore the Talks entries from git history if and when their status is settled.
 - Legibility: 17px body copy, darker muted text (AAA contrast on paper), fewer uppercase labels, the evidence legend removed from the hero and footer.
 - Fixed a production bug: the Newsreader and IBM Plex fonts never loaded because their CSS variables were set on `<body>` while the theme read them at `:root`. They now live on `<html>`.
 - Fixed `cn()` silently dropping the custom type-scale classes (`text-title`, `text-body-sm`, ...) when combined with a text color.
 - Fall 2026 courses are labeled in progress rather than planned.
-- The résumé PDF was not regenerated; replace `public/mitchelcarson_resume.pdf` with the new résumé.
+- The public résumé is now Mitchel's own 2026-09-23 PDF (not generated from the site), at `public/mitchelcarson_resume.pdf`, with the root `Resume_2026.pdf` and `Resume_Masters_26.pdf` copies kept identical.
 
 As of 2026-09-04 (visual refresh branch `claude/personal-website-refresh-jffal0`):
 
@@ -71,7 +73,7 @@ These lanes were confirmed on 2026-08-20. Every target role should map to one pr
 ## Source-of-truth rules
 
 - `src/lib/content.ts` is the source of truth for public website copy.
-- `public/resume.pdf` is the exact resume published by the site.
+- `public/mitchelcarson_resume.pdf` is the exact resume published by the site.
 - `career/resumes/` is the local source of truth for master and tailored resume work.
 - `career/companies.csv` is the local source of truth for companies and applications.
 - `career/calendar.md` is the local source of truth for career milestones and workload decisions.
@@ -135,7 +137,7 @@ Until the Fall 2026 syllabi and personal calendar are reviewed, use this as a pr
 4. Create a role-specific resume; do not overwrite the master.
 5. Check text extraction, links, spelling, visual rendering, and one-page density.
 6. Record the exact version in `career/companies.csv` before applying.
-7. Update `public/resume.pdf` only when intentionally changing the general public resume.
+7. Update `public/mitchelcarson_resume.pdf` only when intentionally changing the general public resume.
 
 Recommended application filename:
 
