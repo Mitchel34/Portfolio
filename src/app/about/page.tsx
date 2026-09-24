@@ -13,7 +13,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Mitchel Carson: software engineer and U.S. Air Force veteran (89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI student researching watershed forecasting, and former USAA software engineering intern.",
+    "Mitchel Carson: software engineer and U.S. Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI student researching watershed forecasting, and former USAA software engineering intern.",
   pathname: "/about",
   keywords: ["about Mitchel Carson", "AI engineer background", "machine learning researcher"],
 });

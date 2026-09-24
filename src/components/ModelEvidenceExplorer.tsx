@@ -51,10 +51,11 @@ const evidenceTabs: EvidenceTab[] = [
     id: "outcome",
     label: "(d) Outputs",
     eyebrow: "Planned outputs",
-    title: "Results arrive when the analysis supports them.",
-    detail: research.architecture[3] + " The data tooling is already public on GitHub.",
+    title: "Two manuscripts and the software behind them.",
+    detail:
+      "A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
     note: research.scopeNote,
-    tokens: ["Diagnostics by lead time", "AGU26 abstract", "Public code"],
+    tokens: ["WRR manuscript", "EM&S software paper", "Public code"],
   },
 ];
 
@@ -186,7 +187,7 @@ function OutcomeVisual() {
       value="1–18 h"
       unit="forecast lead times targeted by the post-processing model"
       status="in-progress"
-      footnote="Results will be posted when the analysis is complete; no performance number is reported yet."
+      footnote="Results will be published with the manuscripts; no performance number is reported yet."
     />
   );
 }

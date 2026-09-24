@@ -4,9 +4,9 @@ export const site = {
   headline: "Software Engineer · Applied AI & Scientific Computing",
   tagline: "From Air Force Two to applied AI.",
   summary:
-    "Mitchel Carson is a software engineer and U.S. Air Force veteran focused on applied AI and scientific computing. As an Executive Missions Aviator in the 89th Airlift Wing (2020–2023) he flew on 50+ executive airlift missions across 30+ countries with zero safety-related incidents. He built Java and Spring Boot GraphQL APIs at USAA and is a UT Austin M.S. Artificial Intelligence student (4.0 GPA, expected May 2027) researching watershed forecasting with deep learning. He holds an active TS/SCI clearance and is based in Austin, Texas.",
+    "Mitchel Carson is a software engineer and U.S. Air Force veteran focused on applied AI and scientific computing. As an Executive Missions Aviator in the 89th Airlift Wing (2020–2023) he flew on 50+ executive airlift missions across 30+ countries, including Air Force Two, with zero safety-related incidents. He built Java and Spring Boot GraphQL APIs at USAA and is a UT Austin M.S. Artificial Intelligence student (4.0 GPA, expected May 2027) researching watershed forecasting with deep learning. He holds an active TS/SCI clearance and is based in Austin, Texas.",
   metaDescription:
-    "Software engineer and Air Force veteran (89th Airlift Wing, 50+ executive missions, active TS/SCI). UT Austin M.S. AI student building applied AI for watershed forecasting.",
+    "Software engineer and Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions, active TS/SCI). UT Austin M.S. AI student building applied AI for watershed forecasting.",
   schemaJobTitle: "M.S. Artificial Intelligence student, The University of Texas at Austin",
   focusLine: "Air Force veteran · Applied AI · Scientific computing",
   runningHead: "Mitchel Carson · Portfolio",
@@ -92,7 +92,7 @@ export const landingSections = {
     label: "Service",
     navLabel: "Service",
     href: "/#service",
-    description: "U.S. Air Force: 89th Airlift Wing, 50+ executive missions",
+    description: "U.S. Air Force: Air Force Two, 89th Airlift Wing, 50+ missions",
     inHeader: true,
   },
   path: {
@@ -119,7 +119,7 @@ export const landingSections = {
     label: "Research & Talks",
     navLabel: "Research",
     href: "/#research",
-    description: "AGU26 workshop, abstract, and honors thesis",
+    description: "AGU26 workshop, abstract, manuscripts, and thesis",
     inHeader: true,
   },
   skills: {
@@ -173,7 +173,7 @@ export const hero = {
 export type HeroStat = { value: string; label: string; detail: string };
 
 export const heroStats: HeroStat[] = [
-  { value: "50+", label: "Executive airlift missions", detail: "Across 30+ countries · 2020–2023" },
+  { value: "50+", label: "Executive airlift missions", detail: "Including Air Force Two · 30+ countries" },
   { value: "Zero", label: "Safety-related incidents", detail: "Every mission, 89th Airlift Wing" },
   { value: "30%", label: "Less troubleshooting time", detail: "USAA · Summer 2025" },
   { value: "4.0", label: "GPA", detail: "UT Austin M.S. AI · May 2027" },
@@ -195,7 +195,7 @@ export const sectionCopy = {
   research: {
     title: "Research and speaking.",
     lede:
-      "Where the work is being presented. Each item carries its current status and is updated as milestones land.",
+      "Where the work is being presented and published. Each item carries its current status and is updated as milestones land.",
   },
   skills: {
     title: "What I bring to a team.",
@@ -218,7 +218,7 @@ export const service = {
   kicker: "U.S. Air Force · 89th Airlift Wing · 2020–2023",
   title: "Before I wrote code, I flew executive missions aboard Air Force Two.",
   intro: [
-    "From 2020 to 2023 I was an Executive Missions Aviator in the 89th Airlift Wing at Joint Base Andrews, the wing whose executive airlift mission supports the Vice President, the First Lady, the Secretaries of State and Defense, and the Chairman of the Joint Chiefs of Staff.",
+    "From 2020 to 2023 I was an Executive Missions Aviator in the 89th Airlift Wing at Joint Base Andrews, the wing whose executive airlift mission supports the Vice President, the First Lady, the Secretaries of State and Defense, and the Chairman of the Joint Chiefs of Staff. I flew aboard Air Force Two, the call sign of the aircraft carrying the Vice President.",
     "It was while serving that I chose to pursue AI. The job taught me what it means for people to rely on your work, and that is the standard I build to.",
   ],
   record: [
@@ -231,11 +231,15 @@ export const service = {
   duties: [
     {
       title: "Onboard with senior leaders",
-      body: "Worked directly onboard with distinguished visitors, including the Vice President and the Secretary of State.",
+      body: "Worked directly onboard with distinguished visitors, including the Vice President aboard Air Force Two and the Secretary of State.",
     },
     {
       title: "Safety and logistics",
       body: "Managed passenger safety and logistics with flight crews, security teams, and White House staff.",
+    },
+    {
+      title: "Mission administration",
+      body: "Handled in-flight meal and beverage service, baggage logistics, crew hotel bookings and ground transportation, visa applications, and crew and passenger subsistence billing.",
     },
     {
       title: "A zero-incident record",
@@ -246,7 +250,7 @@ export const service = {
   lessons: [
     {
       title: "Preparation is the job.",
-      body: "A mission was planned long before anyone boarded. I build research the same way: data manifests, configuration, and leakage checks settled before a model trains.",
+      body: "A mission was planned long before anyone boarded, down to the hotels, the visas, and the in-flight service. I build research the same way: data manifests, configuration, and leakage checks settled before a model trains.",
     },
     {
       title: "Communicate up, down, and across.",
@@ -283,7 +287,7 @@ export const story: StoryChapter[] = [
     period: "2020 – 2023",
     title: "U.S. Air Force",
     role: "Executive Missions Aviator · 89th Airlift Wing · Joint Base Andrews, MD",
-    body: "50+ executive airlift missions across 30+ countries with zero safety-related incidents, working onboard with the Vice President and the Secretary of State. This is where I chose to pursue AI.",
+    body: "50+ executive airlift missions across 30+ countries with zero safety-related incidents, including Air Force Two missions with the Vice President and missions with the Secretary of State. This is where I chose to pursue AI.",
     link: { label: "Service record", href: "/#service" },
   },
   {
@@ -310,7 +314,7 @@ export const story: StoryChapter[] = [
     period: "2026 – May 2027",
     title: "The University of Texas at Austin",
     role: "M.S. Artificial Intelligence · 4.0 GPA · Austin, TX",
-    body: "Machine learning, deep learning, reinforcement learning, and AI ethics completed, with HYDRA continuing as ongoing research.",
+    body: "Machine learning, deep learning, reinforcement learning, and AI ethics completed. HYDRA continues as ongoing research, with a results manuscript in preparation and a software paper planned.",
     link: { label: "Coursework", href: "/coursework" },
   },
   {
@@ -354,7 +358,8 @@ export const featuredWork = {
     },
   ],
   status: "in-progress" as EvidenceStatus,
-  statusNote: "Ongoing research · results pending",
+  statusNote:
+    "Results pending · results manuscript in preparation for Water Resources Research; software paper planned for Environmental Modelling & Software",
   links: [
     { label: "Research details", href: "/research" },
     { label: "Case study", href: "/projects/hydra-temporal" },
@@ -454,12 +459,14 @@ export const toolkit: ToolkitGroup[] = [
     service: true,
     items: [
       "Safety-critical operations",
-      "Logistics across 30+ countries",
+      "In-flight service for distinguished visitors",
+      "Mission logistics across 30+ countries",
+      "Visas, crew hotels, and subsistence billing",
       "Coordination with White House staff and security teams",
       "Technical communication",
       "Active TS/SCI clearance",
     ],
-    usedIn: "U.S. Air Force (89th Airlift Wing), USAA, AGU26 workshop",
+    usedIn: "U.S. Air Force (89th Airlift Wing, Air Force Two), USAA, AGU26 workshop",
   },
 ];
 
@@ -513,9 +520,9 @@ export function projectEvidenceStatus(status: Project["status"]): EvidenceStatus
 export const about = {
   summary: [
     "I came to AI through operations first. From 2020 to 2023 I was an Executive Missions Aviator in the U.S. Air Force’s 89th Airlift Wing, flying on more than 50 executive airlift missions across more than 30 countries. Every one was completed with zero safety-related incidents.",
-    "I worked directly onboard with distinguished visitors, including the Vice President and the Secretary of State, managing passenger safety and logistics with flight crews, security teams, and White House staff. It was while serving that I chose to pursue AI. I still hold an active TS/SCI clearance.",
+    "I worked directly onboard with distinguished visitors, including the Vice President aboard Air Force Two and the Secretary of State, managing passenger safety and logistics with flight crews, security teams, and White House staff. I also handled the mission administration: in-flight meal and beverage service, baggage, crew hotels and ground transportation, visa applications, and subsistence billing. It was while serving that I chose to pursue AI. I still hold an active TS/SCI clearance.",
     "I studied computer science at Appalachian State, graduating cum laude with a senior honors thesis on runoff forecasting with deep learning. Experiencing Hurricane Helene in Boone is what motivated HYDRA, my research on watershed dynamics and forecast reliability. At USAA I built Java and Spring Boot GraphQL APIs and cut troubleshooting time by 30%, and I also build and advise on software for a small business.",
-    "Today I am completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA), with HYDRA as ongoing research. I focus on applied AI that makes complex data useful to the people relying on it.",
+    "Today I am completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA), with HYDRA as ongoing research: a results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned. I focus on applied AI that makes complex data useful to the people relying on it.",
   ],
   values: [
     {
@@ -550,7 +557,7 @@ export const proofItems: ProofItem[] = [
     title: "United States Air Force",
     role: "Executive Missions Aviator · 89th Airlift Wing · 2020–2023",
     description:
-      "I flew on 50+ executive airlift missions across 30+ countries, all completed with zero safety-related incidents, working directly onboard with distinguished visitors including the Vice President and the Secretary of State.",
+      "I flew on 50+ executive airlift missions across 30+ countries, all completed with zero safety-related incidents, working directly onboard with distinguished visitors including the Vice President aboard Air Force Two and the Secretary of State. I also handled in-flight service, baggage, crew hotels, visas, and billing.",
     askAbout: "Operating to a zero-incident standard, executive airlift, and moving from military service into AI.",
     href: "/#service",
     linkLabel: "Service record",
@@ -572,7 +579,7 @@ export const proofItems: ProofItem[] = [
     title: "HYDRA",
     role: "Watershed forecasting research · Ongoing",
     description:
-      "Motivated by experiencing Hurricane Helene in Boone, I build NextGen reforecast generation software and Google Cloud data workflows, and design deep-learning post-processing for 1–18 hour streamflow forecasts under leakage-aware evaluation.",
+      "Motivated by experiencing Hurricane Helene in Boone, I build NextGen reforecast generation software and Google Cloud data workflows, and design deep-learning post-processing for 1–18 hour streamflow forecasts under leakage-aware evaluation. A results manuscript is in preparation.",
     askAbout: "Temporal leakage, forecast evaluation by lead time, and defensible research claims.",
     href: "/research",
     linkLabel: "View research",
@@ -612,12 +619,13 @@ export const projects: Project[] = [
     problem:
       "Experiencing Hurricane Helene in Boone is what motivated HYDRA. Short-lead streamflow forecasts from NOAA’s NextGen framework carry errors that a learned post-processor may be able to reduce, and HYDRA asks whether a model trained on reforecasts generated with the same framework can improve forecasts at 1–18 hour lead times without leaking future information.",
     impact:
-      "The work has two parts: NextGen reforecast generation software with Google Cloud workflows that prepare the data, and a post-processing model evaluated by site and lead time. The research is ongoing and results are pending.",
+      "The work has two parts: NextGen reforecast generation software with Google Cloud workflows that prepare the data, and a post-processing model evaluated by site and lead time. Results are pending; a results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
     approach: [
       "Built NextGen reforecast generation software and Google Cloud workflows to acquire, validate, and align weather, streamflow, and forecast data with traceable provenance.",
       "Designing forecast post-processing for 1–18 hour lead times, comparing LSTM, Transformer, and Mamba-style models on identical inputs and splits.",
       "Evaluating with leakage-aware temporal splits and hydrologic metrics (RMSE, NSE, KGE), reporting performance by site and lead time.",
       "Preserving initialization, lead, valid-time, version, and source metadata so every training example traces back to the forecast that produced it.",
+      "Preparing a results manuscript for Water Resources Research; a software paper for Environmental Modelling & Software is planned.",
     ],
     stack: [
       "PyTorch",
@@ -631,6 +639,7 @@ export const projects: Project[] = [
     results: [
       "Reforecast generation software and Google Cloud data workflows are in place; the NextGen_Hydra repository is public.",
       "Model comparison and lead-time evaluation are in progress; results will be posted when the analysis is complete.",
+      "A results manuscript is in preparation, and a software paper is planned.",
     ],
     learnings: [
       "Post-processing depends as much on how reforecasts are generated and aligned as on model architecture.",
@@ -649,7 +658,7 @@ export const projects: Project[] = [
         "Performance tracked by site, lead time, and hydrologic metric instead of a single aggregate score.",
       ],
       delivery: [
-        "Packaged data acquisition and reforecast generation as reusable software; the data tooling is public.",
+        "Packaged data acquisition and reforecast generation as reusable software for a planned software paper; the data tooling is public.",
         "Produced versioned artifacts, diagnostics, and technical documentation for scientific review.",
         "Maintained a research website while reserving claims for the completed analysis.",
       ],
@@ -794,8 +803,9 @@ export const research = {
   title: "HYDRA: watershed forecasting research",
   status: "Ongoing research · results pending",
   summary:
-    "Motivated by experiencing Hurricane Helene in Boone, HYDRA studies watershed dynamics and forecast reliability: NextGen reforecast generation software and Google Cloud data workflows, plus a deep-learning post-processor for 1–18 hour streamflow forecasts, with LSTM, Transformer, and Mamba-style models compared under leakage-aware evaluation.",
-  scopeNote: "No performance number is reported on this site until the analysis is complete.",
+    "Motivated by experiencing Hurricane Helene in Boone, HYDRA studies watershed dynamics and forecast reliability: NextGen reforecast generation software and Google Cloud data workflows, plus a deep-learning post-processor for 1–18 hour streamflow forecasts, with LSTM, Transformer, and Mamba-style models compared under leakage-aware evaluation. A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
+  scopeNote:
+    "No performance number is reported on this site until the analysis is complete; results will be published with the manuscripts.",
   figures: {
     explorer:
       "Interactive trace of the HYDRA pipeline: reforecast generation, the three model families compared, leakage-aware evaluation by lead time, and the outputs.",
@@ -858,7 +868,7 @@ export const openSource: OpenSourceEntry[] = [
     kind: "maintained",
     group: "Research code",
     what: "End-to-end automation to acquire, verify, and tidy historical NOAA NextGen streamflow data.",
-    why: "Data tooling behind the NextGen reforecast work, public so results can be traced to their data.",
+    why: "Data tooling behind the NextGen reforecast work; the planned software paper builds on it.",
   },
   {
     name: "hydra-nwm-streamflow-correction",
@@ -911,8 +921,8 @@ export const openSource: OpenSourceEntry[] = [
 
 // ---------------------------------------------------------------------------
 // Talks, workshops, and writing. Single source of truth for the home Research &
-// Talks section and /research. Statuses use the evidence system. Manuscripts are
-// listed only once the résumé lists them.
+// Talks section, /research, and /resume. Statuses use the evidence system and match
+// the résumé PDF.
 // ---------------------------------------------------------------------------
 
 export type TalkKind = "Workshop" | "Talk" | "Abstract" | "Manuscript" | "Thesis" | "Poster";
@@ -957,9 +967,35 @@ export const talks: TalkItem[] = [
     links: [{ label: "Research details", href: "/research" }],
   },
   {
+    id: "wrr-manuscript",
+    kind: "Manuscript",
+    order: 3,
+    title: "HYDRA results manuscript",
+    venue: "Water Resources Research (target journal)",
+    whenLabel: "In preparation",
+    status: "in-progress",
+    role: "Author",
+    description:
+      "Post-processing results for NextGen streamflow forecasts at 1–18 hour lead times. Analysis and writing are in progress; a link will be added when one exists.",
+    links: [{ label: "Research details", href: "/research" }],
+  },
+  {
+    id: "ems-software-paper",
+    kind: "Manuscript",
+    order: 4,
+    title: "NextGen reforecast generation software",
+    venue: "Environmental Modelling & Software (target journal)",
+    whenLabel: "Planned",
+    status: "planned",
+    role: "Author",
+    description:
+      "Software paper describing the reforecast generation and data tooling, planned alongside the code release.",
+    links: [{ label: "Code on GitHub", href: "https://github.com/Mitchel34/NextGen_Hydra" }],
+  },
+  {
     id: "honors-thesis",
     kind: "Thesis",
-    order: 3,
+    order: 5,
     title: "Senior Honors Thesis on runoff forecasting with deep learning",
     venue: "Appalachian State University",
     whenLabel: "December 2025",
@@ -1023,7 +1059,7 @@ export const discussions = {
     {
       title: "Reliability lessons from executive-missions operations",
       prompt:
-        "What 50+ executive airlift missions with zero safety-related incidents taught me about preparation and reliability, and how that shows up in software.",
+        "What 50+ executive airlift missions, including Air Force Two, with zero safety-related incidents taught me about preparation and reliability, and how that shows up in software.",
       groundedIn: "/#service",
     },
     {
@@ -1062,7 +1098,8 @@ export const experience: ExperienceItem[] = [
     period: "August 2020 – April 2023",
     highlights: [
       "Flew on 50+ executive airlift missions across 30+ countries, all completed with zero safety-related incidents.",
-      "Worked directly onboard with distinguished visitors including the Vice President and Secretary of State; managed passenger safety and logistics with flight crews, security teams, and White House staff.",
+      "Worked directly onboard with distinguished visitors including the Vice President aboard Air Force Two and the Secretary of State; managed passenger safety and logistics with flight crews, security teams, and White House staff.",
+      "Handled in-flight meal and beverage service, baggage logistics, crew hotel bookings and ground transportation, visa applications, and crew and passenger subsistence billing.",
       "Served in the 89th Airlift Wing, whose executive airlift mission supported the Vice President, First Lady, Secretaries of State and Defense, and Chairman of the Joint Chiefs of Staff.",
       "Hold an active TS/SCI clearance.",
     ],

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
       "applied AI engineer",
       "scientific computing",
       "89th Airlift Wing",
+      "Air Force Two",
       "hydrology machine learning",
     ],
   }),

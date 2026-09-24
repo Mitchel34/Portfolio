@@ -15,7 +15,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Resume",
   description:
-    "Resume for Mitchel Carson: software engineer in applied AI and scientific computing, U.S. Air Force veteran (89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI (expected May 2027), USAA, active TS/SCI.",
+    "Resume for Mitchel Carson: software engineer in applied AI and scientific computing, U.S. Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI (expected May 2027), USAA, active TS/SCI.",
   pathname: "/resume",
   keywords: ["software engineer resume", "applied AI resume", "Air Force veteran resume"],
 });
@@ -112,8 +112,8 @@ export default function ResumePage() {
           </EntryList>
         </SectionFrame>
 
-        <SectionFrame label="Conferences" title="Conference activities">
-          <TalksList items={talks.filter((item) => item.kind === "Workshop" || item.kind === "Abstract")} />
+        <SectionFrame label="Conferences" title="Conference activities and manuscripts">
+          <TalksList items={talks.filter((item) => item.kind !== "Thesis")} />
         </SectionFrame>
 
         <SectionFrame label="Education" title="Academic foundation">

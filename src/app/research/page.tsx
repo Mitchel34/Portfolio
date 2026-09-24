@@ -16,7 +16,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Research",
   description:
-    "HYDRA: watershed forecasting research motivated by Hurricane Helene. NextGen reforecast generation software and deep-learning post-processing for NOAA streamflow forecasts at 1–18 hour lead times.",
+    "HYDRA: watershed forecasting research motivated by Hurricane Helene. NextGen reforecast generation software and deep-learning post-processing for NOAA streamflow forecasts at 1–18 hour lead times. Results manuscript in preparation.",
   pathname: "/research",
   keywords: [
     "AI research",
