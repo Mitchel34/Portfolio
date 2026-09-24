@@ -2,15 +2,15 @@ export const site = {
   name: "Mitchel Carson",
   title: "Machine Learning Engineer & Applied AI Researcher",
   headline: "Machine Learning Engineer & Applied AI Researcher",
-  tagline: "Forecast corrections, evaluated the way they’d be used.",
+  tagline: "From Air Force Two to applied AI.",
   role:
-    "I build reforecast generation software for NOAA’s NextGen framework and post-processing models that improve its streamflow forecasts at 1–18 hour lead times, evaluated the way they would be used. M.S. Artificial Intelligence at UT Austin, expected May 2027; production software at USAA before that.",
+    "U.S. Air Force veteran and UT Austin M.S. Artificial Intelligence student researching deep-learning corrections for NOAA’s NextGen streamflow forecasts. Production software at USAA; active TS/SCI.",
   summary:
-    "Mitchel Carson is a machine learning engineer and UT Austin M.S. Artificial Intelligence student (expected May 2027) researching deep-learning post-processing of NOAA NextGen streamflow reforecasts at 1–18 hour lead times. He previously built GraphQL services as a software engineering intern at USAA and served as an Executive Missions Aviator in the U.S. Air Force; he holds an active TS/SCI clearance and is based in Austin, Texas.",
+    "Mitchel Carson is a U.S. Air Force veteran and machine learning engineer. He flew executive missions aboard Air Force Two as an Executive Missions Aviator at Joint Base Andrews (2020–2023), built GraphQL services as a software engineering intern at USAA, and is now a UT Austin M.S. Artificial Intelligence student (expected May 2027) researching deep-learning post-processing of NOAA NextGen streamflow forecasts at 1–18 hour lead times. He holds an active TS/SCI clearance and is based in Austin, Texas.",
   metaDescription:
-    "Machine learning engineer and UT Austin M.S. AI student researching deep-learning post-processing for NOAA NextGen streamflow forecasts at 1–18 hour lead times. Austin, TX.",
+    "U.S. Air Force veteran (Air Force Two, active TS/SCI) and machine learning engineer. UT Austin M.S. AI student researching deep-learning corrections for NOAA NextGen streamflow forecasts. Austin, TX.",
   schemaJobTitle: "M.S. Artificial Intelligence student, The University of Texas at Austin",
-  focusLine: "Applied AI Research · Reproducible ML · Production Software",
+  focusLine: "Air Force veteran · Applied AI research · Production software",
   runningHead: "Mitchel Carson · Portfolio",
   updated: "September 2026",
   updatedYear: "2026",
@@ -73,12 +73,6 @@ export const evidenceWord: Record<EvidenceStatus, string> = {
   "active-development": "Active development",
 };
 
-export const evidenceLegend: { tone: EvidenceTone; label: string; meaning: string }[] = [
-  { tone: "confirmed", label: "confirmed", meaning: "accepted, completed, production" },
-  { tone: "provisional", label: "provisional", meaning: "under review, preliminary" },
-  { tone: "pending", label: "not yet", meaning: "in progress, planned, active development" },
-];
-
 // ---------------------------------------------------------------------------
 // Navigation. Insertion order is the home-page order; numbers are rendered.
 // ---------------------------------------------------------------------------
@@ -94,63 +88,54 @@ export type LandingSection = {
 };
 
 export const landingSections = {
+  service: {
+    id: "service",
+    number: "01",
+    label: "Service",
+    navLabel: "Service",
+    href: "/#service",
+    description: "U.S. Air Force: executive missions aboard Air Force Two",
+    inHeader: true,
+  },
+  path: {
+    id: "path",
+    number: "02",
+    label: "Path",
+    navLabel: "Path",
+    href: "/#path",
+    description: "Air Force, computer science, USAA, UT Austin",
+    inHeader: true,
+  },
+  work: {
+    id: "work",
+    number: "03",
+    label: "Work",
+    navLabel: "Work",
+    href: "/#work",
+    description: "HYDRA research, USAA APIs, Harmony, client work",
+    inHeader: true,
+  },
   research: {
     id: "research",
-    number: "01",
-    label: "Research",
+    number: "04",
+    label: "Research & Talks",
     navLabel: "Research",
     href: "/#research",
-    description: "HYDRA: post-processing AI for NextGen streamflow reforecasts",
+    description: "AGU26 workshop, abstract, manuscripts, thesis",
     inHeader: true,
   },
-  openSource: {
-    id: "open-source",
-    number: "02",
-    label: "Open Source",
-    navLabel: "Open Source",
-    href: "/#open-source",
-    description: "Research code and tooling, in the open",
-    inHeader: true,
-  },
-  talks: {
-    id: "talks",
-    number: "03",
-    label: "Talks & Discussions",
-    navLabel: "Talks",
-    href: "/#talks",
-    description: "AGU26 workshop, abstract status, and discussion topics",
-    inHeader: true,
-  },
-  projects: {
-    id: "projects",
-    number: "04",
-    label: "Projects",
-    navLabel: "Projects",
-    href: "/#projects",
-    description: "Production APIs and modular AI software",
-    inHeader: true,
-  },
-  about: {
-    id: "about-me",
+  skills: {
+    id: "skills",
     number: "05",
-    label: "About",
-    navLabel: "About",
-    href: "/#about-me",
-    description: "Background, experience, and what I bring",
+    label: "Skills",
+    navLabel: "Skills",
+    href: "/#skills",
+    description: "Machine learning, software, cloud, operations",
     inHeader: true,
-  },
-  coursework: {
-    id: "coursework",
-    number: "06",
-    label: "Graduate Study",
-    navLabel: "Graduate Study",
-    href: "/#coursework",
-    description: "UT Austin M.S. Artificial Intelligence, 4.0 GPA",
-    inHeader: false,
   },
   contact: {
     id: "contact",
-    number: "07",
+    number: "06",
     label: "Contact",
     navLabel: "Contact",
     href: "/#contact",
@@ -165,84 +150,312 @@ export const landingNavItems: LandingSection[] = landingSectionList.filter((sect
 export type SitePage = { label: string; href: string; description: string };
 
 export const sitePages: SitePage[] = [
-  { label: "About", href: "/about", description: "Background, values, focus areas" },
-  { label: "Projects", href: "/projects", description: "All case studies" },
+  { label: "About", href: "/about", description: "Story, service, and what I care about" },
+  { label: "Projects", href: "/projects", description: "Case studies and open source" },
   { label: "Research", href: "/research", description: "HYDRA in full" },
-  { label: "Coursework", href: "/coursework", description: "Completed and planned graduate courses" },
+  { label: "Coursework", href: "/coursework", description: "UT Austin M.S. AI courses" },
   { label: "Résumé", href: "/resume", description: "PDF, experience, education" },
   { label: "Contact", href: "/contact", description: "Form and scheduling" },
 ];
 
 // ---------------------------------------------------------------------------
-// Home-page section copy (titles and ledes). Components read these, never inline copy.
+// Home page. The story runs top to bottom: hook, service, path, work, research,
+// skills, contact. Components read these; they never inline copy.
 // ---------------------------------------------------------------------------
+
+export const hero = {
+  eyebrow: ["U.S. Air Force veteran", "Active TS/SCI", "Austin, Texas"],
+  statement:
+    "Nearly three years of executive missions aboard Air Force Two taught me to prepare for everything. Now I bring that discipline to machine learning.",
+  summary:
+    "I’m completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA) and researching deep-learning corrections for NOAA’s NextGen streamflow forecasts. Before that: production APIs at USAA and a B.S. in Computer Science.",
+  portraitCaption: "Joint Base Andrews → UT Austin",
+};
+
+export type HeroStat = { value: string; label: string; detail: string };
+
+export const heroStats: HeroStat[] = [
+  { value: "2020–23", label: "U.S. Air Force", detail: "Executive Missions Aviator" },
+  { value: "TS/SCI", label: "Clearance", detail: "Active" },
+  { value: "4.0", label: "GPA", detail: "UT Austin M.S. AI · May 2027" },
+  { value: "AGU26", label: "Workshop facilitator", detail: "Accepted · December 2026" },
+];
 
 export type SectionCopy = { title: string; lede: string };
 
 export const sectionCopy = {
+  path: {
+    title: "The path so far.",
+    lede:
+      "Four chapters with one through-line: work other people depend on, done with careful preparation and a standard that does not move.",
+  },
+  work: {
+    title: "Selected work.",
+    lede:
+      "Research I lead, production software I shipped, and systems I am building. Each project links to a case study with the problem, the approach, and what is still open.",
+  },
   research: {
-    title: "Post-processing NextGen streamflow reforecasts at 1–18 hour lead times.",
+    title: "Research and speaking.",
     lede:
-      "HYDRA pairs reforecast generation software for NOAA’s NextGen framework with a post-processing model that learns to improve the forecasts it produces. LSTM, vanilla Transformer, and Mamba-style state-space models are compared under leakage-aware evaluation by lead time.",
+      "Where the work is being presented and published. Each item carries its current status and is updated as milestones land.",
   },
-  openSource: {
-    title: "The code behind the claims.",
-    lede:
-      "I publish research code and tooling in the open so results can be inspected and reproduced. A selection follows; everything else is on GitHub.",
-  },
-  talks: {
-    title: "Upcoming, under review, and in progress.",
-    lede:
-      "One accepted AGU26 workshop, one abstract under review, one manuscript in progress, and the thesis this work grew from, each labeled with its current status and updated as milestones land. Alongside them: topics I am glad to talk through.",
-  },
-  projects: {
-    title: "Engineering beyond HYDRA.",
-    lede:
-      "Production GraphQL services at USAA and a modular forecasting system with fail-closed validation. Each case study separates problem, approach, current evidence, and limits.",
-  },
-  about: {
-    title: "Operations, production software, research.",
-    lede:
-      "Air Force executive missions taught me preparation and reliability. USAA taught me production engineering. HYDRA is where I apply both to open questions, with clear metrics, careful evaluation, and documentation others can extend.",
-  },
-  coursework: {
-    title: "UT Austin M.S. Artificial Intelligence.",
-    lede:
-      "Completed courses represent finished graduate study. Fall 2026 courses are listed as planned and move to completed only after the semester ends.",
+  skills: {
+    title: "What I bring to a team.",
+    lede: "Technical depth from research and industry, and operational habits from the Air Force. Each group notes where it was used.",
   },
   contact: {
-    title: "Let’s talk research, systems, or both.",
+    title: "Let’s talk.",
     lede:
-      "Open to conversations about research engineer, applied scientist, and machine learning engineering roles, and to collaboration on forecasting and evaluation.",
+      "I’m open to machine learning engineering, research engineering, and applied scientist roles, including mission-driven teams where an active clearance matters. I’m also glad to talk forecasting, evaluation, or the move from military service into AI.",
   },
 } satisfies Record<string, SectionCopy>;
 
 // ---------------------------------------------------------------------------
-// Credentials strip (under the masthead).
+// Service. Facts come only from Mitchel's own résumés; nothing here is inferred.
 // ---------------------------------------------------------------------------
 
-export type Credential = { label: string; value: string };
+export type ServiceItem = { title: string; body: string };
 
-export const credentials: Credential[] = [
+export const service = {
+  kicker: "U.S. Air Force · 2020–2023",
+  title: "Before I wrote code, I flew executive missions aboard Air Force Two.",
+  intro: [
+    "Air Force Two is the call sign of the aircraft carrying the Vice President. For nearly three years I was an Executive Missions Aviator at Joint Base Andrews, responsible for the safety, schedule, and comfort of the distinguished guests aboard.",
+    "The job was equal parts planning and execution. I coordinated missions with White House staff, security teams, and flight crews, and I owned the details that make a mission run on time: in-flight service, baggage, crew hotels, ground transportation, billing, and visas.",
+  ],
+  record: [
+    { term: "Role", value: "Executive Missions Aviator" },
+    { term: "Branch", value: "United States Air Force" },
+    { term: "Station", value: "Joint Base Andrews, Maryland" },
+    { term: "Service", value: "August 2020 – April 2023" },
+    { term: "Clearance", value: "Active TS/SCI" },
+  ],
+  duties: [
+    {
+      title: "Mission planning",
+      body: "Planned missions with White House staff by phone and email, and coordinated with flight crews, security teams, and executive staff.",
+    },
+    {
+      title: "Safety and service",
+      body: "Responsible for passenger safety, comfort, and in-flight service for distinguished guests aboard Air Force Two.",
+    },
+    {
+      title: "Logistics",
+      body: "Owned baggage logistics, crew hotel bookings, and crew ground transportation so the schedule held.",
+    },
+    {
+      title: "Administration",
+      body: "Handled visa applications and crew and passenger subsistence billing.",
+    },
+  ] satisfies ServiceItem[],
+  lessonsTitle: "What I carried into engineering",
+  lessons: [
+    {
+      title: "Preparation is the job.",
+      body: "A mission was planned long before anyone boarded. I build research the same way: data manifests, configuration, and leakage checks settled before a model trains.",
+    },
+    {
+      title: "Communicate up, down, and across.",
+      body: "I coordinated with White House staff, security teams, and aircrew. Now it is product owners, engineers, and scientists, and the habit is the same: say what is known, what is not, and what happens next.",
+    },
+    {
+      title: "The standard does not move.",
+      body: "On an executive aircraft, “mostly right” is not an option. I hold my own work to that bar: evaluation that matches how forecasts are really used, and no result published before the analysis supports it.",
+    },
+  ] satisfies ServiceItem[],
+  clearanceNote:
+    "I hold an active TS/SCI clearance and welcome conversations with defense, intelligence, and other mission-driven AI teams.",
+};
+
+// ---------------------------------------------------------------------------
+// Path: the chronological story, one chapter per stage.
+// ---------------------------------------------------------------------------
+
+export type StoryChapter = {
+  marker: string;
+  kicker: string;
+  period: string;
+  title: string;
+  role: string;
+  body: string;
+  link?: { label: string; href: string };
+  upcoming?: boolean;
+};
+
+export const story: StoryChapter[] = [
   {
-    label: "Graduate study",
-    value: "The University of Texas at Austin · M.S. Artificial Intelligence · GPA 4.0 · expected May 2027",
+    marker: "I",
+    kicker: "Service",
+    period: "2020 – 2023",
+    title: "U.S. Air Force",
+    role: "Executive Missions Aviator · Joint Base Andrews, MD",
+    body: "Executive missions aboard Air Force Two: passenger safety, logistics, and mission planning with White House staff.",
+    link: { label: "Service record", href: "/#service" },
   },
   {
-    label: "Research",
-    value: "HYDRA · post-processing AI for NextGen streamflow reforecasts · two manuscripts in preparation",
+    marker: "II",
+    kicker: "Foundation",
+    period: "Graduated December 2025",
+    title: "Appalachian State University",
+    role: "B.S. Computer Science · Cum laude · Boone, NC",
+    body: "A Data Science Certificate and a senior honors thesis on runoff forecasting with deep learning: my first research project, and the seed of HYDRA.",
+    link: { label: "Thesis-era code", href: "https://github.com/Mitchel34/Runoff_Forcasting" },
   },
   {
-    label: "AGU26",
-    value: "Scientific workshop facilitator · Accepted",
+    marker: "III",
+    kicker: "Industry",
+    period: "Summer 2025",
+    title: "USAA",
+    role: "Software Engineering Intern · Global Headquarters, San Antonio, TX",
+    body: "GraphQL APIs in Java and Spring Boot for customer data used across enterprise channels, and comparison views for an internal troubleshooting tool.",
+    link: { label: "Case study", href: "/projects/usaa-risk-services" },
   },
   {
-    label: "Industry",
-    value: "USAA · Software Engineering Intern · 2025",
+    marker: "IV",
+    kicker: "Research",
+    period: "2026 – May 2027",
+    title: "The University of Texas at Austin",
+    role: "M.S. Artificial Intelligence · 4.0 GPA · Austin, TX",
+    body: "Machine learning, deep learning, reinforcement learning, and AI ethics completed; the honors thesis continues as HYDRA, with two manuscripts in preparation.",
+    link: { label: "Coursework", href: "/coursework" },
   },
   {
-    label: "Service and clearance",
-    value: "U.S. Air Force · Executive Missions Aviator · 2020–2023 · Active TS/SCI",
+    marker: "Next",
+    kicker: "Upcoming",
+    period: "December 2026",
+    title: "AGU26 Annual Meeting",
+    role: "Scientific workshop facilitator · San Francisco, CA",
+    body: "Leading an accepted workshop on best practices for AI and agentic workflows in earth science research.",
+    link: { label: "Research and speaking", href: "/#research" },
+    upcoming: true,
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Work. The featured project is HYDRA; the rest are cards.
+// ---------------------------------------------------------------------------
+
+export const featuredWork = {
+  slug: "hydra-temporal",
+  kicker: "Featured research",
+  title: "HYDRA",
+  subtitle: "Deep-learning corrections for NOAA NextGen streamflow forecasts",
+  plain:
+    "River forecasts inform flood warnings and water management. HYDRA asks whether a deep-learning model can correct NOAA’s NextGen streamflow forecasts 1 to 18 hours ahead, using only information that would really be available when the forecast is issued.",
+  pipeline: [
+    {
+      step: "Generate",
+      title: "NextGen reforecasts",
+      body: "Software I built drives NOAA’s NextGen framework to produce retrospective forecasts with full timing metadata.",
+    },
+    {
+      step: "Correct",
+      title: "A learned post-processor",
+      body: "LSTM, Transformer, and Mamba-style state-space models trained on identical inputs and splits.",
+    },
+    {
+      step: "Evaluate",
+      title: "By site and lead time",
+      body: "Leakage-aware temporal splits, with RMSE, NSE, and KGE reported at every lead time from 1 to 18 hours.",
+    },
+  ],
+  status: "in-progress" as EvidenceStatus,
+  statusNote: "Manuscripts in preparation for Water Resources Research and Environmental Modelling & Software",
+  links: [
+    { label: "Research details", href: "/research" },
+    { label: "Case study", href: "/projects/hydra-temporal" },
+    { label: "Code on GitHub", href: "https://github.com/Mitchel34/NextGen_Hydra" },
+  ],
+};
+
+export type WorkCard = {
+  title: string;
+  kicker: string;
+  subtitle: string;
+  body: string;
+  tags: string[];
+  status: EvidenceStatus;
+  href: string;
+  linkLabel: string;
+};
+
+export const otherWork: WorkCard[] = [
+  {
+    title: "USAA",
+    kicker: "Industry",
+    subtitle: "Enterprise GraphQL APIs",
+    body: "Built GraphQL API capabilities in Java and Spring Boot for customer-data workflows used across enterprise channels, plus comparison views for an internal troubleshooting tool.",
+    tags: ["Java", "Spring Boot", "GraphQL", "JavaScript"],
+    status: "production",
+    href: "/projects/usaa-risk-services",
+    linkLabel: "Case study",
+  },
+  {
+    title: "Harmony",
+    kicker: "Systems",
+    subtitle: "Modular AI-agent and finance research system on AWS",
+    body: "A Python research system that separates data, forecasting, validation, policy controls, and simulation. Fail-closed checks stop a workflow when data or evaluation rules are incomplete.",
+    tags: ["Python", "PyTorch", "AWS", "Docker"],
+    status: "active-development",
+    href: "/projects/harmony",
+    linkLabel: "Case study",
+  },
+  {
+    title: "GreenSpace Lawn Care",
+    kicker: "Client work",
+    subtitle: "Small-business website and digital strategy",
+    body: "Built and launched the company’s website and advise on its social media strategy, translating business needs into a clear digital experience.",
+    tags: ["Web", "Client discovery", "Strategy"],
+    status: "delivered",
+    href: "https://www.greenspacelawncare.us/",
+    linkLabel: "Visit site",
+  },
+];
+
+// ---------------------------------------------------------------------------
+// Skills, each group grounded in where it was used.
+// ---------------------------------------------------------------------------
+
+export type ToolkitGroup = { label: string; items: string[]; usedIn: string };
+
+export const toolkit: ToolkitGroup[] = [
+  {
+    label: "Machine learning",
+    items: [
+      "PyTorch",
+      "LSTM, Transformer, and Mamba-style models",
+      "Forecast post-processing",
+      "Leakage-aware temporal evaluation",
+      "RMSE · NSE · KGE",
+      "pandas · NumPy · xarray",
+    ],
+    usedIn: "HYDRA, Harmony, UT Austin coursework",
+  },
+  {
+    label: "Software engineering",
+    items: ["Java · Spring Boot", "GraphQL", "React · Next.js", "Node.js", "Git · Jira · Agile/Scrum"],
+    usedIn: "USAA, client work, this site",
+  },
+  {
+    label: "Cloud and data",
+    items: ["Google Cloud: BigQuery, Cloud Storage", "AWS research compute (CPU/GPU)", "Docker", "PostgreSQL", "SQL"],
+    usedIn: "HYDRA data acquisition, Harmony experiments",
+  },
+  {
+    label: "Languages",
+    items: ["Python", "Java", "TypeScript / JavaScript", "SQL", "R"],
+    usedIn: "Research, industry, coursework",
+  },
+  {
+    label: "Operations and leadership",
+    items: [
+      "Mission planning",
+      "Coordination with senior executive staff",
+      "Schedule-critical logistics",
+      "Technical communication",
+      "Active TS/SCI clearance",
+    ],
+    usedIn: "U.S. Air Force, USAA, AGU26 workshop",
   },
 ];
 
@@ -253,32 +466,6 @@ export const focusAreas = [
   "Reproducible research software",
   "Cloud research compute: Google Cloud, AWS",
   "Production software and APIs",
-];
-
-export type SkillGroup = { label: string; items: string[] };
-
-export const skills: SkillGroup[] = [
-  { label: "Languages", items: ["Python", "Java", "JavaScript/TypeScript", "SQL", "R"] },
-  {
-    label: "Machine learning",
-    items: [
-      "PyTorch",
-      "LSTM, Transformer, and Mamba-style state-space sequence models",
-      "Forecast post-processing",
-      "Leakage-aware temporal evaluation",
-      "Hydrologic metrics (RMSE, NSE, KGE)",
-      "pandas, NumPy, xarray",
-    ],
-  },
-  {
-    label: "Cloud",
-    items: [
-      "Google Cloud (BigQuery, Cloud Storage) for hydrologic forecast data",
-      "AWS research compute (isolated CPU/GPU) for AI-agent and finance research",
-      "Docker",
-    ],
-  },
-  { label: "Software", items: ["Spring Boot", "GraphQL", "React", "Node.js", "PostgreSQL", "Git", "Jira"] },
 ];
 
 export type ProjectLink = {
@@ -321,9 +508,10 @@ export function projectEvidenceStatus(status: Project["status"]): EvidenceStatus
 
 export const about = {
   summary: [
-    "I came to AI through operations first: as an Executive Missions Aviator aboard Air Force 2, where preparation, reliability, and clear communication were the whole job.",
-    "I then studied computer science at Appalachian State, wrote a senior honors thesis on runoff forecasting with deep learning, and interned at USAA building GraphQL services in Java and Spring Boot. I also build and advise on software for a small business.",
-    "Today I am completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA) and continuing that thesis as HYDRA, with a manuscript in progress. I test carefully, document decisions, and label results by how much evidence stands behind them.",
+    "I came to AI through operations first. From 2020 to 2023 I was an Executive Missions Aviator in the U.S. Air Force, flying aboard Air Force Two out of Joint Base Andrews, where preparation, reliability, and clear communication were the whole job.",
+    "I planned missions with White House staff, coordinated with security teams and flight crews, and owned the logistics that keep an executive schedule on time. I still hold an active TS/SCI clearance.",
+    "After the Air Force I studied computer science at Appalachian State, graduating cum laude with a senior honors thesis on runoff forecasting with deep learning, and interned at USAA building GraphQL services in Java and Spring Boot. I also build and advise on software for a small business.",
+    "Today I am completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA) and continuing that thesis as HYDRA, with two manuscripts in preparation. I test carefully, document decisions, and label results by how much evidence stands behind them.",
   ],
   values: [
     {
@@ -355,6 +543,17 @@ export type ProofItem = {
 
 export const proofItems: ProofItem[] = [
   {
+    title: "United States Air Force",
+    role: "Executive Missions Aviator · Joint Base Andrews · 2020–2023",
+    description:
+      "I flew executive missions aboard Air Force Two, responsible for the safety, schedule, and comfort of distinguished guests. I planned missions with White House staff and owned the logistics: baggage, crew hotels, ground transportation, billing, and visas.",
+    askAbout: "Operating under exacting standards, mission planning, and moving from military service into AI.",
+    href: "/#service",
+    linkLabel: "Service record",
+    showOnHome: true,
+    showOnAbout: true,
+  },
+  {
     title: "USAA",
     role: "Software Engineering Intern · Global Headquarters · 2025",
     description:
@@ -362,17 +561,6 @@ export const proofItems: ProofItem[] = [
     askAbout: "GraphQL API design, customer-data flows, and enterprise delivery.",
     href: "/projects/usaa-risk-services",
     linkLabel: "View project",
-    showOnHome: true,
-    showOnAbout: true,
-  },
-  {
-    title: "United States Air Force",
-    role: "Executive Missions Aviator · 2020–2023",
-    description:
-      "I maintained passenger safety, logistics, and schedule reliability for distinguished guests aboard Air Force 2, coordinating mission planning with flight crews, security teams, and executive staff.",
-    askAbout: "Operating under exacting standards, mission planning, and what an active clearance does and does not change.",
-    href: "/resume",
-    linkLabel: "Experience",
     showOnHome: true,
     showOnAbout: true,
   },
@@ -876,8 +1064,14 @@ export const discussions = {
     {
       title: "Reliability lessons from executive-missions operations",
       prompt:
-        "What Air Force executive-missions operations taught me about reliability, and what an active TS/SCI clearance does and does not change.",
-      groundedIn: "/resume",
+        "What flying executive missions aboard Air Force Two taught me about preparation and reliability, and how that shows up in research code.",
+      groundedIn: "/#service",
+    },
+    {
+      title: "From military service into AI",
+      prompt:
+        "What the move from an Air Force flying job to computer science and graduate AI research actually looked like, for veterans weighing the same path.",
+      groundedIn: "/about",
     },
   ] satisfies DiscussionTopic[],
   calendlyCta: { label: "Book a 30-minute conversation", href: site.calendlyUrl },
@@ -908,14 +1102,18 @@ export const experience: ExperienceItem[] = [
   },
   {
     role: "Executive Missions Aviator",
-    org: "United States Air Force",
+    org: "United States Air Force · Joint Base Andrews, MD",
     period: "August 2020 – April 2023",
     highlights: [
-      "Maintained passenger safety and schedule reliability for distinguished guests aboard Air Force 2.",
-      "Coordinated across flight crew, security teams, and executive staff to meet exacting operational standards.",
+      "Maintained passenger safety, comfort, and schedule reliability for distinguished guests aboard Air Force Two.",
+      "Planned missions directly with White House staff by phone and email.",
+      "Coordinated with flight crews, security teams, and executive staff under exacting operational standards.",
+      "Owned in-flight service, baggage logistics, crew hotel bookings, and crew ground transportation.",
+      "Handled visa applications and crew and passenger subsistence billing.",
+      "Hold an active TS/SCI clearance.",
     ],
     bridgingSentence:
-      "Coordinating complex executive missions taught me to value preparation, reliability, and clear communication in every system I build.",
+      "Coordinating executive missions taught me to value preparation, reliability, and clear communication in every system I build.",
   },
 ];
 
@@ -949,7 +1147,7 @@ export type CourseworkItem = {
 };
 
 export function courseEvidenceStatus(status: CourseworkItem["status"]): EvidenceStatus {
-  return status === "Completed" ? "completed" : "planned";
+  return status === "Completed" ? "completed" : "in-progress";
 }
 
 export const coursework = {

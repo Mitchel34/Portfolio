@@ -1,10 +1,7 @@
-import { Reveal } from "@/components/Reveal";
-import { SectionFrame } from "@/components/SectionFrame";
 import { StatusLabel } from "@/components/StatusLabel";
-import { TextLink } from "@/components/TextLink";
-import { courseEvidenceStatus, coursework, type CourseworkItem, landingSections, sectionCopy } from "@/lib/content";
+import { courseEvidenceStatus, type CourseworkItem } from "@/lib/content";
 
-/** Hairline course list; the status word is visible in every row. Also used by /coursework. */
+/** Hairline course list; the status word is visible in every row. Used by /coursework. */
 export function CourseworkList({ items }: { items: CourseworkItem[] }) {
   return (
     <ul className="mt-3 border-b border-border">
@@ -21,40 +18,5 @@ export function CourseworkList({ items }: { items: CourseworkItem[] }) {
         </li>
       ))}
     </ul>
-  );
-}
-
-export function CourseworkSection() {
-  return (
-    <SectionFrame
-      id={landingSections.coursework.id}
-      number="06"
-      label="Graduate Study"
-      title={sectionCopy.coursework.title}
-      lede={sectionCopy.coursework.lede}
-      meta={
-        <span className="mono-label text-muted-foreground">
-          {coursework.institution} · {coursework.program} · GPA {coursework.currentGpa} · expected{" "}
-          {coursework.expectedGraduation}
-        </span>
-      }
-    >
-      <Reveal>
-        <div className="lg:grid lg:grid-cols-10 lg:gap-x-8">
-          <div className="lg:col-span-5">
-            <p className="mono-label text-muted-foreground">Completed</p>
-            <CourseworkList items={coursework.completed} />
-          </div>
-          <div className="mt-10 lg:col-span-5 lg:mt-0">
-            <p className="mono-label text-muted-foreground">Fall 2026</p>
-            <CourseworkList items={coursework.upcoming} />
-          </div>
-        </div>
-
-        <TextLink className="mt-6" href="/coursework">
-          Coursework details
-        </TextLink>
-      </Reveal>
-    </SectionFrame>
   );
 }

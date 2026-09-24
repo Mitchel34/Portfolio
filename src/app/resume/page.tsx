@@ -8,13 +8,13 @@ import { SectionFrame } from "@/components/SectionFrame";
 import { buttonClass } from "@/components/ui/Button";
 import { KeywordLine } from "@/components/KeywordLine";
 import { StatusLabel } from "@/components/StatusLabel";
-import { education, experience, projectEvidenceStatus, projects, site, skills } from "@/lib/content";
+import { education, experience, projectEvidenceStatus, projects, site, toolkit } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Resume",
   description:
-    "Resume for Mitchel Carson: machine learning engineer and applied AI researcher, UT Austin M.S. AI (expected May 2027), USAA, U.S. Air Force, active TS/SCI.",
+    "Resume for Mitchel Carson: U.S. Air Force veteran (Executive Missions Aviator, Air Force Two), machine learning engineer and applied AI researcher, UT Austin M.S. AI (expected May 2027), USAA, active TS/SCI.",
   pathname: "/resume",
   keywords: ["AI engineer resume", "machine learning resume", "software engineer resume"],
 });
@@ -99,7 +99,7 @@ export default function ResumePage() {
 
         <SectionFrame label="Skills" title="Tools and platforms">
           <div className="space-y-3">
-            {skills.map((group) => (
+            {toolkit.map((group) => (
               <KeywordLine key={group.label} label={group.label} items={group.items} />
             ))}
           </div>

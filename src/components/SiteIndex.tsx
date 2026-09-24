@@ -7,6 +7,7 @@ import type { RefObject } from "react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
+import { LinkGlyph } from "@/components/LinkGlyph";
 import { TextLink } from "@/components/TextLink";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { landingSectionList, site, sitePages } from "@/lib/content";
@@ -115,7 +116,7 @@ export function SiteIndex({ isOpen, onClose, triggerRef }: SiteIndexProps) {
           id="site-index"
           role="dialog"
           aria-modal="true"
-          aria-label="Site index"
+          aria-label="Menu"
           initial={prefersReducedMotion ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -125,15 +126,15 @@ export function SiteIndex({ isOpen, onClose, triggerRef }: SiteIndexProps) {
           <div className="mx-auto flex min-h-[100dvh] w-full max-w-6xl flex-col px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-[max(1.5rem,env(safe-area-inset-top))] sm:px-8">
             <div className="flex items-start justify-between gap-6">
               <div>
-                <p className="mono-label text-muted-foreground">Index</p>
-                <h2 className="mt-1 font-serif text-heading">Contents</h2>
+                <p className="mono-label text-muted-foreground">Menu</p>
+                <h2 className="mt-1 font-serif text-heading">{site.name}</h2>
               </div>
 
               <button
                 type="button"
                 onClick={onClose}
                 className="grid h-10 w-10 shrink-0 place-items-center rounded-[2px] border border-input text-foreground transition-colors hover:bg-muted"
-                aria-label="Close site index"
+                aria-label="Close menu"
               >
                 <X className="h-4 w-4" aria-hidden="true" />
               </button>
@@ -166,9 +167,7 @@ export function SiteIndex({ isOpen, onClose, triggerRef }: SiteIndexProps) {
                     {sitePages.map((page) => (
                       <li key={page.href} className="border-t border-border">
                         <Link href={page.href} onClick={onClose} className={rowLinkClass}>
-                          <span aria-hidden="true" className="mono-label text-primary">
-                            →
-                          </span>
+                          <LinkGlyph className="mt-1.5 text-primary" />
                           <span>
                             <span className="block font-serif text-title">{page.label}</span>
                             <span className="mt-0.5 block text-body-sm text-muted-foreground">
@@ -192,6 +191,11 @@ export function SiteIndex({ isOpen, onClose, triggerRef }: SiteIndexProps) {
                     </li>
                     <li>
                       <TextLink href={`mailto:${site.email}`}>Email</TextLink>
+                    </li>
+                    <li>
+                      <TextLink href={site.resumeUrl} external>
+                        Résumé (PDF)
+                      </TextLink>
                     </li>
                   </ul>
                 </div>

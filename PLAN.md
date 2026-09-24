@@ -16,6 +16,16 @@ Build a coherent career system that connects five activities:
 
 ## Current implementation status
 
+As of 2026-09-24 (narrative refresh branch `claude/relaxed-goodall-qfq8i4`):
+
+- The home page is rebuilt around one story: hero ("From Air Force Two to applied AI"), a full-bleed navy Service section, a Path timeline, Work, Research & Talks, Skills, and Contact.
+- Military service is now the foundation of the narrative. Every service fact comes from Mitchel's own résumés (Air Force Two, Joint Base Andrews, White House mission planning, logistics, visas, billing, active TS/SCI); nothing is inferred. Swap in details from the newest résumé (unit, awards, mission counts) only once confirmed.
+- Legibility: 17px body copy, darker muted text (AAA contrast on paper), fewer uppercase labels, the evidence legend removed from the hero and footer.
+- Fixed a production bug: the Newsreader and IBM Plex fonts never loaded because their CSS variables were set on `<body>` while the theme read them at `:root`. They now live on `<html>`.
+- Fixed `cn()` silently dropping the custom type-scale classes (`text-title`, `text-body-sm`, ...) when combined with a text color.
+- Fall 2026 courses are labeled in progress rather than planned.
+- The résumé PDF was not regenerated; replace `public/mitchelcarson_resume.pdf` with the new résumé.
+
 As of 2026-09-04 (visual refresh branch `claude/personal-website-refresh-jffal0`):
 
 - The site has been redesigned around an editorial "preprint" system: paper and ink tokens, Newsreader with IBM Plex Sans and Mono, numbered sections with a margin column, figure wells with captions, footnoted claims, and a three-state evidence glyph (confirmed / provisional / not yet) that labels every output.

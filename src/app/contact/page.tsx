@@ -4,6 +4,7 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { CalendlyEmbed } from "@/components/CalendlyEmbed";
 import { ContactForm } from "@/components/ContactForm";
 import { FigureWell } from "@/components/FigureWell";
+import { LinkGlyph } from "@/components/LinkGlyph";
 import { OfficeHours } from "@/components/OfficeHours";
 import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
@@ -52,13 +53,11 @@ export default function ContactPage() {
             {reachRows.map((row) => (
               <div key={row.term} className="grid grid-cols-[7rem_1fr] gap-x-4 py-3">
                 <dt className="mono-label self-center text-muted-foreground">{row.term}</dt>
-                <dd>
+                <dd className="min-w-0 break-words">
                   <a href={row.href} className={linkClass} {...(row.external ? externalProps : {})}>
                     {row.label}
                     {row.external ? (
-                      <span aria-hidden="true" className="ml-1 font-mono">
-                        ↗
-                      </span>
+                      <LinkGlyph external className="ml-1 align-[-0.1em]" />
                     ) : null}
                   </a>
                 </dd>
