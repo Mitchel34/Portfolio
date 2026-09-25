@@ -1,6 +1,6 @@
 "use client";
 
-import { List } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 
@@ -15,7 +15,7 @@ export function Nav() {
   const closeIndex = useCallback(() => setIsOpen(false), []);
 
   return (
-    <header className="sticky top-0 z-50 h-14 border-b border-border bg-background">
+    <header className="sticky top-0 z-50 h-14 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
       <Container className="flex h-full items-center justify-between gap-4">
         <Link
           href="/"
@@ -41,7 +41,7 @@ export function Nav() {
 
           <Link
             href="/resume"
-            className="mono-label hidden h-9 items-center text-foreground transition-colors hover:text-primary lg:ml-3 lg:inline-flex"
+            className="mono-label hidden h-9 items-center rounded-[2px] border border-input px-3 text-foreground transition-colors hover:border-foreground hover:bg-muted sm:inline-flex lg:ml-3"
           >
             Résumé
           </Link>
@@ -51,15 +51,15 @@ export function Nav() {
           <button
             ref={indexTriggerRef}
             type="button"
-            className="mono-label inline-flex h-9 items-center gap-2 rounded-[2px] border border-input px-3 text-foreground transition-colors hover:bg-muted"
+            className="mono-label inline-flex h-9 items-center gap-2 rounded-[2px] border border-input px-3 text-foreground transition-colors hover:bg-muted lg:hidden"
             onClick={() => setIsOpen((prev) => !prev)}
-            aria-label="Open site index"
+            aria-label="Open menu"
             aria-expanded={isOpen}
             aria-haspopup="dialog"
             aria-controls="site-index"
           >
-            <List className="h-4 w-4" aria-hidden="true" />
-            <span>Index</span>
+            <Menu className="h-4 w-4" aria-hidden="true" />
+            <span>Menu</span>
           </button>
         </nav>
       </Container>

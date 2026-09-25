@@ -1,5 +1,5 @@
 import type { EvidenceStatus, EvidenceTone } from "@/lib/content";
-import { evidenceLegend, evidenceTone, evidenceWord } from "@/lib/content";
+import { evidenceTone, evidenceWord } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export const toneClass: Record<EvidenceTone, string> = {
@@ -57,26 +57,5 @@ export function StatusLabel({ status, prefix, suffix, className }: StatusLabelPr
         {suffix ? ` · ${suffix}` : ""}
       </span>
     </span>
-  );
-}
-
-export function EvidenceLegend({ className }: { className?: string }) {
-  return (
-    <p className={cn("text-footnote text-muted-foreground", className)}>
-      <span>How I label evidence: </span>
-      {evidenceLegend.map((item, index) => (
-        <span key={item.tone}>
-          {index > 0 ? " · " : null}
-          <span className="whitespace-nowrap">
-            <StatusGlyph
-              tone={item.tone}
-              className={cn("mr-1.5 inline-block align-[-1px]", toneClass[item.tone])}
-            />
-            {item.label}
-          </span>{" "}
-          ({item.meaning})
-        </span>
-      ))}
-    </p>
   );
 }

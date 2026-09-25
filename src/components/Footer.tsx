@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { EvidenceLegend } from "@/components/StatusLabel";
+import { LinkGlyph } from "@/components/LinkGlyph";
 import { TextLink } from "@/components/TextLink";
 import { landingSectionList, site } from "@/lib/content";
 import { Container } from "./Container";
@@ -12,11 +12,11 @@ export function Footer() {
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8">
           <div className="lg:col-span-4">
             <p className="font-serif text-title">{site.name}</p>
-            <p className="mt-1 text-body-sm text-muted-foreground">{site.title}</p>
+            <p className="mt-1 font-serif text-body italic text-foreground">{site.tagline}</p>
+            <p className="mt-2 text-body-sm text-muted-foreground">{site.title}</p>
             <p className="mono-label mt-3 text-muted-foreground">
               {site.location} · {site.timezone} · {site.clearance}
             </p>
-            <EvidenceLegend className="mt-4 max-w-[40ch]" />
           </div>
 
           <nav aria-label="Contents" className="mt-8 lg:col-span-3 lg:col-start-6 lg:mt-0">
@@ -68,7 +68,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="link-text transition-colors hover:text-foreground"
             >
-              Source on GitHub <span aria-hidden="true">↗</span>
+              Source on GitHub <LinkGlyph external className="align-[-0.1em]" />
             </a>
             {" · "}Updated {site.updated}
           </p>

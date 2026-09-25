@@ -39,10 +39,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable} min-h-screen bg-background font-sans text-foreground antialiased selection:bg-primary/25`}
-      >
+    // Font variables live on <html> so the @theme tokens (declared on :root) can resolve them.
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable}`}
+    >
+      <body className="min-h-screen bg-background font-sans text-foreground antialiased selection:bg-primary/25">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <MotionProvider>
             <a

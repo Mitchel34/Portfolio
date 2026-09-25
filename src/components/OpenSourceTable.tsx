@@ -1,16 +1,8 @@
 import { Fragment } from "react";
 
-import { Reveal } from "@/components/Reveal";
-import { SectionFrame } from "@/components/SectionFrame";
+import { LinkGlyph } from "@/components/LinkGlyph";
 import { TextLink } from "@/components/TextLink";
-import {
-  landingSections,
-  openSource,
-  type OpenSourceEntry,
-  openSourceGroupOrder,
-  sectionCopy,
-  site,
-} from "@/lib/content";
+import { openSource, type OpenSourceEntry, openSourceGroupOrder, site } from "@/lib/content";
 
 const repoLinkClass =
   "link-text break-words font-mono text-[0.8125rem] leading-snug text-foreground hover:text-primary hover:decoration-primary after:absolute after:inset-0";
@@ -30,7 +22,7 @@ function RepoRow({ entry }: { entry: OpenSourceEntry }) {
             {upstream ? <span className="mono-label mr-2 text-muted-foreground">PR</span> : null}
             <a href={href} target="_blank" rel="noopener noreferrer" className={repoLinkClass}>
               {name}
-              <span aria-hidden="true"> ↗</span>
+              <LinkGlyph external className="ml-1 align-[-0.1em]" />
               <span className="sr-only"> (GitHub)</span>
             </a>
           </span>
@@ -61,46 +53,39 @@ function RepoRow({ entry }: { entry: OpenSourceEntry }) {
   );
 }
 
-export function OpenSourceSection() {
+/** Grouped repository table. Rendered on /projects; the home page shows a compact list. */
+export function OpenSourceTable() {
   const groups = openSourceGroupOrder
     .map((group) => ({ group, entries: openSource.filter((entry) => entry.group === group) }))
     .filter(({ entries }) => entries.length > 0);
 
   return (
-    <SectionFrame
-      id={landingSections.openSource.id}
-      number={landingSections.openSource.number}
-      label={landingSections.openSource.label}
-      title={sectionCopy.openSource.title}
-      lede={sectionCopy.openSource.lede}
-    >
-      <Reveal>
-        <div className="mono-label hidden border-b border-foreground pb-2 text-muted-foreground lg:grid lg:grid-cols-10 lg:gap-x-8">
-          <span className="lg:col-span-3">Repository</span>
-          <span className="lg:col-span-7 xl:col-span-3">
-            What it does<span className="xl:hidden"> · why it is here</span>
-          </span>
-          <span className="hidden xl:col-span-3 xl:block">Why it is here</span>
-          <span className="hidden text-right xl:col-span-1 xl:block">Lang</span>
-        </div>
+    <div>
+      <div className="mono-label hidden border-b border-foreground pb-2 text-muted-foreground lg:grid lg:grid-cols-10 lg:gap-x-8">
+        <span className="lg:col-span-3">Repository</span>
+        <span className="lg:col-span-7 xl:col-span-3">
+          What it does<span className="xl:hidden"> · why it is here</span>
+        </span>
+        <span className="hidden xl:col-span-3 xl:block">Why it is here</span>
+        <span className="hidden text-right xl:col-span-1 xl:block">Lang</span>
+      </div>
 
-        <div className="lg:mt-4">
-          {groups.map(({ group, entries }) => (
-            <Fragment key={group}>
-              <p className="mono-label pt-8 pb-2 text-muted-foreground first:pt-0">{group}</p>
-              <ul className="border-b border-border">
-                {entries.map((entry) => (
-                  <RepoRow key={entry.url} entry={entry} />
-                ))}
-              </ul>
-            </Fragment>
-          ))}
-        </div>
+      <div className="lg:mt-4">
+        {groups.map(({ group, entries }) => (
+          <Fragment key={group}>
+            <p className="mono-label pt-8 pb-2 text-muted-foreground first:pt-0">{group}</p>
+            <ul className="border-b border-border">
+              {entries.map((entry) => (
+                <RepoRow key={entry.url} entry={entry} />
+              ))}
+            </ul>
+          </Fragment>
+        ))}
+      </div>
 
-        <TextLink className="mt-6" href={site.github}>
-          All repositories on GitHub
-        </TextLink>
-      </Reveal>
-    </SectionFrame>
+      <TextLink className="mt-6" href={site.github}>
+        All repositories on GitHub
+      </TextLink>
+    </div>
   );
 }

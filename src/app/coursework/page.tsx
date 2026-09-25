@@ -10,7 +10,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Coursework",
   description:
-    "Completed and planned graduate artificial intelligence coursework for Mitchel Carson's UT Austin M.S. AI program.",
+    "Completed and current graduate artificial intelligence coursework for Mitchel Carson's UT Austin M.S. AI program.",
   pathname: "/coursework",
   keywords: [
     "UT Austin M.S. AI",
@@ -34,7 +34,7 @@ export default function CourseworkPage() {
         <PageHeader
           label="Coursework"
           title="Graduate coursework"
-          lede="Completed courses represent finished graduate study. Fall 2026 courses are listed as planned and move to completed only after the semester ends."
+          lede="Completed courses represent finished graduate study. Fall 2026 courses are in progress and move to completed only after the semester ends."
           meta={
             <span className="mono-label text-muted-foreground">
               {coursework.institution} · {coursework.program} · GPA {coursework.currentGpa} · expected{" "}
@@ -47,7 +47,7 @@ export default function CourseworkPage() {
           <CourseworkList items={coursework.completed} />
         </SectionFrame>
 
-        <SectionFrame label="Fall 2026" title="Planned for Fall 2026">
+        <SectionFrame label="Fall 2026" title="In progress this fall">
           <CourseworkList items={coursework.upcoming} />
         </SectionFrame>
       </div>

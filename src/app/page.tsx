@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 
-import { AboutSection } from "@/components/AboutSection";
 import { ContactSection } from "@/components/ContactSection";
-import { CourseworkSection } from "@/components/CourseworkSection";
-import { CredibilityBand } from "@/components/CredibilityBand";
-import { FeaturedProject } from "@/components/FeaturedProject";
 import { Hero } from "@/components/Hero";
-import { OpenSourceSection } from "@/components/OpenSourceSection";
-import { ProjectGrid } from "@/components/ProjectGrid";
-import { TalksSection } from "@/components/TalksSection";
+import { PathSection } from "@/components/PathSection";
+import { ResearchSection } from "@/components/ResearchSection";
+import { ServiceSection } from "@/components/ServiceSection";
+import { SkillsSection } from "@/components/SkillsSection";
+import { WorkSection } from "@/components/WorkSection";
 import { site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -18,10 +16,12 @@ export const metadata: Metadata = {
     description: site.metaDescription,
     pathname: "/",
     keywords: [
-      "AI portfolio",
-      "ML portfolio",
-      "research engineer portfolio",
-      "open source research code",
+      "Air Force veteran software engineer",
+      "TS/SCI software engineer",
+      "applied AI engineer",
+      "scientific computing",
+      "89th Airlift Wing",
+      "Air Force Two",
       "hydrology machine learning",
     ],
   }),
@@ -34,13 +34,11 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <Hero />
-      <CredibilityBand />
-      <FeaturedProject />
-      <OpenSourceSection />
-      <TalksSection />
-      <ProjectGrid />
-      <AboutSection />
-      <CourseworkSection />
+      <ServiceSection />
+      <PathSection />
+      <WorkSection />
+      <ResearchSection />
+      <SkillsSection />
       <ContactSection />
     </div>
   );

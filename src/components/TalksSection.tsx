@@ -1,12 +1,9 @@
 import { Fragment } from "react";
 
 import { Entry, EntryList } from "@/components/Entry";
-import { OfficeHours } from "@/components/OfficeHours";
-import { Reveal } from "@/components/Reveal";
-import { SectionFrame } from "@/components/SectionFrame";
 import { StatusLabel } from "@/components/StatusLabel";
 import { TextLink } from "@/components/TextLink";
-import { landingSections, sectionCopy, type TalkItem, talks } from "@/lib/content";
+import type { TalkItem } from "@/lib/content";
 
 function TalkRow({ item }: { item: TalkItem }) {
   return (
@@ -42,7 +39,7 @@ function TalkRow({ item }: { item: TalkItem }) {
 /**
  * Hairline list of talks, workshops and writing, ordered by the explicit `order` field.
  * Splits into Upcoming / Past only once the list is long enough (>= 6) and something is past.
- * Also rendered by /research so the two views cannot disagree.
+ * Rendered by /research; the home page shows a compact version of the same `talks` data.
  */
 export function TalksList({ items }: { items: TalkItem[] }) {
   if (items.length === 0) {
@@ -80,29 +77,5 @@ export function TalksList({ items }: { items: TalkItem[] }) {
         </Fragment>
       ))}
     </div>
-  );
-}
-
-export function TalksSection() {
-  return (
-    <SectionFrame
-      id={landingSections.talks.id}
-      number={landingSections.talks.number}
-      label={landingSections.talks.label}
-      title={sectionCopy.talks.title}
-      lede={sectionCopy.talks.lede}
-    >
-      <div className="xl:grid xl:grid-cols-10 xl:gap-x-8">
-        <div className="xl:col-span-6">
-          <p className="mono-label text-muted-foreground">Talks, workshops &amp; writing</p>
-          <Reveal className="mt-3">
-            <TalksList items={talks} />
-          </Reveal>
-        </div>
-        <div className="mt-12 xl:col-span-4 xl:mt-0 xl:border-l xl:border-border xl:pl-8">
-          <OfficeHours />
-        </div>
-      </div>
-    </SectionFrame>
   );
 }

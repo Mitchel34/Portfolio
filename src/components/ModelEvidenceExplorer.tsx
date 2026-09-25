@@ -53,7 +53,7 @@ const evidenceTabs: EvidenceTab[] = [
     eyebrow: "Planned outputs",
     title: "Two manuscripts and the software behind them.",
     detail:
-      "A results manuscript for Water Resources Research and a software paper for Environmental Modelling & Software are in preparation.",
+      "A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
     note: research.scopeNote,
     tokens: ["WRR manuscript", "EM&S software paper", "Public code"],
   },

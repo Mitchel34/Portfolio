@@ -4,15 +4,17 @@ import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
 import { Notes } from "@/components/Notes";
+import { OpenSourceTable } from "@/components/OpenSourceTable";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SchemaScript } from "@/components/SchemaScript";
+import { SectionFrame } from "@/components/SectionFrame";
 import { harmonyBoundaryNote, projects } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, and Harmony's fail-closed research system.",
+    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, Harmony's decision system with bounded LLM autonomy, and open-source research code.",
   pathname: "/projects",
   keywords: [
     "AI projects",
@@ -61,10 +63,18 @@ export default function ProjectsPage() {
               />
             ))}
           </div>
-        <Notes
-            items={[{ id: "2", text: harmonyBoundaryNote }]}
-          />
+          <Notes items={[{ id: "2", text: harmonyBoundaryNote }]} />
         </Container>
+
+        <div className="mt-20">
+          <SectionFrame
+            label="Open source"
+            title="The code behind the claims."
+            lede="Research code and tooling published so results can be inspected and reproduced."
+          >
+            <OpenSourceTable />
+          </SectionFrame>
+        </div>
       </div>
     </>
   );

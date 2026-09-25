@@ -4,86 +4,69 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Image from "next/image";
 
 import { Container } from "@/components/Container";
-import { EvidenceLegend, StatusLabel } from "@/components/StatusLabel";
 import { TextLink } from "@/components/TextLink";
 import { buttonClass } from "@/components/ui/Button";
-import { site, talks } from "@/lib/content";
+import { hero, heroStats, landingSections, site } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 const EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1];
 
 /** Parent orchestrates the one-time stagger; each block fades up 12px. */
 const stagger: Variants = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.06 } },
+  visible: { transition: { staggerChildren: 0.07 } },
 };
 
 const block: Variants = {
   hidden: { opacity: 0, y: 12 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: EASE } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
 };
-
-/** The "Now" line is derived from `talks`, so status has exactly one source of truth. */
-const nowItems = talks.filter((talk) => talk.heroLabel).sort((a, b) => a.order - b.order);
 
 export function Hero() {
   const reduce = useReducedMotion();
 
   return (
-    <section className="pt-10 pb-10 sm:pt-14 lg:pt-20">
-      <Container>
+    <section aria-label="Introduction" className="border-b border-border">
+      <Container className="pt-10 pb-12 sm:pt-14 lg:pt-20 lg:pb-16">
         <motion.div variants={stagger} initial={reduce ? false : "hidden"} animate="visible">
-          <motion.div
-            variants={block}
-            className="mono-label flex items-center justify-between border-b border-border pb-3 text-muted-foreground"
-          >
-            <span>{site.runningHead}</span>
-            <span>Updated {site.updated}</span>
-          </motion.div>
+          <div className="grid gap-y-8 lg:grid-cols-12 lg:items-center lg:gap-x-12">
+            <div className="lg:col-span-7">
+              <motion.p variants={block} className="mono-label flex flex-wrap gap-x-3 gap-y-1 text-primary">
+                {hero.eyebrow.map((item, index) => (
+                  <span key={item} className="whitespace-nowrap">
+                    {index > 0 ? (
+                      <span aria-hidden="true" className="mr-3 text-muted-foreground">
+                        ·
+                      </span>
+                    ) : null}
+                    {item}
+                  </span>
+                ))}
+              </motion.p>
 
-          <div className="mt-8 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-8">
-            <motion.div variants={block} className="lg:col-span-2">
-              <div className="relative h-[72px] w-[72px] overflow-hidden rounded-[4px] border border-border lg:h-28 lg:w-28">
-                <Image
-                  src="/images/mitchel-carson-headshot.jpg"
-                  alt="Portrait of Mitchel Carson"
-                  fill
-                  priority
-                  sizes="(min-width:1024px) 7rem, 4.5rem"
-                  className="object-cover object-[50%_40%]"
-                />
-              </div>
-              <p className="mono-label mt-3 text-muted-foreground">
-                {site.location} · {site.timezone}
-              </p>
-            </motion.div>
-
-            <div className="mt-8 lg:col-span-10 lg:mt-0">
-              <motion.div variants={block}>
-                <h1 className="font-serif text-display text-balance text-foreground sm:text-[3.75rem] lg:text-[4.5rem]">
-                  {site.name}
-                </h1>
-                <p className="mt-5 max-w-[44ch] font-serif text-lede italic text-foreground lg:text-[1.25rem]">
-                  {site.tagline}
-                </p>
-                <p className="mt-3 max-w-[60ch] text-body text-muted-foreground">{site.role}</p>
-              </motion.div>
-
-              <motion.div variants={block} className="mt-6">
-                <p className="mono-label text-muted-foreground">Now · updated {site.updated}</p>
-                <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-2">
-                  {nowItems.map((talk) => (
-                    <li key={talk.id}>
-                      <StatusLabel status={talk.status} prefix={talk.heroLabel} />
-                    </li>
-                  ))}
-                </ul>
-                <EvidenceLegend className="mt-3" />
-              </motion.div>
-
-              <motion.div
+              <motion.h1
                 variants={block}
-                className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3"
+                className="mt-5 font-serif text-[3.25rem] font-medium leading-[0.95] tracking-[-0.03em] text-foreground sm:text-[4.5rem] lg:text-[5.25rem]"
               >
+                {site.name}
+              </motion.h1>
+
+              <motion.p variants={block} className="mt-3 font-serif text-title italic text-muted-foreground">
+                {site.title}
+              </motion.p>
+
+              <motion.p
+                variants={block}
+                className="mt-7 max-w-[32ch] font-serif text-[1.5rem] leading-[1.3] text-foreground sm:text-[1.75rem] lg:text-[2rem]"
+              >
+                {hero.statement}
+              </motion.p>
+
+              <motion.p variants={block} className="mt-5 max-w-[58ch] text-lede text-muted-foreground">
+                {hero.summary}
+              </motion.p>
+
+              <motion.div variants={block} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a
                   className={buttonClass("primary")}
                   href={site.calendlyUrl}
@@ -92,16 +75,55 @@ export function Hero() {
                 >
                   Schedule a conversation
                 </a>
-                <TextLink href="/#research">Read the research</TextLink>
-                <TextLink href={site.github}>Code on GitHub</TextLink>
-                <TextLink href={site.resumeUrl} external>
+                <a className={buttonClass("outline")} href={site.resumeUrl} download={site.resumeFilename}>
                   Résumé (PDF)
-                </TextLink>
+                </a>
+                <TextLink href={landingSections.service.href}>Read the story</TextLink>
               </motion.div>
             </div>
+
+            <motion.figure variants={block} className="order-first lg:order-none lg:col-span-5">
+              <div className="relative aspect-[4/5] w-40 overflow-hidden rounded-[4px] border border-border bg-muted sm:w-52 lg:w-full">
+                <Image
+                  src="/images/mitchel-carson-headshot.jpg"
+                  alt="Portrait of Mitchel Carson"
+                  fill
+                  priority
+                  sizes="(min-width:1024px) 26rem, 13rem"
+                  className="object-cover object-[50%_35%]"
+                />
+              </div>
+              <figcaption className="mono-label mt-3 hidden justify-between gap-4 text-muted-foreground lg:flex">
+                <span>{hero.portraitCaption}</span>
+                <span>{site.timezone}</span>
+              </figcaption>
+            </motion.figure>
           </div>
 
-          <div className="rule-double mt-10" aria-hidden="true" />
+          <motion.dl
+            variants={block}
+            className="mt-12 grid grid-cols-2 border-t-2 border-foreground lg:mt-16 lg:grid-cols-4"
+          >
+            {heroStats.map((stat, index) => (
+              <div
+                key={stat.label}
+                className={cn(
+                  "border-border py-5",
+                  index % 2 === 0 ? "border-r pr-4" : "pl-4 sm:pl-6",
+                  index < 2 && "border-b",
+                  "lg:border-b-0 lg:px-6",
+                  index === 0 && "lg:pl-0",
+                  index < heroStats.length - 1 ? "lg:border-r" : "lg:border-r-0",
+                )}
+              >
+                <dt className="mono-label text-muted-foreground">{stat.label}</dt>
+                <dd className="mt-2 font-serif text-[2rem] leading-none font-medium tracking-[-0.02em] text-foreground sm:text-[2.5rem]">
+                  {stat.value}
+                </dd>
+                <dd className="mt-2 text-footnote text-muted-foreground">{stat.detail}</dd>
+              </div>
+            ))}
+          </motion.dl>
         </motion.div>
       </Container>
     </section>

@@ -7,13 +7,13 @@ import { KeywordLine } from "@/components/KeywordLine";
 import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
 import { TextLink } from "@/components/TextLink";
-import { about, focusAreas, proofItems } from "@/lib/content";
+import { about, focusAreas, proofItems, service, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Mitchel Carson: UT Austin M.S. AI student and Air Force veteran researching streamflow forecast correction; former USAA software engineering intern.",
+    "Mitchel Carson: software engineer and U.S. Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI student researching watershed forecasting, and former USAA software engineering intern.",
   pathname: "/about",
   keywords: ["about Mitchel Carson", "AI engineer background", "machine learning researcher"],
 });
@@ -32,7 +32,7 @@ export default function AboutPage() {
       <div className="pb-20">
         <PageHeader
           label="About"
-          title="Operations, production software, research."
+          title={site.tagline}
           lede={about.summary[0]}
           ledeStyle="italic"
           aside={
@@ -54,6 +54,27 @@ export default function AboutPage() {
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+        </SectionFrame>
+
+        <SectionFrame label="Service" title={service.lessonsTitle} lede={service.clearanceNote}>
+          <EntryList>
+            {service.lessons.map((lesson, index) => (
+              <Entry
+                key={lesson.title}
+                meta={
+                  <p className="mono-label text-primary">
+                    {String(index + 1).padStart(2, "0")}
+                  </p>
+                }
+              >
+                <h3 className="font-serif text-title text-foreground">{lesson.title}</h3>
+                <p className="mt-2 text-body-sm text-foreground">{lesson.body}</p>
+              </Entry>
+            ))}
+          </EntryList>
+          <TextLink className="mt-6" href="/#service">
+            Full service record
+          </TextLink>
         </SectionFrame>
 
         <SectionFrame label="Experience" title="Selected experience">
