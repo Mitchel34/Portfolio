@@ -30,8 +30,8 @@ I'm based in **Austin, Texas**, building across software engineering, applied AI
 
 ## Talks, Workshops, and Writing
 
-- **AGU26 scientific workshop (accepted):** *Best Practices for AI and Agentic Workflows in Earth Science Research*, San Francisco, December 7–11, 2026. Facilitator.
-- **AGU26 HYDRA abstract (under review):** submitted to the H100 machine-learning-in-hydrology session.
+- **AGU26 scientific workshop (accepted, forthcoming):** [*Best Practices for AI and Agentic Workflows in Earth Science Research*](https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Session/280856), SCIWS10, December 6, 2026. Presenters: Mitchel Carson (UT Austin) and Mohammad Ali Javidian (App State).
+- **AGU26 poster (accepted, forthcoming):** [*Hydra: Identifying Data That Improve Local National Water Model Streamflow Estimates*](https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Paper/2094875), December 2026.
 - **Water Resources Research results manuscript (in preparation).**
 - **Environmental Modelling & Software paper on the NextGen reforecast generation software (planned).**
 - **Senior Honors Thesis (completed, December 2025):** runoff forecasting with deep learning, Appalachian State University.

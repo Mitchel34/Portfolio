@@ -119,7 +119,7 @@ export const landingSections = {
     label: "Research & Talks",
     navLabel: "Research",
     href: "/#research",
-    description: "AGU26 workshop, abstract, manuscripts, and thesis",
+    description: "AGU26 workshop, poster, manuscripts, and thesis",
     inHeader: true,
   },
   skills: {
@@ -922,7 +922,7 @@ export const openSource: OpenSourceEntry[] = [
 // ---------------------------------------------------------------------------
 // Talks, workshops, and writing. Single source of truth for the home Research &
 // Talks section, /research, and /resume. Statuses use the evidence system and match
-// the résumé PDF.
+// the current conference and manuscript milestones.
 // ---------------------------------------------------------------------------
 
 export type TalkKind = "Workshop" | "Talk" | "Abstract" | "Manuscript" | "Thesis" | "Poster";
@@ -947,24 +947,28 @@ export const talks: TalkItem[] = [
     kind: "Workshop",
     order: 1,
     title: "Best Practices for AI and Agentic Workflows in Earth Science Research",
-    venue: "AGU26 Annual Meeting · San Francisco · December 7–11, 2026",
-    whenLabel: "December 2026",
+    venue: "AGU26 · SCIWS10 · San Francisco",
+    whenLabel: "December 6, 2026",
     status: "accepted",
-    role: "Scientific workshop facilitator",
+    role: "Workshop presenter",
     description:
-      "Teaching earth and environmental scientists practical AI methods for their research workflows.",
+      "Accepted, forthcoming workshop with presenters Mitchel Carson (UT Austin) and Mohammad Ali Javidian (App State) on practical AI and agentic research workflows.",
+    links: [{ label: "AGU26 workshop details", href: "https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Session/280856" }],
   },
   {
-    id: "agu26-abstract",
-    kind: "Abstract",
+    id: "agu26-poster",
+    kind: "Poster",
     order: 2,
-    title: "HYDRA streamflow-forecasting abstract",
-    venue: "AGU26 · Hydrology session H100 (machine learning in hydrology)",
-    whenLabel: "Decision pending",
-    status: "under-review",
+    title: "Hydra: Identifying Data That Improve Local National Water Model Streamflow Estimates",
+    venue: "AGU26 · San Francisco",
+    whenLabel: "December 2026",
+    status: "accepted",
     description:
-      "Abstract on the HYDRA streamflow-forecasting work. Acceptance and scheduling will be posted when confirmed.",
-    links: [{ label: "Research details", href: "/research" }],
+      "Accepted, forthcoming poster on identifying data that improve local National Water Model streamflow estimates.",
+    links: [
+      { label: "AGU26 poster details", href: "https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Paper/2094875" },
+      { label: "Research details", href: "/research" },
+    ],
   },
   {
     id: "wrr-manuscript",
