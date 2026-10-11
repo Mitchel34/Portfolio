@@ -34,7 +34,7 @@ export default function CourseworkPage() {
         <PageHeader
           label="Coursework"
           title="Graduate coursework"
-          lede="Completed courses represent finished graduate study. Fall 2026 courses are in progress and move to completed only after the semester ends."
+          lede="The foundations behind my work in applied AI: learning algorithms, language models, optimization, and responsible deployment."
           meta={
             <span className="mono-label text-muted-foreground">
               {coursework.institution} · {coursework.program} · GPA {coursework.currentGpa} · expected{" "}
@@ -43,12 +43,12 @@ export default function CourseworkPage() {
           }
         />
 
-        <SectionFrame rule="none" label="Completed" title="Completed coursework">
-          <CourseworkList items={coursework.completed} />
+        <SectionFrame rule="none" label="Fall 2026" title="What I’m studying now">
+          <CourseworkList items={coursework.current} />
         </SectionFrame>
 
-        <SectionFrame label="Fall 2026" title="In progress this fall">
-          <CourseworkList items={coursework.upcoming} />
+        <SectionFrame label="Completed" title="The foundations">
+          <CourseworkList items={coursework.completed} />
         </SectionFrame>
       </div>
     </>

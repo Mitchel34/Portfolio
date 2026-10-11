@@ -3,6 +3,7 @@ import { LinkGlyph } from "@/components/LinkGlyph";
 import { Reveal } from "@/components/Reveal";
 import { StatusLabel } from "@/components/StatusLabel";
 import { TextLink } from "@/components/TextLink";
+import { WatershedExplorer } from "@/components/WatershedExplorer";
 import {
   featuredWork,
   landingSections,
@@ -19,7 +20,7 @@ function isExternal(href: string) {
 
 function FeaturedHydra() {
   return (
-    <article className="overflow-hidden rounded-[4px] border border-border bg-card">
+    <article className="overflow-hidden rounded-xl border border-border bg-card">
       <div className="grid lg:grid-cols-12">
         <div className="p-6 sm:p-10 lg:col-span-7">
           <p className="mono-label text-primary">{featuredWork.kicker}</p>
@@ -43,26 +44,8 @@ function FeaturedHydra() {
           </p>
         </div>
 
-        <div className="border-t border-border bg-surface p-6 sm:p-10 lg:col-span-5 lg:border-t-0 lg:border-l">
-          <p className="mono-label text-muted-foreground">How it works</p>
-          <ol className="mt-5">
-            {featuredWork.pipeline.map((step, index) => (
-              <li key={step.step} className="relative pl-12 pb-8 last:pb-0">
-                {index < featuredWork.pipeline.length - 1 ? (
-                  <span aria-hidden="true" className="absolute top-9 bottom-1 left-[1.0625rem] border-l border-input" />
-                ) : null}
-                <span
-                  aria-hidden="true"
-                  className="absolute top-0 left-0 grid h-9 w-9 place-items-center rounded-full bg-foreground font-mono text-sm text-background"
-                >
-                  {index + 1}
-                </span>
-                <p className="mono-label pt-2 text-primary">{step.step}</p>
-                <p className="mt-1 font-serif text-title text-foreground">{step.title}</p>
-                <p className="mt-2 text-body-sm text-muted-foreground">{step.body}</p>
-              </li>
-            ))}
-          </ol>
+        <div className="border-t border-border lg:col-span-5 lg:border-t-0 lg:border-l">
+          <WatershedExplorer />
         </div>
       </div>
     </article>

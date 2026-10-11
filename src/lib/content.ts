@@ -10,9 +10,9 @@ export const site = {
   schemaJobTitle: "M.S. Artificial Intelligence student, The University of Texas at Austin",
   focusLine: "Air Force veteran · Applied AI · Scientific computing",
   runningHead: "Mitchel Carson · Portfolio",
-  updated: "September 2026",
+  updated: "October 2026",
   updatedYear: "2026",
-  resumePdfUpdated: "September 2026",
+  resumePdfUpdated: "October 2026",
   resumeFilename: "mitchelcarson_resume.pdf",
   resumeUrl: "/mitchelcarson_resume.pdf",
   email: "mitchel.carson@gmail.com",
@@ -86,9 +86,18 @@ export type LandingSection = {
 };
 
 export const landingSections = {
+  work: {
+    id: "work",
+    number: "01",
+    label: "Work",
+    navLabel: "Work",
+    href: "/#work",
+    description: "HYDRA research, USAA APIs, Harmony, client work",
+    inHeader: true,
+  },
   service: {
     id: "service",
-    number: "01",
+    number: "02",
     label: "Service",
     navLabel: "Service",
     href: "/#service",
@@ -97,20 +106,11 @@ export const landingSections = {
   },
   path: {
     id: "path",
-    number: "02",
+    number: "03",
     label: "Path",
     navLabel: "Path",
     href: "/#path",
     description: "Air Force, computer science, USAA, UT Austin",
-    inHeader: true,
-  },
-  work: {
-    id: "work",
-    number: "03",
-    label: "Work",
-    navLabel: "Work",
-    href: "/#work",
-    description: "HYDRA research, USAA APIs, Harmony, client work",
     inHeader: true,
   },
   research: {
@@ -157,16 +157,16 @@ export const sitePages: SitePage[] = [
 ];
 
 // ---------------------------------------------------------------------------
-// Home page. The story runs top to bottom: hook, service, path, work, research,
+// Home page. The story runs top to bottom: hook, work, service, path, research,
 // skills, contact. Components read these; they never inline copy.
 // ---------------------------------------------------------------------------
 
 export const hero = {
   eyebrow: ["U.S. Air Force veteran", "Active TS/SCI", "Austin, Texas"],
   statement:
-    "I chose to pursue AI while flying executive missions for the U.S. Air Force. Now I build applied AI that makes complex data useful to the people relying on it.",
+    "I build software and applied AI for decisions that depend on reliable data.",
   summary:
-    "UT Austin M.S. Artificial Intelligence student (4.0 GPA). I built production Java and Spring Boot APIs at USAA, and I research watershed forecasting with deep learning, work motivated by living through Hurricane Helene in Boone.",
+    "Air Force veteran. UT Austin M.S. AI student. I’ve built production APIs at USAA and now research watershed forecasting with deep learning, motivated by experiencing Hurricane Helene in Boone.",
   portraitCaption: "Joint Base Andrews → UT Austin",
 };
 
@@ -185,17 +185,17 @@ export const sectionCopy = {
   path: {
     title: "The path so far.",
     lede:
-      "Four chapters with one through-line: work other people depend on, done with careful preparation and a standard that does not move.",
+      "From executive airlift to software engineering and AI research, with reliability at the center.",
   },
   work: {
     title: "Selected work.",
     lede:
-      "Research I lead, production software I shipped, and systems I am building. Each project links to a case study with the problem, the approach, and what is still open.",
+      "Forecasting research, production APIs, and systems in development. Explore the problem, approach, and current results.",
   },
   research: {
     title: "Research and speaking.",
     lede:
-      "Where the work is being presented and published. Each item carries its current status and is updated as milestones land.",
+      "Upcoming presentations, manuscripts in progress, and the research behind them.",
   },
   skills: {
     title: "What I bring to a team.",
@@ -204,7 +204,7 @@ export const sectionCopy = {
   contact: {
     title: "Let’s talk.",
     lede:
-      "I’m open to software engineering and applied AI roles, including scientific computing and mission-driven teams where an active clearance matters. I’m also glad to talk forecasting, evaluation, or the move from military service into AI.",
+      "I’m open to software engineering and applied AI roles, including scientific computing and teams where an active clearance matters. Let’s talk about your team or a shared research question.",
   },
 } satisfies Record<string, SectionCopy>;
 
@@ -322,8 +322,8 @@ export const story: StoryChapter[] = [
     kicker: "Upcoming",
     period: "December 2026",
     title: "AGU26 Annual Meeting",
-    role: "Scientific workshop facilitator · San Francisco, CA",
-    body: "Leading an accepted workshop on best practices for AI and agentic workflows in earth science research.",
+    role: "Workshop presenter & poster presenting author · San Francisco, CA",
+    body: "Presenting an accepted workshop on AI and agentic research workflows on December 6, followed by an accepted HYDRA poster on December 11.",
     link: { label: "Research and speaking", href: "/#research" },
     upcoming: true,
   },
@@ -339,7 +339,7 @@ export const featuredWork = {
   title: "HYDRA",
   subtitle: "Watershed forecasting research with deep learning",
   plain:
-    "Experiencing Hurricane Helene in Boone is why I study watershed dynamics and forecast reliability. HYDRA asks whether a deep-learning model can make NOAA’s NextGen streamflow forecasts more reliable 1 to 18 hours ahead, using only information that would really be available when the forecast is issued.",
+    "Can deep learning make NOAA’s NextGen streamflow forecasts more reliable 1–18 hours ahead? HYDRA studies that question using historical forecasts and only the information available when each forecast was issued.",
   pipeline: [
     {
       step: "Generate",
@@ -349,17 +349,17 @@ export const featuredWork = {
     {
       step: "Correct",
       title: "A learned post-processor",
-      body: "Designing post-processing for 1–18 hour lead times, comparing LSTM, Transformer, and Mamba-style models on identical inputs and splits.",
+      body: "Designing a comparison of LSTM, Transformer, and Mamba-style post-processors using the same inputs and evaluation periods.",
     },
     {
       step: "Evaluate",
       title: "By site and lead time",
-      body: "Leakage-aware temporal splits and hydrologic metrics (RMSE, NSE, KGE), reported by site and lead time.",
+      body: "Evaluation plan: time-based splits, forecast-time input checks, and hydrologic metrics (RMSE, NSE, KGE) by site and lead time.",
     },
   ],
   status: "in-progress" as EvidenceStatus,
   statusNote:
-    "Results pending · results manuscript in preparation for Water Resources Research; software paper planned for Environmental Modelling & Software",
+    "Results pending · research manuscript in preparation · software paper planned",
   links: [
     { label: "Research details", href: "/research" },
     { label: "Case study", href: "/projects/hydra-temporal" },
@@ -386,7 +386,7 @@ export const otherWork: WorkCard[] = [
     kicker: "Industry",
     subtitle: "Enterprise GraphQL APIs",
     metric: { value: "30%", label: "less troubleshooting time" },
-    body: "Built Java and Spring Boot GraphQL APIs for customer-data workflows used across enterprise channels, plus API enhancements and JavaScript comparison views that integrate name and employment data from multiple sources.",
+    body: "Built Java and Spring Boot GraphQL APIs for enterprise customer-data workflows, with JavaScript comparison views that reduced troubleshooting time.",
     tags: ["Java", "Spring Boot", "GraphQL", "JavaScript"],
     status: "production",
     href: "/projects/usaa-risk-services",
@@ -396,7 +396,7 @@ export const otherWork: WorkCard[] = [
     title: "Harmony",
     kicker: "Systems",
     subtitle: "Automated decision system with bounded LLM autonomy",
-    body: "A financial decision pipeline built as an explicit state graph with declared action paths and tamper-evident logging. LLMs sit in advisory nodes that can flag or veto but cannot execute, and every consequential action requires human approval.",
+    body: "A financial decision pipeline with explicit action paths and tamper-evident logs. LLMs advise; consequential actions require human approval.",
     tags: ["Python", "scikit-learn", "SQLite", "React", "AWS"],
     status: "active-development",
     href: "/projects/harmony",
@@ -519,10 +519,10 @@ export function projectEvidenceStatus(status: Project["status"]): EvidenceStatus
 
 export const about = {
   summary: [
-    "I came to AI through operations first. From 2020 to 2023 I was an Executive Missions Aviator in the U.S. Air Force’s 89th Airlift Wing, flying on more than 50 executive airlift missions across more than 30 countries. Every one was completed with zero safety-related incidents.",
-    "I worked directly onboard with distinguished visitors, including the Vice President aboard Air Force Two and the Secretary of State, managing passenger safety and logistics with flight crews, security teams, and White House staff. I also handled the mission administration: in-flight meal and beverage service, baggage, crew hotels and ground transportation, visa applications, and subsistence billing. It was while serving that I chose to pursue AI. I still hold an active TS/SCI clearance.",
-    "I studied computer science at Appalachian State, graduating cum laude with a senior honors thesis on runoff forecasting with deep learning. Experiencing Hurricane Helene in Boone is what motivated HYDRA, my research on watershed dynamics and forecast reliability. At USAA I built Java and Spring Boot GraphQL APIs and cut troubleshooting time by 30%, and I also build and advise on software for a small business.",
-    "Today I am completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA), with HYDRA as ongoing research: a results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned. I focus on applied AI that makes complex data useful to the people relying on it.",
+    "I chose to pursue AI while serving as an Executive Missions Aviator in the U.S. Air Force’s 89th Airlift Wing. From 2020 to 2023, I flew on 50+ executive airlift missions across 30+ countries with zero safety-related incidents.",
+    "Aboard Air Force Two and other executive missions, I coordinated passenger safety, logistics, and service with flight crews, security teams, and White House staff. Preparation and clear communication still shape how I build software. I hold an active TS/SCI clearance.",
+    "I graduated cum laude in computer science at Appalachian State, where my senior honors thesis explored runoff forecasting with deep learning. Experiencing Hurricane Helene in Boone motivated HYDRA, my ongoing research on watershed forecasts. At USAA, I built Java and Spring Boot GraphQL APIs and helped cut troubleshooting time by 30%.",
+    "Today I’m completing an M.S. in Artificial Intelligence at UT Austin (4.0 GPA, expected May 2027). My work spans forecasting research, production software, and client websites. HYDRA analysis and manuscript preparation are ongoing; a software paper is planned.",
   ],
   values: [
     {
@@ -614,16 +614,16 @@ export const projects: Project[] = [
   {
     slug: "hydra-temporal",
     title: "HYDRA",
-    subtitle: "Watershed forecasting research: reforecast generation and deep-learning post-processing for NOAA NextGen streamflow forecasts",
+    subtitle: "Reforecast generation and deep learning for NOAA NextGen streamflow forecasts",
     status: "Active",
     problem:
-      "Experiencing Hurricane Helene in Boone is what motivated HYDRA. Short-lead streamflow forecasts from NOAA’s NextGen framework carry errors that a learned post-processor may be able to reduce, and HYDRA asks whether a model trained on reforecasts generated with the same framework can improve forecasts at 1–18 hour lead times without leaking future information.",
+      "Experiencing Hurricane Helene in Boone motivated HYDRA. The research asks whether deep learning can reduce errors in NOAA’s NextGen streamflow forecasts at 1–18 hour lead times, using only information available at forecast issue time.",
     impact:
-      "The work has two parts: NextGen reforecast generation software with Google Cloud workflows that prepare the data, and a post-processing model evaluated by site and lead time. Results are pending; a results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
+      "The work combines NextGen reforecast generation and Google Cloud data workflows with a planned comparison of deep-learning post-processors. Results are pending. A manuscript for Water Resources Research is in preparation; a software paper for Environmental Modelling & Software is planned.",
     approach: [
       "Built NextGen reforecast generation software and Google Cloud workflows to acquire, validate, and align weather, streamflow, and forecast data with traceable provenance.",
-      "Designing forecast post-processing for 1–18 hour lead times, comparing LSTM, Transformer, and Mamba-style models on identical inputs and splits.",
-      "Evaluating with leakage-aware temporal splits and hydrologic metrics (RMSE, NSE, KGE), reporting performance by site and lead time.",
+      "Designing a comparison of LSTM, Transformer, and Mamba-style post-processors for 1–18 hour lead times using identical inputs and time splits.",
+      "Developing evaluation with leakage-aware temporal splits and hydrologic metrics (RMSE, NSE, KGE) by site and lead time.",
       "Preserving initialization, lead, valid-time, version, and source metadata so every training example traces back to the forecast that produced it.",
       "Preparing a results manuscript for Water Resources Research; a software paper for Environmental Modelling & Software is planned.",
     ],
@@ -638,7 +638,7 @@ export const projects: Project[] = [
     ],
     results: [
       "Reforecast generation software and Google Cloud data workflows are in place; the NextGen_Hydra repository is public.",
-      "Model comparison and lead-time evaluation are in progress; results will be posted when the analysis is complete.",
+      "Model comparison and lead-time evaluation are in development; results will be posted when the analysis is complete.",
       "A results manuscript is in preparation, and a software paper is planned.",
     ],
     learnings: [
@@ -649,13 +649,13 @@ export const projects: Project[] = [
     caseStudy: {
       architecture: [
         "Reforecast generation software drives NOAA’s NextGen framework to produce retrospective forecasts with consistent metadata.",
-        "A post-processing model consumes reforecasts and observations to produce improved forecasts at 1–18 hour lead times.",
+        "The proposed post-processor uses reforecasts and available observations to estimate streamflow corrections at 1–18 hour lead times.",
         "Config-driven training and evaluation with strict train/validation/test time boundaries.",
       ],
       reliability: [
         "Leakage-aware splitting by time and lead time to match operational inference constraints.",
         "Reproducible runs through fixed seeds, immutable data artifacts, and tracked configuration snapshots.",
-        "Performance tracked by site, lead time, and hydrologic metric instead of a single aggregate score.",
+        "Evaluation is designed to report performance by site, lead time, and hydrologic metric.",
       ],
       delivery: [
         "Packaged data acquisition and reforecast generation as reusable software for a planned software paper; the data tooling is public.",
@@ -803,21 +803,21 @@ export const research = {
   title: "HYDRA: watershed forecasting research",
   status: "Ongoing research · results pending",
   summary:
-    "Motivated by experiencing Hurricane Helene in Boone, HYDRA studies watershed dynamics and forecast reliability: NextGen reforecast generation software and Google Cloud data workflows, plus a deep-learning post-processor for 1–18 hour streamflow forecasts, with LSTM, Transformer, and Mamba-style models compared under leakage-aware evaluation. A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
+    "HYDRA studies whether deep learning can improve NOAA’s NextGen streamflow forecasts 1–18 hours ahead. The work combines reforecast generation, traceable data workflows, and a planned comparison of sequence models under forecast-time constraints. Experiencing Hurricane Helene in Boone motivated the research.",
   scopeNote:
     "No performance number is reported on this site until the analysis is complete; results will be published with the manuscripts.",
   figures: {
     explorer:
-      "Interactive trace of the HYDRA pipeline: reforecast generation, the three model families compared, leakage-aware evaluation by lead time, and the outputs.",
+      "Explore HYDRA’s reforecast inputs, planned model comparison, evaluation design, and publication plans.",
   },
   architecture: [
     "Reforecasts: NextGen reforecast generation software produces retrospective forecasts with consistent initialization, lead-time, and version metadata.",
     "Inputs: weather, streamflow, and forecast data, acquired and validated with Google Cloud workflows and aligned to forecast issue time with traceable provenance.",
-    "Models: LSTM, vanilla Transformer, and Mamba-style state-space models (with attention) trained as post-processors on identical inputs.",
-    "Outputs: Improved forecasts at 1–18 hour lead times, diagnostics, and research artifacts.",
+    "Model comparison plan: LSTM, Transformer, and Mamba-style state-space post-processors using the same inputs and time splits.",
+    "Planned outputs: Post-processed forecasts at 1–18 hour lead times, diagnostics, and reproducible research artifacts. Improvement remains to be established.",
   ],
   evaluation: [
-    "Metrics: Hydrologic error and skill metrics (RMSE, NSE, KGE) reported by site and lead time.",
+    "Metric plan: Hydrologic error and skill metrics (RMSE, NSE, KGE), evaluated by site and lead time.",
     "Validation: Leakage-aware temporal splits designed around forecast availability.",
     "Reference: Raw NextGen reforecasts at every lead time.",
   ],
@@ -952,7 +952,7 @@ export const talks: TalkItem[] = [
     status: "accepted",
     role: "Workshop presenter",
     description:
-      "Accepted, forthcoming workshop with presenters Mitchel Carson (UT Austin) and Mohammad Ali Javidian (App State) on practical AI and agentic research workflows.",
+      "With Mohammad Ali Javidian (App State): practical AI and agentic research workflows. December 6, 8:30 a.m.–5 p.m. PST · Moscone Center, South, Room 157.",
     links: [{ label: "AGU26 workshop details", href: "https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Session/280856" }],
   },
   {
@@ -960,11 +960,12 @@ export const talks: TalkItem[] = [
     kind: "Poster",
     order: 2,
     title: "Hydra: Identifying Data That Improve Local National Water Model Streamflow Estimates",
-    venue: "AGU26 · San Francisco",
-    whenLabel: "December 2026",
+    venue: "AGU26 · H51P · San Francisco",
+    whenLabel: "December 11, 2026",
     status: "accepted",
+    role: "Presenting author",
     description:
-      "Accepted, forthcoming poster on identifying data that improve local National Water Model streamflow estimates.",
+      "Data-source comparisons using NWM, USGS, ERA5, and ERA5-Land at three southern Appalachian gauges. December 11, 8:30 a.m.–12 p.m. PST · Moscone Center, Halls A–C.",
     links: [
       { label: "AGU26 poster details", href: "https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Paper/2094875" },
       { label: "Research details", href: "/research" },
@@ -1172,7 +1173,7 @@ export const coursework = {
       description: "Value-based and policy-gradient methods, function approximation, and sequential decisions.",
     },
   ] satisfies CourseworkItem[],
-  upcoming: [
+  current: [
     {
       title: "Advances in Deep Learning",
       status: "Fall 2026",

@@ -39,7 +39,7 @@ export function ContactSection() {
     <section
       id={section.id}
       aria-labelledby="contact-heading"
-      className="scroll-mt-14 border-t-2 border-foreground py-20 lg:py-28"
+      className="scroll-mt-20 border-t-2 border-foreground py-20 lg:py-28"
     >
       <Container>
         <Reveal className="grid gap-12 lg:grid-cols-12 lg:gap-x-12">

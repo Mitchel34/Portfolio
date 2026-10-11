@@ -25,7 +25,7 @@ export function HomeSection({ section, title, lede, children, className, aside }
     <section
       id={section.id}
       aria-labelledby={headingId}
-      className={cn("scroll-mt-14 border-t border-border py-20 lg:py-28", className)}
+      className={cn("scroll-mt-20 border-t border-border py-16 lg:py-24", className)}
     >
       <Container>
         <div className="lg:flex lg:items-end lg:justify-between lg:gap-12">
@@ -43,7 +43,7 @@ export function HomeSection({ section, title, lede, children, className, aside }
           </header>
           {aside ? <div className="mt-6 shrink-0 lg:mt-0">{aside}</div> : null}
         </div>
-        <div className="mt-12 lg:mt-16">{children}</div>
+        <div className="mt-10 lg:mt-12">{children}</div>
       </Container>
     </section>
   );

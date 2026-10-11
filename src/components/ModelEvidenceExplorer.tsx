@@ -22,36 +22,36 @@ type EvidenceTab = {
 const evidenceTabs: EvidenceTab[] = [
   {
     id: "inputs",
-    label: "(a) Reforecasts",
+    label: "01 · Inputs",
     eyebrow: "Reforecast generation",
-    title: "The forecasts to learn from are generated, not scraped.",
+    title: "Historical forecasts with a traceable origin.",
     detail: research.architecture[0] + " " + research.architecture[1],
     note: "Consistent initialization, lead-time, and version metadata make every training example traceable to the forecast that produced it.",
     tokens: ["NextGen", "Reforecasts", "USGS observations", "Issue time"],
   },
   {
     id: "architecture",
-    label: "(b) Models",
-    eyebrow: "Three model families",
-    title: "Recurrent, attention, and state-space models on identical inputs.",
+    label: "02 · Models",
+    eyebrow: "Planned model comparison",
+    title: "Three model families. A shared evaluation plan.",
     detail: research.architecture[2],
-    note: "LSTM, vanilla Transformer, and Mamba-style state-space models are trained as post-processors with the same inputs and the same splits, so differences are attributable to the model.",
+    note: "The comparison is designed to hold inputs and time splits constant across recurrent, attention, and state-space models. Training and evaluation results are not yet reported.",
     tokens: ["LSTM", "Transformer", "Mamba (SSM)", "PyTorch"],
   },
   {
     id: "evaluation",
-    label: "(c) Evaluation",
+    label: "03 · Evaluation",
     eyebrow: "Leakage-aware · by lead time",
-    title: "Evaluation mirrors real forecasting constraints.",
+    title: "Evaluate with the information available at issue time.",
     detail: research.evaluation[0] + " " + research.evaluation[1],
     note: research.evaluation[2],
     tokens: ["1–18 h lead times", "Site × lead time", "Temporal splits"],
   },
   {
     id: "outcome",
-    label: "(d) Outputs",
+    label: "04 · Outputs",
     eyebrow: "Planned outputs",
-    title: "Two manuscripts and the software behind them.",
+    title: "Research results and reusable software.",
     detail:
       "A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
     note: research.scopeNote,
@@ -104,21 +104,21 @@ function InputsVisual() {
 const architectureSteps: Array<[step: string, label: string]> = [
   ["01", "NextGen reforecast"],
   ["02", "Post-processing model"],
-  ["03", "Improved forecast"],
+  ["03", "Candidate correction"],
 ];
 
 function ArchitectureVisual() {
   return (
     <div aria-hidden="true" className="grid min-h-48 place-items-center">
-      <div className="grid w-full max-w-md grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2">
+      <div className="grid w-full max-w-md grid-cols-1 items-center gap-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]">
         {architectureSteps.map(([step, label], index) => (
           <div key={step} className="contents">
-            <div className="rounded-[4px] border border-input bg-card px-2 py-4 text-center">
+            <div className="min-w-0 rounded-[4px] border border-input bg-card px-2 py-3 text-center sm:py-4">
               <span className="block mono-label text-primary">{step}</span>
               <span className="mt-2 block text-body-sm font-medium text-foreground">{label}</span>
             </div>
             {index < architectureSteps.length - 1 ? (
-              <span className="font-mono text-foreground">→</span>
+              <span className="rotate-90 text-center font-mono text-foreground sm:rotate-0">→</span>
             ) : null}
           </div>
         ))}
@@ -127,10 +127,9 @@ function ArchitectureVisual() {
   );
 }
 
-/* Time ruler geometry (viewBox units). Bands span x=8..352; the Test band starts at issue time. */
+/* Schematic chronological partitions; forecast issue time varies within evaluation periods. */
 const RULER_START = 8;
 const RULER_END = 352;
-const ISSUE_TIME_X = 272;
 const tickPositions = Array.from(
   { length: Math.floor((RULER_END - RULER_START) / 24) + 1 },
   (_, index) => RULER_START + index * 24,
@@ -147,27 +146,14 @@ function EvaluationVisual() {
         {tickPositions.map((x) => (
           <line key={x} x1={x} x2={x} y1={44} y2={48} className="stroke-muted-foreground" />
         ))}
-        <line
-          x1={ISSUE_TIME_X}
-          x2={ISSUE_TIME_X}
-          y1={10}
-          y2={52}
-          className="stroke-primary"
-          strokeWidth={1.5}
-        />
-        <polygon
-          points={`${ISSUE_TIME_X - 3},10 ${ISSUE_TIME_X + 3},10 ${ISSUE_TIME_X},4`}
-          className="fill-primary"
-        />
       </svg>
       <div className="mx-[2.2222%] grid grid-cols-[192fr_72fr_80fr] mono-label text-muted-foreground">
         <span>Train</span>
-        <span>Validation</span>
+        <span><span className="sm:hidden">Val.</span><span className="hidden sm:inline">Validation</span></span>
         <span>Test</span>
       </div>
       <p className="mt-2 text-footnote text-muted-foreground">
-        <span className="text-primary">▲</span> forecast issue time: model inputs are restricted to what
-        existed before it.
+        Schematic time splits. At every forecast issue time, inputs must already be available.
       </p>
       <div className="mt-4 grid grid-cols-3 gap-2">
         {["RMSE", "NSE", "KGE"].map((metric) => (

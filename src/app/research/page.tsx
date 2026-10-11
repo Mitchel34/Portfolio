@@ -48,7 +48,7 @@ export default function ResearchPage() {
           label="Research"
           title={research.title}
           lede={research.summary}
-          ledeStyle="italic"
+          actions={<TextLink href="#communication">AGU26 poster & workshop</TextLink>}
           meta={<StatusLabel status="in-progress" prefix="Ongoing research" />}
         />
 
@@ -69,8 +69,8 @@ export default function ResearchPage() {
                 example is traceable.
               </p>
               <p>
-                LSTM, vanilla Transformer, and Mamba-style state-space models are trained as post-processors on identical
-                inputs and splits and compared against the raw reforecasts at every lead time from 1 to 18 hours.
+                The evaluation plan compares LSTM, Transformer, and Mamba-style post-processors using the same inputs
+                and temporal splits. Raw NextGen reforecasts provide the baseline at each lead time from 1 to 18 hours.
               </p>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function ResearchPage() {
           </FigureWell>
         </SectionFrame>
 
-        <SectionFrame label="Method" title="Architecture, evaluation, constraints, reproducibility">
+        <SectionFrame label="Method" title="How the research is evaluated">
           <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2">
             {methodGroups.map((group) => (
               <div key={group.label}>
@@ -97,9 +97,9 @@ export default function ResearchPage() {
 
         <SectionFrame
           id="communication"
-          label="Communication"
-          title="Scientific communication, labeled by status."
-          lede="Outputs are listed with their current status and updated as milestones are confirmed."
+          label="Presentations & writing"
+          title="At AGU26, and in progress."
+          lede="The accepted AGU poster presents the earlier National Water Model study. The manuscripts below concern ongoing NextGen research."
         >
           <TalksList items={talks} />
           <OfficeHours className="mt-12" />

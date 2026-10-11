@@ -15,9 +15,9 @@ export function ServiceSection() {
     <section
       id={section.id}
       aria-labelledby="service-heading"
-      className="scroll-mt-14 bg-navy text-navy-foreground"
+      className="scroll-mt-20 bg-navy text-navy-foreground"
     >
-      <Container className="py-20 lg:py-28">
+      <Container className="py-16 lg:py-20">
         <p className="mono-label text-navy-accent">
           {section.number} · {section.label}
         </p>
@@ -55,7 +55,11 @@ export function ServiceSection() {
           </aside>
         </div>
 
-        <Reveal className="mt-16 lg:mt-20">
+        <details className="group mt-10 border-t border-navy-border pt-6">
+          <summary className="cursor-pointer focus-visible:outline-navy-accent text-body font-medium text-navy-foreground marker:text-navy-accent">
+            More about my Air Force service
+          </summary>
+        <Reveal className="mt-8">
           <h3 className="mono-label text-navy-muted">The job</h3>
           <ul className="mt-5 grid gap-px overflow-hidden rounded-[4px] border border-navy-border bg-navy-border sm:grid-cols-2 lg:grid-cols-4">
             {service.duties.map((duty) => (
@@ -67,7 +71,7 @@ export function ServiceSection() {
           </ul>
         </Reveal>
 
-        <Reveal className="mt-16 border-t border-navy-border pt-12 lg:mt-20 lg:pt-16">
+        <Reveal className="mt-10 border-t border-navy-border pt-8">
           <h3 className="font-serif text-heading text-balance text-navy-foreground lg:text-[2.5rem]">
             {service.lessonsTitle}
           </h3>
@@ -86,6 +90,7 @@ export function ServiceSection() {
             <span>{service.clearanceNote}</span>
           </p>
         </Reveal>
+        </details>
       </Container>
     </section>
   );

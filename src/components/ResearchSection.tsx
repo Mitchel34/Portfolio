@@ -31,6 +31,11 @@ export function ResearchSection() {
                 {item.venue}
                 {item.role ? ` · ${item.role}` : ""}
               </p>
+              {item.links?.length ? (
+                <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2">
+                  {item.links.map((link) => <TextLink key={link.href} href={link.href}>{link.label}</TextLink>)}
+                </div>
+              ) : null}
             </div>
             <div className="md:col-start-2 lg:col-start-auto lg:text-right">
               <StatusLabel status={item.status} />

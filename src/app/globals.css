@@ -236,3 +236,29 @@
     }
   }
 }
+
+/* Fine plotting-paper texture ties the introduction to the scientific work. */
+.hero-surface {
+  background-image: radial-gradient(var(--color-border) 0.7px, transparent 0.7px);
+  background-size: 24px 24px;
+}
+
+.hero-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, var(--color-background) 15%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-portrait {
+  box-shadow: 12px 12px 0 -1px var(--color-surface), 12px 12px 0 0 var(--color-border);
+}
+
+@keyframes watershed-flow {
+  to { stroke-dashoffset: -64; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .watershed-flow { animation: watershed-flow 4s linear 1; }
+}
