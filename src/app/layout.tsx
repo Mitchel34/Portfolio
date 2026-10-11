@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
+import localFont from "next/font/local";
 
 import "./globals.css";
 import { Footer } from "@/components/Footer";
@@ -9,24 +9,27 @@ import { StructuredData } from "@/components/StructuredData";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { rootMetadata } from "@/lib/seo";
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
-  axes: ["opsz"],
+const newsreader = localFont({
+  src: [
+    { path: "./fonts/newsreader-latin-normal.woff2", weight: "200 800", style: "normal" },
+    { path: "./fonts/newsreader-latin-italic.woff2", weight: "200 800", style: "italic" },
+  ],
+  adjustFontFallback: "Times New Roman",
   variable: "--font-newsreader",
   display: "swap",
 });
 
-const plexSans = IBM_Plex_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const plexSans = localFont({
+  src: [{ path: "./fonts/ibm-plex-sans-latin-normal.woff2", weight: "400 600", style: "normal" }],
   variable: "--font-ibm-plex-sans",
   display: "swap",
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
+const plexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-400.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-mono-latin-500.woff2", weight: "500", style: "normal" },
+  ],
   variable: "--font-ibm-plex-mono",
   display: "swap",
 });
