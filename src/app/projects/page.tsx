@@ -14,7 +14,7 @@ import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Projects",
   description:
-    "Case studies in applied AI and production software: HYDRA post-processing for NextGen streamflow reforecasts, USAA GraphQL services, Harmony's decision system with bounded LLM autonomy, and open-source research code.",
+    "Completed public ML and platform labs, NextGen research software, HYDRA forecasting research, and production APIs, with reproducible evidence and explicit limits.",
   pathname: "/projects",
   keywords: [
     "AI projects",
@@ -50,7 +50,7 @@ export default function ProjectsPage() {
         <PageHeader
           label="Projects"
           title="Engineering case studies."
-          lede="Problem, approach, current evidence, limits, and lessons, for the HYDRA pipeline, USAA production APIs, and the Harmony forecasting system."
+          lede="Completed ML and platform labs, research software, and production APIs. Each case study connects the problem and approach to published evidence, current limits, and lessons."
         />
         <Container>
           <div className="mt-10 [&>article:first-child]:border-t-0 [&>article:first-child]:pt-0">
