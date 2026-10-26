@@ -38,7 +38,9 @@ I'm based in **Austin, Texas**, building across software engineering, applied AI
 
 ## Site
 
-The home page tells one story from top to bottom: a hero, then numbered sections for Service (the Air Force chapter), Path (a timeline from the Air Force through UT Austin), Work (HYDRA, USAA, Harmony, client work, open source), Research & Talks, Skills, and Contact. Every research output carries its current status (accepted, under review, in progress, completed), and all copy lives in `src/lib/content.ts`.
+The home page tells one story from top to bottom: a hero, then numbered sections for Work, Service (the Air Force chapter), Path (a timeline from the Air Force through UT Austin), Research & Talks, Skills, and Contact. Projects and research outputs carry their current evidence status, and all copy lives in `src/lib/content.ts`.
+
+Completed public lab case studies link directly to their evaluation reports: [Quantized Linear Inference Lab](https://github.com/Mitchel34/quantized-linear-inference-lab), [Batch Inference Contract Guard](https://github.com/Mitchel34/batch-inference-contract-guard), and [Agent Replay Bench](https://github.com/Mitchel34/agent-replay-bench). Their results are bounded synthetic evaluations, with no production or unmeasured performance claims. [NextGen Reforecast Software](https://github.com/Mitchel34/nextgen-reforecast-software) has a separate case study for its completed diagnostic execution foundation; scientific qualification, independent reproduction, and hosted execution remain open.
 
 ## Connect
 

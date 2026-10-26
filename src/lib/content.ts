@@ -92,7 +92,7 @@ export const landingSections = {
     label: "Work",
     navLabel: "Work",
     href: "/#work",
-    description: "HYDRA research, USAA APIs, Harmony, client work",
+    description: "Completed ML labs, research software, USAA APIs, and client work",
     inHeader: true,
   },
   service: {
@@ -190,7 +190,7 @@ export const sectionCopy = {
   work: {
     title: "Selected work.",
     lede:
-      "Forecasting research, production APIs, and systems in development. Explore the problem, approach, and current results.",
+      "Completed ML and platform labs, forecasting research, and production APIs. Explore the problem, approach, evidence, and limits.",
   },
   research: {
     title: "Research and speaking.",
@@ -382,6 +382,36 @@ export type WorkCard = {
 
 export const otherWork: WorkCard[] = [
   {
+    title: "Quantized Linear Inference Lab",
+    kicker: "ML systems",
+    subtitle: "Weight quantization error, made inspectable",
+    body: "Compared per-tensor and per-row signed-int8 weight simulations against binary64 references. Published 48 synthetic metrics and 24 passing checks; no kernel speed or memory claim.",
+    tags: ["Python", "Quantization", "Numerical evaluation"],
+    status: "completed",
+    href: "/projects/quantized-linear-inference-lab",
+    linkLabel: "Case study",
+  },
+  {
+    title: "Batch Inference Contract Guard",
+    kicker: "ML platform",
+    subtitle: "Validate batch responses before using them",
+    body: "A library and JSON CLI that report ID and score-vector contract violations. The synthetic suite accepted nine clean cases and rejected all 69 declared mutations without repairing responses.",
+    tags: ["Python", "Data contracts", "CLI"],
+    status: "completed",
+    href: "/projects/batch-inference-contract-guard",
+    linkLabel: "Case study",
+  },
+  {
+    title: "Agent Replay Bench",
+    kicker: "Agent tooling",
+    subtitle: "Deterministic offline trace comparison",
+    body: "Compared traces from four pure toy tools, with 200 clean matches and detection of all 1,480 declared mutations. This is bounded regression evidence for synthetic traces.",
+    tags: ["Python", "Trace replay", "Regression testing"],
+    status: "completed",
+    href: "/projects/agent-replay-bench",
+    linkLabel: "Case study",
+  },
+  {
     title: "USAA",
     kicker: "Industry",
     subtitle: "Enterprise GraphQL APIs",
@@ -494,7 +524,7 @@ export type Project = {
   slug: string;
   title: string;
   subtitle: string;
-  status: "Active" | "Production" | "Active Development";
+  status: "Completed" | "Active" | "Production" | "Active Development";
   problem: string;
   impact: string;
   approach: string[];
@@ -507,6 +537,8 @@ export type Project = {
 
 export function projectEvidenceStatus(status: Project["status"]): EvidenceStatus {
   switch (status) {
+    case "Completed":
+      return "completed";
     case "Production":
       return "production";
     case "Active Development":
@@ -611,6 +643,162 @@ export const proofItems: ProofItem[] = [
 ];
 
 export const projects: Project[] = [
+  {
+    slug: "quantized-linear-inference-lab",
+    title: "Quantized Linear Inference Lab",
+    subtitle: "A dependency-free lab for inspecting weight quantization error",
+    status: "Completed",
+    problem:
+      "Quantization summaries can hide how scale selection changes numerical error. I wanted a small implementation whose calculations and evaluation could be checked independently.",
+    impact:
+      "Completed a reproducible synthetic comparison of per-tensor and per-output-row signed-int8 weight simulations. Computation uses reconstructed binary64 weights; the results establish neither integer-kernel speed or memory savings nor trained-model accuracy.",
+    approach: [
+      "Implemented reference linear maps, two weight-scaling strategies, and explicit rounding and clipping behavior in plain Python.",
+      "Froze toy fixtures and reported numerical error against independently checked binary64 references.",
+    ],
+    stack: ["Python", "Signed-int8 simulation", "Numerical evaluation", "CLI"],
+    results: [
+      "The frozen synthetic evaluation passed all 24 checks and retained all 48 metrics.",
+      "Per-row scaling lowered mean errors on three nonzero fixtures; maximum errors tied. These observations apply to the declared toy suite.",
+    ],
+    learnings: [
+      "Scale granularity can change mean error without improving the worst case.",
+      "Numerical simulation and an optimized inference kernel require different evidence.",
+    ],
+    caseStudy: {
+      architecture: [
+        "Separated reference maps, quantization parameters, reconstructed weights, and error reporting so each step can be inspected.",
+      ],
+      reliability: [
+        "Used hand checks and an independent evaluation oracle rather than accepting the implementation's own output as its reference.",
+      ],
+      delivery: [
+        "Published source, frozen evaluation results, and clean offline installation evidence; no model weights or datasets are required.",
+      ],
+    },
+    links: [
+      { label: "GitHub repository", href: "https://github.com/Mitchel34/quantized-linear-inference-lab" },
+      { label: "Evaluation report", href: "https://github.com/Mitchel34/quantized-linear-inference-lab/blob/3e0239f9e3232b2d18ccad4b537ea8490ce6794f/RESULTS.md" },
+    ],
+  },
+  {
+    slug: "batch-inference-contract-guard",
+    title: "Batch Inference Contract Guard",
+    subtitle: "Explicit correspondence checks for batch inference responses",
+    status: "Completed",
+    problem:
+      "A batch response can contain plausible scores while dropping, duplicating, or reordering request IDs. Downstream consumers need to see those contract failures before using the response.",
+    impact:
+      "Built a Python library and JSON CLI that diagnose ID and score-vector violations without repairing responses. Completed synthetic evaluation supports the declared correspondence contract; it does not measure model quality, serving performance, or production reliability.",
+    approach: [
+      "Checked missing, extra, duplicate, and reordered IDs alongside malformed score vectors.",
+      "Compared complete diagnostic reports with independent expected reports and repeated each audit to check determinism.",
+    ],
+    stack: ["Python", "JSON", "Data contracts", "CLI"],
+    results: [
+      "Accepted nine clean cases and rejected all 69 declared mutations in the synthetic evaluation.",
+      "All independent full-report comparisons matched, with zero repeat mismatches across 156 audits and all 22 evaluation checks passing.",
+    ],
+    learnings: [
+      "Correct response correspondence is a separate concern from prediction quality.",
+      "Diagnostics should preserve evidence of a broken contract instead of silently repairing it.",
+    ],
+    caseStudy: {
+      architecture: [
+        "Kept contract auditing in a reusable library with a JSON CLI for the same structured reports.",
+      ],
+      reliability: [
+        "Exercised declared mutations against full-report oracles, including violations that superficially valid scores would miss.",
+      ],
+      delivery: [
+        "Published source, evaluation artifacts, and a clean offline wheel installation check with 30 passing hand tests.",
+      ],
+    },
+    links: [
+      { label: "GitHub repository", href: "https://github.com/Mitchel34/batch-inference-contract-guard" },
+      { label: "Evaluation report", href: "https://github.com/Mitchel34/batch-inference-contract-guard/blob/5b42348668e0e4a1b37aa4200f34a43fcb260403/RESULTS.md" },
+    ],
+  },
+  {
+    slug: "agent-replay-bench",
+    title: "Agent Replay Bench",
+    subtitle: "Offline regression checks for deterministic tool traces",
+    status: "Completed",
+    problem:
+      "Changes to a tool-driven workflow can alter event order, arguments, results, or terminal state. A small deterministic comparator makes those regressions inspectable without a live model or service.",
+    impact:
+      "Built an offline trace comparator around four pure toy tools, with published mutation and repeatability results. The largest evaluated trace has four events; this synthetic suite does not establish live-agent reliability or a hardened sandbox.",
+    approach: [
+      "Replayed deterministic toy-tool traces and compared structured events and terminal state.",
+      "Generated declared trace mutations and checked both detection categories and repeated report agreement.",
+    ],
+    stack: ["Python", "JSON", "Trace replay", "Regression testing"],
+    results: [
+      "Matched 200 clean traces and detected all 1,480 declared mutations in their expected categories.",
+      "All 1,680 repeated report pairs matched, and all 24 evaluation checks passed.",
+    ],
+    learnings: [
+      "Deterministic tools make trace differences reproducible and easier to diagnose.",
+      "Mutation coverage is meaningful only within the trace format and failure categories actually tested.",
+    ],
+    caseStudy: {
+      architecture: [
+        "Separated pure toy-tool execution from trace comparison and machine-readable reporting.",
+      ],
+      reliability: [
+        "Checked clean agreement, declared mutation detection, and repeatability independently in the frozen synthetic evaluation.",
+      ],
+      delivery: [
+        "Published source, evaluation artifacts, and clean offline installation verification with 37 passing tests.",
+      ],
+    },
+    links: [
+      { label: "GitHub repository", href: "https://github.com/Mitchel34/agent-replay-bench" },
+      { label: "Evaluation report", href: "https://github.com/Mitchel34/agent-replay-bench/blob/9731acb1c0125f9e6a400bec759647a3d1eeb080/evaluation/RESULTS.md" },
+    ],
+  },
+  {
+    slug: "nextgen-reforecast-software",
+    title: "NextGen Reforecast Software",
+    subtitle: "Campaign planning, diagnostic execution, and verified archives",
+    status: "Active Development",
+    problem:
+      "Reforecast campaigns need traceable inputs, explicit execution boundaries, and verifiable outputs before their data can support scientific analysis.",
+    impact:
+      "Built a completed diagnostic execution foundation within ongoing research software: offline planning, provenance checks, and a pinned Watauga operator workflow. Scientific parameter and source-unit qualification, forecast skill, and independent researcher reproduction remain open.",
+    approach: [
+      "Implemented an operator prepare → run → verify → export workflow with pinned inputs and runtime admission checks.",
+      "Verified complete diagnostic outputs before atomically committing a verified whole-campaign archive and selecting forecast rows for export.",
+    ],
+    stack: ["Python", "NextGen", "t-route", "Provenance", "CLI"],
+    results: [
+      "The October 11, 2026 acceptance recorded 293 Python tests, 17 browser contract tests, and 14 installed CLI checks.",
+      "Three native and three routing stages matched complete sealed reference arrays; all 36 generated issue/lead rows were verified before 12 selected rows were exported.",
+      "Hosted automatic execution, recovery, clean-build qualification, and rights/license resolution remain unfinished. Diagnostic agreement is not scientific release or production qualification.",
+    ],
+    learnings: [
+      "Archive verification and diagnostic reproducibility are useful software milestones while scientific qualification remains incomplete.",
+      "A request interface needs an explicit boundary between local preparation and qualified execution.",
+    ],
+    caseStudy: {
+      architecture: [
+        "Kept campaign planning, execution locks, model stages, archive verification, and export selection as explicit steps.",
+        "A local browser prototype collects requests and inspects preparation reports; it does not acquire inputs, run models, or deliver a scientific archive.",
+      ],
+      reliability: [
+        "The installed diagnostic compared complete canonical arrays with sealed references before export; offline tests also cover refusal paths and archive corruption.",
+        "Later increments have targeted test evidence; the dated acceptance figures describe the October 11 implementation.",
+      ],
+      delivery: [
+        "Published the software and diagnostic acceptance record separately from HYDRA's model-correction research. No hosted product or final scientific release is claimed.",
+      ],
+    },
+    links: [
+      { label: "GitHub repository", href: "https://github.com/Mitchel34/nextgen-reforecast-software" },
+      { label: "October 11 acceptance", href: "https://github.com/Mitchel34/nextgen-reforecast-software/blob/main/docs/PUBLIC_CAMPAIGN_EXECUTION_RESULTS_2026-10-11.md" },
+      { label: "Current scope and limits", href: "https://github.com/Mitchel34/nextgen-reforecast-software/blob/main/docs/IMPLEMENTATION_STATUS.md" },
+    ],
+  },
   {
     slug: "hydra-temporal",
     title: "HYDRA",
@@ -861,6 +1049,46 @@ export type OpenSourceEntry = {
 };
 
 export const openSource: OpenSourceEntry[] = [
+  {
+    name: "quantized-linear-inference-lab",
+    url: "https://github.com/Mitchel34/quantized-linear-inference-lab",
+    language: "Python",
+    kind: "maintained",
+    group: "Tooling",
+    note: "completed synthetic evaluation",
+    what: "Per-tensor and per-row signed-int8 weight simulations with inspectable numerical error reports.",
+    why: "Separates quantization error evidence from unmeasured kernel speed and memory claims.",
+  },
+  {
+    name: "batch-inference-contract-guard",
+    url: "https://github.com/Mitchel34/batch-inference-contract-guard",
+    language: "Python",
+    kind: "maintained",
+    group: "Tooling",
+    note: "completed synthetic evaluation",
+    what: "Library and JSON CLI for batch ID correspondence and score-vector contracts.",
+    why: "Makes malformed inference responses visible without silently repairing them.",
+  },
+  {
+    name: "agent-replay-bench",
+    url: "https://github.com/Mitchel34/agent-replay-bench",
+    language: "Python",
+    kind: "maintained",
+    group: "Tooling",
+    note: "completed synthetic evaluation",
+    what: "Deterministic offline comparison of synthetic traces from four pure toy tools.",
+    why: "Provides reproducible regression evidence within a declared trace and mutation scope.",
+  },
+  {
+    name: "nextgen-reforecast-software",
+    url: "https://github.com/Mitchel34/nextgen-reforecast-software",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    note: "diagnostic foundation · active development",
+    what: "Campaign planning, pinned diagnostic execution, and verified whole-campaign archives.",
+    why: "Auditable research software with scientific qualification and hosted execution still open.",
+  },
   {
     name: "NextGen_Hydra",
     url: "https://github.com/Mitchel34/NextGen_Hydra",
