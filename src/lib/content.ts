@@ -162,6 +162,7 @@ export const sitePages: SitePage[] = [
 // ---------------------------------------------------------------------------
 
 export const hero = {
+  availability: "Open to software engineering & applied AI roles",
   eyebrow: ["U.S. Air Force veteran", "Active TS/SCI", "Austin, Texas"],
   statement:
     "I build software and applied AI for decisions that depend on reliable data.",
@@ -340,23 +341,6 @@ export const featuredWork = {
   subtitle: "Watershed forecasting research with deep learning",
   plain:
     "Can deep learning make NOAA’s NextGen streamflow forecasts more reliable 1–18 hours ahead? HYDRA studies that question using historical forecasts and only the information available when each forecast was issued.",
-  pipeline: [
-    {
-      step: "Generate",
-      title: "Reforecasts and data",
-      body: "NextGen reforecast generation software and Google Cloud workflows acquire, validate, and align weather, streamflow, and forecast data with traceable provenance.",
-    },
-    {
-      step: "Correct",
-      title: "A learned post-processor",
-      body: "Designing a comparison of LSTM, Transformer, and Mamba-style post-processors using the same inputs and evaluation periods.",
-    },
-    {
-      step: "Evaluate",
-      title: "By site and lead time",
-      body: "Evaluation plan: time-based splits, forecast-time input checks, and hydrologic metrics (RMSE, NSE, KGE) by site and lead time.",
-    },
-  ],
   status: "in-progress" as EvidenceStatus,
   statusNote:
     "Results pending · research manuscript in preparation · software paper planned",

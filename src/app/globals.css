@@ -254,11 +254,3 @@
 .hero-portrait {
   box-shadow: 12px 12px 0 -1px var(--color-surface), 12px 12px 0 0 var(--color-border);
 }
-
-@keyframes watershed-flow {
-  to { stroke-dashoffset: -64; }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .watershed-flow { animation: watershed-flow 4s linear 1; }
-}
