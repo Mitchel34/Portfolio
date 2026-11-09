@@ -1,9 +1,9 @@
+import { AsciiStreamflow } from "@/components/AsciiStreamflow";
 import { HomeSection } from "@/components/HomeSection";
 import { LinkGlyph } from "@/components/LinkGlyph";
 import { Reveal } from "@/components/Reveal";
 import { StatusLabel } from "@/components/StatusLabel";
 import { TextLink } from "@/components/TextLink";
-import { WatershedExplorer } from "@/components/WatershedExplorer";
 import {
   featuredWork,
   landingSections,
@@ -44,8 +44,8 @@ function FeaturedHydra() {
           </p>
         </div>
 
-        <div className="border-t border-border lg:col-span-5 lg:border-t-0 lg:border-l">
-          <WatershedExplorer />
+        <div className="min-w-0 border-t border-border bg-[#0a1722] lg:col-span-5 lg:border-t-0 lg:border-l">
+          <AsciiStreamflow embedded className="h-full" />
         </div>
       </div>
     </article>

@@ -4,6 +4,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 import Image from "next/image";
 
 import { Container } from "@/components/Container";
+import { PortfolioChat } from "@/components/PortfolioChat";
 import { TextLink } from "@/components/TextLink";
 import { buttonClass } from "@/components/ui/Button";
 import { hero, heroStats, landingSections, site } from "@/lib/content";
@@ -66,6 +67,10 @@ export function Hero() {
                 {hero.summary}
               </motion.p>
 
+              <motion.p variants={block} className="mono-label mt-5 text-muted-foreground">
+                {hero.availability}
+              </motion.p>
+
               <motion.div variants={block} className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
                 <a
                   className={buttonClass("primary")}
@@ -97,6 +102,10 @@ export function Hero() {
               </figcaption>
             </motion.figure>
           </div>
+
+          <motion.div variants={block} className="mt-9 sm:mt-12">
+            <PortfolioChat />
+          </motion.div>
 
           <motion.dl
             variants={block}
