@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type Ref } from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -9,24 +8,40 @@ type RevealProps = {
   as?: "div" | "ul" | "ol";
 };
 
-const EASE: [number, number, number, number] = [0.2, 0.7, 0.2, 1];
-
 /**
- * The only in-view animation on the site: a 450ms opacity fade of a section body, once.
- * Keeps the surrounding section a server component. Disabled under prefers-reduced-motion.
+ * The only in-view animation on the site: a section body below the fold fades up once as it
+ * scrolls in (see `[data-reveal]` in globals.css). The server always renders the content
+ * visible, so it reads the same without scripts, and nothing moves under prefers-reduced-motion.
  */
-export function Reveal({ children, className, as = "div" }: RevealProps) {
-  const reduce = useReducedMotion();
-  const Tag = as === "ul" ? motion.ul : as === "ol" ? motion.ol : motion.div;
+export function Reveal({ children, className, as: Tag = "div" }: RevealProps) {
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    // Anything already on screen stays put; only content still below the fold waits for its entrance.
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+
+    element.dataset.reveal = "pending";
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        element.dataset.reveal = "in";
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -60px 0px" },
+    );
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      delete element.dataset.reveal;
+    };
+  }, []);
 
   return (
-    <Tag
-      className={className}
-      initial={reduce ? false : { opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.45, ease: EASE }}
-    >
+    <Tag ref={ref as Ref<never>} className={className}>
       {children}
     </Tag>
   );

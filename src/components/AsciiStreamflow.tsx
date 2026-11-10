@@ -222,7 +222,14 @@ function drawRiver(ctx: CanvasRenderingContext2D, scene: Scene, time: number) {
   ctx.fillRect(0, 0, width, height);
 }
 
-export function AsciiStreamflow({ className = "", embedded = false }: { className?: string; embedded?: boolean }) {
+type AsciiStreamflowProps = {
+  className?: string;
+  embedded?: boolean;
+  /** Says what the scene is. It is an illustration, never a research figure. */
+  note?: string;
+};
+
+export function AsciiStreamflow({ className = "", embedded = false, note = "Decorative illustration" }: AsciiStreamflowProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const elapsedRef = useRef(0);
   const [pausedOverride, setPausedOverride] = useState<boolean | null>(null);
@@ -326,9 +333,8 @@ export function AsciiStreamflow({ className = "", embedded = false }: { classNam
           {paused ? <Play className="h-3.5 w-3.5" aria-hidden="true" /> : <Pause className="h-3.5 w-3.5" aria-hidden="true" />}
         </button>
       </div>
-      <figcaption id={captionId} className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-[#28404b] px-5 py-3.5 text-[10px] leading-relaxed text-[#91aaa9] sm:px-6">
-        <span>North to south, from headwaters to downstream.</span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.12em] text-[#729693]">Illustrative scene</span>
+      <figcaption id={captionId} className="border-t border-[#28404b] px-5 py-3 font-mono text-[10px] uppercase tracking-[0.12em] text-[#91aaa9] sm:px-6">
+        {note}
       </figcaption>
     </figure>
   );
