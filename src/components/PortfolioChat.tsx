@@ -260,10 +260,6 @@ export function PortfolioChat() {
             Clear<span className="sr-only"> conversation</span>
           </button>
         </div>
-        <p className="mt-1 text-footnote text-muted-foreground sm:mt-1.5">
-          <span className="hidden sm:inline">{guide.intro.source} </span>
-          {guide.intro.notLive}
-        </p>
 
         <form ref={form} onSubmit={submit} className="mt-3 sm:mt-4">
           <label htmlFor={`${id}-input`} className="sr-only">
@@ -285,7 +281,7 @@ export function PortfolioChat() {
               rows={1}
               enterKeyHint="send"
               placeholder={guide.placeholder}
-              aria-describedby={`${id}-note`}
+              aria-describedby={nearLimit ? `${id}-count` : undefined}
               className="field-sizing-content max-h-36 min-h-11 flex-1 resize-none bg-transparent py-2.5 text-base leading-6 text-foreground outline-none placeholder:text-muted-foreground focus-visible:outline-none"
             />
             {busy ? (
@@ -308,10 +304,16 @@ export function PortfolioChat() {
               </button>
             )}
           </div>
+          {nearLimit ? (
+            <p id={`${id}-count`} className="mono-label mt-1.5 text-right text-muted-foreground">
+              {question.length}/{CHAT_MAX_MESSAGE_LENGTH}
+              <span className="sr-only"> characters used</span>
+            </p>
+          ) : null}
         </form>
       </div>
 
-      <div className="min-h-[15.5rem] px-4 pt-3 sm:px-6">
+      <div className="min-h-[15.5rem] px-4 pt-3 pb-4 sm:px-6 sm:pb-6">
         {hasConversation ? (
           <ol reversed aria-label="Answers, newest first" aria-busy={busy} className="divide-y divide-border">
             {exchanges.map(({ question: asking, answer }, index) => {
@@ -439,7 +441,7 @@ export function PortfolioChat() {
       </div>
 
       {hasConversation && remaining.length ? (
-        <div className="border-t border-border px-4 py-3 sm:px-6">
+        <div className="border-t border-border px-4 pt-3 pb-4 sm:px-6 sm:pb-5">
           <p className="mono-label text-muted-foreground" id={`${id}-next`}>Ask next</p>
           <ul aria-labelledby={`${id}-next`} className="mt-2 flex flex-wrap gap-2">
             {remaining.map((suggestion) => (
@@ -458,17 +460,6 @@ export function PortfolioChat() {
         </div>
       ) : null}
 
-      <p
-        id={`${id}-note`}
-        className="border-t border-border px-4 py-3 text-[0.75rem] leading-relaxed text-muted-foreground sm:px-6"
-      >
-        {guide.privacy}
-        {nearLimit ? (
-          <span className="mono-label ml-2 whitespace-nowrap text-foreground">
-            {question.length}/{CHAT_MAX_MESSAGE_LENGTH}
-          </span>
-        ) : null}
-      </p>
       <p className="sr-only" role="status" aria-live="polite">
         {announcement}
       </p>

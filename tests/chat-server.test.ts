@@ -363,12 +363,7 @@ test("answer text renders only allowlisted links, and hides half-received markup
   assert.equal(parseChatAnswer("See the [HYDRA case").flat()[0].text, "See the [HYDRA case");
 });
 
-test("the visible privacy line matches what the chat actually does", () => {
-  assert.match(guide.privacy, /Suggested questions use prepared answers/);
-  assert.match(guide.privacy, /sent to OpenAI/);
-  assert.match(guide.privacy, /recent conversation/);
-  assert.doesNotMatch(guide.privacy, /stays in (this|your) (tab|browser)|never leaves|not stored|deleted|retain/i);
-  assert.doesNotMatch(`${guide.intro.source} ${guide.placeholder}`, /\b(ask me|my work|i reply|i’ll reply)\b/i);
-  assert.match(guide.label, /AI guide/);
-  assert.match(guide.intro.notLive, /isn’t me replying live/);
+test("the guide is labeled as an AI guide and never invites a first-person reply", () => {
+  assert.equal(guide.label, "AI guide");
+  assert.doesNotMatch(`${guide.title} ${guide.placeholder}`, /\b(ask me|my work|i reply|i’ll reply)\b/i);
 });
