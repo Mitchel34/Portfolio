@@ -1,7 +1,16 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { getPreparedChatAnswer, isTrustedChatHref, preparedAnswers, type ChatStreamEvent } from "../src/lib/chat";
+import {
+  getInlineChatHrefs,
+  getPreparedChatAnswer,
+  getUnlinkedChatSources,
+  isTrustedChatHref,
+  parseChatAnswer,
+  preparedAnswers,
+  suggestions,
+  type ChatStreamEvent,
+} from "../src/lib/chat";
 import {
   buildChatInstructions,
   createChatHandler,
@@ -294,4 +303,61 @@ test("project names outrank generic model keywords and case studies are not cour
   assert.deepEqual(hydra.map((source) => source.href), ["/projects/hydra-temporal", "/research"]);
   const education = selectChatSources([{ role: "user", content: "What is Mitchel studying at UT Austin?" }]);
   assert.ok(education.some((source) => source.href === "/coursework"));
+});
+
+test("prepared answers stay grounded: one per suggestion, trusted links only, no hedging boilerplate", () => {
+  assert.equal(preparedAnswers.length, suggestions.length);
+  assert.ok(suggestions.length >= 3 && suggestions.length <= 5);
+  for (const [index, prepared] of preparedAnswers.entries()) {
+    assert.equal(prepared.question, suggestions[index].question);
+    assert.equal(getPreparedChatAnswer(prepared.question), prepared);
+    assert.ok(prepared.content.length <= 1_800, "prepared answers must fit the history limit");
+    assert.ok(prepared.sources.length >= 1, "every prepared answer links somewhere");
+    for (const [, href] of prepared.content.matchAll(/\]\(([^)]+)\)/g)) assert.ok(isTrustedChatHref(href), href);
+    assert.doesNotMatch(prepared.content, /portfolio[- ]report|the portfolio (reports|lists|says)/i);
+  }
+  const hydra = getPreparedChatAnswer("What is HYDRA?")!.content;
+  assert.match(hydra, /in progress, not a result/);
+  assert.match(hydra, /no performance numbers/);
+  assert.doesNotMatch(hydra, /\d+%/);
+  assert.match(getPreparedChatAnswer("What is Harmony?")!.content, /no live-execution or investment-performance claims/);
+  assert.match(getPreparedChatAnswer("What roles is he looking for?")!.content, /can’t pass messages along/);
+});
+
+test("each destination is offered once: linked in the text or listed as related, never both", () => {
+  for (const prepared of preparedAnswers) {
+    const inline = getInlineChatHrefs(prepared.content);
+    assert.equal(new Set(inline).size, inline.length);
+    assert.deepEqual(prepared.sources.map((source) => source.href), inline);
+    assert.deepEqual(getUnlinkedChatSources(prepared.content, prepared.sources), []);
+  }
+  const generated = "See the [HYDRA case study](/projects/hydra-temporal). More in the [case study](/projects/hydra-temporal).";
+  assert.deepEqual(getInlineChatHrefs(generated), ["/projects/hydra-temporal"]);
+  assert.deepEqual(
+    getUnlinkedChatSources(generated, [
+      { title: "HYDRA case study", href: "/projects/hydra-temporal" },
+      { title: "Research", href: "/research" },
+      { title: "Research again", href: "/research" },
+      { title: "Elsewhere", href: "https://example.com" },
+    ]),
+    [{ title: "Research", href: "/research" }],
+  );
+});
+
+test("answer text renders only allowlisted links, and hides half-received markup while streaming", () => {
+  const [first, second] = parseChatAnswer(
+    "Read the [case study](/projects/harmony), not [this](https://evil.example) or [that](javascript:alert(1)).\n\n**Active development.** Again: [Harmony](/projects/harmony).",
+  );
+  assert.deepEqual(first.filter((segment) => segment.type === "link"), [{ type: "link", text: "case study", href: "/projects/harmony" }]);
+  assert.ok(first.some((segment) => segment.type === "text" && segment.text.includes("this")));
+  assert.ok(!JSON.stringify([first, second]).includes("evil.example"));
+  assert.deepEqual(second[0], { type: "strong", text: "Active development." });
+  assert.ok(second.every((segment) => segment.type !== "link"), "a repeated destination is not linked twice");
+
+  const text = (content: string) => parseChatAnswer(content, { streaming: true }).flat().map((segment) => segment.text).join("");
+  assert.equal(text("See the [HYDRA case"), "See the ");
+  assert.equal(text("See the [HYDRA case study](/projects/hy"), "See the ");
+  assert.equal(text("It is **act"), "It is ");
+  assert.equal(text("See the [HYDRA case study](/projects/hydra-temporal)."), "See the HYDRA case study.");
+  assert.equal(parseChatAnswer("See the [HYDRA case").flat()[0].text, "See the [HYDRA case");
 });
