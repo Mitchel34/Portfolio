@@ -303,11 +303,11 @@ export const work = {
     title: "HYDRA",
     subtitle: "Watershed forecasting with deep learning",
     summary:
-      "Can deep learning make NOAA’s NextGen streamflow forecasts more reliable 1–18 hours ahead? I build the reforecast pipeline and the models that test it.",
+      "Hourly streamflow prediction from discharge history and issued weather, evaluated against the National Water Model. I build the data pipelines, models, and diagnostics behind the research.",
     status: "in-progress" as EvidenceStatus,
     href: "/projects/hydra-temporal",
     linkLabel: "Case study",
-    codeHref: "https://github.com/Mitchel34/NextGen_Hydra",
+    codeHref: "https://github.com/Mitchel34/hydra-directflow",
     sceneNote: "Decorative illustration, not model output",
   },
   usaa: {
@@ -368,7 +368,7 @@ export const toolkit: ToolkitGroup[] = [
       "PyTorch · MLX · scikit-learn",
       "LSTM, Transformer, and Mamba-style models",
       "Leakage-aware temporal evaluation",
-      "RMSE · NSE · KGE",
+      "RMSE · NSE · MAE",
       "pandas · NumPy · xarray · PyArrow",
       "PostgreSQL · SQLite",
     ],
@@ -404,7 +404,7 @@ export const toolkit: ToolkitGroup[] = [
 
 export const focusAreas = [
   "Watershed forecasting and forecast reliability",
-  "Sequence models: LSTM, Transformer, Mamba",
+  "Sequence models: LSTM, Transformer, GRU–Transformer, Mamba2–Transformer",
   "Leakage-aware evaluation by lead time",
   "Bounded LLM autonomy in decision systems",
   "Cloud research compute: Google Cloud, AWS",
@@ -484,59 +484,56 @@ export const projects: Project[] = [
   {
     slug: "hydra-temporal",
     title: "HYDRA",
-    subtitle: "Reforecast generation and deep learning for NOAA NextGen streamflow forecasts",
+    subtitle: "DirectFlow streamflow forecasting and auditable reforecast software",
     status: "Active",
     summary:
-      "Ongoing research on whether deep learning can reduce errors in NOAA’s NextGen streamflow forecasts 1–18 hours ahead. The reforecast software and data workflows are built; the model comparison is in development.",
+      "Ongoing watershed-forecasting research. The current DirectFlow experiment predicts discharge 1–18 hours ahead; saved-model assessment and peak diagnostics are complete, with scientific review continuing.",
     problem:
-      "Can deep learning reduce errors in NOAA’s NextGen streamflow forecasts at 1–18 hour lead times, using only information available at forecast issue time?",
+      "How well can discharge history, issued weather forecasts, and initial soil information predict hourly streamflow, including extreme events?",
     impact:
-      "The work combines NextGen reforecast generation and Google Cloud data workflows with a planned comparison of deep-learning post-processors. Results are pending.",
+      "Completed development training and an independently audited assessment of frozen DirectFlow models at three Appalachian gauges. Findings vary by site and model; they do not establish a blanket improvement over the National Water Model.",
     approach: [
-      "Built NextGen reforecast generation software and Google Cloud workflows to acquire, validate, and align weather, streamflow, and forecast data with traceable provenance.",
-      "Designing a comparison of LSTM, Transformer, and Mamba-style post-processors for 1–18 hour lead times using identical inputs and time splits.",
-      "Developing evaluation with leakage-aware temporal splits and hydrologic metrics (RMSE, NSE, KGE) by site and lead time.",
-      "Preserving initialization, lead, valid-time, version, and source metadata so every training example traces back to the forecast that produced it.",
+      "Built traceable data workflows for revised historical USGS discharge, issued HRRR weather forecasts, and initial soil information, predicting streamflow 1–18 hours ahead.",
+      "Compared LSTM, Transformer, GRU–Transformer, and Mamba2–Transformer models with fixed temporal splits and all declared seeds retained.",
+      "Assessed saved checkpoints without retraining or refitting transforms. Matched National Water Model comparisons cover H1–16; independent DirectFlow forecasts cover H1–18.",
+      "Developed NextGen reforecast planning, provenance, and diagnostic software as a separate research-software track; it is not a hosted forecasting service.",
     ],
-    stack: [
-      "PyTorch",
-      "LSTM",
-      "Transformer",
-      "Mamba (state-space)",
-      "NextGen",
-      "Google Cloud",
-      "xarray",
-    ],
+    stack: ["Python", "PyTorch", "LSTM", "Transformer", "GRU–Transformer", "Mamba2–Transformer", "HRRR", "USGS", "NextGen"],
     results: [
-      "Reforecast generation software and Google Cloud data workflows are in place; the NextGen_Hydra repository is public.",
-      "Model comparison and lead-time evaluation are in development. No performance number is reported until the analysis is complete.",
-      "A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
+      "Development training, saved-model assessment, and extreme-peak diagnostics are complete. Scientific review and manuscript preparation continue.",
+      "NWM had higher matched mean NSE at Jefferson and Galax; Sugar Grove varied by model and seed. These are descriptive comparisons, not a universal improvement or significance claim.",
+      "The saved models substantially underpredicted extreme peaks. These diagnostics describe the assessed checkpoints, not every possible model in those architecture families.",
+      "The two-hour observation delay is simulated using revised historical USGS data; it does not reconstruct original publication availability. No verified 48% improvement is claimed.",
     ],
     learnings: [
-      "Post-processing depends as much on how reforecasts are generated and aligned as on model architecture.",
-      "Reproducible data and configuration lineage make changing scientific results auditable.",
-      "Research claims should evolve with the evidence rather than outrun the analysis.",
+      "Separate average skill, extreme-event behavior, and forecast availability when assessing a model.",
+      "Keep the independent DirectFlow experiment distinct from NWM correction, older thesis results, and NextGen reforecast generation.",
+      "An assessment that has informed new model proposals is no longer a fresh confirmatory test for those proposals.",
     ],
     caseStudy: {
       architecture: [
-        "Reforecast generation software drives NOAA’s NextGen framework to produce retrospective forecasts with consistent metadata.",
-        "The proposed post-processor uses reforecasts and available observations to estimate streamflow corrections at 1–18 hour lead times.",
-        "Config-driven training and evaluation with strict train/validation/test time boundaries.",
+        "DirectFlow predicts discharge directly from discharge history, issued HRRR weather, and initial soil information; NWM is an external comparator rather than the forecast being corrected.",
+        "Four PyTorch model families run on CPU or Apple MPS, with reproducible configurations and saved weights.",
+        "NextGen Reforecast Software is a separate planning/provenance package and local browser prototype with a narrowly qualified Watauga diagnostic execution path.",
       ],
       reliability: [
-        "Leakage-aware splitting by time and lead time to match operational inference constraints.",
-        "Reproducible runs through fixed seeds, immutable data artifacts, and tracked configuration snapshots.",
-        "Evaluation is designed to report performance by site, lead time, and hydrologic metric.",
+        "Assessment reused frozen checkpoints without retraining, transform refits, clipping, repair, or seed selection.",
+        "Matched NWM results cover H1–16 under the exact two-hour-old issue rule; H17–18 NWM comparisons are unsupported.",
+        "Retrospective observation timing is simulated. Results do not establish an operational forecast service or blanket skill improvement.",
       ],
       delivery: [
-        "Packaged data acquisition and reforecast generation as reusable software; the data tooling is public.",
-        "Produced versioned artifacts, diagnostics, and technical documentation for scientific review.",
-        "Maintained a research website while reserving claims for the completed analysis.",
+        "Published source, assessment reports, peak diagnostics, and provenance for scientific review.",
+        "NextGen software has offline planning and diagnostic engineering evidence; hosted automatic execution and scientific release remain unfinished.",
+        "A HYDRA results manuscript is in preparation and a NextGen software paper is planned; neither is represented as a published paper.",
       ],
     },
     links: [
       { label: "Research page", href: "/research" },
-      { label: "Code on GitHub", href: "https://github.com/Mitchel34/NextGen_Hydra" },
+      { label: "DirectFlow code and reports", href: "https://github.com/Mitchel34/hydra-directflow" },
+      { label: "Saved-model assessment", href: "https://github.com/Mitchel34/hydra-directflow/blob/main/reports/assessment-firstpass-v1/README.md" },
+      { label: "Peak diagnostics", href: "https://github.com/Mitchel34/hydra-directflow/blob/main/reports/assessment-event-diagnostics-v1/README.md" },
+      { label: "NextGen reforecast software", href: "https://github.com/Mitchel34/nextgen-reforecast-software" },
+      { label: "Earlier NextGen data tooling", href: "https://github.com/Mitchel34/NextGen_Hydra" },
     ],
   },
   {
@@ -667,38 +664,51 @@ export function getProjectPrimaryExternalLink(project: Project) {
   return getProjectRepositoryUrl(project) ?? project.links?.find((link) => isExternalLink(link.href))?.href;
 }
 
+/** Reviewed against the public protocol and assessment reports on this date. */
 export const research = {
+  reviewedAt: "2026-11-10",
   title: "HYDRA: watershed forecasting research",
-  status: "Ongoing research · results pending",
+  status: "Ongoing research · saved-model assessment complete",
   summary:
-    "HYDRA studies whether deep learning can improve NOAA’s NextGen streamflow forecasts 1–18 hours ahead. The work combines reforecast generation, traceable data workflows, and a planned comparison of sequence models under forecast-time constraints. Experiencing Hurricane Helene in Boone motivated the research.",
+    "HYDRA is Mitchel’s ongoing watershed-forecasting research, motivated by experiencing Hurricane Helene in Boone. The current DirectFlow experiment predicts hourly discharge 1–18 hours ahead at three Appalachian gauges using discharge history, issued HRRR weather forecasts, and initial soil information. Development training, saved-model assessment, and extreme-peak diagnostics are complete; scientific review continues.",
   scopeNote:
-    "No performance number is reported until the analysis is complete. Results will be published with the manuscripts.",
+    "Results vary by site and model and do not establish a blanket improvement over NWM. The saved models substantially underpredicted extreme peaks. NextGen reforecast generation is a separate software track; neither project is a hosted operational forecasting service.",
   figures: {
-    explorer:
-      "Explore HYDRA’s reforecast inputs, planned model comparison, evaluation design, and publication plans.",
+    explorer: "Explore DirectFlow’s inputs, four model families, saved-model assessment, and separate NextGen software track.",
   },
   architecture: [
-    "Reforecasts: NextGen reforecast generation software produces retrospective forecasts with consistent initialization, lead-time, and version metadata.",
-    "Inputs: weather, streamflow, and forecast data, acquired and validated with Google Cloud workflows and aligned to forecast issue time with traceable provenance.",
-    "Model comparison plan: LSTM, Transformer, and Mamba-style state-space post-processors using the same inputs and time splits.",
-    "Planned outputs: Post-processed forecasts at 1–18 hour lead times, diagnostics, and reproducible research artifacts. Improvement remains to be established.",
+    "DirectFlow predicts discharge directly; it does not correct NWM forecasts. NWM is an external comparator. NextGen reforecast software is a separate project.",
+    "Inputs: revised historical USGS discharge, issued HRRR weather forecasts, and initial soil information. A two-hour observation delay is simulated; original historical publication times are not reconstructed.",
+    "Assessed models: LSTM, Transformer, GRU–Transformer, and Mamba2–Transformer, implemented in PyTorch on CPU or Apple MPS.",
+    "Outputs: independent H1–18 forecasts, matched NWM comparisons at H1–16, per-site and per-lead metrics, extreme-event diagnostics, and reproducible artifacts.",
   ],
   evaluation: [
-    "Metric plan: Hydrologic error and skill metrics (RMSE, NSE, KGE), evaluated by site and lead time.",
-    "Validation: Leakage-aware temporal splits designed around forecast availability.",
-    "Reference: Raw NextGen reforecasts at every lead time.",
+    "Saved-model assessment and extreme-peak diagnostics are complete. Frozen checkpoints were scored without retraining, transform refits, or seed selection, using hydrologic metrics including RMSE, NSE, and MAE.",
+    "NWM had higher matched mean NSE at Jefferson and Galax; Sugar Grove was mixed across models and seeds. Descriptive comparisons do not establish significance or a winner at every lead time.",
+    "Independent DirectFlow forecasts cover H1–18. Exact two-hour-old NWM issues support matched H1–16 comparisons only; H17–18 NWM comparisons are unavailable.",
   ],
   reproducibility: [
-    "Configuration-driven experiments with tracked parameters and artifacts.",
-    "Versioned data lineage, manifests, and evaluation outputs.",
-    "Environment and run records designed to support scientific review.",
+    "Configuration-driven experiments with fixed temporal splits and every declared seed retained.",
+    "Versioned input lineage, frozen checkpoints, and independently audited numerical/provenance reports.",
+    "Public assessment and peak diagnostics record the support and limits of each conclusion.",
   ],
   constraints: [
-    "Operational claims must respect the timing and availability of every model input.",
-    "Conclusions stay provisional until the held-out evaluation is complete.",
+    "The observation delay is simulated using revised historical USGS data, not a reconstruction of operational publication availability.",
+    "Weather-plus-soil versus discharge-only is a joint input comparison; it does not separately identify a weather effect.",
+    "Peak findings describe fixed saved checkpoints. The assessment is no longer untouched evidence for later model proposals, and the overall study remains ongoing.",
+    "No blanket improvement, verified 48% gain, live forecasting service, or completed publication is claimed.",
   ],
-  links: [{ label: "HYDRA Case Study", href: "/projects/hydra-temporal" }],
+  nextGenSoftware: {
+    status: "Research software in development",
+    summary: "A separate package for auditable NextGen reforecast campaigns: offline planning/provenance, a local browser prototype, and a narrowly qualified Watauga diagnostic execution path.",
+    limits: "Hosted automatic researcher execution, recovery, clean-build qualification, and scientific release remain unfinished. Diagnostic and synthetic tests establish engineering behavior, not forecast skill, full historical campaign completion, or a speedup.",
+    href: "https://github.com/Mitchel34/nextgen-reforecast-software",
+  },
+  links: [
+    { label: "HYDRA Case Study", href: "/projects/hydra-temporal" },
+    { label: "Saved-model assessment", href: "https://github.com/Mitchel34/hydra-directflow/blob/main/reports/assessment-firstpass-v1/README.md" },
+    { label: "Peak diagnostics", href: "https://github.com/Mitchel34/hydra-directflow/blob/main/reports/assessment-event-diagnostics-v1/README.md" },
+  ],
 };
 
 // ---------------------------------------------------------------------------
@@ -725,10 +735,62 @@ export type OpenSourceEntry = {
   what: string;
   why: string;
   note?: string;
+  evidence?: ProjectLink[];
   upstream?: { repo: string; prTitle: string; prUrl: string; mergedLabel: string };
 };
 
 export const openSource: OpenSourceEntry[] = [
+  {
+    name: "quantized-linear-inference-lab",
+    url: "https://github.com/Mitchel34/quantized-linear-inference-lab",
+    language: "Python",
+    kind: "maintained",
+    group: "Tooling",
+    note: "completed synthetic evaluation",
+    what: "A dependency-free Python lab comparing per-tensor and per-output-row symmetric signed-int8 weight quantization through reconstructed floating-point arithmetic.",
+    why: "Explores quantization error on tiny deterministic fixtures. It does not benchmark integer kernels, speed, RAM, or trained-model accuracy.",
+    evidence: [{ label: "Quantization lab results", href: "https://github.com/Mitchel34/quantized-linear-inference-lab/blob/3e0239f9e3232b2d18ccad4b537ea8490ce6794f/RESULTS.md" }],
+  },
+  {
+    name: "batch-inference-contract-guard",
+    url: "https://github.com/Mitchel34/batch-inference-contract-guard",
+    language: "Python",
+    kind: "maintained",
+    group: "Tooling",
+    note: "completed synthetic evaluation",
+    what: "A Python library and JSON CLI that detect prediction-ID correspondence and score-vector contract faults without repairing the data.",
+    why: "Uses deterministic clean and mutated fixtures to test contract validation. These checks do not establish production reliability, model quality, or serving performance.",
+    evidence: [{ label: "Contract guard results", href: "https://github.com/Mitchel34/batch-inference-contract-guard/blob/5b42348668e0e4a1b37aa4200f34a43fcb260403/RESULTS.md" }],
+  },
+  {
+    name: "agent-replay-bench",
+    url: "https://github.com/Mitchel34/agent-replay-bench",
+    language: "Python",
+    kind: "maintained",
+    group: "Tooling",
+    note: "completed synthetic evaluation",
+    what: "A deterministic offline replay/comparison bench using four pure toy tools and short traces, with declared mutation checks.",
+    why: "Tests repeatable trace comparison and fault detection on synthetic cases. It does not establish live-agent reliability or a hardened sandbox.",
+    evidence: [{ label: "Agent replay results", href: "https://github.com/Mitchel34/agent-replay-bench/blob/9731acb1c0125f9e6a400bec759647a3d1eeb080/evaluation/RESULTS.md" }],
+  },
+  {
+    name: "hydra-directflow",
+    url: "https://github.com/Mitchel34/hydra-directflow",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    what: "Direct hourly streamflow forecasting with LSTM, Transformer, GRU–Transformer, and Mamba2–Transformer models in PyTorch.",
+    why: "Current HYDRA experiment, including audited frozen-model assessment and extreme-peak diagnostics. Research remains ongoing; no blanket NWM improvement is claimed.",
+  },
+  {
+    name: "nextgen-reforecast-software",
+    url: "https://github.com/Mitchel34/nextgen-reforecast-software",
+    language: "Python",
+    kind: "maintained",
+    group: "Research code",
+    what: "Offline planning/provenance, a local browser prototype, and a narrowly qualified Watauga diagnostic path for NextGen reforecast campaigns.",
+    why: "A separate research-software track from DirectFlow, with hosted execution and scientific release still unfinished.",
+  },
   {
     name: "NextGen_Hydra",
     url: "https://github.com/Mitchel34/NextGen_Hydra",
@@ -736,7 +798,7 @@ export const openSource: OpenSourceEntry[] = [
     kind: "maintained",
     group: "Research code",
     what: "End-to-end automation to acquire, verify, and tidy historical NOAA NextGen streamflow data.",
-    why: "Data tooling behind the NextGen reforecast work; the planned software paper builds on it.",
+    why: "Earlier data tooling behind the NextGen reforecast work; the separate NextGen Reforecast Software project continues the software track.",
   },
   {
     name: "hydra-nwm-streamflow-correction",
@@ -764,7 +826,7 @@ export const openSource: OpenSourceEntry[] = [
     language: "TypeScript",
     kind: "maintained",
     group: "Tooling",
-    what: "This website: Next.js 16, React 19, Tailwind CSS 4, a Resend contact API, and a Calendly embed.",
+    what: "This website: Next.js 16, React 19, TypeScript, Tailwind CSS 4, Framer Motion, a Resend contact API, and a Calendly embed. Its AI guide uses prepared suggestions and server-streamed OpenAI Responses API answers to custom questions.",
     why: "The content and every claim on this site are versioned in the same repository that deploys it.",
   },
   {
@@ -833,7 +895,7 @@ export const talks: TalkItem[] = [
     status: "accepted",
     role: "Presenting author",
     description:
-      "Data-source comparisons using NWM, USGS, ERA5, and ERA5-Land at three southern Appalachian gauges. December 11, 8:30 a.m.–12 p.m. PST · Moscone Center, Halls A–C.",
+      "The accepted program abstract describes NWM, USGS, ERA5, and ERA5-Land comparisons at three southern Appalachian gauges. Current DirectFlow work uses issued HRRR weather. December 11, 8:30 a.m.–12 p.m. PST · Moscone Center, Halls A–C.",
     links: [
       { label: "AGU26 poster details", href: "https://studio.m-anage.com/agu/agu26/meetingapp.cgi/Paper/2094875" },
       { label: "Research details", href: "/research" },
@@ -849,7 +911,7 @@ export const talks: TalkItem[] = [
     status: "in-progress",
     role: "Author",
     description:
-      "Post-processing results for NextGen streamflow forecasts at 1–18 hour lead times. Analysis and writing are in progress; a link will be added when one exists.",
+      "HYDRA streamflow-forecasting results. DirectFlow saved-model assessment and peak diagnostics are complete; scientific review and manuscript preparation continue. No publication is claimed.",
     links: [{ label: "Research details", href: "/research" }],
   },
   {
@@ -862,8 +924,8 @@ export const talks: TalkItem[] = [
     status: "planned",
     role: "Author",
     description:
-      "Software paper describing the reforecast generation and data tooling, planned alongside the code release.",
-    links: [{ label: "Code on GitHub", href: "https://github.com/Mitchel34/NextGen_Hydra" }],
+      "Planned software paper on auditable NextGen reforecast generation. The public software is still in development; diagnostic engineering evidence is separate from scientific forecast skill.",
+    links: [{ label: "Code on GitHub", href: "https://github.com/Mitchel34/nextgen-reforecast-software" }],
   },
   {
     id: "honors-thesis",
