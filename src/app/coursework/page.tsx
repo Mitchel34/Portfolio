@@ -37,8 +37,7 @@ export default function CourseworkPage() {
           lede="The foundations behind my work in applied AI: learning algorithms, language models, optimization, and responsible deployment."
           meta={
             <span className="mono-label text-muted-foreground">
-              {coursework.institution} · {coursework.program} · GPA {coursework.currentGpa} · expected{" "}
-              {coursework.expectedGraduation}
+              {coursework.institution} · {coursework.program}
             </span>
           }
         />

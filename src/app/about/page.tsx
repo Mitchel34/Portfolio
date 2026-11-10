@@ -7,7 +7,7 @@ import { KeywordLine } from "@/components/KeywordLine";
 import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
 import { TextLink } from "@/components/TextLink";
-import { about, focusAreas, proofItems, service, site } from "@/lib/content";
+import { about, focusAreas, service, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -17,8 +17,6 @@ export const metadata: Metadata = createPageMetadata({
   pathname: "/about",
   keywords: ["about Mitchel Carson", "AI engineer background", "machine learning researcher"],
 });
-
-const aboutProof = proofItems.filter((item) => item.showOnAbout);
 
 export default function AboutPage() {
   return (
@@ -33,7 +31,7 @@ export default function AboutPage() {
         <PageHeader
           label="About"
           title={site.tagline}
-          lede={about.summary[0]}
+          lede={about.lede}
           ledeStyle="italic"
           aside={
             <div className="relative mt-4 aspect-[4/5] w-full max-w-[14rem] overflow-hidden rounded-[4px] border border-border">
@@ -48,16 +46,32 @@ export default function AboutPage() {
           }
         />
 
-        <SectionFrame rule="none" label="Background" title="Background">
+        <SectionFrame rule="none" label="Background" title="How I got here">
           <div className="max-w-[65ch] space-y-5 text-body text-foreground">
-            {about.summary.slice(1).map((paragraph) => (
+            {about.summary.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
+          <p className="mt-8 flex flex-wrap gap-x-6 gap-y-2">
+            {about.links.map((link) => (
+              <TextLink key={link.href} href={link.href}>
+                {link.label}
+              </TextLink>
+            ))}
+          </p>
         </SectionFrame>
 
-        <SectionFrame label="Service" title={service.lessonsTitle} lede={service.clearanceNote}>
+        <SectionFrame id="service" label="Service" title="What the job was">
           <EntryList>
+            {service.duties.map((duty) => (
+              <Entry key={duty.title} meta={<h3 className="font-serif text-title text-foreground">{duty.title}</h3>}>
+                <p className="text-body-sm text-foreground">{duty.body}</p>
+              </Entry>
+            ))}
+          </EntryList>
+
+          <h3 className="mt-14 font-serif text-heading text-balance text-foreground">{service.lessonsTitle}</h3>
+          <EntryList className="mt-6">
             {service.lessons.map((lesson, index) => (
               <Entry
                 key={lesson.title}
@@ -67,29 +81,8 @@ export default function AboutPage() {
                   </p>
                 }
               >
-                <h3 className="font-serif text-title text-foreground">{lesson.title}</h3>
+                <h4 className="font-serif text-title text-foreground">{lesson.title}</h4>
                 <p className="mt-2 text-body-sm text-foreground">{lesson.body}</p>
-              </Entry>
-            ))}
-          </EntryList>
-          <TextLink className="mt-6" href="/#service">
-            Full service record
-          </TextLink>
-        </SectionFrame>
-
-        <SectionFrame label="Experience" title="Selected experience">
-          <EntryList>
-            {aboutProof.map((item) => (
-              <Entry
-                key={item.title}
-                meta={<p className="mono-label leading-relaxed text-muted-foreground">{item.role}</p>}
-              >
-                <h3 className="font-serif text-title text-foreground">{item.title}</h3>
-                <p className="mt-2 text-body-sm text-foreground">{item.description}</p>
-                <p className="mt-2 text-footnote text-muted-foreground">Ask me about: {item.askAbout}</p>
-                <TextLink className="mt-3" href={item.href}>
-                  {item.linkLabel}
-                </TextLink>
               </Entry>
             ))}
           </EntryList>

@@ -11,6 +11,7 @@ import {
   suggestions,
   type ChatStreamEvent,
 } from "../src/lib/chat";
+import { guide } from "../src/lib/content";
 import {
   buildChatInstructions,
   createChatHandler,
@@ -360,4 +361,14 @@ test("answer text renders only allowlisted links, and hides half-received markup
   assert.equal(text("It is **act"), "It is ");
   assert.equal(text("See the [HYDRA case study](/projects/hydra-temporal)."), "See the HYDRA case study.");
   assert.equal(parseChatAnswer("See the [HYDRA case").flat()[0].text, "See the [HYDRA case");
+});
+
+test("the visible privacy line matches what the chat actually does", () => {
+  assert.match(guide.privacy, /Suggested questions use prepared answers/);
+  assert.match(guide.privacy, /sent to OpenAI/);
+  assert.match(guide.privacy, /recent conversation/);
+  assert.doesNotMatch(guide.privacy, /stays in (this|your) (tab|browser)|never leaves|not stored|deleted|retain/i);
+  assert.doesNotMatch(`${guide.intro.source} ${guide.placeholder}`, /\b(ask me|my work|i reply|i’ll reply)\b/i);
+  assert.match(guide.label, /AI guide/);
+  assert.match(guide.intro.notLive, /isn’t me replying live/);
 });

@@ -1,12 +1,38 @@
-import { ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/Container";
+import { SectionMark } from "@/components/HomeSection";
 import { Reveal } from "@/components/Reveal";
 import { landingSections, service } from "@/lib/content";
 
+/** Decorative route arcs behind the heading. Not a map of real flights. */
+function RouteArcs() {
+  return (
+    <svg
+      aria-hidden="true"
+      focusable="false"
+      viewBox="0 0 600 300"
+      preserveAspectRatio="xMaxYMax meet"
+      className="pointer-events-none absolute right-0 bottom-0 hidden h-[22rem] text-navy-border opacity-70 lg:block"
+    >
+      <g fill="none" stroke="currentColor" strokeWidth="1.25" strokeDasharray="2 7" strokeLinecap="round">
+        <path d="M250 300 C 330 170, 470 130, 600 190" />
+        <path d="M330 300 C 400 220, 500 200, 600 250" />
+        <path d="M150 300 C 280 90, 480 60, 600 120" />
+      </g>
+      <g fill="currentColor">
+        <circle cx="250" cy="298" r="3" />
+        <circle cx="330" cy="298" r="3" />
+        <circle cx="150" cy="298" r="3" />
+      </g>
+    </svg>
+  );
+}
+
 /**
- * The Air Force chapter, given its own full-bleed navy band so it reads as the
- * foundation of the story rather than a line at the bottom of a résumé.
+ * The Air Force chapter, in its own navy band. This is the one place the service
+ * numbers and clearance are stated; the rest of the site links here.
  */
 export function ServiceSection() {
   const section = landingSections.service;
@@ -15,14 +41,13 @@ export function ServiceSection() {
     <section
       id={section.id}
       aria-labelledby="service-heading"
-      className="scroll-mt-20 bg-navy text-navy-foreground"
+      className="relative scroll-mt-20 overflow-hidden bg-navy text-navy-foreground"
     >
-      <Container className="py-16 lg:py-20">
-        <p className="mono-label text-navy-accent">
-          {section.number} · {section.label}
-        </p>
+      <RouteArcs />
+      <Container className="relative py-16 lg:py-24">
+        <SectionMark section={section} className="text-navy-accent" />
 
-        <div className="mt-4 grid gap-12 lg:grid-cols-12 lg:gap-x-12">
+        <div className="mt-5 grid gap-12 lg:grid-cols-12 lg:gap-x-12">
           <div className="lg:col-span-7">
             <p className="mono-label text-navy-muted">{service.kicker}</p>
             <h2
@@ -33,64 +58,49 @@ export function ServiceSection() {
             </h2>
             <div className="mt-8 space-y-5">
               {service.intro.map((paragraph) => (
-                <p key={paragraph} className="max-w-[60ch] text-lede text-navy-muted">
+                <p key={paragraph} className="max-w-[58ch] text-body text-navy-muted sm:text-lede">
                   {paragraph}
                 </p>
               ))}
             </div>
           </div>
 
-          <aside className="lg:col-span-5 lg:pt-10" aria-label="Service record">
-            <div className="rounded-[4px] border border-navy-border bg-navy-raised p-6 sm:p-8">
-              <p className="mono-label text-navy-accent">Service record</p>
-              <dl className="mt-4 divide-y divide-navy-border">
-                {service.record.map((row) => (
-                  <div key={row.term} className="grid grid-cols-[6.5rem_1fr] gap-x-4 py-3">
-                    <dt className="mono-label self-center text-navy-muted">{row.term}</dt>
-                    <dd className="text-body text-navy-foreground">{row.value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </aside>
+          <Reveal className="lg:col-span-5 lg:pt-10">
+            <dl className="rounded-[4px] border border-navy-border bg-navy-raised px-6 py-2 sm:px-8">
+              {service.record.map((row) => (
+                <div key={row.term} className="grid grid-cols-[6rem_1fr] gap-x-4 border-b border-navy-border py-3.5 last:border-b-0">
+                  <dt className="mono-label self-center text-navy-muted">{row.term}</dt>
+                  <dd className="text-body text-navy-foreground">{row.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="mt-5 text-body-sm text-navy-muted">{service.clearanceNote}</p>
+          </Reveal>
         </div>
 
-        <details className="group mt-10 border-t border-navy-border pt-6">
-          <summary className="cursor-pointer focus-visible:outline-navy-accent text-body font-medium text-navy-foreground marker:text-navy-accent">
-            More about my Air Force service
-          </summary>
-        <Reveal className="mt-8">
-          <h3 className="mono-label text-navy-muted">The job</h3>
-          <ul className="mt-5 grid gap-px overflow-hidden rounded-[4px] border border-navy-border bg-navy-border sm:grid-cols-2 lg:grid-cols-4">
-            {service.duties.map((duty) => (
-              <li key={duty.title} className="bg-navy p-6">
-                <p className="font-serif text-title text-navy-foreground">{duty.title}</p>
-                <p className="mt-3 text-body-sm text-navy-muted">{duty.body}</p>
-              </li>
+        <Reveal className="mt-14">
+          <dl className="grid border-y border-navy-border sm:grid-cols-3">
+            {service.stats.map((stat) => (
+              <div
+                key={stat.label}
+                className="flex flex-col-reverse border-b border-navy-border py-6 last:border-b-0 sm:border-r sm:border-b-0 sm:px-8 sm:first:pl-0 sm:last:border-r-0"
+              >
+                <dt className="mono-label mt-3 text-navy-muted">{stat.label}</dt>
+                <dd className="font-serif text-[3.5rem] leading-none font-medium tracking-[-0.03em] text-navy-foreground lg:text-[4.5rem]">
+                  {stat.value}
+                </dd>
+              </div>
             ))}
-          </ul>
-        </Reveal>
+          </dl>
 
-        <Reveal className="mt-10 border-t border-navy-border pt-8">
-          <h3 className="font-serif text-heading text-balance text-navy-foreground lg:text-[2.5rem]">
-            {service.lessonsTitle}
-          </h3>
-          <ol className="mt-10 grid gap-10 lg:grid-cols-3 lg:gap-12">
-            {service.lessons.map((lesson, index) => (
-              <li key={lesson.title}>
-                <p className="mono-label text-navy-accent">{String(index + 1).padStart(2, "0")}</p>
-                <p className="mt-3 font-serif text-title text-navy-foreground">{lesson.title}</p>
-                <p className="mt-3 text-body text-navy-muted">{lesson.body}</p>
-              </li>
-            ))}
-          </ol>
-
-          <p className="mt-14 flex max-w-3xl items-start gap-4 rounded-[4px] border border-navy-border px-5 py-4 text-body text-navy-foreground">
-            <ShieldCheck className="mt-1 h-5 w-5 shrink-0 text-navy-accent" aria-hidden="true" />
-            <span>{service.clearanceNote}</span>
-          </p>
+          <Link
+            href={service.aboutLink.href}
+            className="mt-8 inline-flex items-center gap-2 text-body-sm font-medium text-navy-foreground underline decoration-navy-muted underline-offset-4 transition-colors hover:text-navy-accent hover:decoration-navy-accent"
+          >
+            {service.aboutLink.label}
+            <ArrowRight aria-hidden="true" className="h-4 w-4" />
+          </Link>
         </Reveal>
-        </details>
       </Container>
     </section>
   );

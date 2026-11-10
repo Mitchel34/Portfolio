@@ -8,7 +8,6 @@ import { LinkGlyph } from "@/components/LinkGlyph";
 import { OfficeHours } from "@/components/OfficeHours";
 import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
-import { buttonClass } from "@/components/ui/Button";
 import { discussions, sectionCopy, site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
@@ -45,7 +44,7 @@ export default function ContactPage() {
         <PageHeader
           label="Contact"
           title={sectionCopy.contact.title}
-          lede="Software engineering and applied AI conversations, including scientific computing and mission-driven teams; collaboration on forecasting and evaluation; or questions about the AGU26 workshop. Fastest path is a 30-minute call."
+          lede="Roles in software engineering and applied AI, collaboration on forecasting and evaluation, or questions about the AGU26 workshop. Email, or pick a time below."
         />
 
         <SectionFrame rule="none" label="Reach me" title="Email, scheduling, profiles">
@@ -65,13 +64,8 @@ export default function ContactPage() {
             ))}
           </dl>
 
-          <div className="mt-6">
-            <a href={site.calendlyUrl} className={buttonClass("primary")} {...externalProps}>
-              Schedule a conversation
-            </a>
-          </div>
           <p className="mt-4 mono-label text-muted-foreground">
-            {site.location} · {site.timezone} · {site.clearance}
+            {site.location} · {site.timezone}
           </p>
         </SectionFrame>
 
@@ -80,7 +74,7 @@ export default function ContactPage() {
         </SectionFrame>
 
         <SectionFrame label="Discussions" title={discussions.title} lede={discussions.intro}>
-          <OfficeHours showHeader={false} />
+          <OfficeHours />
         </SectionFrame>
 
         <SectionFrame label="Schedule" title="Book a 30-minute conversation">

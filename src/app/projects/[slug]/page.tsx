@@ -15,15 +15,14 @@ import {
   getProjectRepositoryUrl,
   projectEvidenceStatus,
   projects,
-  research,
-  site, evidenceWord } from "@/lib/content";
+  site,
+  evidenceWord,
+} from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 type ProjectCaseStudyPageProps = {
   params: Promise<{ slug: string }>;
 };
-
-const HYDRA_SLUG = "hydra-temporal";
 
 function getProjectSchema(slug: string) {
   const project = getProjectBySlug(slug);
@@ -116,7 +115,6 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
   }
 
   const schema = getProjectSchema(slug);
-  const isHydra = project.slug === HYDRA_SLUG;
   const isActiveDevelopment = project.status === "Active Development";
   const projectLinks = project.links ?? [];
 
@@ -169,40 +167,31 @@ export default async function ProjectCaseStudyPage({ params }: ProjectCaseStudyP
         <SectionFrame
           rule="none"
           label="Summary"
-          title="Problem and impact"
+          title="The problem, and where it stands"
         >
           <div>
             <p className="mono-label text-muted-foreground">Problem</p>
             <p className="mt-2 max-w-[65ch] text-body text-foreground">{project.problem}</p>
           </div>
           <div className="mt-6">
-            <p className="mono-label text-muted-foreground">Impact</p>
+            <p className="mono-label text-muted-foreground">{isActiveDevelopment || project.status === "Active" ? "Where it stands" : "Impact"}</p>
             <p className="mt-2 max-w-[65ch] text-body text-foreground">
               {project.impact}
             </p>
           </div>
-
-          {isHydra ? (
-            <p className="mt-8 max-w-[65ch] text-footnote text-muted-foreground">{research.scopeNote}</p>
-          ) : null}
         </SectionFrame>
 
-        <SectionFrame label="Case study" title="Approach, architecture, evaluation, delivery">
+        <SectionFrame label="Case study" title="How it was built">
           <div className="grid gap-x-8 gap-y-8 lg:grid-cols-2">
             {caseStudyGroups.map((group, index) => (
               <CaseStudyGroup key={group.title} number={index + 1} title={group.title} items={group.items} />
             ))}
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-x-6 gap-y-3">
+          <div className="mt-12">
             <Link href="/projects" className={buttonClass("outline")}>
-              Back to projects
+              All projects
             </Link>
-            {projectLinks.map((link) => (
-              <TextLink key={link.href} href={link.href}>
-                {link.label}
-              </TextLink>
-            ))}
           </div>
         </SectionFrame>
       </div>

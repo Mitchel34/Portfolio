@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 
-import { AguSpotlight } from "@/components/AguSpotlight";
 import { ContactSection } from "@/components/ContactSection";
 import { Hero } from "@/components/Hero";
 import { PathSection } from "@/components/PathSection";
 import { ResearchSection } from "@/components/ResearchSection";
 import { ServiceSection } from "@/components/ServiceSection";
-import { SkillsSection } from "@/components/SkillsSection";
 import { WorkSection } from "@/components/WorkSection";
 import { site } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
@@ -35,12 +33,10 @@ export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
       <Hero />
-      <AguSpotlight />
       <WorkSection />
+      <ResearchSection />
       <ServiceSection />
       <PathSection />
-      <ResearchSection />
-      <SkillsSection />
       <ContactSection />
     </div>
   );

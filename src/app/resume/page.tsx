@@ -7,9 +7,8 @@ import { PageHeader } from "@/components/PageHeader";
 import { SectionFrame } from "@/components/SectionFrame";
 import { buttonClass } from "@/components/ui/Button";
 import { KeywordLine } from "@/components/KeywordLine";
-import { StatusLabel } from "@/components/StatusLabel";
-import { TalksList } from "@/components/TalksSection";
-import { education, experience, projectEvidenceStatus, projects, site, talks, toolkit } from "@/lib/content";
+import { TextLink } from "@/components/TextLink";
+import { education, experience, site, toolkit } from "@/lib/content";
 import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -19,6 +18,13 @@ export const metadata: Metadata = createPageMetadata({
   pathname: "/resume",
   keywords: ["software engineer resume", "applied AI resume", "Air Force veteran resume"],
 });
+
+/** Research, talks, and case studies have their own pages; the résumé links to them. */
+const moreLinks = [
+  { label: "Research, talks, and manuscripts", href: "/research" },
+  { label: "Project case studies", href: "/projects" },
+  { label: "Graduate coursework", href: "/coursework" },
+];
 
 function EntryMeta({ period, org }: { period: string; org: string }) {
   return (
@@ -52,7 +58,7 @@ export default function ResumePage() {
         <PageHeader
           label="Résumé"
           title="Experience and education."
-          lede="Software engineering, applied AI research, Air Force executive airlift, and graduate AI study. The sections below follow the PDF."
+          lede="The one-page PDF, with the same experience, education, and skills as text below it."
           meta={<span className="mono-label text-muted-foreground">PDF updated {site.resumePdfUpdated}</span>}
           actions={
             <a href={site.resumeUrl} download={site.resumeFilename} className={buttonClass("primary")}>
@@ -88,34 +94,6 @@ export default function ResumePage() {
           </EntryList>
         </SectionFrame>
 
-        <SectionFrame label="Research" title="Research and selected projects">
-          <EntryList>
-            {projects
-              .filter((project) => project.slug === "hydra-temporal" || project.slug === "harmony")
-              .map((project) => (
-                <Entry
-                  key={project.slug}
-                  meta={
-                    <>
-                      <StatusLabel status={projectEvidenceStatus(project.status)} />
-                      <p className="mt-3 mono-label leading-relaxed text-muted-foreground">
-                        {project.stack.slice(0, 5).join(" · ")}
-                      </p>
-                    </>
-                  }
-                >
-                  <h3 className="font-serif text-title text-foreground">{project.title}</h3>
-                  <p className="mt-1 text-body-sm text-muted-foreground">{project.subtitle}</p>
-                  <DetailList items={project.approach} />
-                </Entry>
-              ))}
-          </EntryList>
-        </SectionFrame>
-
-        <SectionFrame label="Conferences" title="Conference activities and manuscripts">
-          <TalksList items={talks.filter((item) => item.kind !== "Thesis")} />
-        </SectionFrame>
-
         <SectionFrame label="Education" title="Academic foundation">
           <EntryList>
             {education.map((item) => (
@@ -133,6 +111,16 @@ export default function ResumePage() {
               <KeywordLine key={group.label} label={group.label} items={group.items} />
             ))}
           </div>
+        </SectionFrame>
+
+        <SectionFrame label="More" title="Research, projects, and courses">
+          <p className="flex flex-wrap gap-x-6 gap-y-2">
+            {moreLinks.map((link) => (
+              <TextLink key={link.href} href={link.href}>
+                {link.label}
+              </TextLink>
+            ))}
+          </p>
         </SectionFrame>
       </div>
     </>
