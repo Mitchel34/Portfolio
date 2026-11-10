@@ -40,7 +40,11 @@ I'm open to **software engineering and applied AI roles**.
 
 ## Site
 
-The home page tells one story from top to bottom: a hero, then numbered sections for Service (the Air Force chapter), Path (a timeline from the Air Force through UT Austin), Work (HYDRA, USAA, Harmony, client work, open source), Research & Talks, Skills, and Contact. Every research output carries its current status (accepted, under review, in progress, completed), and all copy lives in `src/lib/content.ts`.
+The home page is an introduction, not a résumé. It opens with a one-line introduction beside the "Ask about Mitchel" AI guide, then numbered sections for Work (HYDRA, USAA, Harmony, client work, open source), Research & Talks, Service (the Air Force chapter), Path (Air Force through UT Austin), and Contact. Project cards carry short summaries; methods and background live on the project and research pages.
+
+Each fact has one home and everything else links to it: service numbers and clearance in the Service section, the USAA result on its work card, degrees and GPA in Path, and AGU26 and manuscript status in Research & Talks. The résumé page is the one deliberate full record, because it mirrors the PDF. Every research output carries its current status (accepted and upcoming, in progress, planned, completed), and all copy lives in `src/lib/content.ts`.
+
+The visual direction is an editorial page annotated like a field log: Newsreader and IBM Plex, a ruled scale between sections, stacked-sheet cards, crimson as the single signal color, Air Force navy for the service band, and a river palette reserved for HYDRA. The ASCII streamflow scene inside the HYDRA card is a decorative illustration and is captioned as one.
 
 ## Connect
 
@@ -56,11 +60,13 @@ Built with Next.js 16, TypeScript, Tailwind CSS 4, and Framer Motion. Typeset in
 
 ## Ask about Mitchel
 
-The home page includes a portfolio guide with suggested questions, streamed answers, and links to project and research pages. The hero retains the portrait, and an animated ASCII streamflow scene sits inside the featured HYDRA research card, replacing the former “Inside HYDRA” pipeline explorer. Water flows north to south (top to bottom); the scene pauses offscreen, supports reduced motion, and has a pause control.
+The AI guide sits in the hero, with its question box and five suggested questions visible on load. It is labeled as an AI guide and never speaks as Mitchel. The newest answer always opens directly under the question box, so the box stays where it is and the page has no nested scroll area. Each destination is linked once per answer: either in the answer text or in a short "Related" row, never both. The rest of the site works without it.
 
-The four suggested questions use prepared answers and trusted portfolio links entirely in the browser, with no API call or API cost. Typing the same questions (ignoring case, whitespace, and trailing punctuation) also uses the prepared answers. The server has the same shortcut for direct API requests. Prepared responses are labeled separately from OpenAI answers.
+The five suggested questions use prepared answers and trusted portfolio links entirely in the browser, with no API call or API cost. Typing the same questions (ignoring case, whitespace, and trailing punctuation) also uses the prepared answers. The server has the same shortcut for direct API requests. Prepared responses are labeled separately from OpenAI answers.
 
-Custom questions use the official OpenAI SDK and Responses API through the same-origin Next.js route at `/api/chat`. The guide uses curated public portfolio content, has no tools or private-data access, and does not need a vector database. Research in progress remains labeled as such. Conversation history is held in the current browser tab. A custom question sends recent completed turns, including prepared answers, to OpenAI for context; the app does not persist them, and API calls use `store: false`. OpenAI's own data retention policies still apply.
+Custom questions use the official OpenAI SDK and Responses API through the same-origin Next.js route at `/api/chat`. The guide uses curated public portfolio content, has no tools or private-data access, and does not need a vector database. Research in progress remains labeled as such. A custom question sends recent completed turns, including prepared answers, to OpenAI for context; the app does not persist them, and API calls use `store: false`. OpenAI's own data retention policies still apply. The panel states this in one line and makes no retention claim.
+
+The animated ASCII streamflow scene sits inside the featured HYDRA card. Water flows north to south (top to bottom); the scene pauses offscreen, supports reduced motion, and has a pause control.
 
 ### Local setup
 
@@ -96,6 +102,6 @@ npm test
 npm run build
 ```
 
-Tests exercise request validation, stream parsing, cancellation, and upstream failures with a mock provider. They do not call OpenAI or establish live model access. A live answer requires a configured API key.
+Tests exercise request validation, stream parsing, cancellation, upstream failures, prepared answers, link de-duplication, and the visible privacy line with a mock provider. They do not call OpenAI or establish live model access. A live answer requires a configured API key.
 
 To check real answers before deployment, save the key in `.env.local`, restart the local server on port 3005, and run `npm run test:live-chat`. This explicitly makes three OpenAI-backed requests and incurs normal API usage. It checks streaming, trusted links, research status, and conversation history; review the printed public answers for factual accuracy. No key is printed. The test refuses custom provider URLs and nonlocal portfolio servers so a mock cannot be mistaken for live validation.
