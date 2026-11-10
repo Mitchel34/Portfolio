@@ -559,14 +559,7 @@ export const projects: Project[] = [
       "Integrated name and employment data from multiple sources into an internal troubleshooting tool.",
       "Built JavaScript comparison views and delivered work through an Agile team workflow.",
     ],
-    stack: [
-      "Java",
-      "Spring Boot",
-      "GraphQL",
-      "React",
-      "TypeScript",
-      "PostgreSQL",
-    ],
+    stack: ["Java", "Spring Boot", "GraphQL", "JavaScript"],
     results: [
       "Reduced troubleshooting time by 30% through API enhancements and JavaScript comparison views.",
       "Contributed customer-data API capabilities for enterprise workflows.",
@@ -578,7 +571,7 @@ export const projects: Project[] = [
     caseStudy: {
       architecture: [
         "Contract-first GraphQL API layer over core risk services using Java and Spring Boot.",
-        "Typed front-end integrations for operational dashboards and internal support tooling.",
+        "JavaScript comparison views in the internal troubleshooting tool, showing name and employment data from multiple sources side by side.",
         "Data-access partitioning to separate source-of-record from troubleshooting data paths.",
       ],
       reliability: [
