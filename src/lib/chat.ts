@@ -1,3 +1,5 @@
+import { openSource, projects, research, site, talks, work } from "./content";
+
 /** Browser-safe chat contract. Secrets and model instructions live in chat-server.ts. */
 export type ChatMessage = {
   role: "user" | "assistant";
@@ -26,8 +28,8 @@ export const suggestions = [
 
 export const suggestedQuestions = suggestions.map((suggestion) => suggestion.question);
 
-/** Only these existing portfolio destinations can become clickable chat links. */
-export const chatSources: readonly ChatSource[] = [
+/** Exact destinations already published by the portfolio; never a domain-wide allowlist. */
+const publishedChatSources: readonly ChatSource[] = [
   { title: "HYDRA case study", href: "/projects/hydra-temporal" },
   { title: "USAA case study", href: "/projects/usaa-risk-services" },
   { title: "Harmony case study", href: "/projects/harmony" },
@@ -39,10 +41,44 @@ export const chatSources: readonly ChatSource[] = [
   { title: "Coursework", href: "/coursework" },
   { title: "Air Force service", href: "/#service" },
   { title: "Research and talks", href: "/#research" },
+  { title: "Open-source projects", href: "/projects#open-source" },
+  { title: work.greenspace.title, href: work.greenspace.href },
+  ...openSource.map((entry) => ({ title: `${entry.name} on GitHub`, href: entry.url })),
+  ...openSource.flatMap((entry) => entry.evidence?.map((link) => ({ title: link.label, href: link.href })) ?? []),
+  ...projects.flatMap((project) => project.links?.map((link) => ({ title: link.label, href: link.href })) ?? []),
+  ...talks.flatMap((talk) => talk.links?.map((link) => ({ title: link.label, href: link.href })) ?? []),
+  { title: "Résumé PDF", href: site.resumeUrl },
+  { title: "GitHub profile", href: site.github },
+  { title: "LinkedIn profile", href: site.linkedin },
+  { title: "Schedule a conversation", href: site.calendlyUrl },
+  { title: "Email Mitchel", href: `mailto:${site.email}` },
 ];
 
+// Keep the original source title when several public sections link to one URL.
+const sourceHrefs = new Set<string>();
+export const chatSources: readonly ChatSource[] = publishedChatSources.filter((source) => {
+  if (sourceHrefs.has(source.href)) return false;
+  sourceHrefs.add(source.href);
+  return true;
+});
+
 export function getChatSource(href: string): ChatSource | undefined {
-  return chatSources.find((source) => source.href === href);
+  href = href.trim();
+  const exact = chatSources.find((source) => source.href === href);
+  if (exact) return exact;
+
+  // Models sometimes expand an internal link to its absolute site URL. Accept
+  // only that same exact published path, preserving queries and fragments for
+  // comparison rather than normalizing unknown paths into trusted ones.
+  const absolutePath = /^https?:\/\/[^/?#]+(\/.*)$/.exec(href)?.[1];
+  if (!absolutePath) return undefined;
+  try {
+    const url = new URL(href);
+    if (url.origin !== new URL(site.url).origin || url.username || url.password) return undefined;
+    return chatSources.find((source) => source.href.startsWith("/") && source.href === absolutePath);
+  } catch {
+    return undefined;
+  }
 }
 
 export function isTrustedChatHref(href: string): boolean {
@@ -60,12 +96,12 @@ export type ChatAnswerSegment =
   | { type: "strong"; text: string }
   | { type: "link"; text: string; href: string };
 
-const ANSWER_TOKEN = /\[([^\]\n]{1,120})\]\(([^\s)]+)\)|\*\*([^*\n]+)\*\*/g;
+const ANSWER_TOKEN = /\[([^\]\n]{1,120})\]\(\s*([^\s)]+)\s*\)|\*\*([^*\n]+)\*\*/g;
 
 /** Hide a half-received link or bold marker at the end of a streaming answer. */
 function trimIncompleteToken(text: string): string {
   return text
-    .replace(/\[[^\]\n]{0,120}(?:\]\([^\s)]*)?$/, "")
+    .replace(/\[[^\]\n]{0,120}(?:\]\(\s*[^\s)]*\s*)?$/, "")
     .replace(/\*\*[^*\n]*$/, "")
     .replace(/\*$/, "");
 }
@@ -92,11 +128,12 @@ export function parseChatAnswer(content: string, options: { streaming?: boolean 
     for (const match of paragraph.matchAll(ANSWER_TOKEN)) {
       push(paragraph.slice(start, match.index));
       const [, label, href, strong] = match;
+      const source = href ? getChatSource(href) : undefined;
       if (strong) {
         segments.push({ type: "strong", text: strong });
-      } else if (isTrustedChatHref(href) && !linked.has(href)) {
-        linked.add(href);
-        segments.push({ type: "link", text: label, href });
+      } else if (source && !linked.has(source.href)) {
+        linked.add(source.href);
+        segments.push({ type: "link", text: label, href: source.href });
       } else {
         push(label);
       }
@@ -141,7 +178,7 @@ function prepared(question: string, content: string): PreparedChatAnswer {
 export const preparedAnswers: readonly PreparedChatAnswer[] = [
   prepared(
     suggestions[0].question,
-    "HYDRA is Mitchel’s ongoing research on watershed forecasting. It asks whether deep learning can make NOAA’s NextGen streamflow forecasts more reliable 1–18 hours ahead, using only the information available when each forecast was issued. Experiencing Hurricane Helene in Boone is what started it.\n\nIt is research in progress, not a result. The reforecast software and data workflows are built, the model comparison and evaluation are still in development, and no performance numbers have been reported. The [research page](/research) covers the method and current status, and the [HYDRA case study](/projects/hydra-temporal) covers the engineering.",
+    `${research.summary}\n\n${research.scopeNote} The [research page](/research) and [HYDRA case study](/projects/hydra-temporal) cover the methods and current findings.`,
   ),
   prepared(
     suggestions[1].question,

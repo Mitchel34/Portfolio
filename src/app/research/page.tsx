@@ -14,15 +14,14 @@ import { createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Research",
-  description:
-    "HYDRA: watershed forecasting research motivated by Hurricane Helene. NextGen reforecast generation software and deep-learning post-processing for NOAA streamflow forecasts at 1–18 hour lead times. Results manuscript in preparation.",
+  description: research.summary,
   pathname: "/research",
   keywords: [
     "AI research",
     "time-series forecasting research",
     "streamflow forecasting",
-    "NextGen streamflow forecast post-processing",
-    "LSTM Transformer Mamba comparison",
+    "DirectFlow saved-model assessment",
+    "LSTM Transformer GRU Mamba2 comparison",
   ],
 });
 
@@ -56,21 +55,14 @@ export default function ResearchPage() {
             <div className="lg:col-span-4">
               <Readout
                 value="1–18 h"
-                unit="forecast lead times targeted by the post-processing model"
+                unit="independent DirectFlow discharge forecasts"
                 status="in-progress"
                 footnote={research.scopeNote}
               />
             </div>
             <div className="mt-6 max-w-[65ch] space-y-4 text-body text-foreground lg:col-span-6 lg:mt-0">
-              <p>
-                Reforecast generation software drives NOAA’s NextGen framework to produce the retrospective forecasts the
-                model learns from, with initialization, lead-time, and version metadata preserved so every training
-                example is traceable.
-              </p>
-              <p>
-                The evaluation plan compares LSTM, Transformer, and Mamba-style post-processors using the same inputs
-                and temporal splits. Raw NextGen reforecasts provide the baseline at each lead time from 1 to 18 hours.
-              </p>
+              <p>{research.architecture[0]} {research.evaluation[2]}</p>
+              <p>{research.nextGenSoftware.summary} {research.nextGenSoftware.limits}</p>
             </div>
           </div>
 
@@ -98,7 +90,7 @@ export default function ResearchPage() {
           id="communication"
           label="Presentations & writing"
           title="At AGU26, and in progress."
-          lede="The accepted AGU poster presents the earlier National Water Model study. The manuscripts below concern ongoing NextGen research."
+          lede="Two accepted AGU26 presentations, a HYDRA results manuscript in preparation, and a planned NextGen software paper."
         >
           <TalksList items={talks} />
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2">

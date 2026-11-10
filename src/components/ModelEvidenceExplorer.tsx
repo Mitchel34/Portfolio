@@ -23,47 +23,47 @@ const evidenceTabs: EvidenceTab[] = [
   {
     id: "inputs",
     label: "01 · Inputs",
-    eyebrow: "Reforecast generation",
-    title: "Historical forecasts with a traceable origin.",
-    detail: research.architecture[0] + " " + research.architecture[1],
-    note: "Consistent initialization, lead-time, and version metadata make every training example traceable to the forecast that produced it.",
-    tokens: ["NextGen", "Reforecasts", "USGS observations", "Issue time"],
+    eyebrow: "Retrospective inputs",
+    title: "Discharge history, weather, and soil.",
+    detail: research.architecture[1],
+    note: research.constraints[0],
+    tokens: ["USGS discharge", "Issued HRRR", "Initial soil", "Simulated delay"],
   },
   {
     id: "architecture",
     label: "02 · Models",
-    eyebrow: "Planned model comparison",
-    title: "Three model families. A shared evaluation plan.",
+    eyebrow: "Four assessed model families",
+    title: "Predict discharge directly, with a shared assessment.",
     detail: research.architecture[2],
-    note: "The comparison is designed to hold inputs and time splits constant across recurrent, attention, and state-space models. Training and evaluation results are not yet reported.",
-    tokens: ["LSTM", "Transformer", "Mamba (SSM)", "PyTorch"],
+    note: research.architecture[0],
+    tokens: ["LSTM", "Transformer", "GRU–Transformer", "Mamba2–Transformer"],
   },
   {
     id: "evaluation",
     label: "03 · Evaluation",
-    eyebrow: "Leakage-aware · by lead time",
-    title: "Evaluate with the information available at issue time.",
+    eyebrow: "Saved-model assessment complete",
+    title: "Score frozen models by site and lead time.",
     detail: research.evaluation[0] + " " + research.evaluation[1],
     note: research.evaluation[2],
-    tokens: ["1–18 h lead times", "Site × lead time", "Temporal splits"],
+    tokens: ["DirectFlow H1–18", "Matched NWM H1–16", "Temporal splits"],
   },
   {
     id: "outcome",
     label: "04 · Outputs",
-    eyebrow: "Planned outputs",
-    title: "Research results and reusable software.",
+    eyebrow: "Scientific review ongoing",
+    title: "Assessment evidence and writing in progress.",
     detail:
-      "A results manuscript for Water Resources Research is in preparation, and a software paper for Environmental Modelling & Software is planned.",
+      "Saved-model assessment and extreme-peak diagnostics are complete. A results manuscript for Water Resources Research is in preparation, and a separate NextGen software paper for Environmental Modelling & Software is planned. Neither manuscript is published.",
     note: research.scopeNote,
-    tokens: ["WRR manuscript", "EM&S software paper", "Public code"],
+    tokens: ["Public assessment", "Peak diagnostics", "Manuscripts in progress"],
   },
 ];
 
 const inputNodes: Array<[label: string, position: string]> = [
-  ["NextGen", "left-2 top-2"],
-  ["USGS", "right-2 top-2"],
-  ["Lead time", "bottom-2 left-2"],
-  ["Version", "bottom-2 right-2"],
+  ["USGS history", "left-2 top-2"],
+  ["Issued HRRR", "right-2 top-2"],
+  ["Initial soil", "bottom-2 left-2"],
+  ["Issue time", "bottom-2 right-2"],
 ];
 
 function InputsVisual() {
@@ -95,16 +95,16 @@ function InputsVisual() {
         </div>
       ))}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-[4px] border border-input bg-card px-3 py-2 mono-label text-foreground">
-        Align at issue time
+        Retrospective alignment
       </div>
     </div>
   );
 }
 
 const architectureSteps: Array<[step: string, label: string]> = [
-  ["01", "NextGen reforecast"],
-  ["02", "Post-processing model"],
-  ["03", "Candidate correction"],
+  ["01", "Discharge, weather, soil"],
+  ["02", "DirectFlow model"],
+  ["03", "H1–18 discharge"],
 ];
 
 function ArchitectureVisual() {
@@ -153,10 +153,10 @@ function EvaluationVisual() {
         <span>Test</span>
       </div>
       <p className="mt-2 text-footnote text-muted-foreground">
-        Schematic time splits. At every forecast issue time, inputs must already be available.
+        Schematic time splits. Revised historical discharge uses a simulated two-hour delay; original publication times are not reconstructed.
       </p>
       <div className="mt-4 grid grid-cols-3 gap-2">
-        {["RMSE", "NSE", "KGE"].map((metric) => (
+        {["RMSE", "NSE", "MAE"].map((metric) => (
           <div key={metric} className="rounded-[4px] border border-border bg-card px-2 py-2 text-center">
             <p className="mono-label text-foreground">{metric}</p>
             <p className="text-footnote text-muted-foreground">by site × lead time</p>
@@ -171,8 +171,9 @@ function OutcomeVisual() {
   return (
     <Readout
       value="1–18 h"
-      unit="forecast lead times targeted by the post-processing model"
+      unit="independent DirectFlow discharge forecasts"
       status="in-progress"
+      footnote="Saved-model assessment is complete; scientific review continues. Matched NWM comparisons cover H1–16."
     />
   );
 }
@@ -215,7 +216,7 @@ export function ModelEvidenceExplorer() {
       <div className="border-b border-border px-5 py-4">
         <p className="mono-label text-muted-foreground">Figure 1 · interactive</p>
         <h3 id="hydra-evidence-title" className="mt-1 font-serif text-title text-foreground">
-          Inside the HYDRA pipeline
+          Inside the DirectFlow pipeline
         </h3>
       </div>
 

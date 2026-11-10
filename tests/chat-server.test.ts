@@ -284,7 +284,7 @@ test("short follow-ups keep the prior project source and never return fabricated
 
 test("instructions preserve current research and autonomy boundaries", () => {
   const instructions = buildChatInstructions();
-  assert.match(instructions, /results pending/i);
+  assert.match(instructions, /saved-model assessment.*complete/i);
   assert.match(instructions, /no live-execution/i);
   assert.match(instructions, /not Mitchel/);
   assert.match(instructions, /planned/);
@@ -318,8 +318,8 @@ test("prepared answers stay grounded: one per suggestion, trusted links only, no
     assert.doesNotMatch(prepared.content, /portfolio[- ]report|the portfolio (reports|lists|says)/i);
   }
   const hydra = getPreparedChatAnswer("What is HYDRA?")!.content;
-  assert.match(hydra, /in progress, not a result/);
-  assert.match(hydra, /no performance numbers/);
+  assert.match(hydra, /saved-model assessment.*complete/);
+  assert.match(hydra, /do not establish a blanket improvement/);
   assert.doesNotMatch(hydra, /\d+%/);
   assert.match(getPreparedChatAnswer("What is Harmony?")!.content, /no live-execution or investment-performance claims/);
   assert.match(getPreparedChatAnswer("What roles is he looking for?")!.content, /can’t pass messages along/);
