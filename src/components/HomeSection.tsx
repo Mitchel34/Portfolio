@@ -14,34 +14,37 @@ type HomeSectionProps = {
   aside?: ReactNode;
 };
 
+/** The numbered eyebrow every home section opens with. */
+export function SectionMark({ section, className }: { section: LandingSection; className?: string }) {
+  return (
+    <p className={cn("mono-label flex items-center gap-3", className)}>
+      <span>{section.number}</span>
+      <span aria-hidden="true" className="h-px w-8 bg-current opacity-60" />
+      <span>{section.label}</span>
+    </p>
+  );
+}
+
 /**
- * Home-page section: stacked eyebrow, serif title and lede over a full-width body.
+ * Home-page section: a ruled scale, a numbered eyebrow, serif title and lede over a full-width body.
  * Secondary pages keep the margin-column SectionFrame; the home page reads top to bottom.
  */
 export function HomeSection({ section, title, lede, children, className, aside }: HomeSectionProps) {
   const headingId = `${section.id}-heading`;
 
   return (
-    <section
-      id={section.id}
-      aria-labelledby={headingId}
-      className={cn("scroll-mt-20 border-t border-border py-16 lg:py-24", className)}
-    >
+    <section id={section.id} aria-labelledby={headingId} className={cn("scroll-mt-20 pb-16 lg:pb-24", className)}>
       <Container>
-        <div className="lg:flex lg:items-end lg:justify-between lg:gap-12">
+        <div aria-hidden="true" className="tick-rule" />
+        <div className="pt-10 lg:flex lg:items-end lg:justify-between lg:gap-12 lg:pt-14">
           <header className="max-w-3xl">
-            <p className="mono-label text-primary">
-              {section.number} · {section.label}
-            </p>
-            <h2
-              id={headingId}
-              className="mt-3 font-serif text-heading text-balance text-foreground lg:text-[3rem]"
-            >
+            <SectionMark section={section} className="text-primary" />
+            <h2 id={headingId} className="mt-4 font-serif text-heading text-balance text-foreground lg:text-[3rem]">
               {title}
             </h2>
-            {lede ? <p className="mt-4 max-w-[62ch] text-lede text-muted-foreground">{lede}</p> : null}
+            {lede ? <p className="mt-4 max-w-[58ch] text-lede text-muted-foreground">{lede}</p> : null}
           </header>
-          {aside ? <div className="mt-6 shrink-0 lg:mt-0">{aside}</div> : null}
+          {aside ? <div className="mt-6 shrink-0 lg:mt-0 lg:pb-2">{aside}</div> : null}
         </div>
         <div className="mt-10 lg:mt-12">{children}</div>
       </Container>

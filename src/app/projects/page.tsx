@@ -3,12 +3,11 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { Container } from "@/components/Container";
 import { PageHeader } from "@/components/PageHeader";
-import { Notes } from "@/components/Notes";
 import { OpenSourceTable } from "@/components/OpenSourceTable";
 import { ProjectCard } from "@/components/ProjectCard";
 import { SchemaScript } from "@/components/SchemaScript";
 import { SectionFrame } from "@/components/SectionFrame";
-import { harmonyBoundaryNote, projects } from "@/lib/content";
+import { projects } from "@/lib/content";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = createPageMetadata({
@@ -49,28 +48,24 @@ export default function ProjectsPage() {
       <div className="pb-20">
         <PageHeader
           label="Projects"
-          title="Engineering case studies."
-          lede="Problem, approach, current evidence, limits, and lessons, for the HYDRA pipeline, USAA production APIs, and the Harmony forecasting system."
+          title="Case studies."
+          lede="Three projects, each with a full write-up: the problem, the approach, where it stands, and what I learned."
         />
         <Container>
-          <div className="mt-10 [&>article:first-child]:border-t-0 [&>article:first-child]:pt-0">
-            {projects.map((project) => (
-              <ProjectCard
-                key={project.slug}
-                project={project}
-                variant="full"
-                noteId={project.slug === "harmony" ? "2" : undefined}
-              />
+          <div className="mt-10 border-b border-foreground [&>article:first-child]:border-t-0 [&>article:first-child]:pt-0">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.slug} project={project} index={index} />
             ))}
           </div>
-          <Notes items={[{ id: "2", text: harmonyBoundaryNote }]} />
         </Container>
 
         <div className="mt-20">
           <SectionFrame
+            id="open-source"
+            rule="none"
             label="Open source"
-            title="The code behind the claims."
-            lede="Research code and tooling published so results can be inspected and reproduced."
+            title="The code behind the work."
+            lede="Research code and tooling, public so the work can be inspected and reproduced."
           >
             <OpenSourceTable />
           </SectionFrame>

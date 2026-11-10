@@ -94,12 +94,10 @@ export function ContactForm() {
   }
 
   return (
-    <motion.form
-      initial={initial}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.45, ease: EASE }}
+    // Server-rendered visible; the entrance is the CSS `rise`, so the form works before hydration.
+    <form
       onSubmit={handleSubmit}
-      className="max-w-2xl space-y-5"
+      className="rise max-w-2xl space-y-5"
     >
       <div className="grid gap-5 sm:grid-cols-2">
         <div className="space-y-1.5">
@@ -173,6 +171,6 @@ export function ContactForm() {
       <Button variant="primary" type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Sending…" : "Send message"}
       </Button>
-    </motion.form>
+    </form>
   );
 }

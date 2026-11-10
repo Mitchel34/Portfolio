@@ -173,7 +173,6 @@ function OutcomeVisual() {
       value="1–18 h"
       unit="forecast lead times targeted by the post-processing model"
       status="in-progress"
-      footnote="Results will be published with the manuscripts; no performance number is reported yet."
     />
   );
 }

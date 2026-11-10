@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { Container } from "@/components/Container";
+import { SectionMark } from "@/components/HomeSection";
 import { LinkGlyph } from "@/components/LinkGlyph";
 import { Reveal } from "@/components/Reveal";
 import { buttonClass } from "@/components/ui/Button";
@@ -39,17 +40,16 @@ export function ContactSection() {
     <section
       id={section.id}
       aria-labelledby="contact-heading"
-      className="scroll-mt-20 border-t-2 border-foreground py-20 lg:py-28"
+      className="scroll-mt-20 pb-20 lg:pb-28"
     >
       <Container>
-        <Reveal className="grid gap-12 lg:grid-cols-12 lg:gap-x-12">
+        <div aria-hidden="true" className="tick-rule" />
+        <Reveal className="grid gap-12 pt-10 lg:grid-cols-12 lg:gap-x-12 lg:pt-14">
           <div className="lg:col-span-6">
-            <p className="mono-label text-primary">
-              {section.number} · {section.label}
-            </p>
+            <SectionMark section={section} className="text-primary" />
             <h2
               id="contact-heading"
-              className="mt-3 font-serif text-[3rem] leading-none font-medium tracking-[-0.02em] text-foreground sm:text-[4rem] lg:text-[4.5rem]"
+              className="mt-4 font-serif text-[3rem] leading-none font-medium tracking-[-0.02em] text-foreground sm:text-[4rem] lg:text-[4.5rem]"
             >
               {sectionCopy.contact.title}
             </h2>
@@ -93,13 +93,10 @@ export function ContactSection() {
                   {site.location} · {site.timezone}
                 </span>
               </ContactRow>
-              <ContactRow term="Clearance">
-                <span className="text-body text-foreground">{site.clearance}</span>
-              </ContactRow>
             </dl>
 
             <p className="mt-6 text-body-sm text-muted-foreground">
-              Prefer a form or an embedded calendar?{" "}
+              Prefer a form?{" "}
               <Link href="/contact" className="link-text text-foreground hover:text-primary hover:decoration-primary">
                 Use the contact page
               </Link>

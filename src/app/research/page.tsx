@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { BreadcrumbJsonLd } from "@/components/BreadcrumbJsonLd";
 import { FigureWell } from "@/components/FigureWell";
 import { ModelEvidenceExplorer } from "@/components/ModelEvidenceExplorer";
-import { OfficeHours } from "@/components/OfficeHours";
 import { PageHeader } from "@/components/PageHeader";
 import { Readout } from "@/components/Readout";
 import { SectionFrame } from "@/components/SectionFrame";
@@ -48,7 +47,7 @@ export default function ResearchPage() {
           label="Research"
           title={research.title}
           lede={research.summary}
-          actions={<TextLink href="#communication">AGU26 poster & workshop</TextLink>}
+          actions={<TextLink href="#communication">Presentations and writing</TextLink>}
           meta={<StatusLabel status="in-progress" prefix="Ongoing research" />}
         />
 
@@ -102,10 +101,9 @@ export default function ResearchPage() {
           lede="The accepted AGU poster presents the earlier National Water Model study. The manuscripts below concern ongoing NextGen research."
         >
           <TalksList items={talks} />
-          <OfficeHours className="mt-12" />
           <div className="mt-10 flex flex-wrap gap-x-6 gap-y-2">
-            <TextLink href="/projects/hydra-temporal">Case study</TextLink>
-            <TextLink href="https://github.com/Mitchel34/hydra-nwm-streamflow-correction">Code</TextLink>
+            <TextLink href="/projects/hydra-temporal">HYDRA case study</TextLink>
+            <TextLink href="/contact">Talk through the research</TextLink>
           </div>
         </SectionFrame>
       </div>

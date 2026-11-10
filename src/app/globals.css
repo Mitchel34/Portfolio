@@ -41,6 +41,14 @@
   --color-navy-accent: #f3a08f;
   --color-navy-border: #2a3a55;
 
+  /* "River" panel: the HYDRA feature and its streamflow scene. Same values in both themes. */
+  --color-river: #0a1722;
+  --color-river-raised: #102631;
+  --color-river-foreground: #e9f3f1;
+  --color-river-muted: #a9c4c0;
+  --color-river-accent: #7fd0c5;
+  --color-river-border: #28404b;
+
   --radius-lg: 0.375rem;
   --radius-md: 0.25rem;
   --radius-sm: 0.125rem;
@@ -92,6 +100,52 @@
 /* 3px double rule: under the masthead, above the footer, under secondary-page headers. */
 @utility rule-double {
   border-top: 3px double var(--color-foreground);
+}
+
+/*
+ * Field-log motifs. The site reads as an editorial page annotated like an
+ * engineer's log: a ruled scale between sections and stacked-sheet cards.
+ */
+
+/* A ruler: fine ticks every 12px, a longer tick every 60px. Marks the top of a home section. */
+@utility tick-rule {
+  height: 10px;
+  border-top: 1px solid var(--color-foreground);
+  background-image:
+    repeating-linear-gradient(90deg, var(--color-foreground) 0 1px, transparent 1px 60px),
+    repeating-linear-gradient(90deg, var(--color-input) 0 1px, transparent 1px 12px);
+  background-size: 100% 9px, 100% 4px;
+  background-repeat: no-repeat;
+}
+
+/* A sheet of paper resting on another: the hero portrait, the AI guide, and the work cards. */
+@utility sheet {
+  box-shadow:
+    8px 8px 0 -1px var(--color-surface),
+    8px 8px 0 0 var(--color-border);
+}
+
+/* Cards that are links lift off the stack on hover and focus. */
+@utility sheet-lift {
+  transition:
+    transform 220ms var(--ease-editorial),
+    box-shadow 220ms var(--ease-editorial),
+    border-color 220ms var(--ease-editorial);
+  &:hover,
+  &:focus-within {
+    border-color: var(--color-foreground);
+    box-shadow:
+      8px 8px 0 -1px var(--color-surface),
+      8px 8px 0 0 var(--color-foreground);
+  }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    &:hover {
+      transform: translate(-2px, -2px);
+    }
+  }
+  &:active {
+    transform: translate(0, 0);
+  }
 }
 
 /* Every inline text link: visible rest-state underline in muted-foreground. */
@@ -251,6 +305,102 @@
   pointer-events: none;
 }
 
-.hero-portrait {
-  box-shadow: 12px 12px 0 -1px var(--color-surface), 12px 12px 0 0 var(--color-border);
+/* Dark bands swap the crimson focus ring for their own accent so it stays visible. */
+.bg-navy {
+  --color-ring: var(--color-navy-accent);
+}
+
+.bg-river {
+  --color-ring: var(--color-river-accent);
+}
+
+.flow-line {
+  stroke-dasharray: 4 6;
+}
+
+/* Reveal: set by the Reveal component on content that starts below the fold. */
+[data-reveal="pending"] {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+[data-reveal="in"] {
+  transition:
+    opacity 520ms var(--ease-editorial),
+    transform 520ms var(--ease-editorial);
+}
+
+@media print {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* One-time entrance for the introduction. CSS only, so the page is readable before hydration. */
+@media (prefers-reduced-motion: no-preference) {
+  .rise {
+    animation: rise 520ms var(--ease-editorial) both;
+    animation-delay: calc(var(--rise-order, 0) * 70ms);
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+
+  /* The guide's caret while an answer streams, and its three-dot wait state. */
+  .guide-caret::after {
+    content: "";
+    display: inline-block;
+    width: 0.5em;
+    height: 1em;
+    margin-left: 0.15em;
+    vertical-align: -0.15em;
+    background: var(--color-primary);
+    animation: blink 1s steps(2, start) infinite;
+  }
+
+  @keyframes blink {
+    to {
+      visibility: hidden;
+    }
+  }
+
+  .guide-dots span {
+    animation: pulse-dot 1.2s ease-in-out infinite;
+  }
+
+  .guide-dots span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .guide-dots span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    80%,
+    100% {
+      opacity: 0.25;
+    }
+    40% {
+      opacity: 1;
+    }
+  }
+
+  /* Harmony schematic: the declared path "flows" while its card is hovered or focused. */
+  .group:hover .flow-line,
+  .group:focus-within .flow-line {
+    animation: flow 900ms linear infinite;
+  }
+
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -20;
+    }
+  }
 }
