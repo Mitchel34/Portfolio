@@ -194,7 +194,7 @@ export const preparedAnswers: readonly PreparedChatAnswer[] = [
   ),
   prepared(
     suggestions[4].question,
-    "Mitchel is open to software engineering and applied AI roles, including scientific computing. He brings production API work at USAA, ongoing forecasting research, and Air Force operations experience, and he holds an active TS/SCI clearance.\n\nThe [résumé](/resume) has the full record. To talk about a role or a research question, [contact Mitchel](/contact) directly. This guide can’t pass messages along.",
+    "Mitchel is open to software engineering and applied AI roles, including scientific computing. He brings production API work at USAA, ongoing forecasting research, and Air Force operations experience, and he previously held a TS/SCI clearance (adjudicated May 2022).\n\nThe [résumé](/resume) has the full record. To talk about a role or a research question, [contact Mitchel](/contact) directly. This guide can’t pass messages along.",
   ),
 ];
 

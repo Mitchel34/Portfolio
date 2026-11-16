@@ -4,9 +4,9 @@ export const site = {
   headline: "Software Engineer · Applied AI & Scientific Computing",
   tagline: "From Air Force Two to applied AI.",
   summary:
-    "Mitchel Carson is a software engineer and U.S. Air Force veteran focused on applied AI and scientific computing. As an Executive Missions Aviator in the 89th Airlift Wing (2020–2023) he flew on 50+ executive airlift missions across 30+ countries, including Air Force Two, with zero safety-related incidents. He built Java and Spring Boot GraphQL APIs at USAA and is a UT Austin M.S. Artificial Intelligence student (4.0 GPA, expected May 2027) researching watershed forecasting with deep learning. He holds an active TS/SCI clearance and is based in Austin, Texas.",
+    "Mitchel Carson is a software engineer and U.S. Air Force veteran focused on applied AI and scientific computing. As an Executive Missions Aviator in the 89th Airlift Wing (2020–2023) he flew on 50+ executive airlift missions across 30+ countries, including Air Force Two, with zero safety-related incidents. He built Java and Spring Boot GraphQL APIs at USAA and is a UT Austin M.S. Artificial Intelligence student (4.0 GPA, expected May 2027) researching watershed forecasting with deep learning. He previously held a TS/SCI clearance (adjudicated May 2022) and is based in Austin, Texas.",
   metaDescription:
-    "Software engineer and Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions, active TS/SCI). UT Austin M.S. AI student building applied AI for watershed forecasting.",
+    "Software engineer and Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions, prior TS/SCI). UT Austin M.S. AI student building applied AI for watershed forecasting.",
   schemaJobTitle: "M.S. Artificial Intelligence student, The University of Texas at Austin",
   focusLine: "Air Force veteran · Applied AI · Scientific computing",
   runningHead: "Mitchel Carson · Portfolio",
@@ -23,7 +23,7 @@ export const site = {
   calendlyUrl: "https://calendly.com/mitchel-carson/30min",
   location: "Austin, Texas",
   timezone: "Central Time",
-  clearance: "Active TS/SCI",
+  clearance: "Prior TS/SCI (Adjudicated May 2022)",
 };
 
 // ---------------------------------------------------------------------------
@@ -209,7 +209,7 @@ export const service = {
     { term: "Role", value: "Executive Missions Aviator" },
     { term: "Station", value: "Joint Base Andrews, Maryland" },
     { term: "Service", value: "August 2020 – April 2023" },
-    { term: "Clearance", value: "Active TS/SCI" },
+    { term: "Clearance", value: "Prior TS/SCI (Adjudicated May 2022)" },
   ],
   clearanceNote: "I welcome conversations with defense, intelligence, and other mission-driven AI teams.",
   aboutLink: { label: "What the job was, and what I carried into engineering", href: "/about#service" },
@@ -1032,7 +1032,7 @@ export const experience: ExperienceItem[] = [
       "Worked directly onboard with distinguished visitors including the Vice President aboard Air Force Two and the Secretary of State; managed passenger safety and logistics with flight crews, security teams, and White House staff.",
       "Handled in-flight meal and beverage service, baggage logistics, crew hotel bookings and ground transportation, visa applications, and crew and passenger subsistence billing.",
       "Served in the 89th Airlift Wing, whose executive airlift mission supported the Vice President, First Lady, Secretaries of State and Defense, and Chairman of the Joint Chiefs of Staff.",
-      "Hold an active TS/SCI clearance.",
+      "Held a TS/SCI clearance (adjudicated May 2022).",
     ],
     bridgingSentence:
       "I chose to pursue AI while serving, and the preparation, coordination, and zero-incident standard of executive airlift came with me.",

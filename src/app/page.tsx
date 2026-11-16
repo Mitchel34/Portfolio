@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     pathname: "/",
     keywords: [
       "Air Force veteran software engineer",
-      "TS/SCI software engineer",
+      "prior TS/SCI clearance",
       "applied AI engineer",
       "scientific computing",
       "89th Airlift Wing",

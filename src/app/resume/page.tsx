@@ -14,7 +14,7 @@ import { createPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = createPageMetadata({
   title: "Resume",
   description:
-    "Resume for Mitchel Carson: software engineer in applied AI and scientific computing, U.S. Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI (expected May 2027), USAA, active TS/SCI.",
+    "Resume for Mitchel Carson: software engineer in applied AI and scientific computing, U.S. Air Force veteran (Air Force Two, 89th Airlift Wing, 50+ executive missions), UT Austin M.S. AI (expected May 2027), USAA, prior TS/SCI (adjudicated May 2022).",
   pathname: "/resume",
   keywords: ["software engineer resume", "applied AI resume", "Air Force veteran resume"],
 });

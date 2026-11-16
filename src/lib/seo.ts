@@ -12,7 +12,7 @@ export const DEFAULT_KEYWORDS = [
   "Machine Learning Engineer",
   "Research Engineer",
   "Air Force veteran",
-  "TS/SCI clearance",
+  "prior TS/SCI clearance",
   "time-series forecasting",
   "Transformers",
   "streamflow forecasting",
