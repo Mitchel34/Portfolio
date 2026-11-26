@@ -11,6 +11,7 @@ import {
 } from "./chat";
 import { openSource, talks, work } from "./content";
 import { buildChatProfile } from "./chat-knowledge";
+import { createRateLimiter, visitorKey } from "./rate-limit";
 
 const MAX_BODY_BYTES = 16_384;
 const MAX_ASSISTANT_LENGTH = 1_800;
@@ -99,22 +100,8 @@ async function readMessages(request: Request): Promise<ChatMessage[]> {
   return validateMessages(body);
 }
 
-/** A small per-instance backstop, not a distributed limit across serverless replicas. */
 export function createChatRateLimiter(now: () => number = Date.now) {
-  const windows = new Map<string, { count: number; reset: number }>();
-  return (key: string): boolean => {
-    const time = now();
-    for (const [entryKey, entry] of windows) if (entry.reset <= time) windows.delete(entryKey);
-    if (!windows.has(key) && windows.size >= 2_000) return false;
-    const global = windows.get("__global") ?? { count: 0, reset: time + 60_000 };
-    const visitor = windows.get(key) ?? { count: 0, reset: time + 60_000 };
-    if (global.count >= 120 || visitor.count >= 8) return false;
-    global.count += 1;
-    visitor.count += 1;
-    windows.set("__global", global);
-    windows.set(key, visitor);
-    return true;
-  };
+  return createRateLimiter({ windowMs: 60_000, perKey: 8, global: 120 }, now);
 }
 
 const rateLimit = createChatRateLimiter();
@@ -238,8 +225,7 @@ export function createChatHandler(options: ChatHandlerOptions = {}) {
         },
       });
     }
-    const key = (request.headers.get("x-forwarded-for")?.split(",")[0].trim() || "anonymous").slice(0, 128);
-    if (!(options.allowRequest ?? rateLimit)(`visitor:${key}`)) {
+    if (!(options.allowRequest ?? rateLimit)(visitorKey(request))) {
       const response = jsonError("Too many questions right now. Please try again in a minute.", 429);
       response.headers.set("Retry-After", "60");
       return response;

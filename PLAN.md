@@ -26,7 +26,7 @@ As of 2026-09-24 (narrative refresh branch `claude/relaxed-goodall-qfq8i4`):
 - Fixed a production bug: the Newsreader and IBM Plex fonts never loaded because their CSS variables were set on `<body>` while the theme read them at `:root`. They now live on `<html>`.
 - Fixed `cn()` silently dropping the custom type-scale classes (`text-title`, `text-body-sm`, ...) when combined with a text color.
 - Fall 2026 courses are labeled in progress rather than planned.
-- The public résumé (`public/mitchelcarson_resume.pdf`, with identical root copies `Resume_2026.pdf` and `Resume_Masters_26.pdf`) is Mitchel's 2026-09-23 design regenerated on 2026-09-24 with Air Force Two, the mission-administration bullet, and the two manuscripts added. The regeneration script reproduced the original glyph for glyph before the additions. Apply the same text to the local JobSearch generator source so the next regeneration keeps them.
+- The public résumé (`public/mitchelcarson_resume.pdf`; the stale root copies `Resume_2026.pdf` and `Resume_Masters_26.pdf` were removed on 2026-11-26) is Mitchel's 2026-09-23 design regenerated on 2026-09-24 with Air Force Two, the mission-administration bullet, and the two manuscripts added. The regeneration script reproduced the original glyph for glyph before the additions. Apply the same text to the local JobSearch generator source so the next regeneration keeps them.
 
 As of 2026-09-04 (visual refresh branch `claude/personal-website-refresh-jffal0`):
 

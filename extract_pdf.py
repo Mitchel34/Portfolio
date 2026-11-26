@@ -24,4 +24,4 @@ def extract_text(pdf_path):
     return "No suitable library found (pypdf, PyPDF2)"
 
 if __name__ == "__main__":
-    print(extract_text("Resume_2026.pdf"))
+    print(extract_text("public/mitchelcarson_resume.pdf"))
