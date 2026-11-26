@@ -1,23 +1,14 @@
 "use client";
 
 import { Pause, Play, Waves } from "lucide-react";
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
-const MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+import { usePrefersReducedMotion } from "@/lib/usePrefersReducedMotion";
+
 const TERRAIN = ".,:;+=x^";
 const WATER = ".:-~=+";
 const FLOW_SPEED = 0.085;
 const FOAM_PARCELS = 30;
-
-function subscribeToMotion(onChange: () => void) {
-  const query = window.matchMedia(MOTION_QUERY);
-  query.addEventListener("change", onChange);
-  return () => query.removeEventListener("change", onChange);
-}
-
-function readMotionPreference() {
-  return window.matchMedia(MOTION_QUERY).matches;
-}
 
 function hash(x: number, y: number) {
   const n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453;
@@ -46,6 +37,17 @@ function foamParcel(time: number, index: number) {
 function onBoulder(x: number, y: number) {
   return Math.pow((x - 0.43) / 0.028, 2) + Math.pow((y - 0.69) / 0.025, 2) < 1
     || Math.pow((x - 0.61) / 0.033, 2) + Math.pow((y - 0.88) / 0.022, 2) < 1;
+}
+
+/** The cursor, eased into the river as one more stone. Coordinates are 0–1 across the scene. */
+type Stone = { x: number; y: number; strength: number };
+
+/** Pixel offset from the stone, in units of its radius. */
+function stoneOffset(scene: Scene, stone: Stone, x: number, y: number) {
+  const radius = scene.width * 0.055 * stone.strength;
+  const dx = (x - stone.x) * scene.width;
+  const dy = (y - stone.y) * scene.height;
+  return { dx: dx / radius, dy: dy / radius, distance: Math.hypot(dx, dy) / radius, radius };
 }
 
 type Scene = {
@@ -153,7 +155,9 @@ function createScene(width: number, height: number, ratio: number): Scene | null
   return { background, cols, rows, cellWidth, cellHeight, width, height };
 }
 
-function drawRiver(ctx: CanvasRenderingContext2D, scene: Scene, time: number) {
+function drawRiver(ctx: CanvasRenderingContext2D, scene: Scene, time: number, pointer: Stone | null = null) {
+  // Below one character cell the stone would only flicker, so it is ignored.
+  const stone = pointer && scene.width * 0.055 * pointer.strength > scene.cellWidth ? pointer : null;
   const { background, width, height, cols, rows, cellWidth, cellHeight } = scene;
   ctx.drawImage(background, 0, 0, width, height);
   ctx.font = `${cellHeight * 0.94}px ui-monospace, SFMono-Regular, Menlo, Consolas, monospace`;
@@ -184,6 +188,17 @@ function drawRiver(ctx: CanvasRenderingContext2D, scene: Scene, time: number) {
       } else if ((Math.abs(x - 0.43) < 0.02 && y > 0.71 && y < 0.77) || (Math.abs(x - 0.61) < 0.025 && y > 0.9 && y < 0.98)) {
         glyph = foam > 0 ? "~" : ":";
         color = "#bcece0";
+      } else if (stone) {
+        // The cursor: a ring of whitewater, slack water inside it, and a tapering wake downstream.
+        const offset = stoneOffset(scene, stone, x, y);
+        if (offset.distance < 1) {
+          const rim = offset.distance > 0.58;
+          glyph = rim ? (foam > -0.35 ? "~" : ":") : noise > 0.5 ? "." : " ";
+          color = rim ? "#bcece0" : "#1f5f6b";
+        } else if (offset.dy > 0.8 && offset.dy < 2.8 && Math.abs(offset.dx) < 0.8 * (1 - (offset.dy - 0.8) / 2) && foam > 0) {
+          glyph = "~";
+          color = "#bcece0";
+        }
       }
       ctx.fillStyle = color;
       ctx.fillText(glyph, (col + 0.5) * cellWidth, (row + 0.5) * cellHeight);
@@ -202,6 +217,15 @@ function drawRiver(ctx: CanvasRenderingContext2D, scene: Scene, time: number) {
       const parcel = foamParcel(sampleTime, index);
       // Do not draw a wrapped trail from the bottom back to the headwaters.
       if (parcel.progress > head.progress || onBoulder(parcel.x, parcel.y)) continue;
+      if (stone) {
+        // Foam slides around the cursor instead of passing through it.
+        const offset = stoneOffset(scene, stone, parcel.x, parcel.y);
+        if (offset.distance < 2.4) {
+          const side = offset.dx === 0 ? (hash(index, 13) > 0.5 ? 1 : -1) : Math.sign(offset.dx);
+          const push = Math.pow(1 - offset.distance / 2.4, 2) * 1.6;
+          parcel.x += (side * push * offset.radius) / width;
+        }
+      }
       const glyph = trail === 0 ? "~" : trail === 1 ? ":" : ".";
       ctx.globalAlpha = alpha * (1 - trail * 0.2);
       ctx.fillStyle = trail === 0 ? "#dbfff0" : "#89c9c2";
@@ -233,7 +257,7 @@ export function AsciiStreamflow({ className = "", embedded = false, note = "Deco
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const elapsedRef = useRef(0);
   const [pausedOverride, setPausedOverride] = useState<boolean | null>(null);
-  const reducedMotion = useSyncExternalStore(subscribeToMotion, readMotionPreference, () => true);
+  const reducedMotion = usePrefersReducedMotion();
   const paused = pausedOverride ?? reducedMotion;
   const captionId = useId();
 
@@ -248,8 +272,29 @@ export function AsciiStreamflow({ className = "", embedded = false, note = "Deco
     let visible = true;
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
 
+    // The stone eases toward the cursor and grows or shrinks as it enters or leaves.
+    const stone: Stone = { x: 0.5, y: 0.7, strength: 0 };
+    const target = { x: 0.5, y: 0.7, inside: false };
+
     const render = () => {
-      if (scene) drawRiver(ctx, scene, elapsedRef.current);
+      if (scene) drawRiver(ctx, scene, elapsedRef.current, stone);
+    };
+
+    // Mouse and pen only: a finger would cover the effect and should scroll the page.
+    const trackPointer = (event: PointerEvent) => {
+      if (event.pointerType === "touch") return;
+      const rect = canvas.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      target.x = (event.clientX - rect.left) / rect.width;
+      target.y = (event.clientY - rect.top) / rect.height;
+      if (!target.inside && stone.strength < 0.05) {
+        stone.x = target.x;
+        stone.y = target.y;
+      }
+      target.inside = true;
+    };
+    const releasePointer = () => {
+      target.inside = false;
     };
 
     const tick = (timestamp: number) => {
@@ -261,6 +306,10 @@ export function AsciiStreamflow({ className = "", embedded = false, note = "Deco
         const consumed = delta - (delta % (1000 / 30));
         elapsedRef.current += Math.min(consumed, 100) / 1000;
         previousTime = timestamp - (delta % (1000 / 30));
+        stone.x += (target.x - stone.x) * 0.3;
+        stone.y += (target.y - stone.y) * 0.3;
+        stone.strength += ((target.inside ? 1 : 0) - stone.strength) * 0.14;
+        if (stone.strength < 0.01) stone.strength = 0;
         render();
       }
       frame = requestAnimationFrame(tick);
@@ -293,6 +342,8 @@ export function AsciiStreamflow({ className = "", embedded = false, note = "Deco
     resizeObserver.observe(canvas);
     intersectionObserver.observe(canvas);
     document.addEventListener("visibilitychange", syncAnimation);
+    canvas.addEventListener("pointermove", trackPointer);
+    canvas.addEventListener("pointerleave", releasePointer);
     resize();
     syncAnimation();
 
@@ -301,6 +352,8 @@ export function AsciiStreamflow({ className = "", embedded = false, note = "Deco
       resizeObserver.disconnect();
       intersectionObserver.disconnect();
       document.removeEventListener("visibilitychange", syncAnimation);
+      canvas.removeEventListener("pointermove", trackPointer);
+      canvas.removeEventListener("pointerleave", releasePointer);
     };
   }, [paused]);
 

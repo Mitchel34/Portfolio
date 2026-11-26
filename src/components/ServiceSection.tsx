@@ -1,34 +1,11 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
+import { AsciiRoutes } from "@/components/AsciiRoutes";
 import { Container } from "@/components/Container";
 import { SectionMark } from "@/components/HomeSection";
 import { Reveal } from "@/components/Reveal";
 import { landingSections, service } from "@/lib/content";
-
-/** Decorative route arcs behind the heading. Not a map of real flights. */
-function RouteArcs() {
-  return (
-    <svg
-      aria-hidden="true"
-      focusable="false"
-      viewBox="0 0 600 300"
-      preserveAspectRatio="xMaxYMax meet"
-      className="pointer-events-none absolute right-0 bottom-0 hidden h-[22rem] text-navy-border opacity-70 lg:block"
-    >
-      <g fill="none" stroke="currentColor" strokeWidth="1.25" strokeDasharray="2 7" strokeLinecap="round">
-        <path d="M250 300 C 330 170, 470 130, 600 190" />
-        <path d="M330 300 C 400 220, 500 200, 600 250" />
-        <path d="M150 300 C 280 90, 480 60, 600 120" />
-      </g>
-      <g fill="currentColor">
-        <circle cx="250" cy="298" r="3" />
-        <circle cx="330" cy="298" r="3" />
-        <circle cx="150" cy="298" r="3" />
-      </g>
-    </svg>
-  );
-}
 
 /**
  * The Air Force chapter, in its own navy band. This is the one place the service
@@ -43,7 +20,7 @@ export function ServiceSection() {
       aria-labelledby="service-heading"
       className="relative scroll-mt-20 overflow-hidden bg-navy text-navy-foreground"
     >
-      <RouteArcs />
+      <AsciiRoutes />
       <Container className="relative py-16 lg:py-24">
         <SectionMark section={section} className="text-navy-accent" />
 
