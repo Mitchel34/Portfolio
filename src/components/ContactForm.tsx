@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { StatusLabel } from "@/components/StatusLabel";
 import { Button } from "@/components/ui/Button";
+import { CONTACT_LIMITS, HONEYPOT_FIELD } from "@/lib/contact-limits";
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -22,6 +23,7 @@ export function ContactForm() {
   const [email, setEmail] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
   const [formState, setFormState] = useState<FormState>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -53,7 +55,7 @@ export function ContactForm() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message }),
+        body: JSON.stringify({ name, email, subject, message, [HONEYPOT_FIELD]: website }),
       });
 
       const data = await res.json();
@@ -108,6 +110,7 @@ export function ContactForm() {
             id="cf-name"
             type="text"
             autoComplete="name"
+            maxLength={CONTACT_LIMITS.name}
             value={name}
             onChange={(e) => setName(e.target.value)}
             disabled={isSubmitting}
@@ -123,6 +126,7 @@ export function ContactForm() {
             id="cf-email"
             type="email"
             autoComplete="email"
+            maxLength={CONTACT_LIMITS.email}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={isSubmitting}
@@ -139,6 +143,7 @@ export function ContactForm() {
         <input
           id="cf-subject"
           type="text"
+          maxLength={CONTACT_LIMITS.subject}
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           disabled={isSubmitting}
@@ -153,12 +158,27 @@ export function ContactForm() {
         </label>
         <textarea
           id="cf-message"
+          maxLength={CONTACT_LIMITS.message}
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           disabled={isSubmitting}
           rows={5}
           placeholder="Tell me about your project, role, or idea..."
           className={textareaClass}
+        />
+      </div>
+
+      {/* Honeypot: hidden from people and assistive technology; only bots fill it in. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="cf-website">Website</label>
+        <input
+          id="cf-website"
+          type="text"
+          name={HONEYPOT_FIELD}
+          tabIndex={-1}
+          autoComplete="off"
+          value={website}
+          onChange={(e) => setWebsite(e.target.value)}
         />
       </div>
 
